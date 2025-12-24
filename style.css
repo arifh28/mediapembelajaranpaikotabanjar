@@ -1,0 +1,142 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+:root {
+    --primary-green: #4ECDC4; /* Hijau Muda Segar */
+    --secondary-yellow: #FFE66D; /* Kuning Cerah */
+    --dark-text: #292f36;
+    --light-bg: #f7fff7;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Judul Header */
+.main-header {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+/* Custom Card */
+.custom-card {
+    border: none;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+.card-header-custom {
+    background-color: var(--secondary-yellow);
+    color: var(--dark-text);
+    font-weight: 700;
+    padding: 15px;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Tombol */
+.btn-custom {
+    background-color: var(--primary-green);
+    color: white;
+    border-radius: 50px; /* Fully rounded */
+    padding: 10px 25px;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+}
+
+.btn-custom:hover {
+    background-color: #3dbbb3;
+    color: white;
+}
+
+/* Default Setting (Penting agar gambar tidak gepeng) */
+.carousel-item img {
+    border-radius: 20px;
+    width: 100%;
+    object-fit: cover; /* Gambar akan dicrop rapi, tidak penyok */
+    object-position: center; /* Fokus gambar di tengah */
+    transition: height 0.3s ease; /* Efek halus saat resize layar */
+}
+
+/* IFP Specific List styling */
+.ifp-list .list-group-item {
+    border-radius: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    font-weight: 600;
+    transition: 0.2s;
+}
+.ifp-list .list-group-item:hover {
+    background-color: var(--secondary-yellow);
+    cursor: pointer;
+}
+
+.counter-badge {
+    background-color: #eee;
+    color: #555;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.main-footer {
+    background-color: #ffffff;
+    border-top: 5px solid var(--secondary-yellow); /* Garis kuning di atas footer */
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+}
+
+/* 1. Tampilan HP (Mobile) - Layar di bawah 768px */
+@media (max-width: 767.98px) {
+    .carousel-item img {
+        height: 220px; /* Cukup pendek agar proporsional di HP */
+    }
+    
+    /* Opsional: Kecilkan font caption di HP */
+    .carousel-caption h5 {
+        font-size: 1rem;
+    }
+    .carousel-caption p {
+        font-size: 0.8rem;
+    }
+}
+
+/* 2. Tampilan Laptop/Tablet - Layar 768px s/d 1399px */
+@media (min-width: 768px) and (max-width: 1399.98px) {
+    .carousel-item img {
+        height: 400px; /* Tinggi standar laptop */
+    }
+}
+
+/* 3. Tampilan IFP / Layar Besar - Layar di atas 1400px */
+@media (min-width: 1400px) {
+    .carousel-item img {
+        height: 550px; /* Lebih tinggi agar imbang dengan list kelas di sampingnya */
+    }
+    
+    /* Perbesar font caption di IFP agar terbaca dari jauh */
+    .carousel-caption h5 {
+        font-size: 2.5rem;
+    }
+    .carousel-caption p {
+        font-size: 1.5rem;
+    }
+}
