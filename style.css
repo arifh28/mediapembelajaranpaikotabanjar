@@ -32,7 +32,7 @@ body {
     border: none;
     border-radius: 20px;
     background: white;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
     overflow: hidden;
     height: 100%;
@@ -138,5 +138,61 @@ body {
     }
     .carousel-caption p {
         font-size: 1.5rem;
+    }
+}
+
+/* =========================================
+   KHUSUS IFP RESOLUSI 4K (3840 x 2160)
+   ========================================= */
+@media (min-width: 2500px) {
+    
+    /* 1. Memperlebar Wadah Utama (Container) */
+    /* Agar tidak menumpuk kecil di tengah, kita lebarkan hampir full */
+    .container {
+        max-width: 3600px !important; 
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    /* 2. Slider Lebih Tinggi & Besar */
+    .carousel-item img {
+        height: 900px !important; /* Naik dari 550px jadi 900px agar proporsional */
+    }
+
+    /* 3. Perbesar Semua Teks Secara Otomatis */
+    body {
+        font-size: 1.8rem; /* Teks paragraf biasa diperbesar */
+    }
+
+    /* 4. Perbesar Judul-Judul */
+    h1 { font-size: 4.5rem; }
+    h2 { font-size: 4rem; }
+    h3 { font-size: 3.5rem; }
+    h4 { font-size: 3rem; }
+    h5 { font-size: 2.5rem; }
+    h6 { font-size: 2rem; }
+    
+    /* 5. Perbesar Caption Slider */
+    .carousel-caption h5 {
+        font-size: 5rem !important;
+    }
+    .carousel-caption p {
+        font-size: 3rem !important;
+    }
+
+    /* 6. Perbesar Tombol & Icon */
+    .btn {
+        font-size: 1.5rem !important;
+        padding: 15px 40px !important;
+    }
+    
+    /* 7. Perbaiki Grid Card agar tidak terlalu gepeng melebar */
+    /* Kita biarkan tetap 3 kolom (col-xxl-4), tapi karena container melebar, 
+       card akan otomatis membesar mengikuti container. */
+       
+    /* Perbesar Icon di dalam card */
+    .custom-card i {
+        transform: scale(1.5); /* Perbesar icon 1.5x lipat */
+        margin-right: 10px;
     }
 }

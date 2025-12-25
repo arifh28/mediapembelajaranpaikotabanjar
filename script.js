@@ -69,7 +69,46 @@ async function loadViews() {
     }
 }
 
+// Fungsi untuk memuat Top 5 Materi
+async function loadTrending() {
+    const listContainer = document.getElementById('trendingList');
+    if (!listContainer) return;
+
+    // Ambil 5 data tertinggi dari Supabase
+    const { data, error } = await _supabase
+        .from('material_analytics')
+        .select('material_name, click_count')
+        .order('click_count', { ascending: false })
+        .limit(5);
+
+    if (data) {
+        listContainer.innerHTML = ''; // Kosongkan loading
+        data.forEach((item, index) => {
+            // Mapping nama ID ke Judul yang Asli (Bisa dibuat manual atau function helper)
+            let judul = formatNamaMateri(item.material_name); 
+            
+            let html = `
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="badge bg-success rounded-circle me-2">${index + 1}</span>
+                        ${judul}
+                    </div>
+                    <span class="badge bg-light text-dark border">${item.click_count} <i class="fas fa-eye small ms-1"></i></span>
+                </li>`;
+            listContainer.innerHTML += html;
+        });
+    }
+}
+
+// Helper sederhana merapikan nama ID (Opsional)
+function formatNamaMateri(id) {
+    // Ubah k4_materi_1 menjadi "Materi Kelas 4..." atau biarkan ID-nya
+    // Bisa dikembangkan nanti
+    return id.replace(/_/g, ' ').toUpperCase(); 
+}
+
 // Jalankan saat load
 document.addEventListener('DOMContentLoaded', () => {
     loadViews();
+    loadTrending();
 });

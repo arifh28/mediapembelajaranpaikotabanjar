@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Kelas 4 - PAIBP SD</title>
+    <meta name="description" content="Materi PAI Kelas 4 SD Kurikulum Merdeka - KKG Kota Banjar.">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <meta property="og:title" content="Materi Kelas 4 - PAIBP SD">
+    <meta property="og:description" content="Belajar PAI Kelas 4: Al-Hujurat, Usia Balig, Hijrah Nabi, Salat Jumat.">
+    <meta property="og:image" content="header.png"> 
+    <meta property="og:type" content="website">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        #btnBackToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--secondary-yellow);
+            color: var(--dark-text);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        #btnBackToTop:hover {
+            transform: translateY(-5px);
+            background-color: #ffd700;
+        }
+
+        .semester-label {
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-green);
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <header class="main-header text-center" id="topPage">
+        <div class="container position-relative">
+            <a href="index.html" class="btn btn-light rounded-circle position-absolute start-0 top-50 translate-middle-y ms-3 shadow-sm">
+                <i class="fas fa-arrow-left text-success"></i>
+            </a>
+            <h2 class="fw-bold m-0">Kelas 4</h2>
+            <p class="mb-0 text-white-50">Tahun Pelajaran 2025/2026</p>
+        </div>
+    </header>
+
+    <div class="container pb-5 pt-3 flex-grow-1">
+        
+        <div class="row">
+            <div class="col-12">
+                <h3 class="fw-bold semester-label border-start border-5 border-warning ps-3">
+                    Semester 1 (Ganjil)
+                </h3>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+1:+Al-Hujurat+dan+Keragaman" class="card-img-top" alt="Bab 1">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_1">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 1: Mengaji Q.S. Al-Hujurat & Hadis</h5>
+                        <p class="card-text text-muted small flex-grow-1">Membaca, Memahami, Menulis, Menghafal Q.S. Al-Hujurat/49:13 & Hadis Keragaman.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+2:+Asmaulhusna" class="card-img-top" alt="Bab 2">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_2">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 2: Teladan Mulia Asmaulhusna</h5>
+                        <p class="card-text text-muted small flex-grow-1">Lima Asmaulhusna dan Artinya, serta Cara Berakhlak dengannya.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <button onclick="trackClick('k4_materi_2', 'https://www.youtube.com/watch?v=Ag3Sy_RlttM')" class="btn btn-sm btn-danger rounded-pill flex-fill"><i class="fab fa-youtube me-1"></i> Video Pembelajaran Hanum Channel</button>
+                            <button onclick="trackClick('k4_materi_2', 'https://oisrtlcxdwgvzrxrlzpb.supabase.co/storage/v1/object/public/Media%20PAISD/PPT%20TELADAN%20MULIA%20ASMAUL%20HUSNA%20KLS%204.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+3:+Indahnya+Saling+Menghargai" class="card-img-top" alt="Bab 3">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_3">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 3: Saling Menghargai Keragaman</h5>
+                        <p class="card-text text-muted small flex-grow-1">Keragaman Sunnatullah, Ajaran Kebaikan, Toleransi Antar Agama.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+4:+Menyambut+Usia+Balig" class="card-img-top" alt="Bab 4">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_4">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 4: Menyambut Usia Balig</h5>
+                        <p class="card-text text-muted small flex-grow-1">Tanda Balig (Fikih & Biologi), serta Kewajiban Setelah Balig.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">                            
+                            <button onclick="trackClick('k4_materi_4', 'https://metamorf.my.canva.site/menyambut-usia-baligh')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Media Interaktif</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+5:+Kisah+Hijrah" class="card-img-top" alt="Bab 5">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_5">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 5: Kisah Hijrah ke Madinah</h5>
+                        <p class="card-text text-muted small flex-grow-1">Sebab Hijrah, Perjalanan Nabi Muhammad saw., dan Hikmahnya.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> 
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="fw-bold semester-label border-start border-5 border-warning ps-3">
+                    Semester 2 (Genap)
+                </h3>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+6:+Q.S.+At-Tin" class="card-img-top" alt="Bab 6">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_6">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 6: Mengaji Q.S. At-Tin & Silaturahmi</h5>
+                        <p class="card-text text-muted small flex-grow-1">Membaca, Memahami, Menghafal Q.S. At-Tin, dan Hadis Silaturahmi.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+7:+Iman+Kepada+Rasul" class="card-img-top" alt="Bab 7">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_7">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 7: Beriman kepada Rasul Allah</h5>
+                        <p class="card-text text-muted small flex-grow-1">Makna Iman, Sifat-sifat Rasul, dan Tujuan Diutusnya Rasul.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+8:+Aku+Anak+Saleh" class="card-img-top" alt="Bab 8">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_8">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 8: Aku Anak Saleh</h5>
+                        <p class="card-text text-muted small flex-grow-1">Menebar Salam, Senang Menolong, dan Menghindari Ciri Munafik.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+9:+Salat+Jumat+Duha" class="card-img-top" alt="Bab 9">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_9">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 9: Mengenal Salat Sunah & Jumat</h5>
+                        <p class="card-text text-muted small flex-grow-1">Ketentuan Salat Jumat, Salat Duha, dan Salat Tahajud.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-xxl-4">
+                <div class="card custom-card h-100">
+                    <div class="position-relative">
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+10:+Membangun+Madinah" class="card-img-top" alt="Bab 10">
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k4_materi_10">
+                                <i class="fas fa-eye me-1"></i> ...
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Bab 10: Kisah Nabi di Madinah</h5>
+                        <p class="card-text text-muted small flex-grow-1">Membangun Masjid, Menjalin Ukhuwah, dan Menggalang Kerukunan.</p>
+                        <hr class="my-2 text-muted opacity-25">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
+                            <p><strong>Belum ada media.</strong> Silahkan kembali lagi besok.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button id="btnBackToTop" title="Kembali ke Atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="main-footer text-center py-4 mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <p class="mb-0 fw-bold" style="color: #292f36;">
+                        &copy; KKG PAI SD Kota Banjar Jawa Barat 2026
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        const mybutton = document.getElementById("btnBackToTop");
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        mybutton.addEventListener("click", function() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</body>
+</html>
