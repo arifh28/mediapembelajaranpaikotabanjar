@@ -1,77 +1,134 @@
-// Konfigurasi Supabase (GANTI DENGAN KUNCI ANDA)
+// =================================================================
+// 1. KONFIGURASI SUPABASE
+// =================================================================
 const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+// Gunakan Key Anon Public Anda
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Fungsi untuk menambah counter saat materi diklik
-async function trackClick(materialName, urlTujuan) {
-    try {
-        // 1. Ambil data saat ini (opsional, untuk memastikan ada)
-        // 2. Increment counter langsung via RPC atau update manual
-        // Disini kita pakai cara sederhana: ambil dulu, lalu update
+
+// =================================================================
+// 2. FUNGSI UTAMA: TRACK CLICK & BUKA LINK (HYBRID)
+// =================================================================
+async function trackClick(materialId, targetUrl) {
+    
+    // --- BAGIAN A: URUSAN MEMBUKA LINK (UX) ---
+    // Kita jalankan duluan agar user tidak menunggu loading database
+    
+    if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('#')) {
         
-        const { data: currentData, error: fetchError } = await _supabase
+        // Deteksi apakah ini file dokumen (PDF/PPT/Word/Zip)
+        // Regex ini mengecek akhiran file (case insensitive)
+        const isFile = /\.(pdf|ppt|pptx|doc|docx|xls|xlsx|zip|rar)$/i.test(targetUrl);
+        
+        // Trik: Membuat elemen <a> sementara secara gaib
+        // Ini cara paling stabil untuk meniru perilaku tag <a>
+        const link = document.createElement('a');
+        link.href = targetUrl;
+        link.target = '_blank'; // Selalu buka di tab baru
+        
+        if (isFile) {
+            // Jika terdeteksi file, paksa browser untuk download
+            link.setAttribute('download', ''); 
+        }
+
+        // Tempel ke body, klik otomatis, lalu hapus lagi
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // --- BAGIAN B: URUSAN DATABASE (LOGIKA AMAN) ---
+    console.log(`Mencatat view untuk: ${materialId}...`);
+
+    try {
+        // 1. Cek dulu apakah data materi ini sudah ada?
+        const { data: existingData, error: fetchError } = await _supabase
             .from('material_analytics')
             .select('click_count')
-            .eq('material_name', materialName)
+            .eq('material_name', materialId)
             .single();
 
-        if (fetchError && fetchError.code !== 'PGRST116') {
-            console.error('Error fetching:', fetchError);
+        if (existingData) {
+            // SKENARIO 1: Data SUDAH ADA -> Lakukan UPDATE (Tambah +1)
+            await _supabase
+                .from('material_analytics')
+                .update({ click_count: existingData.click_count + 1 })
+                .eq('material_name', materialId);
+            
+            console.log("Sukses update view (+1)");
+
+        } else {
+            // SKENARIO 2: Data BELUM ADA -> Lakukan INSERT (Isi 1)
+            // Kita abaikan error 23505 (duplicate) kalau-kalau ada bentrok milidetik
+            const { error: insertError } = await _supabase
+                .from('material_analytics')
+                .insert([{ material_name: materialId, click_count: 1 }]);
+            
+            if (!insertError) console.log("Sukses buat data baru");
         }
 
-        let newCount = 1;
-        if (currentData) {
-            newCount = currentData.click_count + 1;
+        // 2. Update tampilan angka di layar secara langsung (Realtime feel)
+        if (typeof loadViews === 'function') {
+            loadViews();
         }
-
-        // Update database
-        const { error: updateError } = await _supabase
-            .from('material_analytics')
-            .upsert({ material_name: materialName, click_count: newCount });
-
-        if (updateError) console.error('Error updating:', updateError);
         
-        // Redirect setelah mencatat (tunda sedikit agar request terkirim)
-        setTimeout(() => {
-            if(urlTujuan) window.location.href = urlTujuan;
-        }, 300);
+        // Update juga list trending jika ada di halaman ini
+        if (typeof loadTrending === 'function') {
+            loadTrending();
+        }
 
     } catch (err) {
-        console.error("System Error:", err);
-        // Tetap redirect meski error tracking
-        if(urlTujuan) window.location.href = urlTujuan; 
+        // Error kita log saja di console, jangan alert ke user agar tidak mengganggu
+        console.error("Error sistem tracking:", err);
     }
 }
 
-// Fungsi untuk menampilkan jumlah views di halaman (Load saat halaman dibuka)
+
+// =================================================================
+// 3. FUNGSI LOAD VIEW (TAMPILKAN JUMLAH MATA)
+// =================================================================
 async function loadViews() {
+    // Cari semua elemen yang punya class 'view-counter'
     const counters = document.querySelectorAll('.view-counter');
     
-    // Kumpulkan semua ID material dari DOM
-    const materialNames = Array.from(counters).map(c => c.dataset.id);
-    
-    if (materialNames.length === 0) return;
+    // Jika tidak ada counter di halaman ini, berhenti
+    if (counters.length === 0) return;
 
+    // Ambil semua ID materi dari atribut data-id
+    const materialNames = Array.from(counters).map(c => c.dataset.id);
+
+    // Minta data ke Supabase (Bulk Fetch biar hemat request)
     const { data, error } = await _supabase
         .from('material_analytics')
         .select('material_name, click_count')
         .in('material_name', materialNames);
 
     if (data) {
-        data.forEach(item => {
-            const el = document.querySelector(`.view-counter[data-id="${item.material_name}"]`);
-            if (el) {
-                el.innerText = `${item.click_count} Views`;
-            }
+        // Loop setiap counter di HTML dan isi angkanya
+        counters.forEach(counter => {
+            const id = counter.getAttribute('data-id');
+            // Cari data yang cocok
+            const record = data.find(item => item.material_name === id);
+            
+            // Jika ketemu pakai angkanya, jika tidak pakai 0
+            const count = record ? record.click_count : 0;
+            
+            // Update HTML (Tetap pertahankan Icon Mata)
+            counter.innerHTML = `<i class="fas fa-eye me-1"></i> ${count}`;
         });
     }
 }
 
-// Fungsi untuk memuat Top 5 Materi
+
+// =================================================================
+// 4. FUNGSI TRENDING (MATERI TERPOPULER)
+// =================================================================
 async function loadTrending() {
     const listContainer = document.getElementById('trendingList');
+    
+    // Jika tidak ada elemen trending di halaman ini (misal di halaman detail), skip
     if (!listContainer) return;
 
     // Ambil 5 data tertinggi dari Supabase
@@ -82,33 +139,38 @@ async function loadTrending() {
         .limit(5);
 
     if (data) {
-        listContainer.innerHTML = ''; // Kosongkan loading
+        listContainer.innerHTML = ''; // Bersihkan tulisan "Loading..."
+        
         data.forEach((item, index) => {
-            // Mapping nama ID ke Judul yang Asli (Bisa dibuat manual atau function helper)
+            // Rapikan nama ID menjadi Judul yang enak dibaca
             let judul = formatNamaMateri(item.material_name); 
             
             let html = `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
+                    <div class="text-truncate" style="max-width: 70%;">
                         <span class="badge bg-success rounded-circle me-2">${index + 1}</span>
-                        ${judul}
+                        <span class="fw-bold small">${judul}</span>
                     </div>
-                    <span class="badge bg-light text-dark border">${item.click_count} <i class="fas fa-eye small ms-1"></i></span>
+                    <span class="badge bg-light text-dark border">
+                        ${item.click_count} <i class="fas fa-eye small ms-1"></i>
+                    </span>
                 </li>`;
             listContainer.innerHTML += html;
         });
     }
 }
 
-// Helper sederhana merapikan nama ID (Opsional)
+// Helper: Merapikan ID database menjadi teks (Opsional)
+// Contoh: "k4_materi_1" -> "K4 MATERI 1"
 function formatNamaMateri(id) {
-    // Ubah k4_materi_1 menjadi "Materi Kelas 4..." atau biarkan ID-nya
-    // Bisa dikembangkan nanti
     return id.replace(/_/g, ' ').toUpperCase(); 
 }
 
-// Jalankan saat load
+
+// =================================================================
+// 5. INISIALISASI
+// =================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    loadViews();
-    loadTrending();
+    loadViews();      // Muat angka di kartu materi
+    loadTrending();   // Muat sidebar trending (jika ada)
 });
