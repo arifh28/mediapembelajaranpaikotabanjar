@@ -168,9 +168,34 @@ function formatNamaMateri(id) {
 
 
 // =================================================================
-// 5. INISIALISASI
+// 5. INISIALISASI DAN MENU HANDPHONE
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    loadViews();      // Muat angka di kartu materi
-    loadTrending();   // Muat sidebar trending (jika ada)
+
+    
+    // Ambil elemen
+    const myOffcanvas = document.getElementById('offcanvasNavbar');
+    const menuIcon = document.getElementById('menuIcon');
+
+    if(myOffcanvas && menuIcon) {
+        // Saat menu MUNCUL (Dibuka)
+        myOffcanvas.addEventListener('show.bs.offcanvas', function () {
+            menuIcon.classList.remove('fa-bars');  // Hapus garis 3
+            menuIcon.classList.add('fa-times');    // Ganti jadi X
+            menuIcon.classList.add('fa-spin');     // Efek putar sedikit (opsional)
+            setTimeout(() => menuIcon.classList.remove('fa-spin'), 300);
+        });
+
+        // Saat menu HILANG (Ditutup/Klik X)
+        myOffcanvas.addEventListener('hide.bs.offcanvas', function () {
+            menuIcon.classList.remove('fa-times'); // Hapus X
+            menuIcon.classList.add('fa-bars');     // Balik jadi garis 3
+            menuIcon.classList.add('fa-spin');
+            setTimeout(() => menuIcon.classList.remove('fa-spin'), 300);
+        });
+    }
+
+    // Inisialisasi fungsi lain
+    if(typeof loadViews === 'function') loadViews();
+    if(typeof loadTrending === 'function') loadTrending();
 });

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "judul": "Tata Cara Wudhu yang Benar",
+    "ringkasan": "Panduan lengkap wudhu sesuai sunnah, mulai dari niat hingga tertib.",
+    "kategori": "Fiqih",
+    "link": "blog/cara-wudhu.html",
+    "gambar": "https://placehold.co/600x400/4ECDC4/white?text=Wudhu"
+  },
+  {
+    "id": 2,
+    "judul": "Sejarah Nabi Muhammad SAW",
+    "ringkasan": "Kisah perjalanan hidup Rasulullah dari lahir hingga wafat.",
+    "kategori": "Sejarah",
+    "link": "blog/sejarah-nabi.html",
+    "gambar": "https://placehold.co/600x400/FFE66D/333?text=Sejarah"
+  },
+  {
+    "id": 3,
+    "judul": "Keutamaan Bulan Ramadhan",
+    "ringkasan": "Dalil-dalil tentang pahala berpuasa di bulan suci Ramadhan.",
+    "kategori": "Hadis",
+    "link": "blog/ramadhan.html",
+    "gambar": "https://placehold.co/600x400/4ECDC4/white?text=Ramadhan"
+  }
+]

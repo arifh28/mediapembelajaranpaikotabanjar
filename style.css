@@ -104,6 +104,43 @@ body {
     font-size: 0.9rem;
 }
 
+/* =========================================
+   NAVBAR & SIDE MENU STYLING
+   ========================================= */
+
+/* Style Link Menu */
+.navbar-nav .nav-link {
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Judul Halaman di Navbar */
+.page-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-left: 10px;
+    line-height: 1.2;
+}
+
+/* Tombol Back di Navbar */
+.nav-back-btn {
+    color: white;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+.nav-back-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+}
+
 /* 1. Tampilan HP (Mobile) - Layar di bawah 768px */
 @media (max-width: 767.98px) {
     .carousel-item img {
@@ -116,6 +153,32 @@ body {
     }
     .carousel-caption p {
         font-size: 0.8rem;
+    }
+    
+    .offcanvas-body {
+        background-color: var(--primary-green);
+    }
+    
+    /* Menu Rata Kiri dengan Flexbox */
+    .navbar-nav .nav-link {
+        color: white !important;
+        border: 1px solid rgba(255,255,255,0.2);
+        margin-bottom: 8px;
+        display: flex;              /* Aktifkan Flexbox */
+        align-items: center;        /* Ikon & Teks sejajar vertikal */
+        justify-content: flex-start;/* Rata Kiri (PENTING) */
+        padding-left: 20px !important; /* Jarak dari pinggir kiri */
+        text-align: left;
+    }
+    
+    .navbar-nav .nav-link i {
+        width: 25px; /* Lebar tetap untuk ikon agar teks lurus */
+        text-align: center;
+        margin-right: 10px;
+    }
+
+    .offcanvas-header {
+        border-bottom: 5px solid var(--secondary-yellow);
     }
 }
 
@@ -194,5 +257,47 @@ body {
     .custom-card i {
         transform: scale(1.5); /* Perbesar icon 1.5x lipat */
         margin-right: 10px;
+    }
+
+    /* Perbesar Navbar */
+    .navbar {
+        padding: 40px 0 !important;
+    }
+    
+    /* Perbesar Logo */
+    .navbar-brand img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    .navbar-brand span {
+        font-size: 3rem !important;
+        margin-left: 20px;
+    }
+
+    /* Perbesar Menu Links */
+    .navbar-nav {
+        gap: 30px !important;
+    }
+    .nav-link {
+        font-size: 2.5rem !important; /* Tulisan menu besar */
+        padding: 20px 50px !important;
+        border-radius: 100px !important;
+    }
+    
+    /* Spacer navbar juga harus diperbesar */
+    div[style*="height: 80px"] {
+        height: 180px !important;
+    }
+
+    .page-title {
+        font-size: 3rem !important;
+        margin-left: 30px;
+    }
+    .nav-back-btn {
+        font-size: 3rem !important;
+        padding: 20px;
+    }
+    .navbar-toggler i {
+        font-size: 3rem !important; /* Icon hamburger besar */
     }
 }
