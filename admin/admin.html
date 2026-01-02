@@ -175,7 +175,7 @@
                 // Rapikan nama materi (opsional, ganti _ jadi spasi)
                 const namaMateri = row.material_name.replace(/_/g, ' ').toUpperCase();
                 // Pastikan nama guru tidak null
-                const namaGuru = row.orang ? row.orang : '-';
+                const namaGuru = row.guru ? row.guru : '-';
 
                 html += `
                     <tr>
@@ -187,7 +187,7 @@
                             <span class="d-none">${row.sudah}</span> </td>
                         <td class="text-center">
                             <button class="btn btn-edit btn-sm rounded-pill px-3" 
-                                onclick="openEditModal(${row.id}, '${row.material_name}', '${row.orang}', '${row.sudah}')">
+                                onclick="openEditModal(${row.id}, '${row.material_name}', '${row.guru}', '${row.sudah}')">
                                 <i class="fas fa-pen"></i> Edit
                             </button>
                         </td>
