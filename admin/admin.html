@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Data Guru - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* Override Style DataTables agar sesuai tema */
+        .table thead th {
+            background-color: var(--primary-green) !important;
+            color: white !important;
+            border: none;
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-green) !important;
+            border-color: var(--primary-green) !important;
+        }
+
+        /* Styling Checkbox agar terlihat jelas tapi tidak bisa diklik di tabel */
+        .status-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-green);
+            cursor: not-allowed;
+        }
+
+        .btn-edit {
+            background-color: var(--secondary-yellow);
+            color: var(--dark-text);
+            border: none;
+            font-weight: 600;
+        }
+        .btn-edit:hover {
+            background-color: #ffd700;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <a href="index.html" class="nav-back-btn text-decoration-none">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span class="page-title">Data Pengerjaan Guru</span>
+            </div>
+        </div>
+    </nav>
+    <div style="height: 80px;"></div>
+
+    <div class="container py-5">
+        <div class="card custom-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold m-0"><i class="fas fa-table me-2"></i> Rekap Data</h4>
+                <button onclick="loadData()" class="btn btn-sm btn-outline-success rounded-pill">
+                    <i class="fas fa-sync-alt me-1"></i> Refresh Data
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table id="guruTable" class="table table-hover table-striped align-middle w-100">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="5%">No.</th>
+                            <th width="30%">Materi</th>
+                            <th width="30%">Guru (Orang)</th>
+                            <th class="text-center" width="15%">Sudah</th>
+                            <th class="text-center" width="15%">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-edit me-2"></i> Update Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <input type="hidden" id="editId">
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">NAMA GURU</label>
+                        <input type="text" class="form-control fw-bold" id="editGuru" readonly style="background-color: #f8f9fa;">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">MATERI</label>
+                        <input type="text" class="form-control" id="editMateri" readonly style="background-color: #f8f9fa;">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-success">STATUS PENGERJAAN</label>
+                        <select class="form-select form-select-lg border-success" id="editSudah">
+                            <option value="Belum">Belum</option>
+                            <option value="Sudah">Sudah</option>
+                        </select>
+                    </div>
+
+                    <button onclick="saveChanges()" class="btn btn-success w-100 rounded-pill fw-bold py-2">
+                        <i class="fas fa-save me-2"></i> SIMPAN PERUBAHAN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // 1. KONFIGURASI SUPABASE (Sama dengan script.js)
+        const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let dataTable; // Variabel global untuk DataTables
+
+        $(document).ready(function() {
+            loadData(); // Load data saat halaman dibuka
+        });
+
+        // 2. FUNGSI AMBIL DATA DARI SUPABASE
+        async function loadData() {
+            // Tampilkan loading di tabel
+            if (dataTable) {
+                dataTable.clear().destroy();
+            }
+            $('tbody').html('<tr><td colspan="5" class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-success"></i><br>Memuat data...</td></tr>');
+
+            // Fetch data
+            const { data, error } = await _supabase
+                .from('material_analytics')
+                .select('*')
+                .order('id', { ascending: true }); // Urutkan berdasarkan ID atau Nama
+
+            if (error) {
+                Swal.fire('Error', 'Gagal mengambil data: ' + error.message, 'error');
+                return;
+            }
+
+            renderTable(data);
+        }
+
+        // 3. FUNGSI RENDER KE DATATABLES
+        function renderTable(data) {
+            let html = '';
+            
+            data.forEach((row, index) => {
+                // Logika Checkbox: Jika "Sudah" -> checked, jika tidak -> kosong
+                // Kita buat disabled agar user tidak klik langsung di tabel (harus lewat edit)
+                const isChecked = row.sudah === 'Sudah' ? 'checked' : '';
+                
+                // Rapikan nama materi (opsional, ganti _ jadi spasi)
+                const namaMateri = row.material_name.replace(/_/g, ' ').toUpperCase();
+                // Pastikan nama guru tidak null
+                const namaGuru = row.orang ? row.orang : '-';
+
+                html += `
+                    <tr>
+                        <td class="text-center fw-bold">${index + 1}</td>
+                        <td>${namaMateri}</td>
+                        <td><i class="fas fa-user-circle me-2 text-muted"></i>${namaGuru}</td>
+                        <td class="text-center">
+                            <input type="checkbox" class="status-checkbox" ${isChecked} disabled>
+                            <span class="d-none">${row.sudah}</span> </td>
+                        <td class="text-center">
+                            <button class="btn btn-edit btn-sm rounded-pill px-3" 
+                                onclick="openEditModal(${row.id}, '${row.material_name}', '${row.orang}', '${row.sudah}')">
+                                <i class="fas fa-pen"></i> Edit
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Masukkan ke HTML
+            $('tbody').html(html);
+
+            // Inisialisasi DataTables
+            dataTable = $('#guruTable').DataTable({
+                language: {
+                    search: "Cari Data:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: "Awal",
+                        last: "Akhir",
+                        next: "Lanjut",
+                        previous: "Mundur"
+                    }
+                },
+                columnDefs: [
+                    { orderable: false, targets: 4 } // Matikan sorting di kolom Aksi
+                ]
+            });
+        }
+
+        // 4. FUNGSI BUKA MODAL EDIT
+        window.openEditModal = function(id, materi, guru, statusSekarang) {
+            // Isi form modal dengan data baris yang diklik
+            $('#editId').val(id);
+            $('#editMateri').val(materi);
+            $('#editGuru').val(guru === 'null' ? '-' : guru);
+            
+            // Set dropdown (Default 'Belum' jika data kosong/null)
+            const val = (statusSekarang === 'Sudah') ? 'Sudah' : 'Belum';
+            $('#editSudah').val(val);
+
+            // Tampilkan Modal
+            $('#editModal').modal('show');
+        }
+
+        // 5. FUNGSI SIMPAN PERUBAHAN
+        window.saveChanges = async function() {
+            const id = $('#editId').val();
+            const newStatus = $('#editSudah').val();
+
+            // Tampilkan loading di tombol
+            const btn = document.querySelector('#editModal .btn-success');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+            btn.disabled = true;
+
+            try {
+                // Update ke Supabase
+                const { error } = await _supabase
+                    .from('material_analytics')
+                    .update({ sudah: newStatus })
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                // Sukses
+                $('#editModal').modal('hide');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Status pengerjaan telah diperbarui.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+                loadData(); // Reload tabel
+
+            } catch (err) {
+                Swal.fire('Gagal', err.message, 'error');
+            } finally {
+                // Kembalikan tombol
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
