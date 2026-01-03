@@ -141,6 +141,13 @@ body {
     color: white;
 }
 
+/* Memastikan figure tidak memiliki margin default yang berantakan */
+figure {
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+}
+
 /* 1. Tampilan HP (Mobile) - Layar di bawah 768px */
 @media (max-width: 767.98px) {
     .carousel-item img {

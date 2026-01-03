@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "judul": "Tata Cara Wudhu yang Benar",
-    "ringkasan": "Panduan lengkap wudhu sesuai sunnah, mulai dari niat hingga tertib.",
-    "kategori": "Fiqih",
-    "link": "blog/cara-wudhu.html",
-    "gambar": "https://placehold.co/600x400/4ECDC4/white?text=Wudhu"
+    "judul": "Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar",
+    "ringkasan": "Penerapan pembelajaran mendalam (deep learning) pada materi Salat kelas 3 SD dengan mengintegrasikan assessment as learning, assessment for learning, dan assessment of learning secara proporsional.",
+    "kategori": "Kurikulum",
+    "link": "blog/asesmen-dalam-pembelajaran-mendalam.html",
+    "gambar": "assets/asesmen.jpeg"
   },
   {
     "id": 2,
-    "judul": "Sejarah Nabi Muhammad SAW",
-    "ringkasan": "Kisah perjalanan hidup Rasulullah dari lahir hingga wafat.",
-    "kategori": "Sejarah",
-    "link": "blog/sejarah-nabi.html",
-    "gambar": "https://placehold.co/600x400/FFE66D/333?text=Sejarah"
+    "judul": "Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code",
+    "ringkasan": "Guru kreatif membuat media interaktif menggunakan Canva AI Code.",
+    "kategori": "Canva",
+    "link": "blog/membuat-media-pembelajaran-dan-asesmen-sendiri-menggunakan-canva-ai-code.html",
+    "gambar": "assets/canvaaicode.jpeg"
   },
   {
     "id": 3,
