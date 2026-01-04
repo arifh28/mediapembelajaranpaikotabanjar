@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Soal Lengkap - PAIBP SD</title>
+    <meta name="description" content="Kumpulan Bank Soal PAI SD Lengkap dengan Kisi-kisi dan Analisis.">
+
+    <meta property="og:title" content="Bank Soal PAIBP SD Lengkap">
+    <meta property="og:description" content="Akses bank soal PAI SD lengkap dengan CP, TP, dan Indikator Soal.">
+    <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/header.png"> 
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/banksoal.html">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <a href="index.html" class="nav-back-btn text-decoration-none text-white me-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span class="page-title text-white fw-bold fs-5">Bank Soal & Kisi-Kisi</span>
+            </div>
+
+            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title fw-bold text-success">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="index.html">
+                                <i class="fas fa-home"></i> Beranda
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="buku.html">
+                                <i class="fas fa-book"></i> Buku Paket
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="blog.html">
+                                <i class="fas fa-newspaper"></i> Ruang Baca
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="banksoal.html">
+                                <i class="fas fa-clipboard-list"></i> Bank Soal
+                            </a>
+                        </li>
+                        <li class="nav-item d-none d-lg-block">
+                            <button class="btn text-white" onclick="toggleSearchBar()" title="Cari Materi">
+                                <i class="fas fa-search fa-lg"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="searchBarContainer" class="bg-white border-bottom shadow-sm fixed-top p-3 d-none" style="top: 70px; z-index: 1020;">
+        <div class="container">
+            <div class="input-group">
+                <input type="text" id="navSearchInput" class="form-control border-success" placeholder="Cari lagi..." onkeypress="handleEnter(event)">
+                <button class="btn btn-success" onclick="doSearch()">
+                    <i class="fas fa-search"></i> Cari
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 80px;"></div>
+
+    <div class="container py-4">
+        <div class="row g-4" id="cardContainer">
+        </div>
+    </div>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('cardContainer');
+            
+            // Loop Kelas 1 sampai 6
+            for (let kelas = 1; kelas <= 6; kelas++) {
+                // Loop Semester 1 sampai 2
+                for (let smt = 1; smt <= 2; smt++) {
+                    
+                    // Nama File JSON target (sesuai format Anda)
+                    const fileName = `kelas_${kelas}_semester_${smt}.json`; // misal: kelas_1_semester_1.json
+                    const title = `Kelas ${kelas} Semester ${smt}`;
+                    const imgColor = smt === 1 ? '4ECDC4' : 'FFE66D'; // Hijau (Ganjil), Kuning (Genap)
+                    
+                    const html = `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm custom-card border-0">
+                            <div class="card-header border-0 text-white py-3 d-flex justify-content-between align-items-center" 
+                                 style="background-color: #${imgColor}; border-radius: 20px 20px 0 0;">
+                                <h5 class="fw-bold m-0 text-dark opacity-75">${title}</h5>
+                                <i class="fas fa-book fa-2x text-dark opacity-25"></i>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted small">Bank soal lengkap dengan kisi-kisi, kunci jawaban, dan penilaian otomatis.</p>
+                                
+                                <div class="d-grid gap-2">
+                                    <a href="banksoal/soalguru.html?file=${fileName}" class="btn btn-outline-primary rounded-pill">
+                                        <i class="fas fa-chalkboard-teacher me-2"></i> Kartu Soal (Guru)
+                                    </a>
+                                    
+                                    <a href="banksoal/soalsiswa.html?file=${fileName}" class="btn btn-success text-white rounded-pill">
+                                        <i class="fas fa-user-graduate me-2"></i> Kerjakan (Siswa)
+                                    </a>
+
+                                    <button onclick="copyLink('${fileName}')" class="btn btn-light border text-muted rounded-pill">
+                                        <i class="fas fa-copy me-2"></i> Salin Link Siswa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    
+                    container.innerHTML += html;
+                }
+            }
+        });
+
+        function copyLink(fileName) {
+            // Membuat URL absolut untuk halaman siswa
+            // Mendeteksi apakah kita ada di folder root atau subfolder
+            let basePath = window.location.pathname.replace('banksoal.html', '');
+            if (!basePath.endsWith('/')) basePath += '/';
+            
+            // Perbaiki path agar tidak dobel 'banksoal/banksoal/' jika file ada di subfolder
+            // Asumsi: soalsiswa.html ada di folder yang sama dengan banksoal.html
+            const url = `${window.location.origin}${basePath}banksoal/soalsiswa.html?file=${fileName}`;
+            
+            navigator.clipboard.writeText(url).then(() => {
+                // Tampilkan SweetAlert dengan Link
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Link Berhasil Disalin!',
+                    html: `
+                        <p class="mb-2">Link ujian untuk siswa:</p>
+                        <div class="p-2 bg-light border rounded text-break small text-muted">
+                            ${url}
+                        </div>
+                    `,
+                    timer: 2000, // 2 Detik
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            }).catch(err => {
+                Swal.fire('Gagal', 'Tidak bisa menyalin link otomatis.', 'error');
+            });
+        }
+    </script>
+</body>
+</html>

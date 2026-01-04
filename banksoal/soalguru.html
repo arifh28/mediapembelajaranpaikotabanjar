@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode Guru - Bank Soal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css"> <style>
+        .kisi-box { background: #f8f9fa; border-left: 4px solid var(--primary-green); }
+        .kunci-box { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar fixed-top shadow-sm" style="background-color: var(--primary-green);">
+        <div class="container">
+            <a href="../banksoal.html" class="nav-back-btn text-decoration-none">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <span class="page-title ms-2" id="pageTitle">Memuat Data...</span>
+        </div>
+    </nav>
+    <div style="height: 80px;"></div>
+
+    <div class="container py-4">
+        <div class="alert alert-light border shadow-sm mb-4" id="metaInfo">
+            Loading...
+        </div>
+
+        <div id="soalContainer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Ambil Parameter File dari URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileName = urlParams.get('file');
+
+            if (!fileName) {
+                alert("File soal tidak ditemukan!");
+                return;
+            }
+
+            // 2. Fetch Data JSON
+            try {
+                // Asumsi file json ada di folder yang sama atau folder assets
+                // Sesuaikan path jika file json ada di folder 'assets/'
+                const response = await fetch(fileName); 
+                if (!response.ok) throw new Error("Gagal mengambil file");
+                const result = await response.json();
+
+                renderGuru(result);
+
+            } catch (error) {
+                document.getElementById('soalContainer').innerHTML = `<div class="alert alert-danger">Error: ${error.message}. Pastikan file ${fileName} sudah diupload.</div>`;
+            }
+        });
+
+        function renderGuru(json) {
+            // Render Header
+            document.getElementById('pageTitle').innerText = "Mode Guru: " + json.meta.judul;
+            document.getElementById('metaInfo').innerHTML = `
+                <strong>Kurikulum:</strong> ${json.meta.kurikulum} <br>
+                <strong>Total Soal:</strong> ${json.meta.total_soal} Butir
+            `;
+
+            const container = document.getElementById('soalContainer');
+            
+            json.data.forEach((item, index) => {
+                const no = index + 1;
+                
+                // Format Opsi Jawaban (Jika PG)
+                let opsiHtml = '';
+                if (item.tipe === 'pg') {
+                    opsiHtml = '<ul class="list-unstyled ms-3">';
+                    for (const [key, val] of Object.entries(item.opsi)) {
+                        // Tandai kunci jawaban dengan tebal/warna
+                        const isKey = key === item.kunci ? 'fw-bold text-success' : '';
+                        const icon = key === item.kunci ? '<i class="fas fa-check"></i>' : '';
+                        opsiHtml += `<li class="${isKey}">${key}. ${val} ${icon}</li>`;
+                    }
+                    opsiHtml += '</ul>';
+                } else {
+                    opsiHtml = `<div class="ms-3 text-muted fst-italic">[Soal Isian Singkat]</div>`;
+                }
+
+                // Render Kartu Soal
+                const html = `
+                <div class="card mb-4 shadow-sm border-0">
+                    <div class="card-body">
+                        
+                        <div class="kisi-box p-3 mb-3 rounded">
+                            <small class="text-muted fw-bold d-block mb-1">KISI-KISI SOAL NO. ${no}</small>
+                            <div class="row small">
+                                <div class="col-md-6">
+                                    <strong>Elemen:</strong> ${item.kisi_kisi.elemen}<br>
+                                    <strong>TP:</strong> ${item.kisi_kisi.tp}
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Level Kognitif:</strong> <span class="badge bg-secondary">${item.kisi_kisi.level_kognitif}</span><br>
+                                    <strong>Indikator:</strong> ${item.kisi_kisi.indikator_soal}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <h5 class="me-2 fw-bold">${no}.</h5>
+                            <div class="flex-grow-1">
+                                ${item.pertanyaan}
+                                ${item.gambar ? `<img src="${item.gambar}" class="img-fluid my-2 rounded" style="max-height:200px">` : ''}
+                            </div>
+                        </div>
+
+                        <div class="mt-2 mb-3">
+                            ${opsiHtml}
+                        </div>
+
+                        <div class="kunci-box p-3 rounded">
+                            <div class="mb-2">
+                                <strong><i class="fas fa-key"></i> Kunci Jawaban:</strong> 
+                                ${Array.isArray(item.kunci) ? item.kunci.join(' / ') : item.kunci}
+                            </div>
+                            <div>
+                                <strong><i class="fas fa-lightbulb"></i> Pembahasan:</strong><br>
+                                ${item.pembahasan}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>`;
+                
+                container.innerHTML += html;
+            });
+        }
+    </script>
+</body>
+</html>

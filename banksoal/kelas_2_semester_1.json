@@ -1,0 +1,1160 @@
+{
+  "meta": {
+    "kelas": 2,
+    "semester": 1,
+    "judul": "Bank Soal PAI & BP Kelas 2 Semester 1 - Kurikulum Merdeka",
+    "kurikulum": "Merdeka",
+    "total_soal": 55
+  },
+  "data": [
+    {
+      "id": 1,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami pesan pokok Surah an-Nas.",
+        "tp": "Menjelaskan arti nama surah an-Nas.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti kata an-Nas."
+      },
+      "pertanyaan": "Surah terakhir dalam Al-Qur'an adalah Surah an-Nas. An-Nas artinya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Manusia",
+        "B": "Subuh",
+        "C": "Pembukaan"
+      },
+      "kunci": "A",
+      "pembahasan": "An-Nas artinya Manusia."
+    },
+    {
+      "id": 2,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami pesan pokok Surah an-Nas.",
+        "tp": "Menjelaskan pesan pokok Surah an-Nas.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan tempat meminta perlindungan."
+      },
+      "pertanyaan": "Surah an-Nas mengajarkan kita untuk memohon perlindungan hanya kepada ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Malaikat",
+        "B": "Allah Swt.",
+        "C": "Manusia"
+      },
+      "kunci": "B",
+      "pembahasan": "Dalam Surah an-Nas, kita diperintahkan berlindung kepada Rabb (Tuhan) manusia, yaitu Allah Swt."
+    },
+    {
+      "id": 3,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah bersambung.",
+        "tp": "Membaca huruf hijaiah bersambung.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat membaca rangkaian huruf hijaiah bersambung."
+      },
+      "pertanyaan": "Perhatikan huruf sambung berikut: ( مَلِكِ ). Huruf tersebut jika dipisah menjadi ....",
+      "gambar": null,
+      "opsi": {
+        "A": "مَ - لِ - كِ",
+        "B": "مَ - لَ - كَ",
+        "C": "مِ - لِ - كِ"
+      },
+      "kunci": "A",
+      "pembahasan": "Huruf mim berharakat fathah (ma), lam kasrah (li), dan kaf kasrah (ki) dibaca Maliki."
+    },
+    {
+      "id": 4,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah bersambung.",
+        "tp": "Menyebutkan huruf hijaiah yang tidak bisa disambung.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan huruf yang tidak bisa disambung dengan huruf setelahnya."
+      },
+      "pertanyaan": "Ada enam huruf yang tidak bisa disambung dengan huruf setelahnya. Salah satunya adalah huruf ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Ba (ب)",
+        "B": "Jim (ج)",
+        "C": "Dal (د)"
+      },
+      "kunci": "C",
+      "pembahasan": "Huruf Dal (د) termasuk huruf yang tidak bisa disambung dengan huruf sesudahnya."
+    },
+    {
+      "id": 5,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami makharijul huruf.",
+        "tp": "Menjelaskan makharijul huruf.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan arti makharijul huruf."
+      },
+      "pertanyaan": "Agar bacaan Al-Qur'an fasih, kita belajar makharijul huruf. Makharijul huruf artinya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "tempat keluarnya huruf",
+        "B": "cara menulis huruf",
+        "C": "tanda baca huruf"
+      },
+      "kunci": "A",
+      "pembahasan": "Makharijul huruf adalah tempat keluarnya huruf hijaiah dari mulut."
+    },
+    {
+      "id": 6,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami makharijul huruf.",
+        "tp": "Mengidentifikasi makharijul huruf.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan huruf yang keluar dari dua bibir."
+      },
+      "pertanyaan": "Huruf Mim (م) dan Ba (ب) keluar dari makhraj asy-Syafatain, yaitu ....",
+      "gambar": null,
+      "opsi": {
+        "A": "tenggorokan",
+        "B": "dua bibir",
+        "C": "lidah"
+      },
+      "kunci": "B",
+      "pembahasan": "Asy-Syafatain artinya dua bibir."
+    },
+    {
+      "id": 7,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah an-Nas.",
+        "tp": "Menghafalkan Surah an-Nas.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat melengkapi ayat Surah an-Nas."
+      },
+      "pertanyaan": "Lanjutan ayat 'Min syarril waswaasil ...' adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "kannaas",
+        "B": "khannaas",
+        "C": "annaas"
+      },
+      "kunci": "B",
+      "pembahasan": "Ayat ke-4 berbunyi: Min syarril waswaasil khannaas."
+    },
+    {
+      "id": 8,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah an-Nas.",
+        "tp": "Menjelaskan golongan surah.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan golongan Surah an-Nas."
+      },
+      "pertanyaan": "Surah an-Nas diturunkan di kota Madinah, maka disebut surah golongan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Madaniyah",
+        "B": "Makkiyah",
+        "C": "Misriyah"
+      },
+      "kunci": "A",
+      "pembahasan": "Surah yang diturunkan setelah Nabi hijrah (biasanya di Madinah) disebut Madaniyah."
+    },
+    {
+      "id": 9,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah an-Nas.",
+        "tp": "Menghafalkan Surah an-Nas.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan urutan ayat berdasarkan gambar kaligrafi."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Kaligrafi di samping menunjukkan Surah an-Nas ayat ke ....",
+      "gambar": null,
+      "ai_image_prompt": "Gambar kaligrafi Arab Surah An-Nas ayat pertama (Qul a'udzu birabbin-nas) yang jelas dan indah.",
+      "opsi": {
+        "A": "satu",
+        "B": "dua",
+        "C": "tiga"
+      },
+      "kunci": "A",
+      "pembahasan": "Ayat pertama berbunyi Qul a'udzu birabbin-nas."
+    },
+    {
+      "id": 10,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami pesan pokok Surah an-Nas.",
+        "tp": "Menjelaskan pesan pokok Surah an-Nas.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menyimpulkan perilaku sesuai Surah an-Nas."
+      },
+      "pertanyaan": "Kita sering merasa takut saat sendirian. Berdasarkan Surah an-Nas, sikap yang benar adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bersembunyi di kamar",
+        "B": "menangis ketakutan",
+        "C": "berdoa memohon perlindungan Allah"
+      },
+      "kunci": "C",
+      "pembahasan": "Pesan pokok Surah an-Nas adalah memohon perlindungan kepada Allah dari rasa takut dan bisikan setan."
+    },
+    {
+      "id": 11,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Mengartikan Asmaulhusna al-Hafiz.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti al-Hafiz."
+      },
+      "pertanyaan": "Allah Swt. memiliki nama Al-Hafiz. Arti Al-Hafiz adalah Maha ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Melihat",
+        "B": "Memelihara",
+        "C": "Mendengar"
+      },
+      "kunci": "B",
+      "pembahasan": "Al-Hafiz artinya Maha Memelihara."
+    },
+    {
+      "id": 12,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Mengartikan Asmaulhusna al-Wali.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan makna al-Wali."
+      },
+      "pertanyaan": "Allah Swt. melindungi orang-orang yang beriman. Sifat Allah ini disebut Al-Wali yang artinya Maha ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Melindungi",
+        "B": "Mengetahui",
+        "C": "Memberi"
+      },
+      "kunci": "A",
+      "pembahasan": "Al-Wali artinya Maha Melindungi."
+    },
+    {
+      "id": 13,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Mengartikan Asmaulhusna al-'Alim.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti al-'Alim."
+      },
+      "pertanyaan": "Tidak ada rahasia yang tersembunyi bagi Allah karena Allah bersifat Al-'Alim, yaitu Maha ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Mengetahui",
+        "B": "Melihat",
+        "C": "Kuasa"
+      },
+      "kunci": "A",
+      "pembahasan": "Al-'Alim artinya Maha Mengetahui."
+    },
+    {
+      "id": 14,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Mengartikan Asmaulhusna al-Khabir.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengartikan al-Khabir."
+      },
+      "pertanyaan": "Allah Maha Teliti terhadap segala amal perbuatan hamba-Nya. Nama Allah yang sesuai adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Al-Khabir",
+        "B": "Al-Ahad",
+        "C": "As-Samad"
+      },
+      "kunci": "A",
+      "pembahasan": "Al-Khabir artinya Maha Teliti/Waspada."
+    },
+    {
+      "id": 15,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Meneladani Asmaulhusna al-Hafiz.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan perilaku meneladani al-Hafiz."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Menjaga kebersihan lingkungan sekolah termasuk meneladani sifat Allah ....",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi anak-anak SD sedang kerja bakti membersihkan halaman sekolah, menyapu, dan membuang sampah.",
+      "opsi": {
+        "A": "Al-'Alim",
+        "B": "Al-Hafiz",
+        "C": "Al-Wali"
+      },
+      "kunci": "B",
+      "pembahasan": "Al-Hafiz (Maha Memelihara) diteladani dengan cara memelihara/menjaga lingkungan."
+    },
+    {
+      "id": 16,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Meneladani Asmaulhusna al-'Alim.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan sikap meneladani Al-'Alim."
+      },
+      "pertanyaan": "Agar memiliki banyak pengetahuan seperti sifat Al-'Alim, kita harus rajin ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bermain",
+        "B": "belajar",
+        "C": "tidur"
+      },
+      "kunci": "B",
+      "pembahasan": "Cara meneladani Al-'Alim (Maha Mengetahui) adalah dengan rajin belajar."
+    },
+    {
+      "id": 17,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Meneladani Asmaulhusna al-Khabir.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menerapkan perilaku teliti."
+      },
+      "pertanyaan": "Saat mengerjakan soal ujian, Budi memeriksanya kembali sebelum dikumpulkan. Budi meneladani sifat ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Maha Teliti",
+        "B": "Maha Kaya",
+        "C": "Maha Suci"
+      },
+      "kunci": "A",
+      "pembahasan": "Memeriksa pekerjaan adalah cermin sikap teliti (Al-Khabir)."
+    },
+    {
+      "id": 18,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Memahami bukti Asmaulhusna.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat membuktikan sifat pemeliharaan Allah."
+      },
+      "pertanyaan": "Langit, bumi, dan seisinya tetap teratur dan tidak hancur. Hal ini membuktikan Allah bersifat ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Al-Hafiz",
+        "B": "Al-Basir",
+        "C": "Al-Sami'"
+      },
+      "kunci": "A",
+      "pembahasan": "Keteraturan alam semesta adalah bukti Allah Maha Memelihara (Al-Hafiz)."
+    },
+    {
+      "id": 19,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Menjelaskan konsep perlindungan.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan larangan meminta perlindungan kepada selain Allah."
+      },
+      "pertanyaan": "Meminta perlindungan kepada selain Allah Swt. termasuk perbuatan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "terpuji",
+        "B": "syirik",
+        "C": "biasa"
+      },
+      "kunci": "B",
+      "pembahasan": "Meminta perlindungan kepada selain Allah adalah syirik (menyekutukan Allah)."
+    },
+    {
+      "id": 20,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Menyebutkan jumlah Asmaulhusna.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah Asmaulhusna yang masyhur."
+      },
+      "pertanyaan": "Asmaulhusna berjumlah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "99",
+        "B": "10",
+        "C": "25"
+      },
+      "kunci": "A",
+      "pembahasan": "Jumlah Asmaulhusna yang terkenal adalah 99."
+    },
+    {
+      "id": 21,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menunjukkan sikap sayang kepada sesama.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi contoh sayang kepada sesama."
+      },
+      "pertanyaan": "Islam adalah agama rahmatan lil 'alamin, artinya kasih sayang untuk ....",
+      "gambar": null,
+      "opsi": {
+        "A": "umat Islam saja",
+        "B": "seluruh alam",
+        "C": "keluarga saja"
+      },
+      "kunci": "B",
+      "pembahasan": "Rahmatan lil 'alamin artinya kasih sayang bagi seluruh alam semesta."
+    },
+    {
+      "id": 22,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menjelaskan arti empati.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengartikan kata empati."
+      },
+      "pertanyaan": "Kemampuan untuk memahami dan merasakan perasaan orang lain disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "jujur",
+        "B": "empati",
+        "C": "sabar"
+      },
+      "kunci": "B",
+      "pembahasan": "Empati adalah ikut merasakan apa yang dirasakan orang lain."
+    },
+    {
+      "id": 23,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menerapkan perilaku empati.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan tindakan empati saat teman sedih."
+      },
+      "pertanyaan": "Jika melihat teman sedang sedih dan menangis, sikap kita sebaiknya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "menertawakannya",
+        "B": "menghiburnya",
+        "C": "memarahinya"
+      },
+      "kunci": "B",
+      "pembahasan": "Sikap empati adalah menghibur teman yang sedih."
+    },
+    {
+      "id": 24,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menjelaskan tutur kata lembut.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan lawan kata kasar."
+      },
+      "pertanyaan": "Berbicara dengan orang tua dan guru harus dengan bahasa yang ....",
+      "gambar": null,
+      "opsi": {
+        "A": "kasar",
+        "B": "keras",
+        "C": "sopan dan lembut"
+      },
+      "kunci": "C",
+      "pembahasan": "Kepada orang tua harus bertutur kata sopan dan lembut."
+    },
+    {
+      "id": 25,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menganalisis manfaat tutur kata baik.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan nilai pahala tutur kata baik."
+      },
+      "pertanyaan": "Nabi Muhammad saw. bersabda bahwa bertutur kata yang baik adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "sedekah",
+        "B": "sia-sia",
+        "C": "percuma"
+      },
+      "kunci": "A",
+      "pembahasan": "Hadis Nabi: Kata-kata yang baik adalah sedekah."
+    },
+    {
+      "id": 26,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menjelaskan arti jujur.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengartikan jujur."
+      },
+      "pertanyaan": "Berkata apa adanya dan sesuai kenyataan disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bohong",
+        "B": "jujur",
+        "C": "pamer"
+      },
+      "kunci": "B",
+      "pembahasan": "Jujur adalah kesesuaian antara ucapan dan kenyataan."
+    },
+    {
+      "id": 27,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menerapkan perilaku jujur.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan contoh perilaku jujur di sekolah."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Contoh perilaku jujur saat mengerjakan ulangan di kelas adalah ....",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi suasana ujian di kelas, seorang anak mengerjakan sendiri dengan tenang sementara anak lain mencoba menyontek.",
+      "opsi": {
+        "A": "menyontek teman",
+        "B": "mengerjakan sendiri",
+        "C": "bertanya jawaban pada guru"
+      },
+      "kunci": "B",
+      "pembahasan": "Jujur saat ulangan berarti mengerjakan sendiri tanpa menyontek."
+    },
+    {
+      "id": 28,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menganalisis akibat tidak jujur.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menyimpulkan akibat berbohong."
+      },
+      "pertanyaan": "Anak yang suka berbohong akan dijauhi teman dan tidak akan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "dipercaya",
+        "B": "dihukum",
+        "C": "rugi"
+      },
+      "kunci": "A",
+      "pembahasan": "Pembohong sulit dipercaya orang lain."
+    },
+    {
+      "id": 29,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menunjukkan sikap sayang kepada sesama.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menerapkan perilaku sayang teman."
+      },
+      "pertanyaan": "Jika ada teman yang tidak membawa bekal, sikap sayang sesama ditunjukkan dengan cara ....",
+      "gambar": null,
+      "opsi": {
+        "A": "pamer makanan",
+        "B": "berbagi makanan",
+        "C": "makan sembunyi-sembunyi"
+      },
+      "kunci": "B",
+      "pembahasan": "Berbagi makanan adalah wujud kasih sayang."
+    },
+    {
+      "id": 30,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Meneladani akhlak terpuji.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan lawan kata jujur."
+      },
+      "pertanyaan": "Lawan kata dari sifat jujur adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bohong",
+        "B": "sombong",
+        "C": "kikir"
+      },
+      "kunci": "A",
+      "pembahasan": "Lawan jujur adalah bohong (dusta)."
+    },
+    {
+      "id": 31,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami azan dan ikamah.",
+        "tp": "Menjelaskan pengertian azan.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengartikan fungsi azan."
+      },
+      "pertanyaan": "Panggilan atau seruan sebagai tanda masuknya waktu salat disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "ikamah",
+        "B": "azan",
+        "C": "takbir"
+      },
+      "kunci": "B",
+      "pembahasan": "Azan adalah tanda masuk waktu salat."
+    },
+    {
+      "id": 32,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami azan dan ikamah.",
+        "tp": "Menyebutkan istilah muazin.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nama orang yang azan."
+      },
+      "pertanyaan": "Orang yang mengumandangkan azan disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "imam",
+        "B": "makmum",
+        "C": "muazin"
+      },
+      "kunci": "C",
+      "pembahasan": "Muazin adalah orang yang azan."
+    },
+    {
+      "id": 33,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami azan dan ikamah.",
+        "tp": "Menjelaskan pengertian ikamah.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat membedakan fungsi ikamah."
+      },
+      "pertanyaan": "Seruan yang menandakan salat berjamaah akan segera dimulai disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "azan",
+        "B": "ikamah",
+        "C": "zikir"
+      },
+      "kunci": "B",
+      "pembahasan": "Ikamah adalah tanda salat berjamaah segera dimulai (berdiri)."
+    },
+    {
+      "id": 34,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami salat fardu.",
+        "tp": "Menyebutkan jumlah rakaat salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah rakaat salat Magrib."
+      },
+      "pertanyaan": "Salat fardu yang dikerjakan saat matahari terbenam berjumlah 3 rakaat adalah salat ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Subuh",
+        "B": "Magrib",
+        "C": "Isya"
+      },
+      "kunci": "B",
+      "pembahasan": "Salat Magrib ada 3 rakaat."
+    },
+    {
+      "id": 35,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami gerakan salat.",
+        "tp": "Mempraktikkan gerakan salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi gerakan rukuk dari gambar."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Gerakan salat membungkuk dengan tangan memegang lutut disebut ....",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi anak laki-laki muslim sedang melakukan gerakan rukuk (membungkuk tangan di lutut) dalam salat.",
+      "opsi": {
+        "A": "sujud",
+        "B": "rukuk",
+        "C": "iktidal"
+      },
+      "kunci": "B",
+      "pembahasan": "Gerakan membungkuk tangan di lutut adalah rukuk."
+    },
+    {
+      "id": 36,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami bacaan salat.",
+        "tp": "Melafalkan bacaan salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menentukan arti takbiratulihram."
+      },
+      "pertanyaan": "Gerakan awal salat disebut takbiratulihram dengan membaca 'Allahu Akbar' yang artinya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Allah Maha Besar",
+        "B": "Allah Maha Pengasih",
+        "C": "Allah Maha Suci"
+      },
+      "kunci": "A",
+      "pembahasan": "Allahu Akbar artinya Allah Maha Besar."
+    },
+    {
+      "id": 37,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami ketentuan salat.",
+        "tp": "Menyebutkan syarat sah salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan syarat sah berupa arah."
+      },
+      "pertanyaan": "Salah satu syarat sah salat adalah menghadap ke arah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "timur",
+        "B": "barat",
+        "C": "kiblat"
+      },
+      "kunci": "C",
+      "pembahasan": "Salat harus menghadap kiblat (Ka'bah)."
+    },
+    {
+      "id": 38,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami gerakan salat.",
+        "tp": "Menjelaskan gerakan salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan gerakan sujud."
+      },
+      "pertanyaan": "Gerakan meletakkan dahi, kedua telapak tangan, lutut, dan jari kaki di lantai disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "duduk",
+        "B": "sujud",
+        "C": "salam"
+      },
+      "kunci": "B",
+      "pembahasan": "Gerakan menempelkan dahi ke lantai adalah sujud."
+    },
+    {
+      "id": 39,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami ketentuan salat.",
+        "tp": "Menganalisis hal yang membatalkan salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menentukan penyebab batal salat."
+      },
+      "pertanyaan": "Salat kita menjadi batal jika kita melakukan hal berikut, yaitu ....",
+      "gambar": null,
+      "opsi": {
+        "A": "membaca Al-Fatihah",
+        "B": "makan dan minum",
+        "C": "berdiri tegak"
+      },
+      "kunci": "B",
+      "pembahasan": "Makan dan minum membatalkan salat."
+    },
+    {
+      "id": 40,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami hikmah salat.",
+        "tp": "Menjelaskan manfaat salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menyimpulkan manfaat salat tepat waktu."
+      },
+      "pertanyaan": "Mengerjakan salat tepat waktu melatih kita untuk hidup ....",
+      "gambar": null,
+      "opsi": {
+        "A": "disiplin",
+        "B": "boros",
+        "C": "santai"
+      },
+      "kunci": "A",
+      "pembahasan": "Salat tepat waktu melatih kedisiplinan."
+    },
+    {
+      "id": 41,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Mengenal silsilah Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan urutan kenabian Nabi Nuh."
+      },
+      "pertanyaan": "Nabi Nuh a.s. adalah nabi dan rasul urutan ke ....",
+      "gambar": null,
+      "opsi": {
+        "A": "2",
+        "B": "4",
+        "C": "3"
+      },
+      "kunci": "C",
+      "pembahasan": "Urutan nabi: Adam, Idris, Nuh (ke-3)."
+    },
+    {
+      "id": 42,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Mengenal keluarga Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nama anak Nabi Nuh."
+      },
+      "pertanyaan": "Anak Nabi Nuh a.s. yang durhaka dan tidak mau naik kapal bernama ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Qabil",
+        "B": "Kan'an",
+        "C": "Namrud"
+      },
+      "kunci": "B",
+      "pembahasan": "Anak Nabi Nuh yang tenggelam bernama Kan'an."
+    },
+    {
+      "id": 43,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Menjelaskan mukjizat Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi mukjizat Nabi Nuh dari gambar."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Nabi Nuh a.s. diperintahkan Allah membuat ... untuk menyelamatkan umatnya.",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi sebuah kapal besar (bahtera) kayu di atas air yang sedang diterjang ombak besar.",
+      "opsi": {
+        "A": "kapal besar",
+        "B": "istana megah",
+        "C": "benteng tinggi"
+      },
+      "kunci": "A",
+      "pembahasan": "Mukjizat Nabi Nuh adalah membuat bahtera/kapal besar."
+    },
+    {
+      "id": 44,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Meneladani sikap Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan sikap Nabi Nuh saat diejek."
+      },
+      "pertanyaan": "Saat membuat kapal, Nabi Nuh a.s. diejek oleh kaumnya. Sikap Nabi Nuh a.s. adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "marah",
+        "B": "membalas",
+        "C": "sabar"
+      },
+      "kunci": "C",
+      "pembahasan": "Nabi Nuh bersabar menghadapi ejekan kaumnya."
+    },
+    {
+      "id": 45,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Menjelaskan azab kaum Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan azab bagi kaum Nabi Nuh."
+      },
+      "pertanyaan": "Allah menghukum kaum Nabi Nuh a.s. yang durhaka dengan azab ....",
+      "gambar": null,
+      "opsi": {
+        "A": "banjir besar",
+        "B": "gempa bumi",
+        "C": "angin topan"
+      },
+      "kunci": "A",
+      "pembahasan": "Azabnya adalah banjir bandang yang besar."
+    },
+    {
+      "id": 46,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Meneladani kerja keras Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menerapkan sikap kerja keras dalam belajar."
+      },
+      "pertanyaan": "Nabi Nuh bekerja keras membuat kapal. Sebagai siswa, kita harus bekerja keras dalam ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bermain",
+        "B": "belajar",
+        "C": "tidur"
+      },
+      "kunci": "B",
+      "pembahasan": "Kerja keras siswa diwujudkan dengan rajin belajar."
+    },
+    {
+      "id": 47,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Menganalisis sebab keselamatan.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menyimpulkan siapa yang selamat dari banjir."
+      },
+      "pertanyaan": "Orang-orang yang selamat naik ke kapal Nabi Nuh a.s. adalah mereka yang ....",
+      "gambar": null,
+      "opsi": {
+        "A": "kaya raya",
+        "B": "beriman kepada Allah",
+        "C": "pandai berenang"
+      },
+      "kunci": "B",
+      "pembahasan": "Hanya orang beriman yang diselamatkan Allah."
+    },
+    {
+      "id": 48,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Meneladani sikap Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan lama dakwah Nabi Nuh."
+      },
+      "pertanyaan": "Nabi Nuh a.s. berdakwah kepada kaumnya dalam waktu yang sangat lama, yaitu selama ....",
+      "gambar": null,
+      "opsi": {
+        "A": "100 tahun",
+        "B": "500 tahun",
+        "C": "950 tahun"
+      },
+      "kunci": "C",
+      "pembahasan": "Nabi Nuh berdakwah selama 950 tahun."
+    },
+    {
+      "id": 49,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Mengenal keturunan Nabi.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan ayah Nabi Nuh."
+      },
+      "pertanyaan": "Ayah Nabi Nuh a.s. bernama ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Lamik",
+        "B": "Azar",
+        "C": "Abdullah"
+      },
+      "kunci": "A",
+      "pembahasan": "Ayah Nabi Nuh a.s. bernama Lamik."
+    },
+    {
+      "id": 50,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Meneladani sikap Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan sikap jika diejek teman."
+      },
+      "pertanyaan": "Jika ada teman yang mengejek kita karena berbuat baik, kita sebaiknya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "membalas mengejek",
+        "B": "tetap sabar dan diam",
+        "C": "mengajak berkelahi"
+      },
+      "kunci": "B",
+      "pembahasan": "Meneladani kesabaran Nabi Nuh dengan tetap sabar saat diejek."
+    },
+    {
+      "id": 51,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami pesan pokok Surah an-Nas.",
+        "tp": "Menjelaskan pesan pokok Surah an-Nas.",
+        "lingkup_materi": "Bab 1: Ayo Belajar Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan dari apa kita berlindung."
+      },
+      "pertanyaan": "Dalam Surah an-Nas, kita berlindung kepada Allah dari kejahatan bisikan ....",
+      "gambar": null,
+      "kunci": [
+        "setan",
+        "syaitan"
+      ],
+      "pembahasan": "Kita berlindung dari bisikan setan (waswasil khannas)."
+    },
+    {
+      "id": 52,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Mengenal Asmaulhusna.",
+        "tp": "Mengartikan Asmaulhusna.",
+        "lingkup_materi": "Bab 2: Mari Mengenal Allah Swt.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengartikan Al-Wali."
+      },
+      "pertanyaan": "Allah memiliki Asmaulhusna Al-Wali, artinya Allah Maha ....",
+      "gambar": null,
+      "kunci": [
+        "Melindungi",
+        "Pelindung"
+      ],
+      "pembahasan": "Al-Wali artinya Maha Melindungi."
+    },
+    {
+      "id": 53,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami perilaku terpuji.",
+        "tp": "Menerapkan perilaku terpuji.",
+        "lingkup_materi": "Bab 3: Ayo Berperilaku Terpuji",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan lawan kata bohong."
+      },
+      "pertanyaan": "Anak yang tidak pernah berbohong disebut anak yang ....",
+      "gambar": null,
+      "kunci": [
+        "jujur"
+      ],
+      "pembahasan": "Tidak berbohong berarti jujur."
+    },
+    {
+      "id": 54,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami salat fardu.",
+        "tp": "Menyebutkan jumlah salat.",
+        "lingkup_materi": "Bab 4: Alhamdulillah, Aku Bisa Salat",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah waktu salat fardu."
+      },
+      "pertanyaan": "Dalam sehari semalam, salat fardu dilaksanakan sebanyak ... kali.",
+      "gambar": null,
+      "kunci": [
+        "lima",
+        "5"
+      ],
+      "pembahasan": "Salat fardu 5 kali (Subuh, Zuhur, Asar, Magrib, Isya)."
+    },
+    {
+      "id": 55,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Nuh a.s.",
+        "tp": "Meneladani kisah Nabi Nuh.",
+        "lingkup_materi": "Bab 5: Asyiknya Belajar Kisah Nabi Nuh a.s.",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nama nabi pembuat kapal."
+      },
+      "pertanyaan": "Nabi yang diperintahkan Allah membuat kapal besar adalah Nabi ....",
+      "gambar": null,
+      "kunci": [
+        "Nuh",
+        "Nuh a.s."
+      ],
+      "pembahasan": "Nabi Nuh a.s. adalah pembuat bahtera/kapal."
+    }
+  ]
+}

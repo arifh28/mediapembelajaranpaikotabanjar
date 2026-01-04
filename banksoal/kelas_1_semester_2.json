@@ -1,0 +1,1161 @@
+{
+  "meta": {
+    "kelas": 1,
+    "semester": 2,
+    "judul": "Bank Soal PAI Kelas 1 Semester 2 - Kurikulum Merdeka",
+    "kurikulum": "Merdeka",
+    "total_soal": 55
+  },
+  "data": [
+    {
+      "id": 1,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Menyebutkan macam-macam harakat.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi bentuk harakat kasratain."
+      },
+      "pertanyaan": "Tanda baca dua garis di bawah huruf hijaiah disebut ....",
+      "gambar": null,
+      "opsi": {
+        "A": "kasratain",
+        "B": "fathatain",
+        "C": "dammatain"
+      },
+      "kunci": "A",
+      "pembahasan": "Kasratain adalah tanda dua garis di bawah huruf."
+    },
+    {
+      "id": 2,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Melafalkan huruf hijaiah berharakat.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menentukan bunyi harakat dammatain."
+      },
+      "pertanyaan": "Huruf 'Ba' jika diberi harakat dammatain ( ٌ  ) dibaca ....",
+      "gambar": null,
+      "opsi": {
+        "A": "ban",
+        "B": "bin",
+        "C": "bun"
+      },
+      "kunci": "C",
+      "pembahasan": "Dammatain menghasilkan bunyi 'un'."
+    },
+    {
+      "id": 3,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah Al-Ikhlas.",
+        "tp": "Menyebutkan arti Surah Al-Ikhlas.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti nama surah."
+      },
+      "pertanyaan": "Surah Al-Ikhlas artinya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Pembukaan",
+        "B": "Bersih Hati",
+        "C": "Manusia"
+      },
+      "kunci": "B",
+      "pembahasan": "Al-Ikhlas artinya Bersih Hati atau Memurnikan Keesaan Allah."
+    },
+    {
+      "id": 4,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah Al-Ikhlas.",
+        "tp": "Menghafalkan Surah Al-Ikhlas.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah ayat."
+      },
+      "pertanyaan": "Surah Al-Ikhlas terdiri atas ... ayat.",
+      "gambar": null,
+      "opsi": {
+        "A": "3",
+        "B": "5",
+        "C": "4"
+      },
+      "kunci": "C",
+      "pembahasan": "Surah Al-Ikhlas terdiri dari 4 ayat."
+    },
+    {
+      "id": 5,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah.",
+        "tp": "Membaca huruf bertasydid.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan cara membaca huruf tasydid."
+      },
+      "pertanyaan": "Huruf yang berharakat tasydid harus dibaca ....",
+      "gambar": null,
+      "opsi": {
+        "A": "dobel",
+        "B": "mati",
+        "C": "panjang"
+      },
+      "kunci": "A",
+      "pembahasan": "Tasydid (w) membuat huruf dibaca ganda/dobel."
+    },
+    {
+      "id": 6,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami pesan pokok Surah Al-Ikhlas.",
+        "tp": "Menjelaskan pesan pokok surah.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan makna Esa."
+      },
+      "pertanyaan": "Surah Al-Ikhlas menjelaskan bahwa Allah Maha Esa. Esa artinya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "dua",
+        "B": "satu",
+        "C": "tiga"
+      },
+      "kunci": "B",
+      "pembahasan": "Esa artinya tunggal atau satu."
+    },
+    {
+      "id": 7,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami pesan pokok Surah Al-Ikhlas.",
+        "tp": "Menunjukkan perilaku bertauhid.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menerapkan perilaku ibadah hanya kepada Allah."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Ahmad sedang berdoa. Ia berdoa meminta pertolongan hanya kepada ....",
+      "gambar": "Ilustrasi anak laki-laki muslim sedang berdoa dengan khusyuk mengangkat kedua tangan.",
+      "opsi": {
+        "A": "Allah Swt.",
+        "B": "Malaikat",
+        "C": "Nabi"
+      },
+      "kunci": "A",
+      "pembahasan": "Sesuai Surah Al-Ikhlas, kita hanya meminta kepada Allah Swt."
+    },
+    {
+      "id": 8,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah.",
+        "tp": "Membaca kata sederhana.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat membaca rangkaian huruf berharakat."
+      },
+      "pertanyaan": "Huruf ( كِ - تَ - بٌ ) jika dirangkai dan dibaca menjadi ....",
+      "gambar": null,
+      "opsi": {
+        "A": "kataban",
+        "B": "kitabun",
+        "C": "kutubun"
+      },
+      "kunci": "B",
+      "pembahasan": "Kaf kasrah - Ta fathah - Ba dammatain = kitabun."
+    },
+    {
+      "id": 9,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Menyebutkan arti Asmaulhusna.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti kata Asmaulhusna."
+      },
+      "pertanyaan": "Asmaulhusna artinya nama-nama Allah Swt. yang ....",
+      "gambar": null,
+      "opsi": {
+        "A": "banyak",
+        "B": "baik",
+        "C": "kekal"
+      },
+      "kunci": "B",
+      "pembahasan": "Asmaulhusna adalah nama-nama yang baik/indah."
+    },
+    {
+      "id": 10,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Menyebutkan jumlah Asmaulhusna.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah Asmaulhusna."
+      },
+      "pertanyaan": "Jumlah Asmaulhusna yang masyhur ada ....",
+      "gambar": null,
+      "opsi": {
+        "A": "99",
+        "B": "100",
+        "C": "25"
+      },
+      "kunci": "A",
+      "pembahasan": "Jumlah Asmaulhusna ada 99."
+    },
+    {
+      "id": 11,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Mengartikan Ar-Rahman.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengartikan Ar-Rahman."
+      },
+      "pertanyaan": "Salah satu Asmaulhusna adalah Ar-Rahman. Ar-Rahman artinya Maha ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Penyayang",
+        "B": "Pengasih",
+        "C": "Pemberi"
+      },
+      "kunci": "B",
+      "pembahasan": "Ar-Rahman artinya Maha Pengasih."
+    },
+    {
+      "id": 12,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Mengartikan Ar-Rahim.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengartikan Ar-Rahim."
+      },
+      "pertanyaan": "Allah menyayangi orang-orang beriman. Sifat Allah ini disebut Ar-Rahim yang artinya Maha ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Penyayang",
+        "B": "Pengampun",
+        "C": "Adil"
+      },
+      "kunci": "A",
+      "pembahasan": "Ar-Rahim artinya Maha Penyayang."
+    },
+    {
+      "id": 13,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami kasih sayang terhadap sesama.",
+        "tp": "Meneladani sikap kasih sayang.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan perilaku kasih sayang kepada teman."
+      },
+      "pertanyaan": "Kita harus meneladani sifat kasih sayang Allah. Jika ada teman yang sedih, kita sebaiknya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "mengejeknya",
+        "B": "menghiburnya",
+        "C": "memarahinya"
+      },
+      "kunci": "B",
+      "pembahasan": "Menghibur teman adalah wujud kasih sayang."
+    },
+    {
+      "id": 14,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami kasih sayang Nabi.",
+        "tp": "Meneladani Nabi Muhammad.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi sikap Nabi kepada keluarga."
+      },
+      "pertanyaan": "Nabi Muhammad saw. sangat menyayangi keluarganya. Beliau selalu bersikap ... kepada mereka.",
+      "gambar": null,
+      "opsi": {
+        "A": "kasar",
+        "B": "lemah lembut",
+        "C": "cuek"
+      },
+      "kunci": "B",
+      "pembahasan": "Nabi selalu bersikap lembut dan sayang kepada keluarga."
+    },
+    {
+      "id": 15,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami kasih sayang sesama.",
+        "tp": "Menerapkan sikap peduli.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan sikap dari gambar."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Perbuatan Ahmad menolong kucing menunjukkan sikap ....",
+      "gambar": "Ilustrasi anak laki-laki sedang memberi makan atau menolong seekor kucing.",
+      "opsi": {
+        "A": "kasih sayang",
+        "B": "pemarah",
+        "C": "dendam"
+      },
+      "kunci": "A",
+      "pembahasan": "Menolong hewan adalah bentuk kasih sayang."
+    },
+    {
+      "id": 16,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Menganalisis perbedaan Ar-Rahman dan Ar-Rahim.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat membedakan cakupan kasih sayang Allah."
+      },
+      "pertanyaan": "Allah memberi rezeki kepada semua makhluk, baik yang beriman maupun tidak. Hal ini bukti Allah bersifat ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Ar-Rahim",
+        "B": "Ar-Rahman",
+        "C": "Al-Malik"
+      },
+      "kunci": "B",
+      "pembahasan": "Ar-Rahman (Pengasih) untuk semua makhluk di dunia, Ar-Rahim (Penyayang) khusus untuk orang beriman di akhirat."
+    },
+    {
+      "id": 17,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap berterima kasih.",
+        "tp": "Menyebutkan kepada siapa berterima kasih.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan orang yang berjasa di rumah."
+      },
+      "pertanyaan": "Orang yang merawat dan membesarkan kita di rumah adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "guru",
+        "B": "polisi",
+        "C": "orang tua"
+      },
+      "kunci": "C",
+      "pembahasan": "Orang tua adalah yang merawat kita di rumah."
+    },
+    {
+      "id": 18,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap berterima kasih.",
+        "tp": "Menjelaskan cara berterima kasih.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menentukan ucapan yang tepat."
+      },
+      "pertanyaan": "Jika dibantu oleh orang lain, kita harus mengucapkan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "terima kasih",
+        "B": "sama-sama",
+        "C": "maaf"
+      },
+      "kunci": "A",
+      "pembahasan": "Ucapan atas bantuan orang lain adalah terima kasih."
+    },
+    {
+      "id": 19,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap disiplin.",
+        "tp": "Menjelaskan arti disiplin.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mendefinisikan disiplin."
+      },
+      "pertanyaan": "Disiplin artinya patuh dan taat pada ....",
+      "gambar": null,
+      "opsi": {
+        "A": "aturan",
+        "B": "teman",
+        "C": "hadiah"
+      },
+      "kunci": "A",
+      "pembahasan": "Disiplin adalah ketaatan pada aturan."
+    },
+    {
+      "id": 20,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap berterima kasih.",
+        "tp": "Menerapkan cara berterima kasih.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan cara berterima kasih kepada guru."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Cara berterima kasih kepada guru saat bertemu adalah dengan ....",
+      "gambar": "Ilustrasi siswa mencium tangan gurunya dengan sopan.",
+      "opsi": {
+        "A": "lari menjauh",
+        "B": "bersalaman dan mencium tangan",
+        "C": "diam saja"
+      },
+      "kunci": "B",
+      "pembahasan": "Bersalaman dan mencium tangan adalah cara hormat dan terima kasih pada guru."
+    },
+    {
+      "id": 21,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap disiplin.",
+        "tp": "Menerapkan perilaku disiplin waktu.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan contoh disiplin waktu."
+      },
+      "pertanyaan": "Supaya tidak terlambat ke sekolah, kita harus bangun ....",
+      "gambar": null,
+      "opsi": {
+        "A": "siang",
+        "B": "sore",
+        "C": "pagi"
+      },
+      "kunci": "C",
+      "pembahasan": "Bangun pagi adalah bentuk disiplin waktu."
+    },
+    {
+      "id": 22,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap disiplin.",
+        "tp": "Menganalisis manfaat disiplin.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menyimpulkan manfaat anak disiplin."
+      },
+      "pertanyaan": "Anak yang disiplin hidupnya akan teratur dan menjadi anak yang ....",
+      "gambar": null,
+      "opsi": {
+        "A": "percaya diri",
+        "B": "sombong",
+        "C": "nakal"
+      },
+      "kunci": "A",
+      "pembahasan": "Disiplin melatih tanggung jawab dan percaya diri."
+    },
+    {
+      "id": 23,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap berterima kasih.",
+        "tp": "Menunjukkan adab berterima kasih.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan tangan yang digunakan untuk bersalaman."
+      },
+      "pertanyaan": "Saat berjabat tangan untuk berterima kasih, kita menggunakan tangan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "kiri",
+        "B": "kanan",
+        "C": "kedua-duanya sembarang"
+      },
+      "kunci": "B",
+      "pembahasan": "Jabat tangan menggunakan tangan kanan."
+    },
+    {
+      "id": 24,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap disiplin.",
+        "tp": "Menerapkan disiplin beribadah.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan contoh disiplin ibadah."
+      },
+      "pertanyaan": "Contoh perilaku disiplin dalam beribadah adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "salat tepat waktu",
+        "B": "malas mengaji",
+        "C": "puasa setengah hari"
+      },
+      "kunci": "A",
+      "pembahasan": "Salat tepat waktu adalah disiplin ibadah."
+    },
+    {
+      "id": 25,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara bersuci.",
+        "tp": "Menyebutkan alat bersuci.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan alat utama bersuci."
+      },
+      "pertanyaan": "Alat utama yang digunakan untuk bersuci adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "air",
+        "B": "sabun",
+        "C": "sampo"
+      },
+      "kunci": "A",
+      "pembahasan": "Air adalah alat utama thaharah."
+    },
+    {
+      "id": 26,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami hidup bersih.",
+        "tp": "Menerapkan hidup bersih.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan cara membersihkan gigi."
+      },
+      "pertanyaan": "Agar gigi kita bersih dan sehat, kita harus rajin ....",
+      "gambar": null,
+      "opsi": {
+        "A": "keramas",
+        "B": "menggosok gigi",
+        "C": "cuci muka"
+      },
+      "kunci": "B",
+      "pembahasan": "Menggosok gigi membersihkan gigi."
+    },
+    {
+      "id": 27,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara bersuci.",
+        "tp": "Menjelaskan pengertian najis.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi contoh najis."
+      },
+      "pertanyaan": "Berikut ini yang termasuk najis adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "ludah",
+        "B": "keringat",
+        "C": "air kencing"
+      },
+      "kunci": "C",
+      "pembahasan": "Air kencing (urine) adalah najis."
+    },
+    {
+      "id": 28,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara wudu.",
+        "tp": "Mempraktikkan wudu.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengurutkan gerakan wudu."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Gerakan wudu yang dilakukan setelah membasuh muka adalah ....",
+      "gambar": "Ilustrasi anak laki-laki sedang membasuh kedua tangan sampai siku di kran air.",
+      "opsi": {
+        "A": "membasuh kaki",
+        "B": "membasuh tangan",
+        "C": "mengusap kepala"
+      },
+      "kunci": "B",
+      "pembahasan": "Urutan: Niat, Muka, Tangan, Kepala, Kaki."
+    },
+    {
+      "id": 29,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara tayamum.",
+        "tp": "Menjelaskan ketentuan tayamum.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan alat tayamum."
+      },
+      "pertanyaan": "Jika tidak ada air, kita boleh bersuci dengan tayamum. Tayamum menggunakan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "tepung",
+        "B": "debu suci",
+        "C": "kapur"
+      },
+      "kunci": "B",
+      "pembahasan": "Tayamum menggunakan debu yang suci."
+    },
+    {
+      "id": 30,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara bersuci.",
+        "tp": "Menganalisis cara membersihkan kotoran.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menentukan alat pembersih alternatif."
+      },
+      "pertanyaan": "Jika selesai buang air tetapi tidak ada air, kita bisa membersihkannya (istinja) menggunakan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "batu atau tisu",
+        "B": "plastik",
+        "C": "kaca"
+      },
+      "kunci": "A",
+      "pembahasan": "Istinja bisa menggunakan benda padat kesat seperti batu atau tisu jika tidak ada air."
+    },
+    {
+      "id": 31,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami hidup bersih.",
+        "tp": "Menerapkan kebersihan pakaian.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan tindakan pada pakaian kotor."
+      },
+      "pertanyaan": "Pakaian yang kotor setelah dipakai harus segera ....",
+      "gambar": null,
+      "opsi": {
+        "A": "disetrika",
+        "B": "dicuci",
+        "C": "dilipat"
+      },
+      "kunci": "B",
+      "pembahasan": "Pakaian kotor harus dicuci."
+    },
+    {
+      "id": 32,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara wudu.",
+        "tp": "Menjelaskan syarat wudu.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mempraktikkan gerakan tayamum."
+      },
+      "pertanyaan": "Perhatikan gambar berikut! Gerakan pertama dalam tayamum setelah niat adalah ....",
+      "gambar": "Ilustrasi gerakan tayamum mengusap wajah dengan debu.",
+      "opsi": {
+        "A": "mengusap wajah",
+        "B": "mengusap kaki",
+        "C": "mengusap telinga"
+      },
+      "kunci": "A",
+      "pembahasan": "Rukun tayamum: Niat, Usap Wajah, Usap Tangan."
+    },
+    {
+      "id": 33,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menjelaskan asal-usul manusia.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan manusia pertama."
+      },
+      "pertanyaan": "Manusia pertama yang diciptakan Allah Swt. adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Nabi Nuh a.s.",
+        "B": "Nabi Muhammad saw.",
+        "C": "Nabi Adam a.s."
+      },
+      "kunci": "C",
+      "pembahasan": "Nabi Adam a.s. adalah manusia pertama."
+    },
+    {
+      "id": 34,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menjelaskan proses penciptaan Nabi Adam.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan bahan penciptaan Nabi Adam."
+      },
+      "pertanyaan": "Allah menciptakan Nabi Adam a.s. dari ....",
+      "gambar": null,
+      "opsi": {
+        "A": "tanah",
+        "B": "api",
+        "C": "cahaya"
+      },
+      "kunci": "A",
+      "pembahasan": "Nabi Adam diciptakan dari tanah liat."
+    },
+    {
+      "id": 35,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menyebutkan istri Nabi Adam.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nama istri Nabi Adam."
+      },
+      "pertanyaan": "Istri Nabi Adam a.s. bernama ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Siti Hawa",
+        "B": "Siti Aminah",
+        "C": "Siti Khadijah"
+      },
+      "kunci": "A",
+      "pembahasan": "Istri Nabi Adam bernama Hawa."
+    },
+    {
+      "id": 36,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menjelaskan peristiwa di surga.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan makhluk yang menggoda Nabi Adam."
+      },
+      "pertanyaan": "Makhluk yang menggoda Nabi Adam a.s. dan Hawa agar melanggar perintah Allah adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Malaikat",
+        "B": "Iblis",
+        "C": "Jin"
+      },
+      "kunci": "B",
+      "pembahasan": "Iblis menggoda Nabi Adam untuk memakan buah khuldi."
+    },
+    {
+      "id": 37,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menceritakan kehidupan di bumi.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan tempat pertemuan Adam dan Hawa."
+      },
+      "pertanyaan": "Setelah diturunkan ke bumi dan berpisah lama, Nabi Adam a.s. dan Hawa bertemu kembali di ....",
+      "gambar": "Ilustrasi pemandangan bukit Jabal Rahmah yang tandus tapi bersejarah.",
+      "opsi": {
+        "A": "Jabal Rahmah",
+        "B": "Gua Hira",
+        "C": "Masjidil Haram"
+      },
+      "kunci": "A",
+      "pembahasan": "Mereka bertemu di Jabal Rahmah."
+    },
+    {
+      "id": 38,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Meneladani sikap Nabi Adam.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menerapkan sikap meminta maaf."
+      },
+      "pertanyaan": "Setelah menyadari kesalahannya memakan buah khuldi, Nabi Adam a.s. segera ....",
+      "gambar": null,
+      "opsi": {
+        "A": "lari bersembunyi",
+        "B": "bertaubat dan minta maaf",
+        "C": "menyalahkan Iblis"
+      },
+      "kunci": "B",
+      "pembahasan": "Nabi Adam segera bertaubat kepada Allah."
+    },
+    {
+      "id": 39,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah.",
+        "tp": "Membaca harakat sukun.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat membaca kata dengan sukun."
+      },
+      "pertanyaan": "Huruf ( مَ - سْ - جِ - دٌ ) jika dirangkai dibaca ....",
+      "gambar": null,
+      "opsi": {
+        "A": "masjidun",
+        "B": "muslimun",
+        "C": "mustamiun"
+      },
+      "kunci": "A",
+      "pembahasan": "Mim fathah - Sin sukun - Jim kasrah - Dal dammatain = masjidun."
+    },
+    {
+      "id": 40,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Menerapkan Asmaulhusna.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan contoh kasih sayang di sekolah."
+      },
+      "pertanyaan": "Contoh perilaku meneladani Ar-Rahman di sekolah adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "berbagi bekal dengan teman",
+        "B": "berebut mainan",
+        "C": "mencontek jawaban teman"
+      },
+      "kunci": "A",
+      "pembahasan": "Berbagi adalah wujud kasih sayang."
+    },
+    {
+      "id": 41,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap berterima kasih.",
+        "tp": "Menjelaskan alasan berterima kasih.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan mengapa manusia butuh orang lain."
+      },
+      "pertanyaan": "Manusia tidak bisa hidup sendiri dan selalu butuh bantuan orang lain. Oleh karena itu manusia disebut makhluk ....",
+      "gambar": null,
+      "opsi": {
+        "A": "sosial",
+        "B": "kuat",
+        "C": "hebat"
+      },
+      "kunci": "A",
+      "pembahasan": "Manusia adalah makhluk sosial."
+    },
+    {
+      "id": 42,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara bersuci.",
+        "tp": "Menganalisis hadas.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi pembatal wudu."
+      },
+      "pertanyaan": "Berikut ini hal yang termasuk hadas kecil dan membatalkan wudu adalah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "makan minum",
+        "B": "buang angin",
+        "C": "berbicara"
+      },
+      "kunci": "B",
+      "pembahasan": "Buang angin (kentut) adalah hadas kecil."
+    },
+    {
+      "id": 43,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Meneladani Nabi Adam.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan sikap sabar."
+      },
+      "pertanyaan": "Nabi Adam dan Hawa bersabar saat berpisah lama. Jika kita sedang tertimpa musibah, kita harus ....",
+      "gambar": null,
+      "opsi": {
+        "A": "marah-marah",
+        "B": "bersabar",
+        "C": "putus asa"
+      },
+      "kunci": "B",
+      "pembahasan": "Sabar menghadapi ujian."
+    },
+    {
+      "id": 44,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah Al-Ikhlas.",
+        "tp": "Menjelaskan pesan pokok Al-Ikhlas.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan sifat Allah dalam Al-Ikhlas."
+      },
+      "pertanyaan": "Allah tempat bergantung dan meminta segala sesuatu. Hal ini sesuai ayat 'Allahus ...'.",
+      "gambar": null,
+      "opsi": {
+        "A": "Ahad",
+        "B": "Samad",
+        "C": "Lam yalid"
+      },
+      "kunci": "B",
+      "pembahasan": "Allahus samad (Allah tempat bergantung)."
+    },
+    {
+      "id": 45,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap disiplin.",
+        "tp": "Menerapkan disiplin di sekolah.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan contoh disiplin sekolah."
+      },
+      "pertanyaan": "Saat upacara bendera, kita harus mengikuti dengan ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bercanda",
+        "B": "ramai",
+        "C": "tertib"
+      },
+      "kunci": "C",
+      "pembahasan": "Tertib saat upacara adalah disiplin sekolah."
+    },
+    {
+      "id": 46,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Meneladani Asmaulhusna.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan sikap sayang adik."
+      },
+      "pertanyaan": "Ahmad memiliki adik kecil yang menangis. Ahmad sebaiknya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "menghibur adik",
+        "B": "membiarkan adik",
+        "C": "ikut menangis"
+      },
+      "kunci": "A",
+      "pembahasan": "Menghibur adik adalah kasih sayang keluarga."
+    },
+    {
+      "id": 47,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah.",
+        "tp": "Membaca huruf hijaiah.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi huruf Ya."
+      },
+      "pertanyaan": "Huruf ( ي ) dalam kata 'SAYA' berbunyi seperti huruf ....",
+      "gambar": null,
+      "opsi": {
+        "A": "Y",
+        "B": "S",
+        "C": "A"
+      },
+      "kunci": "A",
+      "pembahasan": "Ya (ي) melambangkan bunyi Y."
+    },
+    {
+      "id": 48,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami hidup bersih.",
+        "tp": "Menerapkan kebersihan diri.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menganalisis dampak kuku kotor."
+      },
+      "pertanyaan": "Kuku yang panjang dan hitam harus dipotong karena ....",
+      "gambar": null,
+      "opsi": {
+        "A": "bisa melukai teman",
+        "B": "sarang kuman penyakit",
+        "C": "sayang kukunya"
+      },
+      "kunci": "B",
+      "pembahasan": "Kuku kotor adalah sarang penyakit."
+    },
+    {
+      "id": 49,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menjelaskan sebab turun ke bumi.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan nama buah terlarang."
+      },
+      "pertanyaan": "Nabi Adam a.s. dan Hawa diturunkan ke bumi karena memakan buah ....",
+      "gambar": null,
+      "opsi": {
+        "A": "khuldi",
+        "B": "tin",
+        "C": "zaitun"
+      },
+      "kunci": "A",
+      "pembahasan": "Buah terlarang adalah buah khuldi."
+    },
+    {
+      "id": 50,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap berterima kasih.",
+        "tp": "Menjelaskan cara berterima kasih.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan ekspresi saat berterima kasih."
+      },
+      "pertanyaan": "Saat mengucapkan terima kasih, wajah kita sebaiknya ....",
+      "gambar": null,
+      "opsi": {
+        "A": "cemberut",
+        "B": "tersenyum",
+        "C": "marah"
+      },
+      "kunci": "B",
+      "pembahasan": "Berterima kasih diucapkan dengan senyum tulus."
+    },
+    {
+      "id": 51,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah Al-Ikhlas.",
+        "tp": "Menghafalkan Surah Al-Ikhlas.",
+        "lingkup_materi": "Bab 6: Al-Qur'an Pedoman Hidupku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat melengkapi ayat pertama Al-Ikhlas."
+      },
+      "pertanyaan": "Qul huwallahu ....",
+      "gambar": null,
+      "kunci": [
+        "ahad",
+        "Ahad",
+        "AHAD"
+      ],
+      "pembahasan": "Ayat 1: Qul huwallahu ahad."
+    },
+    {
+      "id": 52,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami Asmaulhusna.",
+        "tp": "Menyebutkan arti Ar-Rahman.",
+        "lingkup_materi": "Bab 7: Kasih Sayang terhadap Sesama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengartikan Ar-Rahman."
+      },
+      "pertanyaan": "Ar-Rahman artinya Allah Maha ....",
+      "gambar": null,
+      "kunci": [
+        "Pengasih",
+        "pengasih",
+        "PENGASIH"
+      ],
+      "pembahasan": "Ar-Rahman artinya Maha Pengasih."
+    },
+    {
+      "id": 53,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami sikap disiplin.",
+        "tp": "Menerapkan sikap disiplin.",
+        "lingkup_materi": "Bab 8: Aku Suka Berterima Kasih dan Bersikap Disiplin",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti disiplin."
+      },
+      "pertanyaan": "Patuh dan taat pada aturan disebut sikap ....",
+      "gambar": null,
+      "kunci": [
+        "disiplin",
+        "Disiplin",
+        "DISIPLIN"
+      ],
+      "pembahasan": "Disiplin adalah taat aturan."
+    },
+    {
+      "id": 54,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami tata cara tayamum.",
+        "tp": "Menjelaskan alat tayamum.",
+        "lingkup_materi": "Bab 9: Membiasakan Hidup Bersih",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan media tayamum."
+      },
+      "pertanyaan": "Bertayamum menggunakan ... yang suci.",
+      "gambar": null,
+      "kunci": [
+        "debu",
+        "tanah",
+        "debu tanah"
+      ],
+      "pembahasan": "Media tayamum adalah debu suci."
+    },
+    {
+      "id": 55,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah Nabi Adam a.s.",
+        "tp": "Menyebutkan asal penciptaan Nabi Adam.",
+        "lingkup_materi": "Bab 10: Nabi Adam a.s. Manusia Pertama",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan bahan penciptaan manusia."
+      },
+      "pertanyaan": "Nabi Adam a.s. diciptakan oleh Allah dari ....",
+      "gambar": null,
+      "kunci": [
+        "tanah",
+        "Tanah",
+        "tanah liat"
+      ],
+      "pembahasan": "Nabi Adam diciptakan dari tanah."
+    }
+  ]
+}

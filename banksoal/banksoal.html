@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Soal Lengkap - PAIBP SD</title>
+    <meta name="description" content="Kumpulan Bank Soal PAI SD Lengkap dengan Kisi-kisi dan Analisis.">
+
+    <meta property="og:title" content="Bank Soal PAIBP SD Lengkap">
+    <meta property="og:description" content="Akses bank soal PAI SD lengkap dengan CP, TP, dan Indikator Soal.">
+    <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/header.png"> 
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/banksoal.html">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    
+    <style>
+        /* Styling khusus untuk Kartu Soal */
+        .soal-card {
+            border: 1px solid #dee2e6;
+            border-left: 5px solid var(--primary-green, #198754);
+            transition: all 0.3s ease;
+        }
+        .soal-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        /* Box Kisi-Kisi di dalam card */
+        .kisi-kisi-box {
+            background-color: #f8f9fa;
+            border: 1px dashed #ced4da;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .kisi-label {
+            font-weight: 700;
+            color: #198754;
+            width: 120px;
+        }
+        
+        /* Badge Level Kognitif */
+        .badge-level {
+            font-size: 0.75rem;
+            padding: 0.35em 0.65em;
+        }
+        .bg-c1, .bg-c2 { background-color: #6c757d; color: white; } /* Abu-abu untuk C1-C2 */
+        .bg-c3 { background-color: #ffc107; color: black; } /* Kuning untuk C3 */
+        .bg-c4, .bg-c5, .bg-c6 { background-color: #dc3545; color: white; } /* Merah untuk C4-C6 */
+
+        /* Tabel di dalam soal */
+        .soal-content table {
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+        .opsi-radio { cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <a href="index.html" class="nav-back-btn text-decoration-none text-white me-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span class="page-title text-white fw-bold fs-5">Bank Soal & Kisi-Kisi</span>
+            </div>
+
+            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title fw-bold text-success">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../index.html">
+                                <i class="fas fa-home"></i> Beranda
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../buku.html">
+                                <i class="fas fa-book"></i> Buku Paket
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../blog.html">
+                                <i class="fas fa-newspaper"></i> Ruang Baca
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill active-link" href="banksoal.html" style="background-color: rgba(255,255,255,0.2);">
+                                <i class="fas fa-clipboard-list"></i> Bank Soal
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="height: 80px;"></div>
+
+    <div class="container pb-5 pt-3">
+        
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold text-success" id="judul-bank-soal">Memuat Data...</h2>
+                <p class="text-muted mb-3" id="meta-info">Silakan tunggu sebentar.</p>
+                
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+                    <button class="btn btn-sm btn-outline-success active" onclick="filterSoal('all')">Tampilkan Semua</button>
+                    <button class="btn btn-sm btn-outline-success" onclick="filterSoal('pg')">Pilihan Ganda</button>
+                    <button class="btn btn-sm btn-outline-success" onclick="filterSoal('isian')">Isian Singkat</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9" id="soal-container">
+                <div class="text-center py-5">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let allQuestions = [];
+
+        // Fungsi Load Data JSON
+        async function fetchSoal() {
+            try {
+                // Pastikan nama file JSON sesuai dengan yang di-upload
+                const response = await fetch('kelas_1_semester_1.json'); 
+                
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                
+                const data = await response.json();
+                
+                // Set Judul Halaman dari Metadata JSON
+                document.getElementById('judul-bank-soal').innerText = data.meta.judul;
+                document.getElementById('meta-info').innerText = 
+                    `Kurikulum: ${data.meta.kurikulum} | Kelas ${data.meta.kelas} | Total: ${data.meta.total_soal} Soal`;
+                
+                allQuestions = data.data;
+                renderSoal(allQuestions);
+
+            } catch (error) {
+                console.error("Gagal memuat soal:", error);
+                document.getElementById('soal-container').innerHTML = `
+                    <div class="alert alert-danger text-center shadow-sm">
+                        <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Gagal Memuat Data</h4>
+                        <p>Pastikan file JSON (<code>kelas_1_semester_1.json</code>) berada di folder yang sama.</p>
+                        <small class="text-muted">Error: ${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Fungsi Render HTML
+        function renderSoal(data) {
+            const container = document.getElementById('soal-container');
+            container.innerHTML = ''; // Reset container
+
+            if (data.length === 0) {
+                container.innerHTML = '<div class="alert alert-warning text-center">Tidak ada soal ditemukan untuk kategori ini.</div>';
+                return;
+            }
+
+            data.forEach((item, index) => {
+                // 1. Setup Warna Badge Level Kognitif
+                let levelClass = 'bg-c1'; // default
+                const level = item.kisi_kisi.level_kognitif || '';
+                if (level.includes('C3')) levelClass = 'bg-c3';
+                if (level.includes('C4') || level.includes('C5') || level.includes('C6')) levelClass = 'bg-c4';
+
+                // 2. Setup Opsi Jawaban (Jika PG)
+                let inputHTML = '';
+                if (item.tipe === 'pg' && item.opsi) {
+                    inputHTML = '<div class="mt-3 ps-1">';
+                    for (const [key, val] of Object.entries(item.opsi)) {
+                        inputHTML += `
+                            <div class="form-check mb-2">
+                                <input class="form-check-input opsi-radio" type="radio" name="soal_${item.id}" id="opt_${item.id}_${key}">
+                                <label class="form-check-label" for="opt_${item.id}_${key}">
+                                    <strong class="me-1 text-success">${key}.</strong> ${val}
+                                </label>
+                            </div>`;
+                    }
+                    inputHTML += '</div>';
+                } else if (item.tipe === 'isian') {
+                    inputHTML = `
+                        <div class="mt-3">
+                            <label class="form-label text-muted small"><i class="fas fa-pen me-1"></i> Jawaban Anda:</label>
+                            <input type="text" class="form-control" placeholder="Ketik jawaban di sini...">
+                        </div>`;
+                }
+
+                // 3. Setup Gambar
+                let mediaHTML = '';
+                if (item.gambar) {
+                    mediaHTML = `<div class="text-center mb-3"><img src="${item.gambar}" class="img-fluid rounded border shadow-sm" style="max-height: 250px;"></div>`;
+                }
+
+                // 4. Template Card Lengkap
+                const cardHTML = `
+                    <div class="card soal-card mb-4 shadow-sm bg-white">
+                        <div class="card-header bg-white border-bottom pt-3 pb-2 d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success rounded-pill px-3">
+                                <i class="fas fa-layer-group me-1"></i> ${item.kisi_kisi.elemen}
+                            </span>
+                            <div>
+                                <span class="badge ${levelClass} badge-level me-1 rounded">${item.kisi_kisi.level_kognitif}</span>
+                                <span class="badge bg-light text-dark border">No. ${item.id}</span>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            
+                            <div class="kisi-kisi-box p-3 mb-4">
+                                <div class="row g-2">
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <div class="kisi-label">Lingkup Materi</div>
+                                            <div class="flex-grow-1 fw-bold text-dark">: ${item.kisi_kisi.lingkup_materi}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <div class="kisi-label">CP</div>
+                                            <div class="flex-grow-1">: ${item.kisi_kisi.cp}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <div class="kisi-label">TP</div>
+                                            <div class="flex-grow-1">: ${item.kisi_kisi.tp}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <div class="kisi-label">Indikator Soal</div>
+                                            <div class="flex-grow-1 fst-italic text-success">: ${item.kisi_kisi.indikator_soal}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            ${mediaHTML}
+                            <div class="soal-content fs-6 text-dark fw-semibold">
+                                ${item.pertanyaan}
+                            </div>
+                            
+                            ${inputHTML}
+
+                            <div class="accordion accordion-flush mt-4 border-top" id="acc_${item.id}">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed py-2 text-primary small bg-light rounded" type="button" data-bs-toggle="collapse" data-bs-target="#col_${item.id}">
+                                            <i class="fas fa-key me-2"></i> Lihat Pembahasan & Kunci
+                                        </button>
+                                    </h2>
+                                    <div id="col_${item.id}" class="accordion-collapse collapse" data-bs-parent="#acc_${item.id}">
+                                        <div class="accordion-body bg-light small border-top">
+                                            <div class="mb-2">
+                                                <strong>Kunci Jawaban: </strong> 
+                                                <span class="badge bg-success fs-6">${Array.isArray(item.kunci) ? item.kunci.join(' / ') : item.kunci}</span>
+                                            </div>
+                                            <hr>
+                                            <div>
+                                                <strong>Pembahasan:</strong>
+                                                <div class="mt-1 text-muted">${item.pembahasan}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // Fungsi Filter
+        function filterSoal(tipe) {
+            // Update UI Button
+            document.querySelectorAll('.btn-outline-success').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (tipe === 'all') {
+                renderSoal(allQuestions);
+            } else {
+                const filtered = allQuestions.filter(q => q.tipe === tipe);
+                renderSoal(filtered);
+            }
+        }
+
+        // Jalankan saat load
+        document.addEventListener('DOMContentLoaded', fetchSoal);
+    </script>
+</body>
+</html>

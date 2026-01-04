@@ -23,15 +23,21 @@
         <div class="container">
             
             <div class="d-flex align-items-center">
-                <a href="#" class="d-flex align-items-center text-decoration-none">
+                <a href="index.html" class="d-flex align-items-center text-decoration-none">
                     <img src="assets/logo.png" alt="Logo" width="40" height="40" class="bg-white rounded-circle p-1 shadow-sm">
-                    <span class="page-title">PAIBP SD</span>
+                    <span class="page-title ms-2 d-none d-sm-inline">PAIBP SD</span>
                 </a>
             </div>
 
-            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
-                <i class="fas fa-bars fa-lg" id="menuIcon"></i>
-            </button>
+            <div class="d-flex align-items-center ms-auto gap-2">            
+                <button class="btn text-white d-lg-none" onclick="toggleSearchBar()" title="Cari Materi">
+                    <i class="fas fa-search fa-lg"></i>
+                </button>
+
+                <button class="navbar-toggler border-0 text-white p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                    <i class="fas fa-bars fa-lg" id="menuIcon" style="font-size: 1.5rem;"></i>
+                </button>
+            </div>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header bg-light">
@@ -41,7 +47,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill active-link" href="index.html">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="index.html">
                                 <i class="fas fa-home"></i> Beranda
                             </a>
                         </li>
@@ -55,11 +61,35 @@
                                 <i class="fas fa-newspaper"></i> Ruang Baca
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="banksoal.html">
+                                <i class="fas fa-clipboard-list"></i> Bank Soal
+                            </a>
+                        </li>
+                        <li class="nav-item d-none d-lg-block">
+                            <button class="btn text-white" onclick="toggleSearchBar()" title="Cari Materi">
+                                <i class="fas fa-search fa-lg"></i>
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
+
+    <div id="searchBarContainer" class="bg-white border-bottom shadow-sm fixed-top p-3 d-none" style="top: 76px; z-index: 1020; transition: all 0.3s ease;">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-success"><i class="fas fa-search text-success"></i></span>
+                <input type="text" id="navSearchInput" class="form-control border-success" placeholder="Ketik materi (Contoh: Rukun Islam)..." onkeypress="handleEnter(event)">
+                <button class="btn btn-success fw-bold" onclick="doSearch()">CARI</button>
+                <button class="btn btn-outline-secondary" onclick="toggleSearchBar()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div style="height: 80px;"></div>
 
     <div class="container pb-5">

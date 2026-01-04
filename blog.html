@@ -26,9 +26,15 @@
                 <span class="page-title">Ruang Baca</span>
             </div>
 
-            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
-                <i class="fas fa-bars fa-lg" id="menuIcon"></i>
-            </button>
+            <div class="d-flex align-items-center ms-auto gap-2">            
+                <button class="btn text-white d-lg-none" onclick="toggleSearchBar()" title="Cari Materi">
+                    <i class="fas fa-search fa-lg"></i>
+                </button>
+
+                <button class="navbar-toggler border-0 text-white p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                    <i class="fas fa-bars fa-lg" id="menuIcon" style="font-size: 1.5rem;"></i>
+                </button>
+            </div>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header bg-light">
@@ -48,15 +54,37 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill active-link" href="blog.html">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="blog.html">
                                 <i class="fas fa-newspaper"></i> Ruang Baca
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="banksoal.html">
+                                <i class="fas fa-clipboard-list"></i> Bank Soal
+                            </a>
+                        </li>
+                        <li class="nav-item d-none d-lg-block">
+                            <button class="btn text-white" onclick="toggleSearchBar()" title="Cari Materi">
+                                <i class="fas fa-search fa-lg"></i>
+                            </button>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
+
+    <div id="searchBarContainer" class="bg-white border-bottom shadow-sm fixed-top p-3 d-none" style="top: 70px; z-index: 1020;">
+        <div class="container">
+            <div class="input-group">
+                <input type="text" id="navSearchInput" class="form-control border-success" placeholder="Cari lagi..." onkeypress="handleEnter(event)">
+                <button class="btn btn-success" onclick="doSearch()">
+                    <i class="fas fa-search"></i> Cari
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <div style="height: 80px;"></div>
 
     <div class="container flex-grow-1 pb-5">

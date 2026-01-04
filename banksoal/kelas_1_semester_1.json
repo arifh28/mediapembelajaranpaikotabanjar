@@ -1,0 +1,1167 @@
+{
+  "meta": {
+    "kelas": 1,
+    "semester": 1,
+    "judul": "Bank Soal PAI Kelas 1 Semester 1 - Kurikulum Merdeka",
+    "kurikulum": "Merdeka",
+    "total_soal": 55
+  },
+  "data": [
+    {
+      "id": 1,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Menyebutkan jumlah huruf hijaiah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah huruf hijaiah."
+      },
+      "pertanyaan": "<p>Al-Qur'an ditulis menggunakan huruf hijaiah. Jumlah huruf hijaiah yang kita pelajari ada ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "29",
+        "B": "10",
+        "C": "5"
+      },
+      "kunci": "A",
+      "pembahasan": "Jumlah huruf hijaiah yang umum diajarkan di kelas 1 adalah 29."
+    },
+    {
+      "id": 2,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Menyebutkan arti harakat.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi tanda baca fathah."
+      },
+      "pertanyaan": "<p>Tanda baca berupa garis lurus di atas huruf disebut ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "kasrah",
+        "B": "fathah",
+        "C": "dammah"
+      },
+      "kunci": "B",
+      "pembahasan": "Fathah adalah tanda baris di atas."
+    },
+    {
+      "id": 3,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Melafalkan huruf hijaiah berharakat.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menentukan bunyi huruf berharakat kasrah."
+      },
+      "pertanyaan": "<p>Perhatikan tabel huruf dan harakat berikut!</p><table border=\"1\" cellpadding=\"5\" cellspacing=\"0\" style=\"width:100%; text-align:center;\"><thead><tr><th>Huruf</th><th>Harakat</th></tr></thead><tbody><tr><td>Ba ( ب )</td><td>Kasrah ( ِ )</td></tr></tbody></table><p>Jika dibaca, huruf tersebut berbunyi ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "bu",
+        "B": "ba",
+        "C": "bi"
+      },
+      "kunci": "C",
+      "pembahasan": "Harakat kasrah menghasilkan bunyi 'i'."
+    },
+    {
+      "id": 4,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah al-Fatihah.",
+        "tp": "Menjelaskan makna Al-Qur'an.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti nama surah Al-Fatihah."
+      },
+      "pertanyaan": "<p>Surah Al-Fatihah adalah pembuka Al-Qur'an. Arti Al-Fatihah adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Pembukaan",
+        "B": "Penutupan",
+        "C": "Pertengahan"
+      },
+      "kunci": "A",
+      "pembahasan": "Al-Fatihah artinya Pembukaan."
+    },
+    {
+      "id": 5,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah al-Fatihah.",
+        "tp": "Menghafalkan surah Al-Fatihah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah ayat Al-Fatihah."
+      },
+      "pertanyaan": "<p>Jumlah ayat dalam Surah Al-Fatihah adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "8",
+        "B": "6",
+        "C": "7"
+      },
+      "kunci": "C",
+      "pembahasan": "Surah Al-Fatihah terdiri dari 7 ayat."
+    },
+    {
+      "id": 6,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menjelaskan rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan arti iman."
+      },
+      "pertanyaan": "<p>Iman artinya ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "percaya",
+        "B": "melihat",
+        "C": "mendengar"
+      },
+      "kunci": "A",
+      "pembahasan": "Iman secara bahasa artinya percaya."
+    },
+    {
+      "id": 7,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menyebutkan macam-macam rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah rukun iman."
+      },
+      "pertanyaan": "<p>Rukun iman berjumlah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "5",
+        "B": "6",
+        "C": "7"
+      },
+      "kunci": "B",
+      "pembahasan": "Rukun iman berjumlah 6."
+    },
+    {
+      "id": 8,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menyebutkan urutan rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan rukun iman pertama."
+      },
+      "pertanyaan": "<p>Rukun iman yang pertama adalah iman kepada ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Malaikat",
+        "B": "Kitab",
+        "C": "Allah"
+      },
+      "kunci": "C",
+      "pembahasan": "Rukun iman pertama adalah iman kepada Allah."
+    },
+    {
+      "id": 9,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menyebutkan ciptaan Allah.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat membedakan ciptaan Allah dan buatan manusia."
+      },
+      "pertanyaan": "<p>Perhatikan gambar berikut! Pemandangan alam adalah ciptaan Allah, sedangkan rumah adalah ....</p>",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi pemandangan alam desa dengan gunung dan sawah, serta sebuah rumah sederhana di depannya.",
+      "opsi": {
+        "A": "ciptaan nabi",
+        "B": "buatan manusia",
+        "C": "ciptaan malaikat"
+      },
+      "kunci": "B",
+      "pembahasan": "Rumah adalah benda buatan manusia."
+    },
+    {
+      "id": 10,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menjelaskan pengertian rasul.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan arti rasul."
+      },
+      "pertanyaan": "<p>Rasul adalah laki-laki pilihan. Rasul artinya ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "utusan Allah",
+        "B": "teman Allah",
+        "C": "saudara Allah"
+      },
+      "kunci": "A",
+      "pembahasan": "Rasul artinya utusan Allah."
+    },
+    {
+      "id": 11,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Membiasakan diri dengan sikap peduli.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan bukti cinta kepada Allah."
+      },
+      "pertanyaan": "<p>Bukti kita cinta kepada Allah adalah dengan cara ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "merusak tanaman",
+        "B": "merawat ciptaan-Nya",
+        "C": "menyakiti hewan"
+      },
+      "kunci": "B",
+      "pembahasan": "Merawat alam dan ciptaan Allah adalah bukti cinta kepada-Nya."
+    },
+    {
+      "id": 12,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap Allah Swt.",
+        "tp": "Membiasakan diri membaca basmalah.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan waktu membaca basmalah."
+      },
+      "pertanyaan": "<p>Setiap akan memulai belajar, kita harus membaca ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "basmalah",
+        "B": "hamdalah",
+        "C": "takbir"
+      },
+      "kunci": "A",
+      "pembahasan": "Memulai kegiatan diawali dengan basmalah."
+    },
+    {
+      "id": 13,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap Allah Swt.",
+        "tp": "Menyebutkan arti basmalah.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengartikan sifat Allah Ar-Rahman."
+      },
+      "pertanyaan": "<p>Dalam basmalah terdapat nama Allah Ar-Rahman yang artinya ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Maha Penyayang",
+        "B": "Maha Pengasih",
+        "C": "Maha Mengetahui"
+      },
+      "kunci": "B",
+      "pembahasan": "Ar-Rahman artinya Maha Pengasih."
+    },
+    {
+      "id": 14,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap Allah Swt.",
+        "tp": "Membiasakan diri membaca hamdalah.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan waktu membaca hamdalah."
+      },
+      "pertanyaan": "<p>Setelah selesai makan, sikap yang baik adalah mengucapkan ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Subhanallah",
+        "B": "Astaghfirullah",
+        "C": "Alhamdulillah"
+      },
+      "kunci": "C",
+      "pembahasan": "Mengakhiri kegiatan dengan membaca Hamdalah."
+    },
+    {
+      "id": 15,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap diri sendiri.",
+        "tp": "Membiasakan diri bersikap santun.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan perilaku santun kepada orang tua."
+      },
+      "pertanyaan": "<p>Perhatikan gambar berikut! Saat hendak berangkat sekolah, Ahmad melakukan ....</p>",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi anak laki-laki berseragam SD sedang mencium tangan kedua orang tuanya di depan pintu rumah.",
+      "opsi": {
+        "A": "lari begitu saja",
+        "B": "mencium tangan orang tua",
+        "C": "menangis minta uang"
+      },
+      "kunci": "B",
+      "pembahasan": "Berpamitan dengan mencium tangan adalah sikap santun."
+    },
+    {
+      "id": 16,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menyebutkan macam-macam rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah rukun Islam."
+      },
+      "pertanyaan": "<p>Rukun Islam wajib kita laksanakan. Jumlah Rukun Islam ada ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "5",
+        "B": "6",
+        "C": "4"
+      },
+      "kunci": "A",
+      "pembahasan": "Rukun Islam ada 5."
+    },
+    {
+      "id": 17,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menyebutkan macam-macam rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan rukun Islam pertama."
+      },
+      "pertanyaan": "<p>Rukun Islam yang pertama adalah membaca ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Al-Qur'an",
+        "B": "Syahadat",
+        "C": "Salawat"
+      },
+      "kunci": "B",
+      "pembahasan": "Rukun Islam pertama adalah Syahadat."
+    },
+    {
+      "id": 18,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami syahadatain.",
+        "tp": "Mengartikan dua kalimat syahadat.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat mengartikan syahadat tauhid."
+      },
+      "pertanyaan": "<p>Syahadat tauhid berbunyi 'La ilaha illallah', artinya tidak ada Tuhan selain ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Malaikat",
+        "B": "Nabi",
+        "C": "Allah"
+      },
+      "kunci": "C",
+      "pembahasan": "Tiada Tuhan selain Allah."
+    },
+    {
+      "id": 19,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami syahadatain.",
+        "tp": "Mengartikan dua kalimat syahadat.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan makna syahadat rasul."
+      },
+      "pertanyaan": "<p>Kita bersaksi bahwa Nabi Muhammad saw. adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "utusan Allah",
+        "B": "pencipta alam",
+        "C": "malaikat Allah"
+      },
+      "kunci": "A",
+      "pembahasan": "Syahadat Rasul bersaksi bahwa Muhammad utusan Allah."
+    },
+    {
+      "id": 20,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menghafal lima rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan urutan salat."
+      },
+      "pertanyaan": "<p>Salat fardu lima waktu adalah rukun Islam yang ke ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "3",
+        "B": "1",
+        "C": "2"
+      },
+      "kunci": "C",
+      "pembahasan": "Salat adalah rukun Islam kedua."
+    },
+    {
+      "id": 21,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menyebutkan macam-macam rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan tujuan zakat."
+      },
+      "pertanyaan": "<p>Membayar zakat bertujuan untuk membantu ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "orang kaya",
+        "B": "fakir miskin",
+        "C": "pedagang"
+      },
+      "kunci": "B",
+      "pembahasan": "Zakat diberikan kepada fakir miskin."
+    },
+    {
+      "id": 22,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menyebutkan nama 25 nabi dan rasul.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan jumlah nabi."
+      },
+      "pertanyaan": "<p>Jumlah nabi dan rasul yang wajib kita ketahui ada ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "25",
+        "B": "10",
+        "C": "5"
+      },
+      "kunci": "A",
+      "pembahasan": "Ada 25 nabi dan rasul yang wajib diketahui."
+    },
+    {
+      "id": 23,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menyebutkan nama 25 nabi dan rasul.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nabi pertama."
+      },
+      "pertanyaan": "<p>Manusia pertama sekaligus nabi yang pertama adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Nabi Nuh a.s.",
+        "B": "Nabi Adam a.s.",
+        "C": "Nabi Ibrahim a.s."
+      },
+      "kunci": "B",
+      "pembahasan": "Nabi Adam a.s. adalah nabi pertama."
+    },
+    {
+      "id": 24,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menjelaskan pengertian mukjizat.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan arti mukjizat."
+      },
+      "pertanyaan": "<p>Kejadian luar biasa yang diberikan Allah kepada para nabi disebut ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "sihir",
+        "B": "hadiah",
+        "C": "mukjizat"
+      },
+      "kunci": "C",
+      "pembahasan": "Mukjizat adalah kejadian luar biasa dari Allah untuk nabi."
+    },
+    {
+      "id": 25,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menyebutkan salah satu mukjizat nabi.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi mukjizat Nabi Nuh."
+      },
+      "pertanyaan": "<p>Perhatikan gambar berikut! Nabi yang membuat kapal besar untuk menyelamatkan umatnya adalah ....</p>",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi sebuah kapal bahtera kayu besar yang sedang berlayar di tengah ombak banjir bandang, gaya ilustrasi anak.",
+      "opsi": {
+        "A": "Nabi Nuh a.s.",
+        "B": "Nabi Musa a.s.",
+        "C": "Nabi Isa a.s."
+      },
+      "kunci": "A",
+      "pembahasan": "Kapal besar adalah mukjizat Nabi Nuh a.s."
+    },
+    {
+      "id": 26,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menyebutkan salah satu mukjizat nabi.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan mukjizat Nabi Musa."
+      },
+      "pertanyaan": "<p>Nabi Musa a.s. memiliki mukjizat tongkatnya bisa berubah menjadi ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "ular besar",
+        "B": "pedang",
+        "C": "emas"
+      },
+      "kunci": "A",
+      "pembahasan": "Tongkat Nabi Musa a.s. berubah menjadi ular."
+    },
+    {
+      "id": 27,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menyebutkan nama 25 nabi dan rasul.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nabi terakhir."
+      },
+      "pertanyaan": "<p>Nabi penutup para nabi adalah Nabi ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Muhammad saw.",
+        "B": "Isa a.s.",
+        "C": "Musa a.s."
+      },
+      "kunci": "A",
+      "pembahasan": "Nabi Muhammad saw. adalah nabi terakhir."
+    },
+    {
+      "id": 28,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Melafalkan huruf hijaiah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi huruf Mim."
+      },
+      "pertanyaan": "<p>Huruf hijaiah 'Mim' jika ditulis berbentuk ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "ن",
+        "B": "م",
+        "C": "ل"
+      },
+      "kunci": "B",
+      "pembahasan": "Mim dilambangkan dengan م."
+    },
+    {
+      "id": 29,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menjelaskan rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan rukun iman ke-2."
+      },
+      "pertanyaan": "<p>Percaya kepada malaikat adalah rukun iman ke ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "3",
+        "B": "1",
+        "C": "2"
+      },
+      "kunci": "C",
+      "pembahasan": "Iman kepada Malaikat adalah rukun iman ke-2."
+    },
+    {
+      "id": 30,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Membiasakan perilaku sederhana.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mencontohkan hidup sederhana."
+      },
+      "pertanyaan": "<p>Nabi mengajarkan hidup sederhana. Contoh hidup sederhana bagi siswa adalah ....</p>",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi anak SD sedang menabung memasukkan uang koin ke celengan ayam di atas meja belajar.",
+      "opsi": {
+        "A": "rajin menabung",
+        "B": "boros jajan",
+        "C": "meminta uang banyak"
+      },
+      "kunci": "A",
+      "pembahasan": "Rajin menabung adalah cerminan hidup sederhana."
+    },
+    {
+      "id": 31,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah al-Fatihah.",
+        "tp": "Menghafalkan surah Al-Fatihah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat melengkapi ayat Al-Fatihah."
+      },
+      "pertanyaan": "<p>Lanjutan ayat 'Alhamdulillahi rabbil ...' adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "'alamin",
+        "B": "rahim",
+        "C": "din"
+      },
+      "kunci": "A",
+      "pembahasan": "Alhamdulillahi rabbil 'alamin."
+    },
+    {
+      "id": 32,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Menyebutkan macam-macam harakat.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menentukan bunyi dammah."
+      },
+      "pertanyaan": "<p>Perhatikan tabel huruf dan harakat berikut!</p><table border=\"1\" cellpadding=\"5\" cellspacing=\"0\" style=\"width:100%; text-align:center;\"><thead><tr><th>Huruf</th><th>Harakat</th></tr></thead><tbody><tr><td>Jim ( ج )</td><td>Dammah ( ُ )</td></tr></tbody></table><p>Huruf tersebut dibaca ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "ja",
+        "B": "ji",
+        "C": "ju"
+      },
+      "kunci": "C",
+      "pembahasan": "Harakat dammah berbunyi 'u'."
+    },
+    {
+      "id": 33,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap diri sendiri.",
+        "tp": "Membiasakan diri bersikap santun.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan ucapan saat lewat."
+      },
+      "pertanyaan": "<p>Saat berjalan melewati orang yang lebih tua, kita sebaiknya mengucapkan ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "permisi",
+        "B": "minggir",
+        "C": "diam"
+      },
+      "kunci": "A",
+      "pembahasan": "Mengucapkan permisi adalah sikap santun."
+    },
+    {
+      "id": 34,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menyebutkan ciptaan Allah.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan pencipta pelangi."
+      },
+      "pertanyaan": "<p>Pelangi yang indah di langit adalah ciptaan ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "manusia",
+        "B": "Allah",
+        "C": "malaikat"
+      },
+      "kunci": "B",
+      "pembahasan": "Pelangi adalah fenomena alam ciptaan Allah."
+    },
+    {
+      "id": 35,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menyebutkan macam-macam rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menganalisis kewajiban salat."
+      },
+      "pertanyaan": "<p>Jika seorang muslim tidak mengerjakan salat, maka ia akan mendapat ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "pahala",
+        "B": "dosa",
+        "C": "hadiah"
+      },
+      "kunci": "B",
+      "pembahasan": "Meninggalkan kewajiban berdosa."
+    },
+    {
+      "id": 36,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah.",
+        "tp": "Melafalkan huruf hijaiah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat membaca kata sederhana."
+      },
+      "pertanyaan": "<p>Perhatikan huruf-huruf pada tabel berikut!</p><table border=\"1\" cellpadding=\"5\" cellspacing=\"0\" style=\"width:100%; text-align:center;\"><tbody><tr><td>بَ</td><td>دَ</td><td>نُ</td></tr></tbody></table><p>Jika dirangkai dan dibaca menjadi ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "badani",
+        "B": "badana",
+        "C": "badanu"
+      },
+      "kunci": "C",
+      "pembahasan": "Ba fathah - Da fathah - Nun dammah = badanu."
+    },
+    {
+      "id": 37,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Membedakan antara nabi dan rasul.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat membedakan tugas rasul."
+      },
+      "pertanyaan": "<p>Rasul wajib menyampaikan wahyu kepada umatnya, sedangkan Nabi menerima wahyu untuk ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "dirinya sendiri",
+        "B": "keluarganya",
+        "C": "temannya"
+      },
+      "kunci": "A",
+      "pembahasan": "Nabi menerima wahyu untuk diri sendiri."
+    },
+    {
+      "id": 38,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menjelaskan rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan rukun iman ke-3."
+      },
+      "pertanyaan": "<p>Iman kepada Kitab-kitab Allah adalah rukun iman yang ke ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "3",
+        "B": "4",
+        "C": "5"
+      },
+      "kunci": "A",
+      "pembahasan": "Urutan: Allah, Malaikat, Kitab, Rasul."
+    },
+    {
+      "id": 39,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap Allah Swt.",
+        "tp": "Membiasakan diri perilaku bersyukur.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan cara bersyukur."
+      },
+      "pertanyaan": "<p>Kita diberi kesehatan oleh Allah. Cara bersyukur yang benar adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "malas beribadah",
+        "B": "rajin beribadah",
+        "C": "mengeluh"
+      },
+      "kunci": "B",
+      "pembahasan": "Rajin ibadah adalah wujud syukur."
+    },
+    {
+      "id": 40,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menyebutkan macam-macam rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan waktu puasa wajib."
+      },
+      "pertanyaan": "<p>Umat Islam wajib berpuasa pada bulan ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Syawal",
+        "B": "Haji",
+        "C": "Ramadan"
+      },
+      "kunci": "C",
+      "pembahasan": "Puasa wajib di bulan Ramadan."
+    },
+    {
+      "id": 41,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami Surah al-Fatihah.",
+        "tp": "Menghafalkan surah Al-Fatihah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan hukum membaca Al-Fatihah dalam salat."
+      },
+      "pertanyaan": "<p>Membaca surah Al-Fatihah dalam salat hukumnya adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "sunah",
+        "B": "wajib",
+        "C": "makruh"
+      },
+      "kunci": "B",
+      "pembahasan": "Al-Fatihah adalah rukun (wajib) dalam salat."
+    },
+    {
+      "id": 42,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menyebutkan macam-macam rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan rukun iman terakhir."
+      },
+      "pertanyaan": "<p>Rukun iman yang keenam adalah iman kepada ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "qada dan qadar",
+        "B": "hari kiamat",
+        "C": "kitab Allah"
+      },
+      "kunci": "A",
+      "pembahasan": "Rukun iman ke-6 adalah qada dan qadar."
+    },
+    {
+      "id": 43,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap sesama.",
+        "tp": "Membiasakan diri dengan sikap peduli.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan sikap peduli."
+      },
+      "pertanyaan": "<p>Perhatikan gambar berikut! Jika ada teman yang terjatuh, sikap kita adalah ....</p>",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi anak sekolah dasar sedang menolong temannya yang terjatuh dari sepeda di jalan.",
+      "opsi": {
+        "A": "menertawakan",
+        "B": "menolong",
+        "C": "lari"
+      },
+      "kunci": "B",
+      "pembahasan": "Menolong teman adalah sikap peduli."
+    },
+    {
+      "id": 44,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Menyebutkan salah satu mukjizat nabi.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan kitab suci Nabi Muhammad."
+      },
+      "pertanyaan": "<p>Mukjizat terbesar Nabi Muhammad saw. adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Al-Qur'an",
+        "B": "Injil",
+        "C": "Taurat"
+      },
+      "kunci": "A",
+      "pembahasan": "Al-Qur'an adalah mukjizat Nabi Muhammad saw."
+    },
+    {
+      "id": 45,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menghafal lima rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan urutan haji."
+      },
+      "pertanyaan": "<p>Melaksanakan ibadah haji adalah rukun Islam yang ke ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "4",
+        "B": "3",
+        "C": "5"
+      },
+      "kunci": "C",
+      "pembahasan": "Haji adalah rukun Islam kelima."
+    },
+    {
+      "id": 46,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap diri sendiri.",
+        "tp": "Membiasakan perilaku sederhana.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C4",
+        "indikator_soal": "Peserta didik dapat menilai perilaku boros."
+      },
+      "pertanyaan": "<p>Menghabiskan uang jajan untuk membeli mainan mahal adalah contoh perilaku ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "boros",
+        "B": "hemat",
+        "C": "sederhana"
+      },
+      "kunci": "A",
+      "pembahasan": "Membeli barang tidak perlu/mahal adalah boros."
+    },
+    {
+      "id": 47,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah bersambung.",
+        "tp": "Menulis huruf hijaiah bersambung.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat mengidentifikasi bentuk huruf sambung di awal."
+      },
+      "pertanyaan": "<p>Perhatikan tabel huruf berikut!</p><table border=\"1\" cellpadding=\"5\" cellspacing=\"0\" style=\"width:100%; text-align:center;\"><thead><tr><th>Huruf Asli</th><th>Posisi Sambung</th></tr></thead><tbody><tr><td>Nun ( ن )</td><td>Awal</td></tr></tbody></table><p>Bentuk huruf sambungnya adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "ـن",
+        "B": "نـ",
+        "C": "ن"
+      },
+      "kunci": "B",
+      "pembahasan": "Huruf Nun di awal kalimat memiliki titik satu di atas dan menyambung ke kiri (نـ)."
+    },
+    {
+      "id": 48,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menjelaskan rukun iman.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menjelaskan bahan penciptaan Malaikat."
+      },
+      "pertanyaan": "<p>Malaikat diciptakan oleh Allah dari ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "cahaya",
+        "B": "tanah",
+        "C": "api"
+      },
+      "kunci": "A",
+      "pembahasan": "Malaikat diciptakan dari nur/cahaya."
+    },
+    {
+      "id": 49,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami salat fardu.",
+        "tp": "Menyebutkan macam-macam salat fardu.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan salat 3 rakaat."
+      },
+      "pertanyaan": "<p>Salat fardu yang jumlah rakaatnya tiga adalah ....</p>",
+      "gambar": null,
+      "opsi": {
+        "A": "Subuh",
+        "B": "Magrib",
+        "C": "Isya"
+      },
+      "kunci": "B",
+      "pembahasan": "Salat Magrib 3 rakaat."
+    },
+    {
+      "id": 50,
+      "tipe": "pg",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Meneladani sifat nabi dan rasul.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menunjukkan perilaku jujur."
+      },
+      "pertanyaan": "<p>Perhatikan gambar berikut! Saat menemukan uang di kelas, Ahmad menyerahkannya kepada guru. Ahmad bersikap ....</p>",
+      "gambar": null,
+      "ai_image_prompt": "Ilustrasi siswa SD memberikan uang temuan kepada ibu guru di depan kelas, suasana kelas yang rapi.",
+      "opsi": {
+        "A": "bohong",
+        "B": "jujur",
+        "C": "sombong"
+      },
+      "kunci": "B",
+      "pembahasan": "Mengembalikan barang temuan adalah sikap jujur."
+    },
+    {
+      "id": 51,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Al-Qur'an Hadis",
+        "cp": "Memahami huruf hijaiah berharakat.",
+        "tp": "Menyebutkan huruf hijaiah.",
+        "lingkup_materi": "Bab 1: Aku Cinta Al-Qur'an",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan huruf pertama hijaiah."
+      },
+      "pertanyaan": "<p>Huruf pertama dalam abjad hijaiah adalah ....</p>",
+      "gambar": null,
+      "kunci": [
+        "alif",
+        "Alif",
+        "ALIF"
+      ],
+      "pembahasan": "Huruf pertama adalah Alif."
+    },
+    {
+      "id": 52,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Akidah",
+        "cp": "Memahami rukun iman.",
+        "tp": "Menyebutkan ciptaan Allah.",
+        "lingkup_materi": "Bab 2: Mengenal Rukun Iman",
+        "level_kognitif": "C2",
+        "indikator_soal": "Peserta didik dapat menyebutkan pencipta alam."
+      },
+      "pertanyaan": "<p>Gunung, laut, dan bumi adalah ciptaan ....</p>",
+      "gambar": null,
+      "kunci": [
+        "Allah",
+        "Allah Swt",
+        "ALLAH"
+      ],
+      "pembahasan": "Semua alam semesta ciptaan Allah."
+    },
+    {
+      "id": 53,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Akhlak",
+        "cp": "Memahami akhlak terhadap sesama.",
+        "tp": "Membiasakan diri dengan sikap peduli.",
+        "lingkup_materi": "Bab 3: Aku Suka Membaca Basmalah dan Hamdalah",
+        "level_kognitif": "C3",
+        "indikator_soal": "Peserta didik dapat menentukan ucapan terima kasih."
+      },
+      "pertanyaan": "<p>Jika diberi hadiah oleh teman, kita mengucapkan ....</p>",
+      "gambar": null,
+      "kunci": [
+        "terima kasih",
+        "makasih",
+        "alhamdulillah"
+      ],
+      "pembahasan": "Ucapan yang baik saat menerima adalah terima kasih."
+    },
+    {
+      "id": 54,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Fikih",
+        "cp": "Memahami rukun Islam.",
+        "tp": "Menyebutkan macam-macam rukun Islam.",
+        "lingkup_materi": "Bab 4: Mengenal Rukun Islam",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan tempat salat."
+      },
+      "pertanyaan": "<p>Umat Islam melaksanakan salat berjamaah di ....</p>",
+      "gambar": null,
+      "kunci": [
+        "masjid",
+        "musala",
+        "mushola"
+      ],
+      "pembahasan": "Tempat ibadah salat adalah masjid/musala."
+    },
+    {
+      "id": 55,
+      "tipe": "isian",
+      "kisi_kisi": {
+        "elemen": "Sejarah Peradaban Islam",
+        "cp": "Memahami kisah beberapa nabi dan rasul.",
+        "tp": "Mengenal keluarga nabi.",
+        "lingkup_materi": "Bab 5: Nabi dan Rasul Panutanku",
+        "level_kognitif": "C1",
+        "indikator_soal": "Peserta didik dapat menyebutkan nama ayah Nabi."
+      },
+      "pertanyaan": "<p>Ayah Nabi Muhammad saw. bernama ....</p>",
+      "gambar": null,
+      "kunci": [
+        "Abdullah",
+        "abdullah",
+        "ABDULLAH"
+      ],
+      "pembahasan": "Ayah Nabi Muhammad saw. bernama Abdullah."
+    }
+  ]
+}

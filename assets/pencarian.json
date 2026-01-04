@@ -1,0 +1,482 @@
+[
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 1",
+    "judul": "Aku Cinta Al-Qur’an",
+    "keyword": "al-qur’an kitabku huruf hijaiyah harakat al-fatihah",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_1"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 2",
+    "judul": "Mengenal Rukun Iman",
+    "keyword": "rukun iman allah rasul cinta allah dan rasul",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_2"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 3",
+    "judul": "Aku Suka Membaca Basmalah dan Hamdalah",
+    "keyword": "basmalah hamdalah bersikap santun bersyukur nikmat allah",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_3"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 4",
+    "judul": "Mengenal Rukun Islam",
+    "keyword": "rukun islam syahadat dua kalimat syahadat anak muslim",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_4"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 5",
+    "judul": "Nabi dan Rasul Panutanku",
+    "keyword": "nabi dan rasul 25 nabi mukjizat perilaku sederhana",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_5"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 6",
+    "judul": "Al-Qur’an Pedoman Hidupku",
+    "keyword": "harakat huruf hijaiyah surah al-ikhlas pesan pokok",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_6"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 7",
+    "judul": "Kasih Sayang terhadap Sesama",
+    "keyword": "asmaul husna ar-rahman ar-rahim kasih sayang nabi muhammad",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_7"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 8",
+    "judul": "Aku Suka Berterima Kasih dan Disiplin",
+    "keyword": "berterima kasih sesama disiplin perilaku",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_8"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 9",
+    "judul": "Membiasakan Hidup Bersih",
+    "keyword": "hidup bersih bersuci berwudu tayamum",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_9"
+  },
+  {
+    "kelas": "Kelas 1",
+    "bab": "Bab 10",
+    "judul": "Nabi Adam a.s. Manusia Pertama",
+    "keyword": "nabi adam hawa surga bumi manusia pertama",
+    "url": "kelas1.html",
+    "id_element": "k1_materi_10"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 1",
+    "judul": "Ayo Belajar Al-Qur’an",
+    "keyword": "surah an-nas pesan pokok huruf hijaiyah makharijul huruf",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_1"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 2",
+    "judul": "Mari Mengenal Allah Swt.",
+    "keyword": "allah al-hafiz al-wali al-‘alim al-khabir asmaul husna",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_2"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 3",
+    "judul": "Ayo Berperilaku Terpuji",
+    "keyword": "sayang sesama empati tutur kata lembut jujur",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_3"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 4",
+    "judul": "Alhamdulillah, Aku Bisa Salat",
+    "keyword": "azan ikamah salat fardu",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_4"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 5",
+    "judul": "Asyiknya Belajar Kisah Nabi Nuh a.s.",
+    "keyword": "nabi nuh dakwah sabar kerja keras teladan",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_5"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 6",
+    "judul": "Senang Bisa Membaca Al-Qur’an",
+    "keyword": "membaca surah al-falaq surah al-kautsar",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_6"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 7",
+    "judul": "Mari Mengenal Malaikat-Malaikat Allah",
+    "keyword": "iman malaikat nama malaikat tugas malaikat",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_7"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 8",
+    "judul": "Aku Senang Bisa Berakhlak Terpuji",
+    "keyword": "hidup bersih hidup rapi hidup teratur",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_8"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 9",
+    "judul": "Ayo Zikir dan Doa Setelah Salat",
+    "keyword": "zikir doa setelah salat",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_9"
+  },
+  {
+    "kelas": "Kelas 2",
+    "bab": "Bab 10",
+    "judul": "Asyiknya Belajar Kisah Ayah Para Nabi",
+    "keyword": "nabi ibrahim ayah para nabi dakwah teladan",
+    "url": "kelas2.html",
+    "id_element": "k2_materi_10"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 1",
+    "judul": "Asyiknya Belajar Surah Al-‘Alaq",
+    "keyword": "surah al-‘alaq qalqalah hukum bacaan pesan pokok",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_1"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 2",
+    "judul": "Ayo Mengenal Tuhan Kita",
+    "keyword": "sifat wajib mustahil jaiz allah asmaulhusna al-wahhab al-kabir",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_2"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 3",
+    "judul": "Perilaku Terpuji Adalah Kepribadianku",
+    "keyword": "berbakti orang tua guru menghormati sesama",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_3"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 4",
+    "judul": "Aku Bangga Mampu Berpuasa",
+    "keyword": "puasa ketentuan hikmah puasa",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_4"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 5",
+    "judul": "Aku Suka Belajar Sejarah Islam",
+    "keyword": "sejarah islam arab pra-islam nabi muhammad selawat",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_5"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 6",
+    "judul": "Senangnya Belajar Hadis",
+    "keyword": "hadis salat berjemaah pesan pokok praktik",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_6"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 7",
+    "judul": "Ayo Beriman kepada Kitab-Kitab Allah Swt.",
+    "keyword": "iman kitab allah dalil manfaat beriman",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_7"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 8",
+    "judul": "Aku Senang Berkalimah Tayyibah",
+    "keyword": "kalimah tayyibah subhanallah masyaallah insyaallah allahu akbar",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_8"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 9",
+    "judul": "Senangnya Salat Rawatib",
+    "keyword": "salat rawatib macam-macam hikmah praktik",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_9"
+  },
+  {
+    "kelas": "Kelas 3",
+    "bab": "Bab 10",
+    "judul": "Nabi Muhammad saw. Rasulku",
+    "keyword": "nabi muhammad rasul dakwah mukjizat",
+    "url": "kelas3.html",
+    "id_element": "k3_materi_10"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 1",
+    "judul": "Mari Kita Mengaji dan Mengkaji Q.S. Al-Hujurat/49:13 dan Hadis tentang Keragaman",
+    "keyword": "surat al-hujurat hadis keragaman membaca menghafal",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_1"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 2",
+    "judul": "Teladan Mulia Asmaulhusna",
+    "keyword": "lima asmaulhusna akhlak mulia teladan",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_2"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 3",
+    "judul": "Indahnya Saling Menghargai dalam Keragaman",
+    "keyword": "keragaman sunnatullah saling menghargai toleransi beda agama",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_3"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 4",
+    "judul": "Menyambut Usia Balig",
+    "keyword": "usia balig tanda fikih tanda biologi kewajiban",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_4"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 5",
+    "judul": "Kisah Hijrah Nabi Muhammad saw. ke Madinah",
+    "keyword": "hijrah nabi muhammad madinah sebab perjalanan hikmah",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_5"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 6",
+    "judul": "Mari Mengaji dan Mengkaji Q.S. At-Tin dan Hadis tentang Silaturahmi",
+    "keyword": "surat at-tin hadis silaturahmi membaca menghafal",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_6"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 7",
+    "judul": "Beriman kepada Rasul-Rasul Allah",
+    "keyword": "iman rasul allah sifat rasul tujuan diutus",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_7"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 8",
+    "judul": "Aku Anak Saleh",
+    "keyword": "anak saleh salam menolong ciri munafik",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_8"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 9",
+    "judul": "Mengenal Salat Jumat, Duha, dan Tahajud",
+    "keyword": "salat jumat salat duha salat tahajud ibadah sunah",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_9"
+  },
+  {
+    "kelas": "Kelas 4",
+    "bab": "Bab 10",
+    "judul": "Kisah Nabi Muhammad saw. Membangun Kota Madinah",
+    "keyword": "nabi muhammad membangun masjid ukhuwah kerukunan",
+    "url": "kelas4.html",
+    "id_element": "k4_materi_10"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 1",
+    "judul": "Menyayangi Anak Yatim",
+    "keyword": "surah al-ma’un anak yatim menyayangi pesan pokok",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_1"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 2",
+    "judul": "Lebih Dekat dengan Nama-Nama Allah",
+    "keyword": "asmaulhusna mengenal allah perilaku terpuji",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_2"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 3",
+    "judul": "Aku Anak Saleh",
+    "keyword": "anak saleh saling menghargai manusia sebagai khalifah",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_3"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 4",
+    "judul": "Hidup Lapang dengan Berbagi",
+    "keyword": "zakat infak sedekah hadiah berbagi",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_4"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 5",
+    "judul": "Meneladani Perjuangan Rasulullah",
+    "keyword": "fathu makkah haji wada’ kisah rasulullah",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_5"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 6",
+    "judul": "Hidup Damai dalam Kebersamaan",
+    "keyword": "surah ali ‘imran surah al-baqarah damai kebersamaan",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_6"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 7",
+    "judul": "Ketika Kehidupan Telah Berhenti",
+    "keyword": "hari akhir kiamat iman hari akhir hikmah",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_7"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 8",
+    "judul": "Senangnya Berteman",
+    "keyword": "persaudaraan berteman beda agama toleransi",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_8"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 9",
+    "judul": "Ibadah Haji dan Kurban",
+    "keyword": "ibadah haji ibadah kurban",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_9"
+  },
+  {
+    "kelas": "Kelas 5",
+    "bab": "Bab 10",
+    "judul": "Keteladanan Khulafaurasyidin",
+    "keyword": "khulafaurasyidin abu bakar umar usman ali",
+    "url": "kelas5.html",
+    "id_element": "k5_materi_10"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 1",
+    "judul": "Belajar Al-Qur’an dan Hadis",
+    "keyword": "surah ad-duha membaca menulis pesan pokok menghafal",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_1"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 2",
+    "judul": "Allah Swt. Maha Segalanya",
+    "keyword": "al-gaffar al-‘afuw al-wahid as-samad ampunan allah",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_2"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 3",
+    "judul": "Hidup Damai dengan Saling Memaafkan",
+    "keyword": "maaf memaafkan penyesalan damai",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_3"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 4",
+    "judul": "Hukum Halal dan Haram",
+    "keyword": "halal haram hukum islam definisi sebab",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_4"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 5",
+    "judul": "Jasa Khulafaur Rasyidin untuk Dunia",
+    "keyword": "abu bakar as-siddiq umar bin khattab khulafaur rasyidin jasa",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_5"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 6",
+    "judul": "Mengaji Al-Qur’an Surah Al-A‘la",
+    "keyword": "surah al-a‘la membaca menulis pesan pokok menghafal",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_6"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 7",
+    "judul": "Indahnya Ketetapan Allah",
+    "keyword": "qada qadar takdir iman ketetapan allah",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_7"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 8",
+    "judul": "Peduli Lingkungan",
+    "keyword": "peduli lingkungan manfaat sikap pelestarian",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_8"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 9",
+    "judul": "Mengamalkan Puasa Sunah",
+    "keyword": "puasa sunah jenis waktu hikmah keutamaan",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_9"
+  },
+  {
+    "kelas": "Kelas 6",
+    "bab": "Bab 10",
+    "judul": "Meneladani Jasa Khalifah Usman bin Affan dan Ali bin Abi Thalib",
+    "keyword": "usman bin affan ali bin abi thalib jasa khalifah",
+    "url": "kelas6.html",
+    "id_element": "k6_materi_10"
+  }
+]

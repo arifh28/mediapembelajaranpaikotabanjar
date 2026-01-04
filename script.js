@@ -2,149 +2,100 @@
 // 1. KONFIGURASI SUPABASE
 // =================================================================
 const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
-// Gunakan Key Anon Public Anda
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
 // =================================================================
-// 2. FUNGSI UTAMA: TRACK CLICK & BUKA LINK (HYBRID)
+// 2. FUNGSI TRACK CLICK (HYBRID: LINK & DATABASE)
 // =================================================================
 async function trackClick(materialId, targetUrl) {
     
-    // --- BAGIAN A: URUSAN MEMBUKA LINK (UX) ---
-    // Kita jalankan duluan agar user tidak menunggu loading database
-    
+    // A. BUKA LINK DULUAN (UX CEPAT)
     if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('#')) {
-        
-        // Deteksi apakah ini file dokumen (PDF/PPT/Word/Zip)
-        // Regex ini mengecek akhiran file (case insensitive)
         const isFile = /\.(pdf|ppt|pptx|doc|docx|xls|xlsx|zip|rar)$/i.test(targetUrl);
         
-        // Trik: Membuat elemen <a> sementara secara gaib
-        // Ini cara paling stabil untuk meniru perilaku tag <a>
         const link = document.createElement('a');
         link.href = targetUrl;
-        link.target = '_blank'; // Selalu buka di tab baru
+        link.target = '_blank'; 
         
-        if (isFile) {
-            // Jika terdeteksi file, paksa browser untuk download
-            link.setAttribute('download', ''); 
-        }
+        if (isFile) link.setAttribute('download', ''); 
 
-        // Tempel ke body, klik otomatis, lalu hapus lagi
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
     }
 
-    // --- BAGIAN B: URUSAN DATABASE (LOGIKA AMAN) ---
+    // B. UPDATE DATABASE (SUPABASE)
     console.log(`Mencatat view untuk: ${materialId}...`);
-
     try {
-        // 1. Cek dulu apakah data materi ini sudah ada?
-        const { data: existingData, error: fetchError } = await _supabase
+        const { data: existingData } = await _supabase
             .from('material_analytics')
             .select('click_count')
             .eq('material_name', materialId)
             .single();
 
         if (existingData) {
-            // SKENARIO 1: Data SUDAH ADA -> Lakukan UPDATE (Tambah +1)
+            // Update
             await _supabase
                 .from('material_analytics')
                 .update({ click_count: existingData.click_count + 1 })
                 .eq('material_name', materialId);
-            
-            console.log("Sukses update view (+1)");
-
         } else {
-            // SKENARIO 2: Data BELUM ADA -> Lakukan INSERT (Isi 1)
-            // Kita abaikan error 23505 (duplicate) kalau-kalau ada bentrok milidetik
-            const { error: insertError } = await _supabase
+            // Insert Baru
+            await _supabase
                 .from('material_analytics')
                 .insert([{ material_name: materialId, click_count: 1 }]);
-            
-            if (!insertError) console.log("Sukses buat data baru");
-        }
-
-        // 2. Update tampilan angka di layar secara langsung (Realtime feel)
-        if (typeof loadViews === 'function') {
-            loadViews();
         }
         
-        // Update juga list trending jika ada di halaman ini
-        if (typeof loadTrending === 'function') {
-            loadTrending();
-        }
+        // Refresh tampilan angka jika ada di halaman
+        if (typeof loadViews === 'function') loadViews();
+        if (typeof loadTrending === 'function') loadTrending();
 
     } catch (err) {
-        // Error kita log saja di console, jangan alert ke user agar tidak mengganggu
-        console.error("Error sistem tracking:", err);
+        console.error("Error tracking:", err);
     }
 }
 
 
 // =================================================================
-// 3. FUNGSI LOAD VIEW (TAMPILKAN JUMLAH MATA)
+// 3. FUNGSI LOAD VIEW & TRENDING
 // =================================================================
 async function loadViews() {
-    // Cari semua elemen yang punya class 'view-counter'
     const counters = document.querySelectorAll('.view-counter');
-    
-    // Jika tidak ada counter di halaman ini, berhenti
     if (counters.length === 0) return;
 
-    // Ambil semua ID materi dari atribut data-id
-    const materialNames = Array.from(counters).map(c => c.dataset.id);
-
-    // Minta data ke Supabase (Bulk Fetch biar hemat request)
-    const { data, error } = await _supabase
+    const ids = Array.from(counters).map(c => c.dataset.id);
+    const { data } = await _supabase
         .from('material_analytics')
         .select('material_name, click_count')
-        .in('material_name', materialNames);
+        .in('material_name', ids);
 
     if (data) {
-        // Loop setiap counter di HTML dan isi angkanya
         counters.forEach(counter => {
             const id = counter.getAttribute('data-id');
-            // Cari data yang cocok
             const record = data.find(item => item.material_name === id);
-            
-            // Jika ketemu pakai angkanya, jika tidak pakai 0
             const count = record ? record.click_count : 0;
-            
-            // Update HTML (Tetap pertahankan Icon Mata)
             counter.innerHTML = `<i class="fas fa-eye me-1"></i> ${count}`;
         });
     }
 }
 
-
-// =================================================================
-// 4. FUNGSI TRENDING (MATERI TERPOPULER)
-// =================================================================
 async function loadTrending() {
     const listContainer = document.getElementById('trendingList');
-    
-    // Jika tidak ada elemen trending di halaman ini (misal di halaman detail), skip
     if (!listContainer) return;
 
-    // Ambil 5 data tertinggi dari Supabase
-    const { data, error } = await _supabase
+    const { data } = await _supabase
         .from('material_analytics')
         .select('material_name, click_count')
         .order('click_count', { ascending: false })
         .limit(5);
 
     if (data) {
-        listContainer.innerHTML = ''; // Bersihkan tulisan "Loading..."
-        
+        listContainer.innerHTML = '';
         data.forEach((item, index) => {
-            // Rapikan nama ID menjadi Judul yang enak dibaca
-            let judul = formatNamaMateri(item.material_name); 
-            
+            let judul = item.material_name.replace(/_/g, ' ').toUpperCase(); 
             let html = `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="text-truncate" style="max-width: 70%;">
@@ -160,42 +111,199 @@ async function loadTrending() {
     }
 }
 
-// Helper: Merapikan ID database menjadi teks (Opsional)
-// Contoh: "k4_materi_1" -> "K4 MATERI 1"
-function formatNamaMateri(id) {
-    return id.replace(/_/g, ' ').toUpperCase(); 
+
+// =================================================================
+// 4. LOGIKA PENCARIAN (BARU)
+// =================================================================
+
+// Toggle (Buka/Tutup) Search Bar
+function toggleSearchBar() {
+    const container = document.getElementById('searchBarContainer');
+    const input = document.getElementById('navSearchInput');
+    
+    if (container.classList.contains('d-none')) {
+        container.classList.remove('d-none');
+        input.focus(); 
+    } else {
+        container.classList.add('d-none');
+    }
 }
 
-
-// =================================================================
-// 5. INISIALISASI DAN MENU HANDPHONE
-// =================================================================
-document.addEventListener('DOMContentLoaded', () => {
-
+// Redirect ke search.html
+function doSearch() {
+    const input = document.getElementById('navSearchInput');
+    const query = input.value.trim();
     
-    // Ambil elemen
-    const myOffcanvas = document.getElementById('offcanvasNavbar');
-    const menuIcon = document.getElementById('menuIcon');
+    if (query.length > 0) {
+        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+    }
+}
 
-    if(myOffcanvas && menuIcon) {
-        // Saat menu MUNCUL (Dibuka)
-        myOffcanvas.addEventListener('show.bs.offcanvas', function () {
-            menuIcon.classList.remove('fa-bars');  // Hapus garis 3
-            menuIcon.classList.add('fa-times');    // Ganti jadi X
-            menuIcon.classList.add('fa-spin');     // Efek putar sedikit (opsional)
-            setTimeout(() => menuIcon.classList.remove('fa-spin'), 300);
+// Handle tombol Enter
+function handleEnter(event) {
+    if (event.key === 'Enter') {
+        doSearch();
+    }
+}
+
+// =================================================================
+// LOGIKA PENCARIAN (UPDATE: PINTAR & CARD BERGAMBAR)
+// =================================================================
+
+// 1. Fungsi Normalisasi Teks (Agar "Al-Qur'an" == "Alquran")
+function normalizeText(text) {
+    if (!text) return "";
+    return text
+        .toLowerCase()              // Ubah ke huruf kecil
+        .replace(/[^a-z0-9]/g, ''); // Hapus SEMUA karakter kecuali huruf & angka
+        // Contoh: "Al-Qur'an" -> "alquran"
+}
+
+// 2. Render Hasil Pencarian (Khusus search.html)
+async function renderSearchResults() {
+    const container = document.getElementById('resultsContainer');
+    const keywordSpan = document.getElementById('searchKeyword');
+    
+    if (!container) return; // Stop jika bukan halaman search
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const rawQuery = urlParams.get('q'); // Query asli user (misal: "Al-Qur'an")
+
+    if (!rawQuery) {
+        keywordSpan.innerText = "-";
+        container.innerHTML = '<div class="alert alert-warning">Masukkan kata kunci pencarian.</div>';
+        return;
+    }
+
+    keywordSpan.innerText = `"${rawQuery}"`;
+    container.innerHTML = '<div class="col-12 text-center"><i class="fas fa-spinner fa-spin"></i> Memuat...</div>';
+
+    try {
+        const response = await fetch('assets/pencarian.json');
+        const allData = await response.json();
+
+        // Query yang sudah dinormalisasi (bersih)
+        const cleanQuery = normalizeText(rawQuery);
+
+        const filtered = allData.filter(item => {
+            // Kita bersihkan juga data di database saat pencocokan
+            const cleanJudul = normalizeText(item.judul);
+            const cleanKeyword = normalizeText(item.keyword);
+            const cleanBab = normalizeText(item.bab);
+
+            // Cek apakah mengandung kata kunci
+            return cleanJudul.includes(cleanQuery) || 
+                   cleanKeyword.includes(cleanQuery) ||
+                   cleanBab.includes(cleanQuery);
         });
 
-        // Saat menu HILANG (Ditutup/Klik X)
-        myOffcanvas.addEventListener('hide.bs.offcanvas', function () {
-            menuIcon.classList.remove('fa-times'); // Hapus X
-            menuIcon.classList.add('fa-bars');     // Balik jadi garis 3
-            menuIcon.classList.add('fa-spin');
+        if (filtered.length > 0) {
+            let html = '';
+            filtered.forEach(item => {
+                const link = `${item.url}?highlight=${item.id_element}`;
+                
+                // Tentukan Warna Placeholder Gambar berdasarkan Kelas
+                let imgColor = '4ECDC4'; // Default Hijau (Kelas Atas)
+                if (item.kelas.includes('1') || item.kelas.includes('2') || item.kelas.includes('3')) {
+                    imgColor = 'FFE66D'; // Kuning (Kelas Bawah)
+                }
+
+                // Placeholder Image (Judul + Warna)
+                const encodedTitle = encodeURIComponent(item.judul);
+                const imgSrc = `https://placehold.co/600x350/${imgColor}/333?text=${encodedTitle}`;
+
+                html += `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm custom-card border-0 overflow-hidden">
+                        
+                        <div class="position-relative">
+                            <img src="${imgSrc}" class="card-img-top" alt="${item.judul}" style="height: 200px; object-fit: cover;">
+                            <div class="position-absolute top-0 start-0 m-2">
+                                <span class="badge bg-white text-dark shadow-sm">${item.kelas}</span>
+                            </div>
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <small class="text-muted mb-1"><i class="fas fa-bookmark text-success me-1"></i> ${item.bab}</small>
+                            <h5 class="card-title fw-bold text-dark">${item.judul}</h5>
+                            
+                            <div class="alert alert-light border mt-2 py-2 px-3 small text-muted flex-grow-1">
+                                <i class="fas fa-tags me-1 text-secondary"></i> 
+                                ${item.keyword}
+                            </div>
+                            
+                            <hr class="opacity-25 my-3">
+                            <a href="${link}" class="btn btn-outline-success btn-sm w-100 rounded-pill mt-auto">
+                                Buka Materi <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        } else {
+            container.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <img src="https://placehold.co/200x200/f0f0f0/ccc?text=404" class="mb-3 rounded-circle opacity-50" width="150">
+                    <h5 class="text-muted">Materi tidak ditemukan.</h5>
+                    <p class="small text-muted">Kami tidak menemukan hasil untuk "${rawQuery}". <br>Coba kata kunci lain.</p>
+                </div>`;
+        }
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<div class="alert alert-danger">Gagal memuat data pencarian.</div>';
+    }
+}
+
+// =================================================================
+// 5. INISIALISASI (MAIN)
+// =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // A. Load Data Awal
+    loadViews();
+    loadTrending();
+    
+    // B. Cek apakah ini halaman Search?
+    renderSearchResults();
+
+    // C. Animasi Menu Hamburger (X to Bars)
+    const myOffcanvas = document.getElementById('offcanvasNavbar');
+    const menuIcon = document.getElementById('menuIcon');
+    if(myOffcanvas && menuIcon) {
+        myOffcanvas.addEventListener('show.bs.offcanvas', () => {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times', 'fa-spin');
+            setTimeout(() => menuIcon.classList.remove('fa-spin'), 300);
+        });
+        myOffcanvas.addEventListener('hide.bs.offcanvas', () => {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars', 'fa-spin');
             setTimeout(() => menuIcon.classList.remove('fa-spin'), 300);
         });
     }
 
-    // Inisialisasi fungsi lain
-    if(typeof loadViews === 'function') loadViews();
-    if(typeof loadTrending === 'function') loadTrending();
+    // D. Auto Scroll (Highlight) jika dari Pencarian
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetId = urlParams.get('highlight');
+
+    if (targetId) {
+        const targetElement = document.querySelector(`[data-id="${targetId}"]`);
+        if (targetElement) {
+            const cardElement = targetElement.closest('.card');
+            if (cardElement) {
+                // Scroll & Highlight Effect
+                setTimeout(() => {
+                    cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    cardElement.style.transition = "all 0.5s";
+                    cardElement.classList.add('border', 'border-warning', 'border-5');
+                }, 500);
+                
+                // Hapus Highlight setelah 3 detik
+                setTimeout(() => {
+                    cardElement.classList.remove('border', 'border-warning', 'border-5');
+                }, 3500);
+            }
+        }
+    }
 });
