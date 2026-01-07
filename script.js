@@ -10,26 +10,44 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 // =================================================================
 // 2. FUNGSI TRACK CLICK (HYBRID: LINK & DATABASE)
 // =================================================================
+
+async function logPageView() {
+    // Ambil nama file halaman saat ini (misal: index.html atau kelas1.html)
+    let pageName = window.location.pathname.split("/").pop();
+    if (pageName === "") pageName = "index.html"; // Jika root
+
+    try {
+        await _supabase.from('analytics_logs').insert([
+            { event_type: 'page_view', event_name: pageName }
+        ]);
+        console.log("Kunjungan tercatat:", pageName);
+    } catch (err) {
+        console.error("Gagal catat kunjungan", err);
+    }
+}
+
 async function trackClick(materialId, targetUrl) {
     
-    // A. BUKA LINK DULUAN (UX CEPAT)
+    // A. BUKA LINK DULUAN (Supaya user tidak menunggu)
     if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('#')) {
         const isFile = /\.(pdf|ppt|pptx|doc|docx|xls|xlsx|zip|rar)$/i.test(targetUrl);
-        
         const link = document.createElement('a');
         link.href = targetUrl;
         link.target = '_blank'; 
-        
         if (isFile) link.setAttribute('download', ''); 
-
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
     }
 
-    // B. UPDATE DATABASE (SUPABASE)
-    console.log(`Mencatat view untuk: ${materialId}...`);
+    // B. PEREKAMAN DATA (BACKGROUND PROCESS)
     try {
+        // 1. Catat ke LOG (Untuk hitungan Hari/Minggu/Bulan)
+        await _supabase.from('analytics_logs').insert([
+            { event_type: 'click_material', event_name: materialId }
+        ]);
+
+        // 2. Update Total Counter (Untuk tampilan kartu materi yang cepat)
         const { data: existingData } = await _supabase
             .from('material_analytics')
             .select('click_count')
@@ -37,27 +55,21 @@ async function trackClick(materialId, targetUrl) {
             .single();
 
         if (existingData) {
-            // Update
             await _supabase
                 .from('material_analytics')
                 .update({ click_count: existingData.click_count + 1 })
                 .eq('material_name', materialId);
         } else {
-            // Insert Baru
+            // Jika materi baru belum ada di tabel analytics
             await _supabase
                 .from('material_analytics')
                 .insert([{ material_name: materialId, click_count: 1 }]);
         }
-        
-        // Refresh tampilan angka jika ada di halaman
-        if (typeof loadViews === 'function') loadViews();
-        if (typeof loadTrending === 'function') loadTrending();
 
     } catch (err) {
         console.error("Error tracking:", err);
     }
 }
-
 
 // =================================================================
 // 3. FUNGSI LOAD VIEW & TRENDING
@@ -261,6 +273,7 @@ async function renderSearchResults() {
 document.addEventListener('DOMContentLoaded', () => {
     
     // A. Load Data Awal
+    logPageView();
     loadViews();
     loadTrending();
     
