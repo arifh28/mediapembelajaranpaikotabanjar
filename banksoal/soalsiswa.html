@@ -7,11 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         /* =========================================
-           STYLE WARNA PILIHAN JAWABAN
+           STYLE WARNA PILIHAN JAWABAN (GRADASI)
            ========================================= */
         .option-card {
             cursor: pointer;
@@ -29,18 +30,18 @@
         }
 
         /* WARNA DEFAULT (GRADASI MUDA) */
-        .opt-A { background: linear-gradient(to right, #fffde7, #fff9c4); border-color: #fff59d; } /* Kuning Muda */
-        .opt-B { background: linear-gradient(to right, #f1f8e9, #dcedc8); border-color: #c5e1a5; } /* Hijau Muda */
-        .opt-C { background: linear-gradient(to right, #ffebee, #ffcdd2); border-color: #ef9a9a; } /* Merah Muda */
-        .opt-D { background: linear-gradient(to right, #e3f2fd, #bbdefb); border-color: #90caf9; } /* Biru Muda */
+        .opt-A { background: linear-gradient(to right, #fffde7, #fff9c4); border-color: #fff59d; } /* Kuning */
+        .opt-B { background: linear-gradient(to right, #f1f8e9, #dcedc8); border-color: #c5e1a5; } /* Hijau */
+        .opt-C { background: linear-gradient(to right, #ffebee, #ffcdd2); border-color: #ef9a9a; } /* Merah */
+        .opt-D { background: linear-gradient(to right, #e3f2fd, #bbdefb); border-color: #90caf9; } /* Biru */
 
-        /* WARNA SAAT DIPILIH (GRADASI PEKAT) */
+        /* WARNA SAAT DIPILIH (GRADASI PEKAT + TEXT PUTIH) */
         .option-card.selected.opt-A { background: linear-gradient(135deg, #fbc02d, #f57f17) !important; color: white; border-color: #fbc02d; }
         .option-card.selected.opt-B { background: linear-gradient(135deg, #43a047, #2e7d32) !important; color: white; border-color: #43a047; }
         .option-card.selected.opt-C { background: linear-gradient(135deg, #e53935, #c62828) !important; color: white; border-color: #e53935; }
         .option-card.selected.opt-D { background: linear-gradient(135deg, #1e88e5, #1565c0) !important; color: white; border-color: #1e88e5; }
 
-        /* Style Badge Huruf (Lingkaran A, B, C, D) */
+        /* Badge Huruf Lingkaran */
         .badge-huruf {
             width: 40px; height: 40px;
             display: flex; align-items: center; justify-content: center;
@@ -52,12 +53,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Saat dipilih, badge huruf menyesuaikan */
-        .option-card.selected .badge-huruf {
-            background-color: white;
-            color: #333;
-        }
-
+        .option-card.selected .badge-huruf { background-color: white; color: #333; }
         .hidden-radio { position: absolute; opacity: 0; cursor: pointer; }
 
         /* Navigasi Nomor */
@@ -72,11 +68,16 @@
     <nav class="navbar sticky-top shadow-sm bg-white">
         <div class="container d-flex justify-content-between align-items-center">
             <div>
-                <small class="text-muted d-block">Ujian Materi:</small>
+                <small class="text-muted d-block" id="studentInfoDisplay">Peserta: ...</small>
                 <span class="fw-bold text-success text-truncate d-block" style="max-width: 200px;" id="examTitle">Memuat...</span>
             </div>
-            <div class="badge bg-warning text-dark fs-6 px-3 py-2 rounded-pill shadow-sm">
-                <i class="fas fa-clock me-1"></i> <span id="timer">00:00</span>
+            <div class="d-flex align-items-center gap-2">
+                 <button onclick="resetExam()" class="btn btn-sm btn-outline-danger" title="Reset Ujian (Hapus Data)">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <div class="badge bg-warning text-dark fs-6 px-3 py-2 rounded-pill shadow-sm">
+                    <i class="fas fa-clock me-1"></i> <span id="timer">00:00</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -90,10 +91,10 @@
                         
                         <div class="d-flex justify-content-between mt-5 pt-3 border-top">
                             <button class="btn btn-outline-secondary px-4 rounded-pill" id="btnPrev" onclick="prevSoal()">
-                                <i class="fas fa-chevron-left"></i> Sebelumnya
+                                <i class="fas fa-chevron-left"></i> Prev
                             </button>
                             <button class="btn btn-primary px-4 rounded-pill" id="btnNext" onclick="nextSoal()">
-                                Selanjutnya <i class="fas fa-chevron-right"></i>
+                                Next <i class="fas fa-chevron-right"></i>
                             </button>
                             <button class="btn btn-success px-4 rounded-pill d-none" id="btnFinish" onclick="finishExam()">
                                 <i class="fas fa-check-circle"></i> Selesai
@@ -120,6 +121,33 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalStart" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-user-edit"></i> Identitas Peserta</h5>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted text-center mb-4">Silakan isi data diri sebelum mengerjakan soal.</p>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nama Lengkap</label>
+                        <input type="text" id="inputName" class="form-control rounded-pill" placeholder="Nama Lengkapmu">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Kelas</label>
+                        <input type="text" id="inputClass" class="form-control rounded-pill" placeholder="Tulis Kelas">
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary w-100 rounded-pill py-2" onclick="startExam()">
+                        Mulai Mengerjakan <i class="fas fa-arrow-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modalFinish" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0">
@@ -131,21 +159,17 @@
                     <div class="text-center mb-4">
                         <i class="fas fa-trophy fa-3x text-warning mb-2"></i>
                         <h5>Ujian Selesai!</h5>
-                        <p class="text-muted small">Silakan isi identitas untuk mengirim nilai ke Guru.</p>
+                        <p class="text-muted small">Waktu Pengerjaan: <span id="finishTime" class="fw-bold">-</span></p>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Nama Lengkap Siswa</label>
-                        <input type="text" id="studentName" class="form-control rounded-pill" placeholder="Contoh: Ahmad Dahlan">
-                    </div>
+                    
                     <div class="mb-3">
                         <label class="form-label fw-bold">Nomor WhatsApp Guru</label>
                         <input type="number" id="teacherPhone" class="form-control rounded-pill" placeholder="Contoh: 628123456789">
                         <small class="text-muted ms-2">*Gunakan awalan 62 (bukan 0)</small>
                     </div>
-                </div>
-                <div class="modal-footer border-0">
+
                     <button type="button" class="btn btn-success w-100 rounded-pill py-2" onclick="sendToWA()">
-                        Kirim Nilai Sekarang <i class="fas fa-paper-plane ms-1"></i>
+                        Kirim Nilai ke WA Guru <i class="fas fa-paper-plane ms-1"></i>
                     </button>
                 </div>
             </div>
@@ -155,14 +179,28 @@
     <script>
         let allQuestions = [];
         let currentIdx = 0;
-        let userAnswers = {};
         let examMeta = {};
+        
+        // DATA STATE (Akan disimpan di LocalStorage)
+        let state = {
+            studentName: '',
+            studentClass: '',
+            answers: {},        // Format: { 1: 'A', 2: 'masjid' }
+            startTime: null,    // Kapan mulai
+            endTime: null       // Target selesai
+        };
+
+        // Key unik untuk LocalStorage agar tiap mapel beda data
+        let STORAGE_KEY = ''; 
 
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const fileName = urlParams.get('file');
 
             if (!fileName) return Swal.fire('Error', 'File soal tidak ditemukan.', 'error');
+            
+            // Set Storage Key unik berdasarkan nama file
+            STORAGE_KEY = `exam_data_${fileName}`;
 
             try {
                 const response = await fetch(fileName);
@@ -172,54 +210,120 @@
                 examMeta = result.meta;
                 allQuestions = result.data;
                 document.getElementById('examTitle').innerText = examMeta.judul;
-                initExam();
-                startTimer();
+
+                // CEK DATA DI LOCAL STORAGE (RESUME)
+                loadState();
+
             } catch (error) {
                 Swal.fire('Gagal', 'Tidak bisa memuat soal: ' + error.message, 'error');
             }
         });
 
-        function initExam() {
-            renderQuestion(0);
-            renderNumberGrid();
+        // 1. SISTEM SIMPAN/MUAT (LOCAL STORAGE)
+        function loadState() {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            
+            if (savedData) {
+                state = JSON.parse(savedData);
+                
+                // Validasi jika data rusak/kosong
+                if (!state.studentName) {
+                    showStartModal();
+                } else {
+                    // Jika data ada, langsung lanjut (Resume)
+                    updateUIIdentity();
+                    initExamLogic();
+                    
+                    // Notifikasi kecil bahwa ujian dilanjutkan
+                    const Toast = Swal.mixin({
+                        toast: true, position: 'top-end', showConfirmButton: false, timer: 3000
+                    });
+                    Toast.fire({ icon: 'info', title: 'Melanjutkan ujian sebelumnya...' });
+                }
+            } else {
+                // Jika belum ada data, tampilkan Modal Start
+                showStartModal();
+            }
         }
 
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        // 2. MODAL START
+        function showStartModal() {
+            const modal = new bootstrap.Modal(document.getElementById('modalStart'));
+            modal.show();
+        }
+
+        function startExam() {
+            const name = document.getElementById('inputName').value.trim();
+            const cls = document.getElementById('inputClass').value;
+
+            if (!name || !cls) return Swal.fire('Wajib Diisi', 'Nama dan Kelas harus diisi.', 'warning');
+
+            // Simpan Data Awal
+            state.studentName = name;
+            state.studentClass = cls;
+            state.startTime = Date.now();
+            
+            // Set Timer (Ambil dari JSON atau default 90 menit)
+            const durasiMenit = examMeta.waktu_menit || 90; 
+            state.endTime = Date.now() + (durasiMenit * 60 * 1000); 
+            
+            saveState(); // Simpan ke storage
+            
+            // Tutup Modal
+            const modalEl = document.getElementById('modalStart');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
+
+            updateUIIdentity();
+            initExamLogic();
+        }
+
+        function updateUIIdentity() {
+            document.getElementById('studentInfoDisplay').innerText = `Peserta: ${state.studentName} (Kelas ${state.studentClass})`;
+        }
+
+        function initExamLogic() {
+            renderQuestion(0);
+            renderNumberGrid();
+            startTimerLogic();
+        }
+
+        // 3. RENDER SOAL & OPSI WARNA-WARNI
         function renderQuestion(index) {
             currentIdx = index;
             const q = allQuestions[index];
-            const savedAns = userAnswers[q.id] || '';
+            const savedAns = state.answers[q.id] || '';
 
             let inputHtml = '';
             
             if (q.tipe === 'pg') {
-                // RENDER PG DENGAN WARNA WARNI (A,B,C,D)
                 inputHtml += `<div class="d-flex flex-column gap-3">`;
-                
                 for (const [key, val] of Object.entries(q.opsi)) {
                     const isSelected = savedAns === key ? 'selected' : '';
                     const uniqueId = `q${q.id}_${key}`;
                     
-                    // Tambahkan class opt-A, opt-B, dll sesuai key
+                    // Class warna: opt-A, opt-B, dst.
                     const colorClass = `opt-${key}`;
 
                     inputHtml += `
                     <div class="option-card p-3 d-flex align-items-center ${colorClass} ${isSelected}" 
                          onclick="selectOption(${q.id}, '${key}')" id="card_${uniqueId}">
-                        
                         <span class="badge-huruf">${key}</span>
                         <div class="flex-grow-1 fw-medium fs-5">${val}</div>
-                        
                         <input type="radio" class="hidden-radio" name="ans_${q.id}" value="${key}" ${savedAns === key ? 'checked' : ''}>
                     </div>`;
                 }
                 inputHtml += `</div>`;
             } else {
-                // RENDER ISIAN
                 inputHtml += `
                 <div class="mt-3">
                     <label class="form-label fw-bold">Jawaban Anda:</label>
                     <input type="text" class="form-control form-control-lg rounded-pill" 
-                           value="${savedAns}" oninput="saveAnswer(${q.id}, this.value)" 
+                           value="${savedAns}" oninput="selectOption(${q.id}, this.value)" 
                            placeholder="Ketik jawaban singkat...">
                 </div>`;
             }
@@ -227,7 +331,7 @@
             const html = `
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <span class="badge bg-primary rounded-pill px-3">Soal No. ${index + 1}</span>
-                    <span class="text-muted small">Tipe: ${q.tipe === 'pg' ? 'Pilihan Ganda' : 'Isian Singkat'}</span>
+                    <span class="text-muted small">Tipe: ${q.tipe === 'pg' ? 'Pilihan Ganda' : 'Isian'}</span>
                 </div>
                 <h4 class="mb-4 lh-base fw-bold text-dark">${q.pertanyaan}</h4>
                 ${q.gambar ? `<div class="text-center mb-4"><img src="${q.gambar}" class="img-fluid rounded border shadow-sm" style="max-height:250px"></div>` : ''}
@@ -238,22 +342,24 @@
             renderNumberGrid();
         }
 
-        function selectOption(qId, key) {
-            saveAnswer(qId, key);
-            // Update visual
-            const allCards = document.querySelectorAll(`input[name="ans_${qId}"]`);
-            allCards.forEach(input => {
-                input.parentElement.classList.remove('selected');
-            });
-            const targetCard = document.getElementById(`card_q${qId}_${key}`);
-            if(targetCard) targetCard.classList.add('selected');
-        }
+        // 4. SIMPAN JAWABAN (AUTO SAVE)
+        function selectOption(qId, val) {
+            // Update State
+            state.answers[qId] = val;
+            saveState(); // Simpan detik itu juga ke LocalStorage
 
-        function saveAnswer(qId, val) {
-            userAnswers[qId] = val;
+            // Visual Update (PG)
+            const qType = allQuestions.find(q => q.id === qId).tipe;
+            if (qType === 'pg') {
+                const allCards = document.querySelectorAll(`input[name="ans_${qId}"]`);
+                allCards.forEach(input => input.parentElement.classList.remove('selected'));
+                const targetCard = document.getElementById(`card_q${qId}_${val}`);
+                if(targetCard) targetCard.classList.add('selected');
+            }
             renderNumberGrid();
         }
 
+        // 5. NAVIGASI
         function prevSoal() { if(currentIdx > 0) renderQuestion(currentIdx - 1); }
         function nextSoal() { if(currentIdx < allQuestions.length - 1) renderQuestion(currentIdx + 1); }
         function jumpTo(idx) { renderQuestion(idx); }
@@ -274,15 +380,38 @@
             grid.innerHTML = '';
             allQuestions.forEach((q, idx) => {
                 let btnClass = 'btn-outline-secondary';
-                if (userAnswers[q.id]) btnClass = 'answered';
+                if (state.answers[q.id]) btnClass = 'answered';
                 if (idx === currentIdx) btnClass = 'active';
-                const btn = `<button onclick="jumpTo(${idx})" class="btn ${btnClass} nav-btn rounded border-0 shadow-sm">${idx + 1}</button>`;
-                grid.innerHTML += btn;
+                grid.innerHTML += `<button onclick="jumpTo(${idx})" class="btn ${btnClass} nav-btn rounded border-0 shadow-sm">${idx + 1}</button>`;
             });
         }
 
+        // 6. TIMER LOGIC
+        function startTimerLogic() {
+            const timerEl = document.getElementById('timer');
+            
+            const interval = setInterval(() => {
+                const now = Date.now();
+                const diff = state.endTime - now;
+
+                if (diff <= 0) {
+                    clearInterval(interval);
+                    timerEl.innerText = "00:00";
+                    timerEl.parentElement.classList.replace('bg-warning', 'bg-danger');
+                    Swal.fire('Waktu Habis!', 'Jawaban Anda akan otomatis dikunci.', 'warning')
+                        .then(() => showFinishModal());
+                    return;
+                }
+
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                timerEl.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // 7. FINISH & KIRIM WA
         function finishExam() {
-            const answered = Object.keys(userAnswers).length;
+            const answered = Object.keys(state.answers).length;
             if (answered < allQuestions.length) {
                 Swal.fire({
                     title: 'Belum Selesai!',
@@ -296,44 +425,105 @@
                 showFinishModal();
             }
         }
-        function showFinishModal() { new bootstrap.Modal(document.getElementById('modalFinish')).show(); }
+
+        function showFinishModal() {
+            // Hitung durasi
+            const durationMs = Date.now() - state.startTime;
+            const minutes = Math.floor(durationMs / 60000);
+            const seconds = ((durationMs % 60000) / 1000).toFixed(0);
+            document.getElementById('finishTime').innerText = `${minutes} menit ${seconds} detik`;
+
+            new bootstrap.Modal(document.getElementById('modalFinish')).show();
+        }
 
         function sendToWA() {
-            const name = document.getElementById('studentName').value.trim();
             const phone = document.getElementById('teacherPhone').value.trim();
-            if (!name || !phone) return Swal.fire('Lengkapi Data', 'Nama dan No WA Guru wajib diisi.', 'warning');
+            if (!phone) return Swal.fire('Error', 'Nomor WA Guru wajib diisi.', 'warning');
 
+            // 1. HITUNG NILAI & DATA
             let skor = 0;
             let detailSalah = [];
+            
             allQuestions.forEach((q, idx) => {
-                const ans = userAnswers[q.id];
+                const ans = state.answers[q.id];
                 let isCorrect = false;
+                
                 if (q.tipe === 'pg') {
                     if (ans === q.kunci) isCorrect = true;
                 } else {
                     if (ans && q.kunci.map(k=>k.toLowerCase()).includes(ans.toLowerCase())) isCorrect = true;
                 }
+
                 if (isCorrect) skor += (q.tipe === 'pg' ? 1 : 2);
                 else detailSalah.push(`No ${idx+1}`);
             });
 
             const maxScore = allQuestions.reduce((acc, q) => acc + (q.tipe === 'pg' ? 1 : 2), 0);
             const nilaiAkhir = Math.round((skor / maxScore) * 100);
-
-            let msg = `*HASIL UJIAN PAI* 📋\nNama: ${name}\nMateri: ${examMeta.judul}\nNilai: *${nilaiAkhir}*\n------------------\n`;
-            if (detailSalah.length > 0) msg += `❌ Salah No: ${detailSalah.join(', ')}\n`;
-            else msg += `🎉 BENAR SEMUA!\n`;
             
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
+            const durationMs = Date.now() - state.startTime;
+            const timeStr = `${Math.floor(durationMs / 60000)} menit`;
 
-        function startTimer() {
-            let s = 0;
-            setInterval(() => {
-                s++;
-                document.getElementById('timer').innerText = 
-                    `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
-            }, 1000);
+            // 2. SIAPKAN PESAN WA
+            let msg = `*LAPORAN HASIL UJIAN PAI* 📋\n\n`;
+            msg += `👤 Nama: ${state.studentName}\n`;
+            msg += `🏫 Kelas: ${state.studentClass}\n`;
+            msg += `📚 Materi: ${examMeta.judul}\n`;
+            msg += `⏱️ Waktu: ${timeStr}\n`;
+            msg += `🏆 Nilai: *${nilaiAkhir}*\n`;
+            msg += `------------------------\n`;
+            
+            if (detailSalah.length > 0) {
+                msg += `❌ Salah (${detailSalah.length} soal):\n${detailSalah.join(', ')}\n`;
+            } else {
+                msg += `🎉 BENAR SEMUA! (Perfect Score)\n`;
+            }
+            
+            msg += `\n_Dikirim otomatis dari Web PAI SD_`;
+
+            // 3. EKSEKUSI (BUKA WA -> REDIRECT KE HASIL)
+            
+            // Buka WA
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Terkirim!',
+                text: 'Mengarahkan ke halaman pembahasan...',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                allowOutsideClick: false
+            }).then(() => {
+                // JANGAN HAPUS LOCALSTORAGE DI SINI
+                // Redirect ke hasilujian.html dengan parameter file yang sama
+                const urlParams = new URLSearchParams(window.location.search);
+                const fileName = urlParams.get('file');
+                
+                // Deteksi folder path
+                if (window.location.pathname.includes('/banksoal/')) {
+                     window.location.href = `hasilujian.html?file=${fileName}`; 
+                } else {
+                     window.location.href = `hasilujian.html?file=${fileName}`;
+                }
+            });
+        }
+        
+        // RESET (Hapus Storage)
+        function resetExam() {
+            Swal.fire({
+                title: 'Ulangi Ujian?',
+                text: "Data jawaban akan dihapus dan mulai dari awal.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Reset'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem(STORAGE_KEY);
+                    location.reload();
+                }
+            });
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

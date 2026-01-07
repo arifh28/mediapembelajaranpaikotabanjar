@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil & Pembahasan - PAIBP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .score-card {
+            background: linear-gradient(135deg, var(--primary-green), #20bf6b);
+            color: white;
+            border-radius: 20px;
+        }
+        
+        .answer-card {
+            border: 1px solid #eee;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        .answer-card.correct { border-left: 5px solid #198754; background-color: #f8fff9; }
+        .answer-card.wrong { border-left: 5px solid #dc3545; background-color: #fff8f8; }
+
+        .badge-answer { font-size: 0.9rem; padding: 8px 12px; border-radius: 30px; }
+        
+        .pembahasan-box {
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            border: 1px solid #bbdefb;
+            color: #0d47a1;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar fixed-top shadow-sm bg-white">
+        <div class="container">
+            <span class="fw-bold text-success"><i class="fas fa-chart-pie me-2"></i> Hasil & Pembahasan</span>
+            <a href="banksoal.html" class="btn btn-sm btn-outline-secondary rounded-pill">
+                <i class="fas fa-home"></i> Menu Utama
+            </a>
+        </div>
+    </nav>
+    <div style="height: 70px;"></div>
+
+    <div class="container py-4">
+        
+        <div class="card score-card shadow mb-4 border-0">
+            <div class="card-body p-4 text-center">
+                <h5 class="opacity-75 mb-1">NILAI ANDA</h5>
+                <h1 class="display-1 fw-bold mb-0" id="displayScore">0</h1>
+                <p class="fs-5 mt-2" id="displayName">Peserta: -</p>
+                
+                <div class="row mt-4 justify-content-center g-2">
+                    <div class="col-4 col-md-3">
+                        <div class="bg-white text-dark rounded p-2 shadow-sm">
+                            <small class="d-block text-muted">Benar</small>
+                            <h4 class="fw-bold text-success mb-0" id="countCorrect">0</h4>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-3">
+                        <div class="bg-white text-dark rounded p-2 shadow-sm">
+                            <small class="d-block text-muted">Salah</small>
+                            <h4 class="fw-bold text-danger mb-0" id="countWrong">0</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2 mb-4">
+            <div class="col-6">
+                <button onclick="tryAgain()" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm">
+                    <i class="fas fa-redo me-2"></i> Kerjakan Lagi
+                </button>
+            </div>
+            <div class="col-6">
+                <a href="banksoal.html" class="btn btn-outline-secondary w-100 py-3 rounded-pill fw-bold shadow-sm">
+                    <i class="fas fa-list me-2"></i> Cari Soal Lain
+                </a>
+            </div>
+        </div>
+
+        <h5 class="mb-3 fw-bold text-secondary ps-2 border-start border-4 border-success">DETAIL PEMBAHASAN</h5>
+
+        <div id="reviewContainer">
+            <div class="text-center py-5"><i class="fas fa-spinner fa-spin"></i> Memuat data...</div>
+        </div>
+
+    </div>
+
+    <script>
+        let examMeta = {};
+        let allQuestions = [];
+        let state = {};
+        let STORAGE_KEY = '';
+        let currentFileName = '';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentFileName = urlParams.get('file');
+
+            if (!currentFileName) {
+                Swal.fire('Error', 'File tidak ditemukan.', 'error').then(() => window.location.href = 'banksoal.html');
+                return;
+            }
+
+            // Kunci storage sama dengan di soalsiswa.html
+            STORAGE_KEY = `exam_data_${currentFileName}`;
+
+            // Ambil Data dari LocalStorage
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (!savedData) {
+                Swal.fire('Data Kosong', 'Anda belum mengerjakan soal ini.', 'warning')
+                    .then(() => window.location.href = `soalsiswa.html?file=${currentFileName}`);
+                return;
+            }
+
+            state = JSON.parse(savedData);
+
+            // Fetch JSON Soal untuk mencocokkan kunci
+            try {
+                const response = await fetch(currentFileName);
+                const result = await response.json();
+                examMeta = result.meta;
+                allQuestions = result.data;
+
+                renderResult();
+
+            } catch (error) {
+                console.error(error);
+                Swal.fire('Gagal', 'Gagal memuat kunci jawaban.', 'error');
+            }
+        });
+
+        function renderResult() {
+            // Update Header Info
+            document.getElementById('displayName').innerText = `${state.studentName} (${state.studentClass})`;
+            
+            let correctCount = 0;
+            let wrongCount = 0;
+            let htmlReview = '';
+
+            allQuestions.forEach((q, idx) => {
+                const userAns = state.answers[q.id] || ''; // Jawaban user (misal: 'A' atau 'masjid')
+                let isCorrect = false;
+                let kunciDisplay = '';
+
+                // Logika Cek Jawaban
+                if (q.tipe === 'pg') {
+                    if (userAns === q.kunci) isCorrect = true;
+                    // Ambil teks opsi yang benar untuk ditampilkan
+                    kunciDisplay = `<strong>${q.kunci}</strong>. ${q.opsi[q.kunci]}`;
+                } else {
+                    // Isian (Case Insensitive)
+                    if (userAns && q.kunci.map(k => k.toLowerCase()).includes(userAns.toLowerCase())) {
+                        isCorrect = true;
+                    }
+                    kunciDisplay = q.kunci.join(' / '); // Tampilkan semua kemungkinan kunci
+                }
+
+                if (isCorrect) correctCount++;
+                else wrongCount++;
+
+                // Tentukan Style Kartu (Hijau/Merah)
+                const cardClass = isCorrect ? 'correct' : 'wrong';
+                const statusBadge = isCorrect 
+                    ? `<span class="badge bg-success badge-answer"><i class="fas fa-check me-1"></i> Benar</span>`
+                    : `<span class="badge bg-danger badge-answer"><i class="fas fa-times me-1"></i> Salah</span>`;
+
+                // Tampilan Jawaban User
+                let userAnsText = userAns;
+                if(q.tipe === 'pg' && userAns) {
+                    userAnsText = `<strong>${userAns}</strong>. ${q.opsi[userAns] || '-'}`;
+                } else if (!userAns) {
+                    userAnsText = `<span class="text-muted fst-italic">Tidak dijawab</span>`;
+                }
+
+                // Render Kartu Soal
+                htmlReview += `
+                <div class="card answer-card ${cardClass} shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="fw-bold text-muted">Soal No. ${idx + 1}</span>
+                            ${statusBadge}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="fw-bold mb-2">${q.pertanyaan}</div>
+                            ${q.gambar ? `<img src="${q.gambar}" class="img-fluid rounded border mb-2" style="max-height: 200px">` : ''}
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <div class="p-2 border rounded bg-white h-100">
+                                    <small class="text-muted d-block">Jawaban Anda:</small>
+                                    <div class="${isCorrect ? 'text-success' : 'text-danger'} fw-bold">
+                                        ${userAnsText}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                ${!isCorrect ? `
+                                <div class="p-2 border rounded bg-light h-100">
+                                    <small class="text-muted d-block">Kunci Jawaban:</small>
+                                    <div class="text-success fw-bold">
+                                        ${kunciDisplay}
+                                    </div>
+                                </div>` : ''}
+                            </div>
+                        </div>
+
+                        <div class="pembahasan-box p-3">
+                            <strong class="d-block mb-1"><i class="fas fa-lightbulb text-warning"></i> Pembahasan:</strong>
+                            <span class="small">${q.pembahasan || 'Tidak ada pembahasan detail.'}</span>
+                        </div>
+
+                    </div>
+                </div>`;
+            });
+
+            // Update Nilai Akhir
+            // Bobot: PG=1, Isian=2 (Sesuaikan dengan soalsiswa.html)
+            const skor = allQuestions.reduce((acc, q) => {
+                const ans = state.answers[q.id];
+                if(q.tipe === 'pg' && ans === q.kunci) return acc + 1;
+                if(q.tipe !== 'pg' && ans && q.kunci.map(k=>k.toLowerCase()).includes(ans.toLowerCase())) return acc + 2;
+                return acc;
+            }, 0);
+            
+            const maxScore = allQuestions.reduce((acc, q) => acc + (q.tipe === 'pg' ? 1 : 2), 0);
+            const nilaiAkhir = Math.round((skor / maxScore) * 100);
+
+            document.getElementById('displayScore').innerText = nilaiAkhir;
+            document.getElementById('countCorrect').innerText = correctCount;
+            document.getElementById('countWrong').innerText = wrongCount;
+
+            // Render ke HTML
+            document.getElementById('reviewContainer').innerHTML = htmlReview;
+        }
+
+        // FUNGSI RESET / KERJAKAN LAGI
+        function tryAgain() {
+            Swal.fire({
+                title: 'Kerjakan Ulang?',
+                text: "Riwayat jawaban ini akan dihapus dan Anda mulai dari awal.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#4ECDC4',
+                confirmButtonText: 'Ya, Mulai Lagi',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 1. HAPUS DATA DARI LOCAL STORAGE
+                    localStorage.removeItem(STORAGE_KEY);
+                    
+                    // 2. REDIRECT KEMBALI KE HALAMAN SOAL
+                    window.location.href = `soalsiswa.html?file=${currentFileName}`;
+                }
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
