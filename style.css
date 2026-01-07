@@ -148,6 +148,11 @@ figure {
     width: 100%;
 }
 
+/* Default: Sembunyikan di semua layar (HP, Tablet, Laptop Kecil) */
+.tombol-ifp-only {
+    display: none;
+}
+
 /* 1. Tampilan HP (Mobile) - Layar di bawah 768px */
 @media (max-width: 767.98px) {
     .carousel-item img {
@@ -208,6 +213,10 @@ figure {
     }
     .carousel-caption p {
         font-size: 1.5rem;
+    }
+
+    .tombol-ifp-only {
+        display: block;
     }
 }
 
