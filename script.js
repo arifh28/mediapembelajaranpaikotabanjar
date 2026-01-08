@@ -267,6 +267,17 @@ async function renderSearchResults() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Cek apakah user pernah menutup widget ini sebelumnya?
+    if (sessionStorage.getItem('hideIFPWidget') === 'true') {
+        const widget = document.getElementById('floatingIFP');
+        if (widget) {
+            widget.classList.add('d-none'); // Sembunyikan permanen
+            widget.classList.remove('d-lg-flex');
+        }
+    }
+});
+
 // =================================================================
 // 5. INISIALISASI (MAIN)
 // =================================================================
@@ -319,4 +330,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    // E. CEK SESSION STORAGE (WIDGET IFP)
+    // Logika: Jika user pernah close, kita pastikan class d-lg-flex dibuang dan d-none dipasang
+    if (sessionStorage.getItem('hideIFPWidget') === 'true') {
+        const widget = document.getElementById('floatingIFP');
+        if (widget) {
+            widget.classList.remove('d-lg-flex'); // Hapus display flex (penting!)
+            widget.classList.add('d-none');        // Tambah display none
+        }
+    }
 });
+
+function closeIFPWidget() {
+    const widget = document.getElementById('floatingIFP');
+    
+    if (widget) {
+        // 1. Animasi Keluar (Geser ke kanan via CSS)
+        widget.classList.add('hide-widget');
+
+        // 2. Simpan di memori browser
+        sessionStorage.setItem('hideIFPWidget', 'true');
+        
+        // 3. Hapus elemen secara permanen setelah animasi selesai (0.5 detik)
+        setTimeout(() => {
+            // Kita gunakan cara yang sama dengan di atas (konsisten)
+            widget.classList.remove('d-lg-flex'); // Matikan Flexbox
+            widget.classList.add('d-none');        // Sembunyikan total
+            
+            // Opsional: hapus style inline jika ada
+            widget.style.display = ''; 
+        }, 500);
+    } else {
+        console.log("Widget tidak ditemukan/sudah hilang");
+    }
+}

@@ -148,9 +148,28 @@ figure {
     width: 100%;
 }
 
-/* Default: Sembunyikan di semua layar (HP, Tablet, Laptop Kecil) */
-.tombol-ifp-only {
-    display: none;
+#floatingIFP {
+    position: fixed;
+    top: 25%; /* Posisi vertikal (agak ke atas sedikit) */
+    right: 0;
+    z-index: 9999; /* Paling atas */
+    
+    background: #FFC107; /* Warna Kuning Warning Bootstrap */
+    padding: 10px 20px 10px 15px;
+    border-radius: 30px 0 0 30px; /* Membulat hanya di kiri */
+    border-left: 4px solid #fff;
+    
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+#floatingIFP:hover {
+    transform: translateX(-5px); /* Efek geser dikit saat hover */
+}
+
+/* Class untuk menyembunyikan widget saat diclose */
+.hide-widget {
+    transform: translateX(120%) !important; /* Geser ke kanan luar layar */
 }
 
 /* 1. Tampilan HP (Mobile) - Layar di bawah 768px */
@@ -213,10 +232,6 @@ figure {
     }
     .carousel-caption p {
         font-size: 1.5rem;
-    }
-
-    .tombol-ifp-only {
-        display: block;
     }
 }
 
