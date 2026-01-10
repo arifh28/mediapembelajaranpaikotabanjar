@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Pengerjaan - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    
+    <link rel="stylesheet" href="../style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* Override Header Tabel agar Hijau */
+        .table thead th {
+            background-color: var(--primary-green) !important;
+            color: white !important;
+            border: none;
+            font-weight: 700;
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-green) !important;
+            border-color: var(--primary-green) !important;
+        }
+
+        /* Filter Box Style */
+        .filter-box {
+            background: #f8f9fa;
+            border-left: 5px solid var(--secondary-yellow);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <a href="index.html" class="nav-back-btn text-decoration-none">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span class="page-title ms-2">Progress Guru</span>
+            </div>
+            <button class="btn btn-light text-success fw-bold btn-sm rounded-pill ms-auto" onclick="fetchData()">
+                <i class="fas fa-sync-alt me-1"></i> Refresh
+            </button>
+        </div>
+    </nav>
+    <div style="height: 80px;"></div>
+
+    <div class="container py-5">
+        
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card custom-card p-4 border-0">
+                    
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                        <h4 class="fw-bold text-success mb-3 mb-md-0">
+                            <i class="fas fa-chart-line me-2"></i> Laporan Progress
+                        </h4>
+                        
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="fw-bold text-muted small">FILTER:</label>
+                            <select id="filterStatus" class="form-select border-success shadow-sm" style="width: 200px;" onchange="applyFilter()">
+                                <option value="all">Semua Data</option>
+                                <option value="Sudah">🟢 Sudah Mengerjakan</option>
+                                <option value="Belum">🔴 Belum Mengerjakan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="filter-box p-3 mb-4 d-flex justify-content-around">
+                        <div class="text-center">
+                            <h2 class="fw-bold text-success mb-0" id="countSudah">0</h2>
+                            <small class="text-muted fw-bold">SUDAH</small>
+                        </div>
+                        <div class="border-end"></div>
+                        <div class="text-center">
+                            <h2 class="fw-bold text-danger mb-0" id="countBelum">0</h2>
+                            <small class="text-muted fw-bold">BELUM</small>
+                        </div>
+                        <div class="border-end"></div>
+                        <div class="text-center">
+                            <h2 class="fw-bold text-dark mb-0" id="countTotal">0</h2>
+                            <small class="text-muted fw-bold">TOTAL</small>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="progressTable" class="table table-hover table-striped align-middle w-100">
+                            <thead class="rounded-3 overflow-hidden">
+                                <tr>
+                                    <th class="text-center rounded-start" width="5%">No.</th>
+                                    <th width="25%">Nama Guru</th>
+                                    <th width="20%">Kecamatan</th>
+                                    <th width="35%">Materi</th>
+                                    <th class="text-center rounded-end" width="15%">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // 1. KONEKSI SUPABASE
+        const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let globalData = []; // Menyimpan data mentah untuk filter lokal
+        let dataTable; // Instance DataTables
+
+        // 2. MAPPING KECAMATAN
+        const mapKecamatan = {
+            '1': 'Banjar',
+            '2': 'Pataruman',
+            '3': 'Langensari',
+            '4': 'Purwaharja'
+        };
+
+        $(document).ready(function() {
+            fetchData();
+        });
+
+        // 3. AMBIL DATA DARI SUPABASE
+        async function fetchData() {
+            // Tampilkan loading
+            if (dataTable) { dataTable.clear().destroy(); }
+            $('tbody').html('<tr><td colspan="5" class="text-center py-5"><i class="fas fa-spinner fa-spin fa-2x text-success"></i><br>Sedang memuat data...</td></tr>');
+
+            // Query: Ambil kolom guru, kecamatan, material_name, sudah
+            const { data, error } = await _supabase
+                .from('material_analytics')
+                .select('*')
+                .order('id', { ascending: true });
+
+            if (error) {
+                Swal.fire('Error', error.message, 'error');
+                return;
+            }
+
+            globalData = data; // Simpan ke variabel global
+            applyFilter(); // Render tabel pertama kali
+        }
+
+        // 4. LOGIKA FILTER & RENDER
+        function applyFilter() {
+            const filterValue = document.getElementById('filterStatus').value;
+            
+            // Filter Data (Di sisi Client/Browser agar cepat)
+            let filteredData = globalData;
+            if (filterValue !== 'all') {
+                filteredData = globalData.filter(item => item.sudah === filterValue);
+            }
+
+            updateCounters(filteredData);
+            renderTable(filteredData);
+        }
+
+        // 5. UPDATE ANGKA REKAP
+        function updateCounters(data) {
+            // Hitung total dari data yang sedang ditampilkan ATAU dari global (tergantung kebutuhan)
+            // Di sini kita hitung dari Global Data agar angka rekap tetap utuh
+            const total = globalData.length;
+            const sudah = globalData.filter(i => i.sudah === 'Sudah').length;
+            const belum = globalData.filter(i => i.sudah !== 'Sudah').length;
+
+            document.getElementById('countTotal').innerText = total;
+            document.getElementById('countSudah').innerText = sudah;
+            document.getElementById('countBelum').innerText = belum;
+        }
+
+        // 6. RENDER KE TABEL HTML
+        function renderTable(data) {
+            let html = '';
+
+            data.forEach((row, index) => {
+                // Konversi Kode Kecamatan
+                // Jika datanya angka 1-4, diubah. Jika bukan, tampilkan apa adanya.
+                let namaKecamatan = mapKecamatan[row.kecamatan] || row.kecamatan || '-';
+
+                // Rapikan Nama Materi
+                let namaMateri = row.material_name ? row.material_name.replace(/_/g, ' ').toUpperCase() : '-';
+
+                // Nama Guru
+                let namaGuru = row.guru ? row.guru : '<span class="text-muted fst-italic">Tanpa Nama</span>';
+
+                // Badge Status
+                let badge = row.sudah === 'Sudah' 
+                    ? '<span class="badge bg-success rounded-pill px-3"><i class="fas fa-check me-1"></i> SUDAH</span>' 
+                    : '<span class="badge bg-danger rounded-pill px-3"><i class="fas fa-times me-1"></i> BELUM</span>';
+
+                html += `
+                    <tr>
+                        <td class="text-center fw-bold">${index + 1}</td>
+                        <td class="fw-bold text-dark">${namaGuru}</td>
+                        <td><span class="badge bg-light text-dark border"><i class="fas fa-map-marker-alt text-danger me-1"></i> ${namaKecamatan}</span></td>
+                        <td>${namaMateri}</td>
+                        <td class="text-center">${badge}</td>
+                    </tr>
+                `;
+            });
+
+            // Destroy tabel lama jika ada (untuk re-init)
+            if ($.fn.DataTable.isDataTable('#progressTable')) {
+                $('#progressTable').DataTable().destroy();
+            }
+
+            $('tbody').html(html);
+
+            // Init DataTables Baru
+            dataTable = $('#progressTable').DataTable({
+                language: {
+                    search: "Cari Nama/Materi:",
+                    lengthMenu: "_MENU_ Data per halaman",
+                    info: "Hal _PAGE_ dari _PAGES_",
+                    paginate: { first: "<<", last: ">>", next: ">", previous: "<" },
+                    zeroRecords: "Data tidak ditemukan"
+                }
+            });
+        }
+    </script>
+</body>
+</html>
