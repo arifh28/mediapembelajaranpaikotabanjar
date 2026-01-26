@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analitik Pengunjung - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    
+    <link rel="stylesheet" href="../style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        .stat-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.2s;
+            overflow: hidden;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .bg-gradient-primary { background: linear-gradient(45deg, #4ECDC4, #2CB5AC); color: white; }
+        .bg-gradient-warning { background: linear-gradient(45deg, #FFE66D, #FF6B6B); color: white; }
+        .bg-gradient-info { background: linear-gradient(45deg, #4b6cb7, #182848); color: white; }
+        .bg-gradient-success { background: linear-gradient(45deg, #11998e, #38ef7d); color: white; }
+
+        /* Table Header Color */
+        .table thead th {
+            background-color: var(--primary-green) !important;
+            color: white !important;
+            border: none;
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-green) !important;
+            border-color: var(--primary-green) !important;
+        }
+        
+        .badge-view { background-color: #e3f2fd; color: #0d47a1; border: 1px solid #90caf9; }
+        .badge-click { background-color: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <a href="dashboard.html" class="nav-back-btn text-decoration-none">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span class="page-title ms-2">Analitik Pengunjung</span>
+            </div>
+            
+            <button onclick="fetchAnalytics()" class="btn btn-light text-success fw-bold rounded-pill ms-auto btn-sm">
+                <i class="fas fa-sync-alt me-1"></i> Refresh
+            </button>
+        </div>
+    </nav>
+    <div style="height: 80px;"></div>
+
+    <div class="container py-4">
+        
+        <h5 class="fw-bold mb-3 text-secondary"><i class="fas fa-chart-line me-2"></i> Ringkasan Trafik</h5>
+        
+        <div class="row g-3 mb-4">
+            <div class="col-md-3 col-6">
+                <div class="card stat-card bg-gradient-success h-100">
+                    <div class="card-body p-3">
+                        <small class="text-white-50 fw-bold text-uppercase">Hari Ini</small>
+                        <div class="d-flex justify-content-between align-items-end mt-2">
+                            <div>
+                                <h3 class="mb-0 fw-bold" id="viewToday">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Views</small>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 fw-bold" id="clickToday">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Clicks</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="card stat-card bg-gradient-info h-100">
+                    <div class="card-body p-3">
+                        <small class="text-white-50 fw-bold text-uppercase">Minggu Ini</small>
+                        <div class="d-flex justify-content-between align-items-end mt-2">
+                            <div>
+                                <h3 class="mb-0 fw-bold" id="viewWeek">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Views</small>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 fw-bold" id="clickWeek">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Clicks</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="card stat-card bg-gradient-warning h-100">
+                    <div class="card-body p-3">
+                        <small class="text-white-50 fw-bold text-uppercase">Bulan Ini</small>
+                        <div class="d-flex justify-content-between align-items-end mt-2">
+                            <div>
+                                <h3 class="mb-0 fw-bold" id="viewMonth">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Views</small>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 fw-bold" id="clickMonth">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Clicks</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="card stat-card bg-gradient-primary h-100">
+                    <div class="card-body p-3">
+                        <small class="text-white-50 fw-bold text-uppercase">Total Semua</small>
+                        <div class="d-flex justify-content-between align-items-end mt-2">
+                            <div>
+                                <h3 class="mb-0 fw-bold" id="viewAll">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Views</small>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 fw-bold" id="clickAll">0</h3>
+                                <small class="text-white-50" style="font-size: 0.7rem;">Clicks</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card custom-card shadow-sm border-0">
+            <div class="card-header bg-white border-bottom pt-4 px-4 pb-3">
+                <h5 class="fw-bold m-0 text-dark"><i class="fas fa-list-alt me-2 text-primary"></i> Riwayat Aktivitas</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table id="logsTable" class="table table-hover table-striped align-middle w-100">
+                        <thead class="rounded-3 overflow-hidden">
+                            <tr>
+                                <th class="text-center" width="5%">No</th>
+                                <th width="20%">Waktu</th>
+                                <th width="15%" class="text-center">Tipe</th>
+                                <th>Detail Aktivitas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin fa-2x text-secondary"></i>
+                                    <p class="mt-2 text-muted">Memuat data...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/locale/id.js"></script>
+
+    <script>
+        // 1. CONFIG SUPABASE
+        const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let dataTableInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAnalytics();
+        });
+
+        async function fetchAnalytics() {
+            // Ambil Data dari tabel analytics_logs
+            // Batasi 2000 data terakhir agar tidak terlalu berat di client
+            const { data, error } = await _supabase
+                .from('analytics_logs')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(2000); 
+
+            if (error) {
+                console.error("Gagal ambil data:", error);
+                alert("Gagal memuat data analitik.");
+                return;
+            }
+
+            calculateStats(data);
+            renderTable(data);
+        }
+
+        // FUNGSI HITUNG STATISTIK (HARI/MINGGU/BULAN)
+        function calculateStats(data) {
+            const now = new Date();
+            const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            // Awal Minggu (Senin)
+            const day = now.getDay() || 7; // Ubah Minggu(0) jadi 7
+            const startWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - day + 1);
+            
+            // Awal Bulan
+            const startMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+            let stats = {
+                view: { today: 0, week: 0, month: 0, all: 0 },
+                click: { today: 0, week: 0, month: 0, all: 0 }
+            };
+
+            data.forEach(row => {
+                const rowDate = new Date(row.created_at);
+                const isView = row.event_type === 'page_view';
+                const type = isView ? 'view' : 'click';
+
+                // Hitung Semua
+                stats[type].all++;
+
+                // Hitung Bulan Ini
+                if (rowDate >= startMonth) stats[type].month++;
+
+                // Hitung Minggu Ini
+                if (rowDate >= startWeek) stats[type].week++;
+
+                // Hitung Hari Ini
+                if (rowDate >= startToday) stats[type].today++;
+            });
+
+            // Update UI
+            // View
+            document.getElementById('viewToday').innerText = stats.view.today;
+            document.getElementById('viewWeek').innerText = stats.view.week;
+            document.getElementById('viewMonth').innerText = stats.view.month;
+            document.getElementById('viewAll').innerText = stats.view.all;
+
+            // Click
+            document.getElementById('clickToday').innerText = stats.click.today;
+            document.getElementById('clickWeek').innerText = stats.click.week;
+            document.getElementById('clickMonth').innerText = stats.click.month;
+            document.getElementById('clickAll').innerText = stats.click.all;
+        }
+
+        // FUNGSI RENDER TABEL (DATATABLES)
+        function renderTable(data) {
+            // Format Data untuk DataTables
+            // Kita olah dulu agar HTML-nya siap
+            const formattedData = data.map((row, index) => {
+                // Format Waktu (Indonesia)
+                const waktu = moment(row.created_at).locale('id').format('dddd, D MMM YYYY HH:mm');
+                
+                // Format Tipe Badge
+                let tipeBadge = '';
+                let icon = '';
+                if (row.event_type === 'page_view') {
+                    tipeBadge = '<span class="badge badge-view rounded-pill"><i class="fas fa-eye me-1"></i> Page View</span>';
+                    icon = 'fas fa-file-alt text-primary';
+                } else {
+                    tipeBadge = '<span class="badge badge-click rounded-pill"><i class="fas fa-mouse-pointer me-1"></i> Click</span>';
+                    icon = 'fas fa-hand-pointer text-warning';
+                }
+
+                // Format Nama Event (Rapikan _ jadi spasi)
+                let detail = row.event_name.replace(/_/g, ' ').toUpperCase();
+                // Jika page view, hilangkan .html agar bersih
+                if(row.event_type === 'page_view') {
+                    detail = detail.replace('.HTML', '');
+                    detail = `Mengunjungi Halaman <strong>${detail}</strong>`;
+                } else {
+                    detail = `Mengklik Materi <strong>${detail}</strong>`;
+                }
+
+                return [
+                    index + 1,
+                    `<small class="fw-bold text-secondary">${waktu}</small>`,
+                    tipeBadge,
+                    `<i class="${icon} me-2"></i> ${detail}`
+                ];
+            });
+
+            // Hapus tabel lama jika ada
+            if (dataTableInstance) {
+                dataTableInstance.destroy();
+            }
+
+            // Inisialisasi DataTables
+            dataTableInstance = $('#logsTable').DataTable({
+                data: formattedData,
+                columns: [
+                    { title: "No", className: "text-center fw-bold" },
+                    { title: "Waktu" },
+                    { title: "Tipe", className: "text-center" },
+                    { title: "Detail Aktivitas" }
+                ],
+                language: {
+                    search: "Cari Aktivitas:",
+                    lengthMenu: "Tampil _MENU_",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ aktivitas",
+                    paginate: { first: "Awal", last: "Akhir", next: ">", previous: "<" },
+                    zeroRecords: "Belum ada data aktivitas"
+                },
+                order: [[ 0, 'asc' ]], // Urutkan berdasarkan No
+                pageLength: 10
+            });
+        }
+    </script>
+</body>
+</html>
