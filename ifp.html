@@ -182,6 +182,28 @@
     </div>
 
     <script>
+
+        // ==========================================
+        // 1. KONFIGURASI SUPABASE
+        // ==========================================
+        const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Variabel Global untuk menyimpan kelas yang sedang dibuka
+        let activeKelas = 0;
+
+        async function trackEvent(type, name) {
+            try {
+                await _supabase.from('analytics_logs').insert([
+                    { event_type: type, event_name: name }
+                ]);
+                console.log(`Tracking sent: ${type} - ${name}`);
+            } catch (err) {
+                console.error("Gagal tracking:", err);
+            }
+        }
+
         // ==========================================
         // DATABASE MATERI (EDIT LINK DI SINI)
         // ==========================================
@@ -192,312 +214,317 @@
             {
                 "title": "Aku Cinta Al-Qur\u2019an",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vQFx-T67O38AqDgWob4vJznu9wvdYsCtdq8uWvYS40fx2DTuhAxTHkOlpF2BfIfJw/pub?start=false&loop=false&delayms=3000"
             },
             {
-                "title": "Mengenal Rukun Iman",
+                "title": "Mengenal Rukun Iman Bagian 1",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vReO25DDaGA4pfdPdfcxMMwHYlD3iMV3e_3W7JPHPUOVo_xE4fJ0of4IHUGrAhyKA/pub?start=false&loop=false&delayms=3000"
+            },
+            {
+                "title": "Mengenal Rukun Iman Bagian 2",
+                "type": "ppt",
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vQWZBUCbNf_6crWuWuI1bKAq3DsnYukDerI1LuuoeDZCo7XDLsvajn9ZO3Vh9qyFw/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Aku Suka Membaca Basmalah dan Hamdalah",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "youtube",
+                "url": "https://www.youtube.com/embed/bMmSj-1_Pz0?si=yu2Mx9eWTln3ypbq"
             },
             {
                 "title": "Mengenal Rukun Islam",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vTMbmD79pdGaiS7M-tFAPe0jTX2wwR1h1acJlAmWBhLhMhDLOW2MCiFO0qPb_ucFA/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Nabi dan Rasul Panutanku",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://1drv.ms/p/c/3af33c2c28a3ba42/IQQsnFY2wZOpR5WjXXNokw69AeLSto9zF28j7TGvsjWjeh8?em=2&wdAr=1.77&wdSlideDuration=5"
             },
             {
                 "title": "Al-Qur\u2019an Pedoman Hidupku",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://www.educaplay.com/learning-resources/26740041-quiz_surah_al_ikhlas.html"
             },
             {
                 "title": "Kasih Sayang terhadap Sesama",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vSNZTr2EMyy1YeTK6i29Q4Z017BCxAFJVi98ttA0vHPwDdbZRQ85xwGUyqWfrHKnA/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Aku Suka Berterima Kasih dan Disiplin",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "pdf",
+                "url": "assets/k1_materi_8_aku_suka_berterimakasih.pdf#view=Fit#toolbar=0#scroll=0#page=0"
             },
             {
                 "title": "Membiasakan Hidup Bersih",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ8Z0iF7xHHj-1wSHqIhezpkKl8B4VlvvOJOSt-HBPtEU4UnZEj1trWNlG3z5_deA/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Nabi Adam a.s. Manusia Pertama",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vQEcCLQ0xQhFK9x3-2j3bru9_DY3WVOFK2EM1q7trhiQ4WxY1KvA9s4q9AvgrrQzg/pub?start=false&loop=false&delayms=3000"
             }
         ],
         "2": [
             {
                 "title": "Ayo Belajar Al-Qur\u2019an",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "pdf",
+                "url": "assets/k2_materi_1_surat_an_naas.pdf#view=Fit#toolbar=0#scroll=0#page=0"
             },
             {
                 "title": "Mari Mengenal Allah Swt.",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vS-XGneBHDFwEgVcIexBc3C2ODxitErRUxRh7-oclUfGFzz0peBkHSLH9PqJT7UkQ/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Ayo Berperilaku Terpuji",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vTNhsxeQqI7j_nEYa2f3ZOO6k34DfgtkX86VCB06GCEM48PWbz1Y1zR-2ckjsdYVA/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Alhamdulillah, Aku Bisa Salat",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vTRmeOamCVzqTZBQGr1apF3OvvLnxNGLhJrlsyTFxSkwHKQB-py6Cn-Hgav5fyBVA/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Asyiknya Belajar Kisah Nabi Nuh a.s.",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "youtube",
+                "url": "https://www.youtube.com/embed/5rK0HyxiH8E?si=YXT5_rXRyaBq3j3u"
             },
             {
                 "title": "Senang Bisa Membaca Al-Qur\u2019an",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vSRK2MTWg-pYS4kpbzKTR1VN74-u7ziRsaSRWDhWKugjY7hQwqc_WITtFOP7fkr1g/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Mari Mengenal Malaikat-Malaikat Allah",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "assets/k2_materi_7_malaikat_Allah.pdf#view=Fit#toolbar=0#scroll=0#page=0"
             },
             {
                 "title": "Aku Senang Bisa Berakhlak Terpuji",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://nedubapai.my.canva.site/akhlak-terpuji-kelas-2"
             },
             {
                 "title": "Ayo Zikir dan Doa Setelah Salat",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://www.canva.com/design/DAG8IOHuuBw/kC90vx10Eal5_-6UIU_T5A/view?embed"
             },
             {
                 "title": "Asyiknya Belajar Kisah Ayah Para Nabi",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vRFFyY1oZnN-mHi5gOutUlYHtnjj-PRORYuYI688XajY63-mCltPuNbEVMlGfZP_A/pub?start=false&loop=false&delayms=3000"
             }
         ],
         "3": [
             {
                 "title": "Asyiknya Belajar Surah Al-\u2018Alaq",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "pdf",
+                "url": "assets/k3_materi_1_presentasi.pdf#view=Fit#toolbar=0#scroll=0#page=0"
             },
             {
                 "title": "Ayo Mengenal Tuhan Kita",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://ayu-widianingsih-guru-sd.my.canva.site/media-pembelajaran-pai-kelas-3"
             },
             {
                 "title": "Perilaku Terpuji Adalah Kepribadianku",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://jurnal7kaih.my.canva.site/media-pembelajaran-pai-kelas-3"
             },
             {
                 "title": "Aku Bangga Mampu Berpuasa",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://app-udin.my.canva.site/media-pembelajaran-puasa"
             },
             {
                 "title": "Aku Suka Belajar Sejarah Islam",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://jurnal7kaih.my.canva.site/media-pembelajaran-paikls3-bab5"
             },
             {
                 "title": "Senangnya Belajar Hadis",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://nurhayatievilkpd.my.canva.site/materi-membaca-dan-menulis-hadis-salat-berjamaah"
             },
             {
                 "title": "Ayo Beriman kepada Kitab-Kitab Allah Swt.",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://jurnal7kaih.my.canva.site/paikls-3-bab-7"
             },
             {
                 "title": "Aku Senang Berkalimah Tayyibah",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://mpifebrianisdn1bjb.my.canva.site/salinan-dari-media-interaktif-pai-kelas-3-aku-senang-berkalimah-tayyibah"
             },
             {
                 "title": "Senangnya Salat Rawatib",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://mpietyun.my.canva.site/untitled-app"
             },
             {
                 "title": "Nabi Muhammad saw. Rasulku",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://www.canva.com/design/DAG8zrVBCQU/OqCRaO5BgVW5zR2xFP1pwA/view?embed"
             }
         ],
         "4": [
             {
                 "title": "Mari Kita Mengaji dan Mengkaji Q.S. Al-Hujurat/49:13 dan Hadis tentang Keragaman",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": null
             },
             {
                 "title": "Teladan Mulia Asmaulhusna",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://1drv.ms/p/c/3af33c2c28a3ba42/IQSMpgnl93q5ToTCJaYMKyqlAeeAiFoM5o4_S5Jn8ZLNj10?em=2&wdAr=1.77"
             },
             {
                 "title": "Indahnya Saling Menghargai dalam Keragaman",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vSfz4-ZBG3e_8C-COZ6cAsXPXu7CpNMitoQkONdGhqqHO7xqFURfnZ-H9DBb9f-WQ/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Menyambut Usia Balig",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://metamorf.my.canva.site/menyambut-usia-baligh"
             },
             {
                 "title": "Kisah Hijrah Nabi Muhammad saw. ke Madinah",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://kombel-someah.my.canva.site/media-pembelajaran-hijrah-nabi-muhammad-saw"
             },
             {
                 "title": "Mari Mengaji dan Mengkaji Q.S. At-Tin dan Hadis tentang Silaturahmi",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": null
             },
             {
                 "title": "Beriman kepada Rasul-Rasul Allah",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": null
             },
             {
                 "title": "Aku Anak Saleh",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": null
             },
             {
                 "title": "Mengenal Salat Jumat, Duha, dan Tahajud",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vROd9bdJCHxu3l_Bc23hXQ2epQaIcAR7sRQ1pauk9_wC_ID4mfjW_CVty-K3EyzMQ/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Kisah Nabi Muhammad saw. Membangun Kota Madinah",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://www.canva.com/design/DAG9fTi3JJE/-5cI_JffCj9NvbBsjgryog/view?embed"
             }
         ],
         "5": [
             {
                 "title": "Menyayangi Anak Yatim",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://rinirosnaeni.my.canva.site/surah-al-maun-menyayangi-anak-yatim"
             },
             {
                 "title": "Lebih Dekat dengan Nama-Nama Allah",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "genially",
+                "url": "https://view.genially.com/69293a3d61e2adf446ad3ecb/interactive-image-berikutnya"
             },
             {
                 "title": "Aku Anak Saleh",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://online.fliphtml5.com/PAIKelas5Bab3/wulg/"
             },
             {
                 "title": "Hidup Lapang dengan Berbagi",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://aasteksprosedur.my.canva.site/byhbtd44ak9ytq1g"
             },
             {
                 "title": "Meneladani Perjuangan Rasulullah",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "genially",
+                "url": "https://view.genially.com/695dd3cb0618170940a5075e/interactive-content-pendidikan-agama-islam-dan-budi-pekerti"
             },
             {
                 "title": "Hidup Damai dalam Kebersamaan",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "canva",
+                "url": "https://www.canva.com/design/DAG70v3GCx8/INdLSIbxBwcHE_su5LynLQ/view?embed"
             },
             {
                 "title": "Ketika Kehidupan Telah Berhenti",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "canva",
+                "url": "https://www.canva.com/design/DAG7Q3OcY2M/IM2KYBfZVcpKSdL0COJvsg/view?embed"
             },
             {
                 "title": "Senangnya Berteman",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vSNhoywL1f2WaExMegevJjKRU8IUyXuFhD2IZ1mRl83rAT-K8kDsw1wzBers7WH2w/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Ibadah Haji dan Kurban",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vSKVD2hAYJ-V_HRqbvV-k0e48HBd6WjspWDhacEaylUYU2hGRjGzKc7mbNYjTyc6g/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Keteladanan Khulafaurasyidin",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "canva",
+                "url": "https://www.canva.com/design/DAG9dgfYQhY/wzkHCn_92RtlhgVGP1z6OA/view?embed"
             }
         ],
         "6": [
             {
                 "title": "Belajar Al-Qur\u2019an dan Hadis",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://diniharyati.my.canva.site/belajaralquranhadis"
             },
             {
                 "title": "Allah Swt. Maha Segalanya",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://gemini.google.com/share/bc283bbde60c"
             },
             {
                 "title": "Hidup Damai dengan Saling Memaafkan",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://sites.google.com/guru.sd.belajar.id/mediapembelajaraninteraktifpai/halaman-muka"
             },
             {
                 "title": "Hukum Halal dan Haram",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "canva",
+                "url": "https://www.canva.com/design/DAG9gvc3w7E/CgG_TQhv2d4m5ybK_h7w4w/view?embed"
             },
             {
                 "title": "Jasa Khulafaur Rasyidin untuk Dunia",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://gemini.google.com/share/d85cfccc6c53"
             },
             {
                 "title": "Mengaji Al-Qur\u2019an Surah Al-A\u2018la",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vQey4OuJXLgXDYiV1gCzilNBYL7_yjvpbHtLtn2QaVg51laCJcbzsrCpBlmTUqBxg/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Indahnya Ketetapan Allah",
-                "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "type": "web",
+                "url": "https://indahnyaketetapanallah-hp.vercel.app/"
             },
             {
                 "title": "Peduli Lingkungan",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vTyZ5D3IaZYwo6rmmITuxkbsS_frxWI9cMWzTorrHuqXmxWenkNUOlaXqzDJYwujA/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Mengamalkan Puasa Sunah",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vRLozHmrt4ddST5ETF8XG4hU1uc5Imo6S_ID8eioKCIJSM7pJtw5-H5a26WT-zWtQ/pub?start=false&loop=false&delayms=3000"
             },
             {
                 "title": "Meneladani Jasa Khalifah Usman bin Affan dan Ali bin Abi Thalib",
                 "type": "ppt",
-                "url": "https://docs.google.com/presentation/d/e/"
+                "url": "https://docs.google.com/presentation/d/e/2PACX-1vQf_Qn3Oskv4BDfq4miQeRQEMpKr4omPiE6bJKmqhnJjz2vx63GTqtdqAxBqXa0rA/pub?start=false&loop=false&delayms=3000"
             }
         ]
     };
@@ -524,10 +551,17 @@
                     speed: 1.0
                 });
             }, 500);
+
+            // 3. TRACKING: Catat View IFP
+            // Ini akan masuk sebagai 'page_view' dengan nama 'ifp.html'
+            trackEvent('page_view', 'ifp.html');
         }
 
         // BUKA DAFTAR MATERI (LEVEL 2)
         function openClass(kelas) {
+
+            activeKelas = kelas; // SIMPAN NOMOR KELAS KE VARIABEL GLOBAL
+
             const container = document.getElementById('materiListContainer');
             const title = document.getElementById('kelasTitle');
             const data = databaseMateri[kelas] || []; // Ambil data dari JSON
@@ -549,10 +583,14 @@
                     if(item.type === 'ppt') { icon = 'fa-file-powerpoint'; color = '#d35400'; } // Orange Powerpoint
                     else if(item.type === 'canva') { icon = 'fa-palette'; color = '#8e44ad'; } // Ungu Canva
                     else if(item.type === 'genially') { icon = 'fa-rocket'; color = '#2980b9'; } // Biru Genially
+                    else if(item.type === 'pdf') { icon = 'fa-file-pdf'; color = '#e74c3c'; }
+                    else if(item.type === 'youtube') { icon = 'fa-youtube'; color = '#FF0000'; } // Warna Merah YouTube
+                    else if(item.type === 'ebook') { icon = 'fa-book-open'; color = '#17a2b8'; } // Warna Teal (Biru Tosca) agar segar dibaca
                     else { icon = 'fa-globe'; color = '#27ae60'; } // Hijau Web
 
                     const html = `
-                    <div class="card-materi p-4 d-flex flex-column align-items-center text-center" onclick="playContent('${item.url}', '${item.title}')">
+                    <div class="card-materi p-4 d-flex flex-column align-items-center text-center" 
+                         onclick="playContent('${item.url}', '${item.title}')">
                         <div class="icon-type shadow" style="background: ${color}">
                             <i class="fas ${icon}"></i>
                         </div>
@@ -580,6 +618,11 @@
             frame.src = url;
             playerTitle.innerText = title;
             document.getElementById('overlayPlayer').classList.add('active');
+
+            // 4. TRACKING: Catat Klik Materi
+            // Format nama: ifp_KELAS_JUDUL (contoh: ifp_1_Mengenal Huruf)
+            const trackingName = `ifp_${activeKelas}_${title}`;
+            trackEvent('click_material', trackingName);
         }
 
         // TUTUP OVERLAY

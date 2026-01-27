@@ -3,7 +3,7 @@
 // =================================================================
 const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
 // const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
-const SUPABASE_KEY = '';
+// const SUPABASE_KEY = '';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
@@ -162,7 +162,7 @@ function handleEnter(event) {
 // LOGIKA PENCARIAN (UPDATE: PINTAR & CARD BERGAMBAR)
 // =================================================================
 
-// 1. Fungsi Normalisasi Teks (Agar "Al-Qur'an" == "Alquran")
+// 1. Fungsi Normalisasi Teks 1 (Menghapus tanda baca -)
 function normalizeText(text) {
     if (!text) return "";
     return text
@@ -171,99 +171,178 @@ function normalizeText(text) {
         // Contoh: "Al-Qur'an" -> "alquran"
 }
 
-// 2. Render Hasil Pencarian (Khusus search.html)
+// 2. Fungsi Normalisasi Teks 2 (Agar "solat" == "salat")
+function standardizeText(text) {
+    if (!text) return "";
+    let clean = text.toLowerCase();
+
+    // 1. Kelompok SHALAT (Semua diubah jadi 'salat')
+    clean = clean.replace(/sholat/g, 'salat');
+    clean = clean.replace(/solat/g, 'salat');
+    clean = clean.replace(/shalat/g, 'salat');
+    
+    // 2. Kelompok AL-QURAN
+    clean = clean.replace(/alquran/g, "al-qur'an");
+    clean = clean.replace(/quran/g, "al-qur'an");
+    clean = clean.replace(/al quran/g, "al-qur'an");
+
+    // 3. Kelompok HADIS
+    clean = clean.replace(/hadist/g, 'hadis');
+    clean = clean.replace(/hadits/g, 'hadis');
+
+    // 4. Kelompok ALLAH
+    clean = clean.replace(/alloh/g, 'allah');
+
+    // 4. Kelompok RASUL
+    clean = clean.replace(/rosul/g, 'rasul');
+
+    // 5. Kelompok AKHLAK
+    clean = clean.replace(/akhlaq/g, 'akhlak');
+    clean = clean.replace(/ahlaq/g, 'akhlak');
+    clean = clean.replace(/ahlak/g, 'akhlak');
+
+    // 6. Kelompok ZIKIR
+    clean = clean.replace(/dzikir/g, 'zikir');
+
+    return clean;
+}
+
 async function renderSearchResults() {
     const container = document.getElementById('resultsContainer');
     const keywordSpan = document.getElementById('searchKeyword');
     
-    if (!container) return; // Stop jika bukan halaman search
+    // Stop jika elemen tidak ditemukan (bukan halaman search)
+    if (!container) return; 
 
     const urlParams = new URLSearchParams(window.location.search);
-    const rawQuery = urlParams.get('q'); // Query asli user (misal: "Al-Qur'an")
+    const rawQuery = urlParams.get('q'); // Query asli user
 
+    // Jika tidak ada query
     if (!rawQuery) {
-        keywordSpan.innerText = "-";
-        container.innerHTML = '<div class="alert alert-warning">Masukkan kata kunci pencarian.</div>';
+        if(keywordSpan) keywordSpan.innerText = "-";
+        container.innerHTML = '<div class="col-12"><div class="alert alert-warning text-center">Silakan masukkan kata kunci pencarian.</div></div>';
         return;
     }
 
-    keywordSpan.innerText = `"${rawQuery}"`;
-    container.innerHTML = '<div class="col-12 text-center"><i class="fas fa-spinner fa-spin"></i> Memuat...</div>';
+    // Tampilkan keyword di header
+    if(keywordSpan) keywordSpan.innerText = `"${rawQuery}"`;
+    container.innerHTML = '<div class="col-12 text-center py-5"><i class="fas fa-spinner fa-spin fa-2x text-success"></i><p class="mt-2">Sedang mencari materi...</p></div>';
 
     try {
-        const response = await fetch('assets/pencarian.json');
+        // Ambil Database
+        const response = await fetch('assets/pencarian.json'); // Pastikan path json benar
         const allData = await response.json();
 
-        // Query yang sudah dinormalisasi (bersih)
-        const cleanQuery = normalizeText(rawQuery);
+        // 1. Bersihkan Query User pakai standar kita
+        const cleanQuery = standardizeText(rawQuery);
 
+        // 2. Filter Data
         const filtered = allData.filter(item => {
-            // Kita bersihkan juga data di database saat pencocokan
-            const cleanJudul = normalizeText(item.judul);
-            const cleanKeyword = normalizeText(item.keyword);
-            const cleanBab = normalizeText(item.bab);
+            // Bersihkan data database juga agar "apple to apple"
+            const cleanJudul = standardizeText(item.judul);
+            const cleanKeyword = standardizeText(item.keyword);
+            const cleanBab = standardizeText(item.bab);
 
-            // Cek apakah mengandung kata kunci
+            // Cek kecocokan
             return cleanJudul.includes(cleanQuery) || 
                    cleanKeyword.includes(cleanQuery) ||
                    cleanBab.includes(cleanQuery);
         });
 
+        // 3. Render HTML
         if (filtered.length > 0) {
             let html = '';
             filtered.forEach(item => {
-                const link = `${item.url}?highlight=${item.id_element}`;
+                // --- LOGIKA GAMBAR PINTAR ---
+                let imgSrc = '';
                 
-                // Tentukan Warna Placeholder Gambar berdasarkan Kelas
-                let imgColor = '4ECDC4'; // Default Hijau (Kelas Atas)
-                if (item.kelas.includes('1') || item.kelas.includes('2') || item.kelas.includes('3')) {
-                    imgColor = 'FFE66D'; // Kuning (Kelas Bawah)
+                // Cek 1: Apakah di JSON ada key "gambar" dan tidak kosong?
+                if (item.gambar && item.gambar.trim() !== "") {
+                    imgSrc = item.gambar;
+                } else {
+                    // Cek 2: Jika tidak ada, buat Placeholder Warna-Warni
+                    let imgColor = '4ECDC4'; // Default Hijau (Kelas 4,5,6)
+                    
+                    // Jika Kelas 1, 2, 3 warnanya Kuning
+                    if (item.kelas && (item.kelas.includes('1') || item.kelas.includes('2') || item.kelas.includes('3'))) {
+                        imgColor = 'FFE66D'; 
+                    }
+                    
+                    // Encode judul agar aman di URL gambar
+                    const encodedTitle = encodeURIComponent(item.judul);
+                    imgSrc = `https://placehold.co/600x350/${imgColor}/333?text=${encodedTitle}`;
                 }
 
-                // Placeholder Image (Judul + Warna)
-                const encodedTitle = encodeURIComponent(item.judul);
-                const imgSrc = `https://placehold.co/600x350/${imgColor}/333?text=${encodedTitle}`;
+                // --- LOGIKA URL ---
+                // Tambahkan highlight ID jika ada
+                let finalUrl = item.url;
+                if (item.id_element) {
+                    finalUrl += `?highlight=${item.id_element}`;
+                }
 
                 html += `
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm custom-card border-0 overflow-hidden">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm custom-card border-0 overflow-hidden hover-scale">
                         
                         <div class="position-relative">
                             <img src="${imgSrc}" class="card-img-top" alt="${item.judul}" style="height: 200px; object-fit: cover;">
                             <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-white text-dark shadow-sm">${item.kelas}</span>
+                                <span class="badge bg-white text-dark shadow-sm fw-bold">${item.kelas}</span>
                             </div>
                         </div>
 
                         <div class="card-body d-flex flex-column">
-                            <small class="text-muted mb-1"><i class="fas fa-bookmark text-success me-1"></i> ${item.bab}</small>
-                            <h5 class="card-title fw-bold text-dark">${item.judul}</h5>
+                            <small class="text-muted mb-1 fw-bold">
+                                <i class="fas fa-bookmark text-success me-1"></i> ${item.bab}
+                            </small>
                             
-                            <div class="alert alert-light border mt-2 py-2 px-3 small text-muted flex-grow-1">
-                                <i class="fas fa-tags me-1 text-secondary"></i> 
-                                ${item.keyword}
+                            <h5 class="card-title fw-bold text-dark mb-2">
+                                <a href="${finalUrl}" class="text-decoration-none text-dark stretched-link">
+                                    ${item.judul}
+                                </a>
+                            </h5>
+                            
+                            <div class="mt-2 mb-3">
+                                <small class="text-muted bg-light px-2 py-1 rounded border">
+                                    <i class="fas fa-tag me-1 text-secondary"></i> 
+                                    ${item.keyword}
+                                </small>
                             </div>
-                            
-                            <hr class="opacity-25 my-3">
-                            <a href="${link}" class="btn btn-outline-success btn-sm w-100 rounded-pill mt-auto">
-                                Buka Materi <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
+
+                            <div class="mt-auto">
+                                <a href="${finalUrl}" class="btn btn-outline-success btn-sm w-100 rounded-pill">
+                                    Buka Materi <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>`;
             });
             container.innerHTML = html;
         } else {
+            // JIKA HASIL KOSONG
             container.innerHTML = `
                 <div class="col-12 text-center py-5">
-                    <img src="https://placehold.co/200x200/f0f0f0/ccc?text=404" class="mb-3 rounded-circle opacity-50" width="150">
-                    <h5 class="text-muted">Materi tidak ditemukan.</h5>
-                    <p class="small text-muted">Kami tidak menemukan hasil untuk "${rawQuery}". <br>Coba kata kunci lain.</p>
+                    <div class="mb-3">
+                        <i class="fas fa-search fa-3x text-muted opacity-25"></i>
+                    </div>
+                    <h5 class="text-muted fw-bold">Materi tidak ditemukan.</h5>
+                    <p class="text-muted small">
+                        Kami tidak menemukan hasil untuk "<strong>${rawQuery}</strong>". <br>
+                        Coba kata kunci lain atau gunakan sinonim.
+                    </p>
+                    <a href="index.html" class="btn btn-success rounded-pill px-4 mt-2">Kembali ke Beranda</a>
                 </div>`;
         }
+
     } catch (error) {
-        console.error(error);
-        container.innerHTML = '<div class="alert alert-danger">Gagal memuat data pencarian.</div>';
+        console.error("Error Search:", error);
+        container.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <div class="alert alert-danger d-inline-block">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Gagal memuat data pencarian.
+                </div>
+            </div>`;
     }
 }
 
