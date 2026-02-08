@@ -358,6 +358,68 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // =================================================================
+// FUNGSI TRACK DOWNLOAD BUKU
+// =================================================================
+async function trackDownload(bookName) {
+    console.log(`Mencatat download: ${bookName}`);
+    
+    try {
+        await _supabase.from('analytics_logs').insert([
+            { 
+                event_type: 'download_buku', 
+                event_name: bookName 
+            }
+        ]);
+        console.log("Tracking sukses dikirim ke Supabase");
+    } catch (err) {
+        console.error("Gagal tracking download:", err);
+    }
+}
+
+// =================================================================
+// FUNGSI LOAD DATA DINAMIS (GURU & VIEW COUNT)
+// =================================================================
+async function loadDynamicData() {
+    // Cek apakah ada elemen kartu materi di halaman ini
+    if (!document.querySelector('.custom-card')) return; 
+
+    console.log("Mengambil data guru & statistik dari Supabase...");
+
+    try {
+        // 1. Ambil data dari tabel 'material_analytics'
+        // Kolom yang diambil: material_name (kunci), guru (nama), click_count (jumlah view)
+        const { data, error } = await _supabase
+            .from('material_analytics')
+            .select('material_name, guru, click_count');
+
+        if (error) throw error;
+
+        // 2. Loop setiap baris data yang didapat
+        if (data) {
+            data.forEach(item => {
+                // A. TEMPELKAN NAMA GURU
+                // Mencari elemen dengan ID: guru-k1_materi_10, guru-k1_materi_1, dst.
+                const elGuru = document.getElementById(`guru-${item.material_name}`);
+                if (elGuru) {
+                    // Jika nama guru kosong di database, tulis Admin
+                    elGuru.innerText = item.guru || "Tim PAI"; 
+                }
+
+                // B. TEMPELKAN JUMLAH VIEW (Update view counter juga)
+                // Mencari elemen dengan atribut: data-id="k1_materi_10"
+                const elView = document.querySelector(`.view-counter[data-id="${item.material_name}"]`);
+                if (elView) {
+                    // Update isi html view counter (tetap pertahankan ikon mata)
+                    elView.innerHTML = `<i class="fas fa-eye me-1"></i> ${item.click_count}`;
+                }
+            });
+        }
+    } catch (err) {
+        console.error("Gagal load data dinamis:", err);
+    }
+}
+
+// =================================================================
 // 5. INISIALISASI (MAIN)
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -366,9 +428,10 @@ document.addEventListener('DOMContentLoaded', () => {
     logPageView();
     loadViews();
     loadTrending();
+    loadDynamicData();
     
     // B. Cek apakah ini halaman Search?
-    renderSearchResults();
+    renderSearchResults();    
 
     // C. Animasi Menu Hamburger (X to Bars)
     const myOffcanvas = document.getElementById('offcanvasNavbar');
