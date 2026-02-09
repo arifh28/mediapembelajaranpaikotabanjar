@@ -169,6 +169,22 @@
                 Swal.fire('Gagal', 'Tidak bisa menyalin link otomatis.', 'error');
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error', // Ikon X Merah
+                title: 'Mohon Maaf 🙏',
+                text: 'Fitur Bank Soal belum bisa digunakan sepenuhnya karena saat ini masih dalam tahap pengembangan & pengisian konten.',
+                confirmButtonText: 'Baik, Saya Mengerti',
+                confirmButtonColor: '#198754', // Warna Hijau sesuai tema
+                allowOutsideClick: false, // User harus klik tombol untuk menutup
+                backdrop: `
+                    rgba(0,0,123,0.4)
+                    left top
+                    no-repeat
+                `
+            });
+        });
     </script>
 </body>
 </html>
