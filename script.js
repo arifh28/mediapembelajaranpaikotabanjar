@@ -2,10 +2,97 @@
 // 1. KONFIGURASI SUPABASE
 // =================================================================
 const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
-// const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
-const SUPABASE_KEY = '';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
+// const SUPABASE_KEY = '';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Suntikkan HTML Floating Button dan Modal ke dalam halaman
+    const feedbackHTML = `
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9998;">
+        <button class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center" 
+                data-bs-toggle="modal" data-bs-target="#modalSaran" 
+                style="width: 60px; height: 60px; transition: transform 0.3s;"
+                onmouseover="this.style.transform='scale(1.1)'" 
+                onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-comment-dots fa-2x text-white"></i>
+        </button>
+    </div>
+
+    <div class="modal fade" id="modalSaran" tabindex="-1" aria-labelledby="modalSaranLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-success text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold" id="modalSaranLabel"><i class="fas fa-envelope-open-text me-2"></i>Kirim Kritik & Saran</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formKritikSaran">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nama Anda</label>
+                            <input type="text" class="form-control" id="fs-nama" placeholder="Masukkan nama Anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Kritik / Saran</label>
+                            <textarea class="form-control" id="fs-saran" rows="4" placeholder="Tulis masukan Anda untuk media pembelajaran ini..." required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light rounded-bottom-4">
+                        <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success rounded-pill px-4" id="btnSubmitSaran">
+                            <i class="fas fa-paper-plane me-2"></i>Kirim Saran
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    `;
+
+    // Pastikan tidak merender dua kali
+    if(!document.getElementById('modalSaran')) {
+        document.body.insertAdjacentHTML('beforeend', feedbackHTML);
+    }
+
+    // 2. Tangani Form Submit
+    const formSaran = document.getElementById('formKritikSaran');
+    if (formSaran) {
+        formSaran.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const nama = document.getElementById('fs-nama').value;
+            const saran = document.getElementById('fs-saran').value;
+            const btnSubmit = document.getElementById('btnSubmitSaran');
+            
+            // Ubah tombol jadi loading
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Mengirim...';
+
+            try {
+                // Ambil IP Address publik user menggunakan API gratis (ipify)
+                const ipRes = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipRes.json();
+                const ip_address = ipData.ip;
+
+                // Insert data ke Supabase
+                const { error } = await _supabase.from('kritik_saran').insert([
+                    { nama: nama, saran: saran, ip_address: ip_address }
+                ]);
+
+                if (error) throw error;
+
+                // Redirect ke halaman saran.html jika berhasil
+                window.location.href = 'saran.html';
+
+            } catch (err) {
+                console.error("Gagal kirim saran:", err);
+                alert("Maaf, terjadi kesalahan saat mengirim saran. Coba lagi.");
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Kirim Saran';
+            }
+        });
+    }
+});
 
 // =================================================================
 // 2. FUNGSI TRACK CLICK (HYBRID: LINK & DATABASE)

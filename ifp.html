@@ -92,15 +92,15 @@
             padding: 20px;
             overflow-y: auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Muat 1-2 kolom di HP */
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
-            align-content: start; /* Agar kartu tidak melar ke bawah */
+            align-items: start;
         }
 
         @media (min-width: 768px) {
             .materi-grid {
                 padding: 40px;
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Muat banyak di IFP */
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
                 gap: 30px;
             }
         }
@@ -108,13 +108,19 @@
         .card-materi {
             background: white;
             border-radius: 20px;
-            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
-            height: 100%; /* Memastikan tinggi kartu seragam */
+            padding: 1.5rem;
         }
+        
+        .card-materi:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #27ae60;
+        }
+
         .card-materi:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -630,7 +636,7 @@
                             <i class="${iconBase} ${icon}"></i>
                         </div>
 
-                        <h5 class="fw-bold mb-1 w-100" style="font-size: 1.1rem; color: #000 !important; line-height: 1.3;">
+                <h5 class="fw-bold mb-3 w-100" style="font-size: 1.1rem; color: #000 !important; line-height: 1.4; white-space: normal; word-wrap: break-word;">
                             ${item.title}
                         </h5>
 
