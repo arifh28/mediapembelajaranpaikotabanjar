@@ -89,11 +89,20 @@
 
         /* GRID MATERI */
         .materi-grid {
-            padding: 40px;
+            padding: 20px;
             overflow-y: auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Muat 1-2 kolom di HP */
+            gap: 20px;
+            align-content: start; /* Agar kartu tidak melar ke bawah */
+        }
+
+        @media (min-width: 768px) {
+            .materi-grid {
+                padding: 40px;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Muat banyak di IFP */
+                gap: 30px;
+            }
         }
 
         .card-materi {
@@ -104,6 +113,7 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
+            height: 100%; /* Memastikan tinggi kartu seragam */
         }
         .card-materi:hover {
             transform: translateY(-5px);
@@ -587,63 +597,36 @@
             const title = document.getElementById('kelasTitle');
             const data = databaseMateri[kelas] || []; 
 
-            // Update Judul
             title.innerHTML = `<span class="badge bg-warning text-dark me-2">KELAS ${kelas}</span> Daftar Materi Pembelajaran`;
-            
-            // Kosongkan Container
             container.innerHTML = '';
             
             if(data.length === 0) {
-                container.innerHTML = '<div class="col-12 text-center text-muted py-5"><h3>📭</h3><h5>Belum ada materi untuk kelas ini.</h5></div>';
+                container.innerHTML = '<div class="col-12 text-center text-muted py-5" style="grid-column: 1 / -1;"><h3>📭</h3><h5>Belum ada materi untuk kelas ini.</h5></div>';
             } else {
                 data.forEach(item => {
-                    // Default Values
                     let icon = 'fa-globe';
                     let color = '#27ae60';
-                    let iconBase = 'fas'; // Default pakai FAS (Solid)
+                    let iconBase = 'fas'; 
 
-                    // === LOGIKA DETEKSI IKON & TIPE ===
-                    if(item.type === 'ppt') { 
-                        icon = 'fa-file-powerpoint'; 
-                        color = '#d35400'; 
-                    } 
-                    else if(item.type === 'canva') { 
-                        icon = 'fa-palette'; 
-                        color = '#8e44ad'; 
-                    } 
-                    else if(item.type === 'genially') { 
-                        icon = 'fa-rocket'; 
-                        color = '#2980b9'; 
-                    } 
-                    else if(item.type === 'youtube') { 
-                        icon = 'fa-youtube'; 
-                        color = '#FF0000'; 
-                        iconBase = 'fab'; // <--- KHUSUS YOUTUBE PAKAI FAB (BRAND)
-                    }
-                    else if(item.type === 'ebook') { 
-                        icon = 'fa-book-open'; 
-                        color = '#17a2b8'; 
-                    }
-                    else if(item.type === 'pdf') { 
-                        icon = 'fa-file-pdf'; 
-                        color = '#e74c3c'; 
-                    }
+                    if(item.type === 'ppt') { icon = 'fa-file-powerpoint'; color = '#d35400'; } 
+                    else if(item.type === 'canva') { icon = 'fa-palette'; color = '#8e44ad'; } 
+                    else if(item.type === 'genially') { icon = 'fa-rocket'; color = '#2980b9'; } 
+                    else if(item.type === 'youtube') { icon = 'fa-youtube'; color = '#FF0000'; iconBase = 'fab'; }
+                    else if(item.type === 'ebook') { icon = 'fa-book-open'; color = '#17a2b8'; }
+                    else if(item.type === 'pdf') { icon = 'fa-file-pdf'; color = '#e74c3c'; }
 
-                    // === RENDER HTML (DENGAN PERBAIKAN CSS) ===
-                    // Perhatikan style: min-width & min-height agar tidak lonjong
+                    // Sanitasi judul agar tanda kutip tidak merusak HTML
+                    const safeTitle = item.title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+                    // HTML Generator
                     const html = `
                     <div class="card-materi p-4 d-flex flex-column align-items-center text-center animate-up" 
-                         onclick="playContent('${item.url}', '${item.title}')"
-                         style="cursor: pointer; transition: transform 0.2s;">
+                         data-url="${item.url}" 
+                         data-title="${safeTitle}"
+                         onclick="playContent(this.getAttribute('data-url'), this.getAttribute('data-title'))">
                         
                         <div class="icon-circle shadow mb-3" 
-                             style="background: ${color}; 
-                                    width: 70px; height: 70px; 
-                                    min-width: 70px; min-height: 70px; 
-                                    border-radius: 50%; 
-                                    display: flex; align-items: center; justify-content: center; 
-                                    color: white; font-size: 2rem;
-                                    flex-shrink: 0;">
+                             style="background: ${color}; width: 70px; height: 70px; min-width: 70px; min-height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; flex-shrink: 0;">
                             <i class="${iconBase} ${icon}"></i>
                         </div>
 
@@ -651,7 +634,7 @@
                             ${item.title}
                         </h5>
 
-                        <small class="text-white px-2 py-1 rounded-pill mt-2 fw-bold" style="background-color: ${color}; font-size: 0.7rem; letter-spacing: 1px;">
+                        <small class="text-white px-2 py-1 rounded-pill mt-auto fw-bold" style="background-color: ${color}; font-size: 0.7rem; letter-spacing: 1px;">
                             ${item.type.toUpperCase()}
                         </small>
                     </div>`;
@@ -663,9 +646,26 @@
             const overlay = document.getElementById('overlayMateri');
             if(overlay) overlay.classList.add('active');
         }
-
+        
         // FUNGSI 3: Putar Konten (Klik Materi)
         function playContent(url, title) {
+            // Cek jika URL kosong (kasus Kelas 4 Materi 1)
+            if (!url || url === 'null') {
+                alert("Mohon maaf, materi ini sedang dalam tahap penyempurnaan (URL kosong).");
+                return;
+            }
+
+            // DETEKSI SITUS YANG MENOLAK IFRAME (CANVA.SITE, GEMINI, GOOGLE SITES)
+            if (url.includes('canva.site') || url.includes('gemini.google.com') || url.includes('educaplay.com') || url.includes('sites.google.com')) {
+                // Jangan paksa buka di Iframe, langsung buka di Tab Baru
+                window.open(url, '_blank');
+                
+                // Track klik tab baru
+                trackEvent('click_material_newtab', `ifp_${activeKelas}_${title}`);
+                return;
+            }
+
+            // Jika aman, buka di Iframe Overlay Player
             const frame = document.getElementById('contentFrame');
             const playerTitle = document.getElementById('playerTitle');
             
