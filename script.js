@@ -569,49 +569,6 @@ document.addEventListener('DOMContentLoaded', () => {
             widget.classList.add('d-none');        // Tambah display none
         }
     }
-
-    // 1. Tangkap elemen popup
-    const popupEl = document.getElementById('promoPopup');
-    
-    // 2. CEK: Apakah kita sedang berada di halaman yang memiliki popup? (Yaitu index.html)
-    // Jika tidak ada popup (misal di halaman blog), abaikan saja agar tidak error
-    if (popupEl) {
-        const closeBtn = document.getElementById('closePromoBtn');
-        const promoLink = document.getElementById('promoLink');
-
-        // 3. Cek apakah popup belum pernah ditutup di sesi ini
-        if (!sessionStorage.getItem('popupPromoClosed')) {
-            // Tampilkan popup (hapus d-none, lalu beri opacity agar fade-in bekerja)
-            popupEl.classList.remove('d-none');
-            setTimeout(() => {
-                popupEl.style.opacity = '1';
-            }, 100);
-        }
-
-        // 4. Fungsi mematikan popup & mencatat ke Session Storage
-        function closePopup() {
-            popupEl.style.opacity = '0';
-            setTimeout(() => {
-                popupEl.classList.add('d-none');
-            }, 400);
-            
-            // Catat di browser agar tidak muncul lagi saat user balik ke index
-            sessionStorage.setItem('popupPromoClosed', 'true');
-        }
-
-        // 5. Pemicu (Trigger)
-        // Jika klik tanda X, tutup popup
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closePopup);
-        }
-        
-        // Jika klik gambar, tab baru akan terbuka (karena ada target="_blank" di HTML),
-        // dan di saat bersamaan, tutup popup ini agar tidak menghalangi web saat user kembali.
-        if (promoLink) {
-            promoLink.addEventListener('click', closePopup);
-        }
-    }
-
 });
 
 function closeIFPWidget() {
