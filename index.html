@@ -15,6 +15,64 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* CSS Khusus untuk Bento Grid yang Responsive */
+        .bento-grid {
+            display: grid;
+            gap: 1.5rem;
+            /* Default untuk mobile: 2 kolom (kelas) */
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Styling Card Kelas */
+        .bento-kelas {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bento-kelas:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+        }
+
+        .kelas-img-wrapper img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        /* Styling Card Trending agar mengambil lebar penuh di mobile */
+        .bento-trending {
+            grid-column: span 2; /* Di mobile, ambil 2 kolom (lebar penuh) */
+            background: #ffffff;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Aturan Responsive untuk Tablet dan Desktop */
+        @media (min-width: 768px) {
+            .bento-grid {
+                /* Di tablet/desktop, gunakan 4 kolom */
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .bento-trending {
+                grid-column: span 2; /* Trending ambil 2 kolom dari 4 kolom */
+                grid-row: span 2;    /* Trending ambil tinggi 2 baris */
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top glass-nav">
@@ -88,17 +146,16 @@
                     <h1 class="display-5 fw-bolder mb-3" style="color: var(--primary-blue);">Eksplorasi Materi PAI <br><span class="text-success">Lebih Menyenangkan!</span></h1>
                     <p class="fs-5 mb-4 opacity-75">Temukan rangkuman materi, buku elektronik, dan latihan soal interaktif untuk Sekolah Dasar.</p>
                     
-                    <!-- Search Bar dengan Fitur Rekomendasi (Live Search) -->
-                    <div class="position-relative mx-auto" style="max-width: 600px;">
-                        <div class="search-bar-hero d-flex shadow-sm rounded-pill overflow-hidden bg-white">
+                    <!-- Search Bar dengan Fitur Rekomendasi (Live Search) dikembalikan sesuai dengan yang diminta -->
+                    <div class="position-relative mx-auto ms-lg-0" style="max-width: 600px;">
+                        <div class="search-bar-hero d-flex shadow-sm rounded-pill overflow-hidden bg-white border">
                             <span class="input-group-text bg-transparent border-0 text-muted ps-4"><i class="fas fa-search"></i></span>
-                            <!-- Tambahan oninput="showRecommendations(this.value)" dan autocomplete="off" -->
-                            <input type="text" id="mainSearchInput" class="form-control border-0 shadow-none" placeholder="Cari materi (Cth: Rukun Islam)..." onkeypress="handleEnter(event)" oninput="showRecommendations(this.value)" autocomplete="off" style="box-shadow: none;">
+                            <input type="text" id="mainSearchInput" class="form-control border-0 shadow-none py-3" placeholder="Cari materi (Cth: Rukun Islam)..." onkeypress="handleEnter(event)" oninput="showRecommendations(this.value)" autocomplete="off">
                             <button class="btn btn-primary fw-bold px-4 rounded-pill m-1" onclick="doSearch()">Cari</button>
                         </div>
                         
                         <!-- Kotak Dropdown Rekomendasi (Tersembunyi secara default) -->
-                        <ul id="searchRecommendations" class="list-group position-absolute w-100 shadow-lg d-none text-start" style="top: 110%; z-index: 1050; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);">
+                        <ul id="searchRecommendations" class="list-group position-absolute w-100 shadow-lg d-none text-start mt-2" style="top: 100%; z-index: 1050; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);">
                             <!-- Isi rekomendasi akan disuntikkan dari Javascript -->
                         </ul>
                     </div>
@@ -147,43 +204,63 @@
 
         <h3 class="font-heading mb-4 text-dark"><i class="fas fa-th-large text-primary me-2"></i> Jelajahi Materi</h3>
 
-        <!-- BENTO GRID UTAMA -->
-        <div class="bento-grid">
+        <!-- BENTO GRID UTAMA MENGGUNAKAN BOOTSTRAP ROW/COL -->
+        <div class="row g-3 g-md-4 align-items-stretch">
             
-            <a href="kelas1.html" class="bento-card bento-kelas text-center">
-                <div class="kelas-img-wrapper"><img src="assets/kelas1.png" alt="Kelas 1"></div>
-                <h4 class="font-heading">Kelas 1</h4>
-            </a>
-            <a href="kelas2.html" class="bento-card bento-kelas text-center">
-                <div class="kelas-img-wrapper"><img src="assets/kelas2.png" alt="Kelas 2"></div>
-                <h4 class="font-heading">Kelas 2</h4>
-            </a>
-            <a href="kelas3.html" class="bento-card bento-kelas text-center">
-                <div class="kelas-img-wrapper"><img src="assets/kelas3.png" alt="Kelas 3"></div>
-                <h4 class="font-heading">Kelas 3</h4>
-            </a>
-
-            <div class="bento-card bento-trending">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="font-heading m-0"><i class="fas fa-fire text-danger me-2"></i> Sedang Populer</h5>
-                </div>
-                <ul id="trendingList" class="list-group list-group-flush">
-                    <li class="list-group-item text-center text-muted border-0">Memuat data...</li>
-                </ul>
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas1.html" class="bento-kelas text-center w-100">
+                    <div class="kelas-img-wrapper"><img src="assets/kelas1.png" alt="Kelas 1"></div>
+                    <h4 class="font-heading m-0 text-dark">Kelas 1</h4>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas2.html" class="bento-kelas text-center w-100">
+                    <div class="kelas-img-wrapper"><img src="assets/kelas2.png" alt="Kelas 2"></div>
+                    <h4 class="font-heading m-0 text-dark">Kelas 2</h4>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas3.html" class="bento-kelas text-center w-100">
+                    <div class="kelas-img-wrapper"><img src="assets/kelas3.png" alt="Kelas 3"></div>
+                    <h4 class="font-heading m-0 text-dark">Kelas 3</h4>
+                </a>
             </div>
 
-            <a href="kelas4.html" class="bento-card bento-kelas text-center">
-                <div class="kelas-img-wrapper"><img src="assets/kelas4.png" alt="Kelas 4"></div>
-                <h4 class="font-heading">Kelas 4</h4>
-            </a>
-            <a href="kelas5.html" class="bento-card bento-kelas text-center">
-                <div class="kelas-img-wrapper"><img src="assets/kelas5.png" alt="Kelas 5"></div>
-                <h4 class="font-heading">Kelas 5</h4>
-            </a>
-            <a href="kelas6.html" class="bento-card bento-kelas text-center">
-                <div class="kelas-img-wrapper"><img src="assets/kelas6.png" alt="Kelas 6"></div>
-                <h4 class="font-heading">Kelas 6</h4>
-            </a>
+            <!-- Card Trending: Memakai grid 12 kolom di mobile, dan 6 kolom (setengah baris) di desktop.
+                 Dengan order-last di mobile, card ini akan turun ke bawah. Di desktop (order-md-0), dia menempati posisi tengah. -->
+            <div class="col-12 col-md-6 d-flex align-items-stretch order-last order-md-0">
+                <div class="bento-trending w-100 d-flex flex-column" style="min-height: 250px;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="font-heading m-0"><i class="fas fa-fire text-danger me-2"></i> Sedang Populer</h5>
+                    </div>
+                    <ul id="trendingList" class="list-group list-group-flush h-100 overflow-auto">
+                        <li class="list-group-item text-center text-muted border-0">Memuat data...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas4.html" class="bento-kelas text-center w-100">
+                    <div class="kelas-img-wrapper"><img src="assets/kelas4.png" alt="Kelas 4"></div>
+                    <h4 class="font-heading m-0 text-dark">Kelas 4</h4>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas5.html" class="bento-kelas text-center w-100">
+                    <div class="kelas-img-wrapper"><img src="assets/kelas5.png" alt="Kelas 5"></div>
+                    <h4 class="font-heading m-0 text-dark">Kelas 5</h4>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas6.html" class="bento-kelas text-center w-100">
+                    <div class="kelas-img-wrapper"><img src="assets/kelas6.png" alt="Kelas 6"></div>
+                    <h4 class="font-heading m-0 text-dark">Kelas 6</h4>
+                </a>
+            </div>
 
         </div>
     </div>
@@ -193,7 +270,6 @@
         function closeCpAlert() {
             const alertBox = document.getElementById('cpUpdateAlert');
             if (alertBox) {
-                // Memberikan efek animasi menghilang secara halus
                 alertBox.style.transition = "opacity 0.5s ease, transform 0.5s ease";
                 alertBox.style.opacity = "0";
                 alertBox.style.transform = "scale(0.95)";
@@ -208,12 +284,10 @@
             const alertBox = document.getElementById('cpUpdateAlert');
             
             if (progressBar && alertBox) {
-                // Memulai animasi garis putih menyusut selama 30 detik
                 setTimeout(() => {
                     progressBar.style.width = '0%';
                 }, 100);
 
-                // Otomatis menutup alert setelah 15 detik
                 setTimeout(() => {
                     closeCpAlert();
                 }, 15000);
