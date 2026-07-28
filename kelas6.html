@@ -21,337 +21,249 @@
 
     <style>
         #btnBackToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: none;
-            z-index: 999;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--secondary-yellow);
-            color: var(--dark-text);
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            position: fixed; bottom: 30px; right: 30px; display: none; z-index: 999;
+            width: 50px; height: 50px; border-radius: 50%; background-color: var(--primary-blue);
+            color: white; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;
         }
-
-        #btnBackToTop:hover {
-            transform: translateY(-5px);
-            background-color: #ffd700;
-        }
-
-        .semester-label {
-            margin-top: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-green);
-        }
+        #btnBackToTop:hover { transform: translateY(-5px); background-color: var(--primary-green); }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <header class="main-header text-center" id="topPage">
-        <div class="container position-relative">
-            <a href="index.html" class="btn btn-light rounded-circle position-absolute start-0 top-50 translate-middle-y ms-3 shadow-sm">
-                <i class="fas fa-arrow-left text-success"></i>
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
             </a>
-            <h2 class="fw-bold m-0">Kelas 6</h2>
-            <p class="mb-0 text-white-50">Tahun Pelajaran 2025/2026</p>
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
+                    </ul>
+                    <div id="authContainer" class="mt-3 mt-lg-0">
+                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                            <i class="fab fa-google me-2"></i> Masuk
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
+
+    <div style="height: 90px;"></div>
 
     <div class="container pb-5 pt-3 flex-grow-1">
         
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center position-relative" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
+            <a href="index.html" class="btn btn-light rounded-circle position-absolute top-50 start-0 translate-middle-y ms-3 ms-md-4 shadow-sm" style="z-index: 10;">
+                <i class="fas fa-arrow-left text-primary"></i>
+            </a>
+            <h1 class="display-5 fw-bolder mb-2 text-white font-heading">Materi Kelas 6</h1>
+            <p class="fs-5 mb-0 text-white opacity-75">Tahun Pelajaran 2025/2026</p>
+        </div>
+
+        <div class="alert alert-success auth-only d-none shadow-sm rounded-4 border-0 mb-4">
+            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i> Anda login sebagai Guru. Riwayat aktivitas akan otomatis tersimpan.</h5>
+        </div>
+
         <div class="row">
             <div class="col-12">
-                <h3 class="fw-bold semester-label border-start border-5 border-warning ps-3">
-                    Semester 1 (Ganjil)
-                </h3>
+                <h3 class="font-heading mb-4 text-dark border-start border-5 border-warning ps-3">Semester 1 (Ganjil)</h3>
             </div>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 mb-5">
             
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+1:+Surah+Ad-Duha" class="card-img-top" alt="Bab 1">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_1">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_1" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+1:+Surah+Ad-Duha" class="img-fluid w-100" alt="Bab 1" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_1"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_1" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 1: Belajar Al-Qur’an dan Hadis</h5>
-                        <p class="card-text text-muted small flex-grow-1">Membaca, Menulis, Menghafal, dan Pesan Pokok Q.S. Ad-Duha.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_1', 'https://diniharyati.my.canva.site/belajaralquranhadis')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-tags me-1"></i> Media Interaktif</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 1: Belajar Al-Qur’an dan Hadis</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Membaca, Menulis, Menghafal, dan Pesan Pokok Q.S. Ad-Duha.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_1', 'https://diniharyati.my.canva.site/belajaralquranhadis')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-tags me-1"></i> Media Interaktif</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+2:+Asmaulhusna" class="card-img-top" alt="Bab 2">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_2">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_2" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+2:+Asmaulhusna" class="img-fluid w-100" alt="Bab 2" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_2"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_2" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 2: Allah Swt. Maha Segalanya</h5>
-                        <p class="card-text text-muted small flex-grow-1">Makna Al-Gaffar, Al-‘Afuw, Al-Wahid, As-Samad & Cara Allah Mengampuni.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_2', 'https://gemini.google.com/share/bc283bbde60c')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-laptop me-1"></i> MPI Gemini</button>                            
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 2: Allah Swt. Maha Segalanya</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Makna Al-Gaffar, Al-‘Afuw, Al-Wahid, As-Samad & Cara Allah Mengampuni.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_2', 'https://gemini.google.com/share/bc283bbde60c')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-laptop me-1"></i> MPI Gemini</button>                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+3:+Saling+Memaafkan" class="card-img-top" alt="Bab 3">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_3">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_3" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+3:+Saling+Memaafkan" class="img-fluid w-100" alt="Bab 3" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_3"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_3" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 3: Hidup Damai Saling Memaafkan</h5>
-                        <p class="card-text text-muted small flex-grow-1">Pengertian Maaf, Memaafkan, dan Pentingnya Menyatakan Penyesalan.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">                            
-                            <button onclick="trackClick('k6_materi_3', 'https://sites.google.com/guru.sd.belajar.id/mediapembelajaraninteraktifpai/halaman-muka')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-sitemap me-1"></i> Media Interaktif Google Sites</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 3: Hidup Damai Saling Memaafkan</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Pengertian Maaf, Memaafkan, dan Pentingnya Menyatakan Penyesalan.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">                            
+                            <button onclick="trackClick('k6_materi_3', 'https://sites.google.com/guru.sd.belajar.id/mediapembelajaraninteraktifpai/halaman-muka')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-sitemap me-1"></i> Media Interaktif Google Sites</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+4:+Halal+dan+Haram" class="card-img-top" alt="Bab 4">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_4">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_4" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+4:+Halal+dan+Haram" class="img-fluid w-100" alt="Bab 4" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_4"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_4" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 4: Hukum Halal dan Haram</h5>
-                        <p class="card-text text-muted small flex-grow-1">Definisi, Dasar Hukum, Sebab, dan Penerapan Halal & Haram.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_4', 'https://www.canva.com/design/DAG9gvc3w7E/CgG_TQhv2d4m5ybK_h7w4w/edit')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-tags me-1"></i> Presentasi Canva</button>
-                            <button onclick="trackClick('k6_materi_4', 'https://www.canva.com/design/DAG9nQIpqzY/lysadnWj-fNfx6-VVZDn_g/edit')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Canva</button>
-                            <button onclick="trackClick('k6_materi_4', 'https://wordwall.net/resource/105050099/kuis-hukum-halal-dan-haram')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-bookmark me-1"></i> Asesmen Wordwall</button>                            
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 4: Hukum Halal dan Haram</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Definisi, Dasar Hukum, Sebab, dan Penerapan Halal & Haram.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_4', 'https://www.canva.com/design/DAG9gvc3w7E/CgG_TQhv2d4m5ybK_h7w4w/edit')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-tags me-1"></i> Presentasi Canva</button>
+                            <button onclick="trackClick('k6_materi_4', 'https://www.canva.com/design/DAG9nQIpqzY/lysadnWj-fNfx6-VVZDn_g/edit')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD Canva</button>
+                            <button onclick="trackClick('k6_materi_4', 'https://wordwall.net/resource/105050099/kuis-hukum-halal-dan-haram')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-bookmark me-1"></i> Asesmen Wordwall</button>                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+5:+Jasa+Khulafaur+Rasyidin" class="card-img-top" alt="Bab 5">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_5">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_5" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+5:+Jasa+Khulafaur+Rasyidin" class="img-fluid w-100" alt="Bab 5" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_5"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_5" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 5: Jasa Khulafaur Rasyidin</h5>
-                        <p class="card-text text-muted small flex-grow-1">Meneladani Jasa Khalifah Abu Bakar As-Siddiq dan Umar bin Khattab.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">                            
-                            <button onclick="trackClick('k6_materi_5', 'https://gemini.google.com/share/d85cfccc6c53')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-laptop me-1"></i> MPI Gemini</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 5: Jasa Khulafaur Rasyidin</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Meneladani Jasa Khalifah Abu Bakar As-Siddiq dan Umar bin Khattab.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">                            
+                            <button onclick="trackClick('k6_materi_5', 'https://gemini.google.com/share/d85cfccc6c53')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-laptop me-1"></i> MPI Gemini</button>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div> 
-        <div class="row mt-5">
+
+        <div class="row mt-4">
             <div class="col-12">
-                <h3 class="fw-bold semester-label border-start border-5 border-warning ps-3">
-                    Semester 2 (Genap)
-                </h3>
+                <h3 class="font-heading mb-4 text-dark border-start border-5 border-warning ps-3">Semester 2 (Genap)</h3>
             </div>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 mb-5">
             
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+6:+Surah+Al-A'la" class="card-img-top" alt="Bab 6">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_6">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_6" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+6:+Surah+Al-A'la" class="img-fluid w-100" alt="Bab 6" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_6"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_6" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 6: Mengaji Surah Al-A‘la</h5>
-                        <p class="card-text text-muted small flex-grow-1">Membaca, Menulis, Menghafal, dan Pesan Pokok Q.S. Al-A‘la.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_6', 'assets/k6_materi_6_surat_al-ala.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 6: Mengaji Surah Al-A‘la</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Membaca, Menulis, Menghafal, dan Pesan Pokok Q.S. Al-A‘la.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_6', 'assets/k6_materi_6_surat_al-ala.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+7:+Qada+dan+Qadar" class="card-img-top" alt="Bab 7">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_7">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_7" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+7:+Qada+dan+Qadar" class="img-fluid w-100" alt="Bab 7" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_7"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_7" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 7: Indahnya Ketetapan Allah</h5>
-                        <p class="card-text text-muted small flex-grow-1">Makna Qada & Qadar, Jenis Takdir, dan Hikmah Beriman.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_7', 'https://indahnyaketetapanallah-hp.vercel.app/')" class="btn btn-sm btn-danger rounded-pill flex-fill"><i class="fas fa-laptop me-1"></i> MPI Untuk IFP</button>
-                            <button onclick="trackClick('k6_materi_7', 'https://wordwall.net/resource/103618851/agama/indahnya-ketetapan-allah')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book me-1"></i> Wordwall Melengkapi Kalimat</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 7: Indahnya Ketetapan Allah</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Makna Qada & Qadar, Jenis Takdir, dan Hikmah Beriman.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_7', 'https://indahnyaketetapanallah-hp.vercel.app/')" class="btn btn-sm btn-danger rounded-pill flex-fill fw-bold"><i class="fas fa-laptop me-1"></i> MPI Untuk IFP</button>
+                            <button onclick="trackClick('k6_materi_7', 'https://wordwall.net/resource/103618851/agama/indahnya-ketetapan-allah')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-book me-1"></i> Wordwall Melengkapi Kalimat</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+8:+Peduli+Lingkungan" class="card-img-top" alt="Bab 8">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_8">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_8" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+8:+Peduli+Lingkungan" class="img-fluid w-100" alt="Bab 8" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_8"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_8" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 8: Peduli Lingkungan</h5>
-                        <p class="card-text text-muted small flex-grow-1">Konsep, Manfaat, dan Sikap Peduli terhadap Lingkungan.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_8', 'assets/k6_materi_8_peduli_lingkungan.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 8: Peduli Lingkungan</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Konsep, Manfaat, dan Sikap Peduli terhadap Lingkungan.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_8', 'assets/k6_materi_8_peduli_lingkungan.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+9:+Puasa+Sunah" class="card-img-top" alt="Bab 9">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_9">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_9" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+9:+Puasa+Sunah" class="img-fluid w-100" alt="Bab 9" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_9"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_9" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 9: Mengamalkan Puasa Sunah</h5>
-                        <p class="card-text text-muted small flex-grow-1">Jenis, Waktu, Ketentuan, dan Hikmah Puasa Sunah.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_9', 'assets/k6_materi_9_pausa_sunah.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 9: Mengamalkan Puasa Sunah</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Jenis, Waktu, Ketentuan, dan Hikmah Puasa Sunah.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_9', 'assets/k6_materi_9_pausa_sunah.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+10:+Usman+dan+Ali" class="card-img-top" alt="Bab 10">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k6_materi_10">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
-                        </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k6_materi_10" class="fw-bold" style="font-size: 0.75rem;">...</span>
-                            </span>
-                        </div>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+10:+Usman+dan+Ali" class="img-fluid w-100" alt="Bab 10" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3"><span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k6_materi_10"><i class="fas fa-eye me-1"></i> ...</span></div>
+                        <div class="position-absolute bottom-0 end-0 m-3"><span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill"><i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k6_materi_10" class="fw-bold" style="font-size: 0.75rem;">...</span></span></div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 10: Jasa Usman & Ali</h5>
-                        <p class="card-text text-muted small flex-grow-1">Meneladani Jasa Khalifah Usman bin Affan dan Ali bin Abi Thalib.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k6_materi_10', 'assets/k6_materi_10_jasa_usman.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint Jasa Utsman bin Affan</button>
-                            <button onclick="trackClick('k6_materi_10', 'assets/k6_materi_10_jasa_ali.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint Jasa Ali bin Abi Thalib</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 10: Jasa Usman & Ali</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Meneladani Jasa Khalifah Usman bin Affan dan Ali bin Abi Thalib.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k6_materi_10', 'assets/k6_materi_10_jasa_usman.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT Jasa Utsman</button>
+                            <button onclick="trackClick('k6_materi_10', 'assets/k6_materi_10_jasa_ali.pptx')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT Jasa Ali</button>
                         </div>
                     </div>
                 </div>

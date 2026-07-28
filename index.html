@@ -3,150 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sedang Perbaikan - Media Pembelajaran PAIBP SD Kota Banjar</title>
-    <meta name="description" content="Sedang Perbaikan - Media Pembelajaran PAIBP SD Kota Banjar">
+    <title>Media Pembelajaran PAIBP SD</title>
+    <meta name="description" content="Portal Media Pembelajaran dan Buku Elektronik PAI SD KKG Kota Banjar.">
     <link rel="icon" type="image/png" href="assets/logo.png">
-    <meta property="og:title" content="Sedang Perbaikan - Media Pembelajaran PAIBP SD Kota Banjar">
-    <meta property="og:description" content="Sedang Perbaikan - Media Pembelajaran PAIBP SD Kota Banjar">
+    <meta property="og:title" content="Media Pembelajaran PAIBP SD">
+    <meta property="og:description" content="Akses materi pembelajaran interaktif dan buku elektronik PAI SD Kurikulum Merdeka.">
     <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/header.png"> 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        :root {
-            --primary-green: #4ECDC4;
-            --secondary-yellow: #FFE66D;
-            --dark-text: #292f36;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f7fff7;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .maintenance-card {
-            max-width: 600px;
-            padding: 40px;
-            border-radius: 30px;
-            background: white;
-            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.15);
-            text-align: center;
-            border-bottom: 8px solid var(--primary-green);
-        }
-
-        /* Animasi Ikon Melayang & Berputar */
-        .icon-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 230, 109, 0.3); /* Kuning Transparan */
-            border-radius: 50%;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .main-icon {
-            color: var(--secondary-yellow);
-            font-size: 3.5rem;
-            animation: spin-slow 10s linear infinite;
-        }
-
-        .gear-small {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: var(--primary-green);
-            font-size: 1.5rem;
-            animation: spin 4s linear infinite;
-        }
-
-        h1 {
-            color: var(--dark-text);
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        p {
-            color: #6c757d;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .btn-refresh {
-            background-color: var(--primary-green);
-            color: white;
-            border-radius: 50px;
-            padding: 12px 35px;
-            font-weight: 700;
-            border: none;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-refresh:hover {
-            background-color: #3dbbb3;
-            transform: scale(1.05);
-            color: white;
-        }
-
-        /* Keyframes Animasi */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes spin-slow {
-            100% { transform: rotate(-360deg); }
-        }
-    </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="maintenance-card mx-auto">
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
             
-            <div class="icon-wrapper">
-                <i class="fas fa-tools main-icon"></i>
-                <i class="fas fa-cog gear-small"></i>
-            </div>
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
 
-            <h1>Sedang Perbaikan</h1>
-            
-            <p>
-                Mohon maaf, website <strong>Media Pembelajaran PAIBP SD Kota Banjar</strong> sedang dalam pemeliharaan sistem untuk meningkatkan kualitas layanan pembelajaran.<br>
-                <span class="text-success fw-bold d-block mt-2">Silakan kembali lagi nanti ya! 😊</span>
-            </p>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
+                    </ul>
 
-            <div class="d-grid gap-2 d-sm-flex justify-content-center">
-                <button onclick="window.location.reload()" class="btn btn-refresh shadow-sm">
-                    <i class="fas fa-sync-alt me-2"></i> Coba Muat Ulang
-                </button>
-                <a href="https://wa.me/6285974597450" class="btn btn-outline-secondary rounded-pill px-4 py-2 fw-bold" style="border: 2px solid #eee;">
-                    <i class="fab fa-whatsapp me-2"></i> Hubungi Penanggung Jawab
-                </a>
-            </div>
+                    <div id="authContainer" class="mt-3 mt-lg-0">
+                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                            <i class="fab fa-google me-2"></i> Masuk
+                        </button>
+                    </div>
 
-            <div class="mt-4 text-muted small">
-                &copy; KKG PAI SD Kota Banjar
+                </div>
             </div>
         </div>
+    </nav>
+
+    <div style="height: 90px;"></div>
+
+    <div class="container pb-5">
+        <!-- ALERT UPDATE PENDIDIKAN (Auto Hide 30s) -->
+        <div id="cpUpdateAlert" class="alert border-0 shadow-sm position-relative overflow-hidden mb-5 text-white" style="background: linear-gradient(135deg, #e53935 0%, #ff5252 100%); border-radius: 1.5rem;">
+            <!-- Tombol Silang (Close) -->
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" aria-label="Close" onclick="closeCpAlert()"></button>
+            
+            <div class="p-2 p-md-3">
+                <h4 class="fw-bold font-heading mb-2"><i class="fas fa-bullhorn me-2 text-warning"></i> Info Penting: Update CP 2026!</h4>
+                <p class="mb-3 opacity-100" style="font-size: 0.95rem;">
+                    Telah terbit Keputusan Kepala BKPDM Kemendikdasmen No. 020 Tahun 2026 tentang <strong>Perubahan Capaian Pembelajaran (CP)</strong> terbaru. Yuk, segera cek apa saja yang berubah dan persiapkan perangkat ajar Anda!
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="https://www.kemendikdasmen.go.id/siaran-pers/15636-capaian-pembelajaran-baru-telah-terbit-yang-berubah-hanya-ma" target="_blank" class="btn btn-light text-danger fw-bold rounded-pill px-4 shadow-sm btn-sm">
+                        <i class="fas fa-external-link-alt me-1"></i> Rilis Kemendikdasmen
+                    </a>
+                    <a href="blog/cp.html" class="btn btn-outline-light fw-bold rounded-pill px-4 btn-sm">
+                        <i class="fas fa-file-alt me-1"></i> Lihat Rincian CP Baru
+                    </a>
+                </div>
+            </div>
+
+            <!-- Indikator Waktu Mundur Berwarna Putih Tebal -->
+            <div id="cpAlertProgressBar" class="position-absolute bottom-0 start-0 bg-white" style="height: 6px; width: 100%; transition: width 30s linear; opacity: 0.9;"></div>
+        </div>
+
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm overflow-visible">
+            <div class="row align-items-center">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <span class="badge bg-white text-primary mb-3 px-3 py-2 rounded-pill shadow-sm">Kurikulum Merdeka</span>
+                    <h1 class="display-5 fw-bolder mb-3" style="color: var(--primary-blue);">Eksplorasi Materi PAI <br><span class="text-success">Lebih Menyenangkan!</span></h1>
+                    <p class="fs-5 mb-4 opacity-75">Temukan rangkuman materi, buku elektronik, dan latihan soal interaktif untuk Sekolah Dasar.</p>
+                    
+                    <!-- Search Bar dengan Fitur Rekomendasi (Live Search) -->
+                    <div class="position-relative mx-auto" style="max-width: 600px;">
+                        <div class="search-bar-hero d-flex shadow-sm rounded-pill overflow-hidden bg-white">
+                            <span class="input-group-text bg-transparent border-0 text-muted ps-4"><i class="fas fa-search"></i></span>
+                            <!-- Tambahan oninput="showRecommendations(this.value)" dan autocomplete="off" -->
+                            <input type="text" id="mainSearchInput" class="form-control border-0 shadow-none" placeholder="Cari materi (Cth: Rukun Islam)..." onkeypress="handleEnter(event)" oninput="showRecommendations(this.value)" autocomplete="off" style="box-shadow: none;">
+                            <button class="btn btn-primary fw-bold px-4 rounded-pill m-1" onclick="doSearch()">Cari</button>
+                        </div>
+                        
+                        <!-- Kotak Dropdown Rekomendasi (Tersembunyi secara default) -->
+                        <ul id="searchRecommendations" class="list-group position-absolute w-100 shadow-lg d-none text-start" style="top: 110%; z-index: 1050; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);">
+                            <!-- Isi rekomendasi akan disuntikkan dari Javascript -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block text-center">
+                    <img src="assets/images/header_image.png" alt="Ilustrasi" class="img-fluid" style="max-height: 300px; border-radius: 1rem;">
+                </div>
+            </div>
+        </div>
+
+        <!-- AREA KHUSUS MEMBER (MUNCUL JIKA SUDAH LOGIN) -->
+        <div class="auth-only d-none mb-5 mt-2">
+            
+            <div class="alert alert-success shadow-sm border-0 rounded-4 mb-4">
+                <h4 class="fw-bold"><i class="fas fa-check-circle me-2"></i> Selamat datang di area member!</h4>
+                <p class="mb-0">Ini adalah pengumuman rahasia dan menu eksklusif yang hanya bisa diakses oleh member yang sudah masuk.</p>
+            </div>
+
+            <!-- Bento Grid Khusus Member -->
+            <div class="row g-4">
+                
+                <!-- Bento Card Game Interaktif -->
+                <div class="col-12 col-lg-4">
+                    <a href="game.html" class="bento-card text-white text-center text-decoration-none d-flex flex-column justify-content-center align-items-center p-4 border-0 h-100" style="background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%); min-height: 220px;">
+                        <i class="fas fa-gamepad mb-3" style="font-size: 4.5rem; opacity: 0.9; text-shadow: 2px 2px 10px rgba(0,0,0,0.1);"></i>
+                        <h4 class="font-heading fw-bold mb-1">Game Interaktif</h4>
+                        <p class="small opacity-75 mb-0 fw-bold">Uji wawasan PAI dengan seru!</p>
+                    </a>
+                </div>
+                
+                <!-- Bento Card Perpustakaan Digital (Dipindah ke Sini) -->
+                <div class="col-12 col-lg-8">
+                    <div class="bento-card bg-gradient-blue-green d-flex flex-row align-items-center justify-content-between h-100 border-0 p-4" style="min-height: 220px;">
+                        <div class="text-white">
+                            <h3 class="font-heading mb-2">Perpustakaan Digital</h3>
+                            <p class="mb-4 opacity-75">Buku Sekolah Elektronik (BSE) PAI Kurikulum Merdeka format PDF.</p>
+                            <a href="buku.html" class="btn btn-light text-primary fw-bold rounded-pill px-4">Buka Perpustakaan</a>
+                        </div>
+                        <i class="fas fa-book-reader text-white opacity-25 d-none d-sm-block" style="font-size: 8rem; margin-right: 10px;"></i>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+        <h3 class="font-heading mb-4 text-dark"><i class="fas fa-th-large text-primary me-2"></i> Jelajahi Materi</h3>
+
+        <!-- BENTO GRID UTAMA -->
+        <div class="bento-grid">
+            
+            <a href="kelas1.html" class="bento-card bento-kelas text-center">
+                <div class="kelas-img-wrapper"><img src="assets/kelas1.png" alt="Kelas 1"></div>
+                <h4 class="font-heading">Kelas 1</h4>
+            </a>
+            <a href="kelas2.html" class="bento-card bento-kelas text-center">
+                <div class="kelas-img-wrapper"><img src="assets/kelas2.png" alt="Kelas 2"></div>
+                <h4 class="font-heading">Kelas 2</h4>
+            </a>
+            <a href="kelas3.html" class="bento-card bento-kelas text-center">
+                <div class="kelas-img-wrapper"><img src="assets/kelas3.png" alt="Kelas 3"></div>
+                <h4 class="font-heading">Kelas 3</h4>
+            </a>
+
+            <div class="bento-card bento-trending">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="font-heading m-0"><i class="fas fa-fire text-danger me-2"></i> Sedang Populer</h5>
+                </div>
+                <ul id="trendingList" class="list-group list-group-flush">
+                    <li class="list-group-item text-center text-muted border-0">Memuat data...</li>
+                </ul>
+            </div>
+
+            <a href="kelas4.html" class="bento-card bento-kelas text-center">
+                <div class="kelas-img-wrapper"><img src="assets/kelas4.png" alt="Kelas 4"></div>
+                <h4 class="font-heading">Kelas 4</h4>
+            </a>
+            <a href="kelas5.html" class="bento-card bento-kelas text-center">
+                <div class="kelas-img-wrapper"><img src="assets/kelas5.png" alt="Kelas 5"></div>
+                <h4 class="font-heading">Kelas 5</h4>
+            </a>
+            <a href="kelas6.html" class="bento-card bento-kelas text-center">
+                <div class="kelas-img-wrapper"><img src="assets/kelas6.png" alt="Kelas 6"></div>
+                <h4 class="font-heading">Kelas 6</h4>
+            </a>
+
+        </div>
     </div>
+
+    <!-- SCRIPT UNTUK ANIMASI ALERT -->
+    <script>
+        function closeCpAlert() {
+            const alertBox = document.getElementById('cpUpdateAlert');
+            if (alertBox) {
+                // Memberikan efek animasi menghilang secara halus
+                alertBox.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                alertBox.style.opacity = "0";
+                alertBox.style.transform = "scale(0.95)";
+                setTimeout(() => {
+                    alertBox.classList.add('d-none');
+                }, 500);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('cpAlertProgressBar');
+            const alertBox = document.getElementById('cpUpdateAlert');
+            
+            if (progressBar && alertBox) {
+                // Memulai animasi garis putih menyusut selama 30 detik
+                setTimeout(() => {
+                    progressBar.style.width = '0%';
+                }, 100);
+
+                // Otomatis menutup alert setelah 15 detik
+                setTimeout(() => {
+                    closeCpAlert();
+                }, 15000);
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

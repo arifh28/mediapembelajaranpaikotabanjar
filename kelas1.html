@@ -24,13 +24,13 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            display: none; /* Sembunyi dulu */
+            display: none;
             z-index: 999;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--secondary-yellow);
-            color: var(--dark-text);
+            background-color: var(--primary-blue);
+            color: white;
             border: none;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
@@ -38,336 +38,329 @@
 
         #btnBackToTop:hover {
             transform: translateY(-5px);
-            background-color: #ffd700;
-        }
-
-        .semester-label {
-            margin-top: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-green);
+            background-color: var(--primary-green);
         }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <header class="main-header text-center" id="topPage">
-        <div class="container position-relative">
-            <a href="index.html" class="btn btn-light rounded-circle position-absolute start-0 top-50 translate-middle-y ms-3 shadow-sm">
-                <i class="fas fa-arrow-left text-success"></i>
+    <!-- Navbar Glassmorphism -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
             </a>
-            <h2 class="fw-bold m-0">Kelas 1</h2>
-            <p class="mb-0 text-white-50">Tahun Pelajaran 2025/2026</p>
+            
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
+                    </ul>
+
+                    <div id="authContainer" class="mt-3 mt-lg-0">
+                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                            <i class="fab fa-google me-2"></i> Masuk
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
+
+    <div style="height: 90px;"></div>
 
     <div class="container pb-5 pt-3 flex-grow-1">
         
+        <!-- Hero Section Pengganti Header Lama -->
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center position-relative" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
+            <a href="index.html" class="btn btn-light rounded-circle position-absolute top-50 start-0 translate-middle-y ms-3 ms-md-4 shadow-sm" style="z-index: 10;">
+                <i class="fas fa-arrow-left text-primary"></i>
+            </a>
+            <h1 class="display-5 fw-bolder mb-2 text-white font-heading">Materi Kelas 1</h1>
+            <p class="fs-5 mb-0 text-white opacity-75">Tahun Pelajaran 2025/2026</p>
+        </div>
+
+        <!-- Validasi Akses Member -->
+        <div class="alert alert-success auth-only d-none shadow-sm rounded-4 border-0 mb-4">
+            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i> Anda login sebagai Guru. Riwayat aktivitas akan otomatis tersimpan.</h5>
+        </div>
+
         <div class="row">
             <div class="col-12">
-                <h3 class="fw-bold semester-label border-start border-5 border-warning ps-3">
-                    Semester 1 (Ganjil)
-                </h3>
+                <h3 class="font-heading mb-4 text-dark border-start border-5 border-warning ps-3">Semester 1 (Ganjil)</h3>
             </div>
         </div>
 
-        <div class="row g-4">
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+        <div class="row g-4 mb-5">
+            
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+1:+Cinta+Al-Qur'an" class="card-img-top" alt="Bab 1">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_1">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+1:+Cinta+Al-Qur'an" class="img-fluid w-100" alt="Bab 1" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_1"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_1" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_1" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 1: Aku Cinta Al-Qur’an</h5>
-                        <p class="card-text text-muted small flex-grow-1">Al-Qur’an Kitabku, Huruf Hijaiyah, Harakat, Hafalan Surah Al-Fatihah.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_1', 'assets/k1_materi_1_harokat_al-fatihah.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint Harokat Al-Fatihah</button>
-                            <button onclick="trackClick('k1_materi_1', 'https://wordwall.net/resource/104831618')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-puzzle-piece me-1"></i> Wordwall Aku Cinta Alquran</button>
-                            
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 1: Aku Cinta Al-Qur’an</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Al-Qur’an Kitabku, Huruf Hijaiyah, Harakat, Hafalan Surah Al-Fatihah.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_1', 'assets/k1_materi_1_harokat_al-fatihah.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> Powerpoint</button>
+                            <button onclick="trackClick('k1_materi_1', 'https://wordwall.net/resource/104831618')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-puzzle-piece me-1"></i> Wordwall</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+2:+Rukun+Iman" class="card-img-top" alt="Bab 2">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_2">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+2:+Rukun+Iman" class="img-fluid w-100" alt="Bab 2" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_2"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_2" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_2" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 2: Mengenal Rukun Iman</h5>
-                        <p class="card-text text-muted small flex-grow-1">Pengertian Rukun Iman, Beriman kepada Allah & Rasul, Cinta Allah & Rasul-Nya.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_rukun_iman_bagian_1.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint Bagian 1</button>
-                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_rukun_iman_bagian_2.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint Bagian 2</button>
-                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_lkpd_rukun_iman_bagian_1.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Rukun Iman Bagian 1</button>
-                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_lkpd_rukun_iman_bagian_2.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Rukun Iman Bagian 2</button>
-                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_flipbook_kartu_rukun_iman.pdf')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Wordwall Rukun Islam</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 2: Mengenal Rukun Iman</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Pengertian Rukun Iman, Beriman kepada Allah & Rasul, Cinta Allah.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_rukun_iman_bagian_1.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT Bagian 1</button>
+                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_rukun_iman_bagian_2.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT Bagian 2</button>
+                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_lkpd_rukun_iman_bagian_1.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD 1</button>
+                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_lkpd_rukun_iman_bagian_2.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD 2</button>
+                            <button onclick="trackClick('k1_materi_2', 'assets/k1_materi_2_flipbook_kartu_rukun_iman.pdf')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> Wordwall</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+3:+Basmalah+Hamdalah" class="card-img-top" alt="Bab 3">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_3">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+3:+Basmalah+Hamdalah" class="img-fluid w-100" alt="Bab 3" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_3"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_3" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_3" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 3: Basmalah & Hamdalah</h5>
-                        <p class="card-text text-muted small flex-grow-1">Membaca Basmalah & Hamdalah, Bersikap Santun, Mensyukuri Nikmat Allah.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_3', 'https://youtu.be/bMmSj-1_Pz0')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fab fa-youtube me-1"></i> Video Youtube</button> 
-                            <button onclick="trackClick('k1_materi_3', 'assets/k1_materi_3_kalimah_basmalah_hamdalah.mp4')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-file-video me-1"></i> Presentasi Video</button>
-                            <button onclick="trackClick('k1_materi_3', 'assets/k1_materi_3_lkpd_kalimah_basmalah_hamdalah.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Basmalah dan Hamdalah</button>
-                            <button onclick="trackClick('k1_materi_3', 'https://wordwall.net/play/105156/384/559')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Wordwall Basmalah dan Hamdalah</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 3: Basmalah & Hamdalah</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Membaca Basmalah & Hamdalah, Bersikap Santun, Mensyukuri Nikmat Allah.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_3', 'https://youtu.be/bMmSj-1_Pz0')" class="btn btn-sm btn-danger rounded-pill flex-fill fw-bold"><i class="fab fa-youtube me-1"></i> Video</button> 
+                            <button onclick="trackClick('k1_materi_3', 'assets/k1_materi_3_kalimah_basmalah_hamdalah.mp4')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-video me-1"></i> Presentasi</button>
+                            <button onclick="trackClick('k1_materi_3', 'assets/k1_materi_3_lkpd_kalimah_basmalah_hamdalah.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD</button>
+                            <button onclick="trackClick('k1_materi_3', 'https://wordwall.net/play/105156/384/559')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-gamepad me-1"></i> Wordwall</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+4:+Rukun+Islam" class="card-img-top" alt="Bab 4">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_4">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+4:+Rukun+Islam" class="img-fluid w-100" alt="Bab 4" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_4"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_4" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_4" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 4: Mengenal Rukun Islam</h5>
-                        <p class="card-text text-muted small flex-grow-1">Mengenal & Mengartikan Syahadat, Aku Anak Muslim.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_4', 'assets/k1_materi_4_rukun_islam.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
-                            <button onclick="trackClick('k1_materi_4', 'assets/k1_materi_4_lkpd_rukun_islam.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Rukun Islam</button>
-                            <button onclick="trackClick('k1_materi_4', 'https://wordwall.net/id/resource/62883995/latihan-pai-kelas-1-sd-rukun-islam')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Wordwall Rukun Islam</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 4: Mengenal Rukun Islam</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Mengenal & Mengartikan Syahadat, Aku Anak Muslim.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_4', 'assets/k1_materi_4_rukun_islam.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT</button>
+                            <button onclick="trackClick('k1_materi_4', 'assets/k1_materi_4_lkpd_rukun_islam.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD</button>
+                            <button onclick="trackClick('k1_materi_4', 'https://wordwall.net/id/resource/62883995/latihan-pai-kelas-1-sd-rukun-islam')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-gamepad me-1"></i> Wordwall</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+5:+Nabi+dan+Rasul" class="card-img-top" alt="Bab 5">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_5">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+5:+Nabi+dan+Rasul" class="img-fluid w-100" alt="Bab 5" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_5"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_5" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_5" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 5: Nabi & Rasul Panutanku</h5>
-                        <p class="card-text text-muted small flex-grow-1">Mengenal 25 Nabi, Mukjizat, Perilaku Sederhana Nabi & Rasul.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_5', 'https://archive.org/download/k1_materi_5_nabi_panutanku/k1_materi_5_nabi_panutanku.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
-                            <button onclick="trackClick('k1_materi_5', 'assets/k1_materi_5_lkpd_nabi_panutanku.docx')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Nabi dan Rasul Panutanku</button>
-                            <button onclick="trackClick('k1_materi_5', 'https://wordwall.net/id/resource/87096869')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Wordwall Mandiri Nabi dan Rasul Panutanku</button> 
-                            <button onclick="trackClick('k1_materi_5', 'https://wordwall.net/id/resource/87692990')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Wordwall Kelompok Nabi dan Rasul Panutanku</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 5: Nabi & Rasul Panutanku</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Mengenal 25 Nabi, Mukjizat, Perilaku Sederhana Nabi & Rasul.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_5', 'https://archive.org/download/k1_materi_5_nabi_panutanku/k1_materi_5_nabi_panutanku.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT</button>
+                            <button onclick="trackClick('k1_materi_5', 'assets/k1_materi_5_lkpd_nabi_panutanku.docx')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD</button>
+                            <button onclick="trackClick('k1_materi_5', 'https://wordwall.net/id/resource/87096869')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-gamepad me-1"></i> Wordwall 1</button> 
+                            <button onclick="trackClick('k1_materi_5', 'https://wordwall.net/id/resource/87692990')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-gamepad me-1"></i> Wordwall 2</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+
+        <div class="row mt-4">
             <div class="col-12">
-                <h3 class="fw-bold semester-label border-start border-5 border-warning ps-3">
-                    Semester 2 (Genap)
-                </h3>
+                <h3 class="font-heading mb-4 text-dark border-start border-5 border-warning ps-3">Semester 2 (Genap)</h3>
             </div>
         </div>
 
-        <div class="row g-4">
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+        <div class="row g-4 mb-5">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+6:+Pedoman+Hidupku" class="card-img-top" alt="Bab 6">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_6">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+6:+Pedoman+Hidupku" class="img-fluid w-100" alt="Bab 6" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_6"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_6" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_6" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 6: Al-Qur’an Pedomanku</h5>
-                        <p class="card-text text-muted small flex-grow-1">Membaca Hijaiyah Berharakat, Surah Al-Ikhlas & Pesan Pokoknya.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_6', 'https://www.educaplay.com/learning-resources/26740041-quiz_surah_al_ikhlas.html')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-puzzle-piece me-1"></i> Kuis Surat Al-Ikhlas</button>
-                            <button onclick="trackClick('k1_materi_6', 'https://www.educaplay.com/learning-resources/27199391-quiz_harakat_tanwin_kelas_1.html')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-puzzle-piece me-1"></i> Kuis Harakat Tanwin</button>
-                            <button onclick="trackClick('k1_materi_6', 'assets/k1_materi_6_surat_al-ikhlas.pdf')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Surat Al-Ikhlas</button>
-                            <button onclick="trackClick('k1_materi_6', 'assets/k1_materi_6_harokat_tanwin.pdf')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Harakat Tanwin</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 6: Al-Qur’an Pedomanku</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Membaca Hijaiyah Berharakat, Surah Al-Ikhlas & Pesan Pokoknya.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_6', 'https://www.educaplay.com/learning-resources/26740041-quiz_surah_al_ikhlas.html')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-puzzle-piece me-1"></i> Kuis Al-Ikhlas</button>
+                            <button onclick="trackClick('k1_materi_6', 'https://www.educaplay.com/learning-resources/27199391-quiz_harakat_tanwin_kelas_1.html')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-puzzle-piece me-1"></i> Kuis Harakat</button>
+                            <button onclick="trackClick('k1_materi_6', 'assets/k1_materi_6_surat_al-ikhlas.pdf')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD Al-Ikhlas</button>
+                            <button onclick="trackClick('k1_materi_6', 'assets/k1_materi_6_harokat_tanwin.pdf')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD Harakat</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+7:+Kasih+Sayang" class="card-img-top" alt="Bab 7">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_7">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+7:+Kasih+Sayang" class="img-fluid w-100" alt="Bab 7" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_7"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_7" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_7" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 7: Kasih Sayang Sesama</h5>
-                        <p class="card-text text-muted small flex-grow-1">Asmaul Husna Ar-Rahman & Ar-Rahim, Kasih Sayang Nabi Muhammad SAW.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_7', 'assets/k1_materi_7_kasih_sayang_terhadap_sesama.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
-                            <button onclick="trackClick('k1_materi_7', 'assets/k1_materi_7_lkpd_kasih_sayang_terhadap_sesama.pdf')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book me-1"></i> LKPD Kasih Sayang Kepada Sesama</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 7: Kasih Sayang Sesama</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Asmaul Husna Ar-Rahman & Ar-Rahim, Kasih Sayang Nabi Muhammad SAW.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_7', 'assets/k1_materi_7_kasih_sayang_terhadap_sesama.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT</button>
+                            <button onclick="trackClick('k1_materi_7', 'assets/k1_materi_7_lkpd_kasih_sayang_terhadap_sesama.pdf')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-book me-1"></i> LKPD</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+8:+Terima+Kasih" class="card-img-top" alt="Bab 8">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_8">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+8:+Terima+Kasih" class="img-fluid w-100" alt="Bab 8" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_8"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_8" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_8" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 8: Terima Kasih & Disiplin</h5>
-                        <p class="card-text text-muted small flex-grow-1">Cara Berterima Kasih kepada Sesama, Perilaku Disiplin.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_8', 'assets/k1_materi_8_aku_suka_berterimakasih.pdf')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-pdf me-1"></i> Presentasi PDF</button>
-                            <button onclick="trackClick('k1_materi_8', 'assets/k1_materi_8_lkpd_aku_suka_berterimakasih.pdf')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book me-1"></i> LKPD Berterimakasih dan Disiplin</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 8: Terima Kasih & Disiplin</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Cara Berterima Kasih kepada Sesama, Perilaku Disiplin.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_8', 'assets/k1_materi_8_aku_suka_berterimakasih.pdf')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-pdf me-1"></i> PDF Presentasi</button>
+                            <button onclick="trackClick('k1_materi_8', 'assets/k1_materi_8_lkpd_aku_suka_berterimakasih.pdf')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-book me-1"></i> LKPD</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+9:+Hidup+Bersih" class="card-img-top" alt="Bab 9">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_9">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/4ECDC4/white?text=Bab+9:+Hidup+Bersih" class="img-fluid w-100" alt="Bab 9" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_9"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_9" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_9" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 9: Membiasakan Hidup Bersih</h5>
-                        <p class="card-text text-muted small flex-grow-1">Hidup Bersih, Bersuci, Tata Cara Berwudu, Tayamum.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_9', 'https://archive.org/download/ppt-interaktif-pai-kelas-1-bab-9-membiasakan-hidup-bersih/PPT%20INTERAKTIF_PAI%20KELAS%201%20BAB%209%20MEMBIASAKAN%20HIDUP%20BERSIH.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
-                            <button onclick="trackClick('k1_materi_9', 'assets/k1_materi_9_lkpd_wudhu_tayamum.pdf')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Wudhu Tayamum</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 9: Membiasakan Hidup Bersih</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Hidup Bersih, Bersuci, Tata Cara Berwudu, Tayamum.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_9', 'https://archive.org/download/ppt-interaktif-pai-kelas-1-bab-9-membiasakan-hidup-bersih/PPT%20INTERAKTIF_PAI%20KELAS%201%20BAB%209%20MEMBIASAKAN%20HIDUP%20BERSIH.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT Interaktif</button>
+                            <button onclick="trackClick('k1_materi_9', 'assets/k1_materi_9_lkpd_wudhu_tayamum.pdf')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD Wudhu</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-xxl-4">
-                <div class="card custom-card h-100">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100">
                     <div class="position-relative">
-                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+10:+Nabi+Adam" class="card-img-top" alt="Bab 10">
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm view-counter" data-id="k1_materi_10">
-                                <i class="fas fa-eye me-1"></i> ...
-                            </span>
+                        <img src="https://placehold.co/600x350/FFE66D/333?text=Bab+10:+Nabi+Adam" class="img-fluid w-100" alt="Bab 10" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-white text-primary shadow-sm view-counter px-2 py-1 rounded-pill" data-id="k1_materi_10"><i class="fas fa-eye me-1"></i> ...</span>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark shadow-sm d-flex align-items-center" style="opacity: 0.9;">
-                                <i class="fas fa-chalkboard-teacher me-2"></i>
-                                <span id="guru-k1_materi_10" class="fw-bold" style="font-size: 0.75rem;">...</span>
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <span class="badge bg-white text-success shadow-sm d-flex align-items-center px-2 py-1 rounded-pill">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> <span id="guru-k1_materi_10" class="fw-bold" style="font-size: 0.75rem;">...</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Bab 10: Nabi Adam a.s.</h5>
-                        <p class="card-text text-muted small flex-grow-1">Penciptaan Manusia Pertama, Kisah di Surga, Keteladanan Nabi Adam.</p>
-                        <hr class="my-2 text-muted opacity-25">
-                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-auto">
-                            <button onclick="trackClick('k1_materi_10', 'assets/k1_materi_10_adam_manusia_pertama.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill"><i class="fas fa-file-powerpoint me-1"></i> Presentasi Powerpoint</button>
-                            <button onclick="trackClick('k1_materi_10', 'assets/k1_materi_10_lkpd_adam_manusia_pertama.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> LKPD Adam Manusia Pertama</button>
-                            <button onclick="trackClick('k1_materi_10', 'https://www.canva.com/design/DAG8mhmOlFY/PTLJzscancj9lw7Pk-JB-A/view?utm_content=DAG8mhmOlFY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h96495d3a8b#6')" class="btn btn-sm btn-warning rounded-pill flex-fill"><i class="fas fa-tags me-1"></i> Presentasi Canva</button>
-                            <button onclick="trackClick('k1_materi_10', 'https://wayground.com/join?gc=26250150&source=liveDashboard')" class="btn btn-sm btn-success rounded-pill flex-fill"><i class="fas fa-book-open me-1"></i> Kuis Wayground (Quizziz) Adam Manusia Pertama</button>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <h5 class="font-heading mb-2">Bab 10: Nabi Adam a.s.</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Penciptaan Manusia Pertama, Kisah di Surga, Keteladanan Nabi Adam.</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <button onclick="trackClick('k1_materi_10', 'assets/k1_materi_10_adam_manusia_pertama.pptx')" class="btn btn-sm btn-primary rounded-pill flex-fill fw-bold"><i class="fas fa-file-powerpoint me-1"></i> PPT</button>
+                            <button onclick="trackClick('k1_materi_10', 'assets/k1_materi_10_lkpd_adam_manusia_pertama.pdf')" class="btn btn-sm btn-info rounded-pill flex-fill fw-bold"><i class="fas fa-book-open me-1"></i> LKPD</button>
+                            <button onclick="trackClick('k1_materi_10', 'https://www.canva.com/design/DAG8mhmOlFY/PTLJzscancj9lw7Pk-JB-A/view?utm_content=DAG8mhmOlFY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h96495d3a8b#6')" class="btn btn-sm btn-warning rounded-pill flex-fill fw-bold"><i class="fas fa-tags me-1"></i> Canva</button>
+                            <button onclick="trackClick('k1_materi_10', 'https://wayground.com/join?gc=26250150&source=liveDashboard')" class="btn btn-sm btn-success rounded-pill flex-fill fw-bold"><i class="fas fa-gamepad me-1"></i> Quizziz</button>
                         </div>
                     </div>
                 </div>
@@ -396,12 +389,8 @@
     <script src="script.js"></script>
 
     <script>
-        // Ambil elemen tombol
         const mybutton = document.getElementById("btnBackToTop");
-
-        // Ketika user scroll ke bawah 300px, munculkan tombol
         window.onscroll = function() {scrollFunction()};
-
         function scrollFunction() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 mybutton.style.display = "block";
@@ -409,13 +398,8 @@
                 mybutton.style.display = "none";
             }
         }
-
-        // Ketika tombol diklik, gulir ke atas
         mybutton.addEventListener("click", function() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>

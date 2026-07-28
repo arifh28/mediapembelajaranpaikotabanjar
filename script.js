@@ -1,10 +1,136 @@
 // =================================================================
-// 1. KONFIGURASI SUPABASE
+// 1. KONFIGURASI SUPABASE & AUTH
 // =================================================================
 const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
-// const SUPABASE_KEY = '';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Fungsi Login Google
+async function loginGoogle() {
+    const { data, error } = await _supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            // Ini akan memastikan user dikembalikan persis ke halaman saat ini
+            redirectTo: window.location.href 
+        }
+    });
+    if (error) console.error("Login Error:", error.message);
+}
+
+// Fungsi Logout
+async function logout() {
+    const { error } = await _supabase.auth.signOut();
+    if (!error) window.location.reload();
+}
+
+// Cek Sesi User saat halaman dimuat
+async function checkUserSession() {
+    const { data: { session } } = await _supabase.auth.getSession();
+    const authContainer = document.getElementById('authContainer');
+
+    // Mengambil semua elemen yang mau disembunyikan/ditampilkan
+    const authOnlyElements = document.querySelectorAll('.auth-only');
+    const guestOnlyElements = document.querySelectorAll('.guest-only');
+
+    if (session && session.user) {
+        // --- USER SUDAH LOGIN ---
+        const userMeta = session.user.user_metadata;
+        const userEmail = session.user.email;
+        
+        // Perbaikan Foto: Cek avatar_url, lalu picture, jika tidak ada pakai inisial nama
+        const avatarUrl = userMeta.avatar_url || userMeta.picture || `https://ui-avatars.com/api/?name=${encodeURIComponent(userMeta.full_name)}&background=random`;
+
+        // Render Dropdown Profil
+        if(authContainer) {
+            authContainer.innerHTML = `
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown">
+                    <img src="${avatarUrl}" alt="Profile" class="user-profile-img me-2" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-green);">
+                    <span class="d-none d-lg-inline">${userMeta.full_name}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
+                    <li><a class="dropdown-item disabled" href="#"><i class="fas fa-envelope me-2"></i> ${userEmail}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a></li>
+                </ul>
+            </div>`;
+        }
+
+        // Tampilkan div khusus yang login, sembunyikan div guest
+        authOnlyElements.forEach(el => el.classList.remove('d-none'));
+        guestOnlyElements.forEach(el => el.classList.add('d-none'));
+
+    } else {
+        // --- USER BELUM LOGIN ---
+        
+        if(authContainer) {
+            // Render ulang tombol login jika user logout
+            authContainer.innerHTML = `
+            <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                <i class="fab fa-google me-2"></i> Masuk
+            </button>`;
+        }
+
+        // Tampilkan div guest, sembunyikan div khusus login
+        authOnlyElements.forEach(el => el.classList.add('d-none'));
+        guestOnlyElements.forEach(el => el.classList.remove('d-none'));
+    }
+}
+
+// Panggil cek sesi
+checkUserSession();
+
+// =================================================================
+// 2. FUNGSI PENCARIAN DARI HERO SECTION
+// =================================================================
+function doSearch() {
+    // Ambil dari input baru di hero section
+    const input = document.getElementById('mainSearchInput');
+    if(!input) return;
+    
+    const query = input.value.trim();
+    if (query.length > 0) {
+        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+    }
+}
+
+function handleEnter(event) {
+    if (event.key === 'Enter') {
+        doSearch();
+    }
+}
+
+// =================================================================
+// 3. FUNGSI RENDER POSTS (BLOG)
+// =================================================================
+async function renderPosts() {
+    const container = document.getElementById('postsContainer');
+    if (!container) return; // Cuma jalan di posts.html
+
+    try {
+        const response = await fetch('posts.json');
+        const posts = await response.json();
+        
+        container.innerHTML = ''; // Bersihkan loading
+
+        posts.forEach(post => {
+            container.innerHTML += `
+            <div class="col-md-6 col-lg-4">
+                <div class="bento-card p-0">
+                    <img src="${post.gambar}" alt="${post.judul}" class="img-fluid w-100" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <span class="badge bg-light text-primary mb-2 align-self-start">${post.kategori}</span>
+                        <h5 class="font-heading mb-2">${post.judul}</h5>
+                        <p class="text-muted small mb-4">${post.ringkasan}</p>
+                        <a href="${post.link}" class="btn btn-outline-primary mt-auto rounded-pill w-100 fw-bold">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>`;
+        });
+    } catch (error) {
+        container.innerHTML = `<div class="alert alert-danger w-100">Gagal memuat artikel.</div>`;
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Suntikkan HTML Floating Button dan Modal ke dalam halaman
@@ -294,144 +420,178 @@ function standardizeText(text) {
     return clean;
 }
 
+// =================================================================
+// LOGIKA PENCARIAN (PINTAR & CARD BERGAMBAR)
+// =================================================================
+function standardizeText(text) {
+    if (!text) return "";
+    let clean = text.toLowerCase();
+    clean = clean.replace(/sholat|solat|shalat/g, 'salat');
+    clean = clean.replace(/alquran|quran|al quran/g, "al-qur'an");
+    clean = clean.replace(/hadist|hadits/g, 'hadis');
+    clean = clean.replace(/alloh/g, 'allah');
+    clean = clean.replace(/rosul/g, 'rasul');
+    clean = clean.replace(/akhlaq|ahlaq|ahlak/g, 'akhlak');
+    clean = clean.replace(/dzikir/g, 'zikir');
+    return clean;
+}
+
 async function renderSearchResults() {
     const container = document.getElementById('resultsContainer');
     const keywordSpan = document.getElementById('searchKeyword');
-    
-    // Stop jika elemen tidak ditemukan (bukan halaman search)
     if (!container) return; 
 
     const urlParams = new URLSearchParams(window.location.search);
-    const rawQuery = urlParams.get('q'); // Query asli user
+    const rawQuery = urlParams.get('q'); 
 
-    // Jika tidak ada query
     if (!rawQuery) {
         if(keywordSpan) keywordSpan.innerText = "-";
-        container.innerHTML = '<div class="col-12"><div class="alert alert-warning text-center">Silakan masukkan kata kunci pencarian.</div></div>';
+        container.innerHTML = '<div class="col-12"><div class="alert alert-warning text-center rounded-4 border-0 shadow-sm">Silakan masukkan kata kunci pencarian.</div></div>';
         return;
     }
 
-    // Tampilkan keyword di header
     if(keywordSpan) keywordSpan.innerText = `"${rawQuery}"`;
-    container.innerHTML = '<div class="col-12 text-center py-5"><i class="fas fa-spinner fa-spin fa-2x text-success"></i><p class="mt-2">Sedang mencari materi...</p></div>';
+    container.innerHTML = '<div class="col-12 text-center py-5"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Sedang mencari materi...</p></div>';
 
     try {
-        // Ambil Database
-        const response = await fetch('assets/pencarian.json'); // Pastikan path json benar
+        const response = await fetch('assets/pencarian.json'); 
         const allData = await response.json();
-
-        // 1. Bersihkan Query User pakai standar kita
         const cleanQuery = standardizeText(rawQuery);
 
-        // 2. Filter Data
         const filtered = allData.filter(item => {
-            // Bersihkan data database juga agar "apple to apple"
             const cleanJudul = standardizeText(item.judul);
             const cleanKeyword = standardizeText(item.keyword);
             const cleanBab = standardizeText(item.bab);
-
-            // Cek kecocokan
-            return cleanJudul.includes(cleanQuery) || 
-                   cleanKeyword.includes(cleanQuery) ||
-                   cleanBab.includes(cleanQuery);
+            return cleanJudul.includes(cleanQuery) || cleanKeyword.includes(cleanQuery) || cleanBab.includes(cleanQuery);
         });
 
-        // 3. Render HTML
         if (filtered.length > 0) {
             let html = '';
             filtered.forEach(item => {
-                // --- LOGIKA GAMBAR PINTAR ---
-                let imgSrc = '';
-                
-                // Cek 1: Apakah di JSON ada key "gambar" dan tidak kosong?
-                if (item.gambar && item.gambar.trim() !== "") {
-                    imgSrc = item.gambar;
-                } else {
-                    // Cek 2: Jika tidak ada, buat Placeholder Warna-Warni
-                    let imgColor = '4ECDC4'; // Default Hijau (Kelas 4,5,6)
-                    
-                    // Jika Kelas 1, 2, 3 warnanya Kuning
-                    if (item.kelas && (item.kelas.includes('1') || item.kelas.includes('2') || item.kelas.includes('3'))) {
-                        imgColor = 'FFE66D'; 
-                    }
-                    
-                    // Encode judul agar aman di URL gambar
-                    const encodedTitle = encodeURIComponent(item.judul);
-                    imgSrc = `https://placehold.co/600x350/${imgColor}/333?text=${encodedTitle}`;
+                let imgColor = '4ECDC4'; 
+                if (item.kelas && (item.kelas.includes('1') || item.kelas.includes('2') || item.kelas.includes('3'))) {
+                    imgColor = 'FFE66D'; 
                 }
+                const encodedTitle = encodeURIComponent(item.judul);
+                let imgSrc = `https://placehold.co/600x350/${imgColor}/333?text=${encodedTitle}`;
 
-                // --- LOGIKA URL ---
-                // Tambahkan highlight ID jika ada
                 let finalUrl = item.url;
-                if (item.id_element) {
-                    finalUrl += `?highlight=${item.id_element}`;
-                }
+                if (item.id_element) finalUrl += `?highlight=${item.id_element}`;
 
                 html += `
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow-sm custom-card border-0 overflow-hidden hover-scale">
-                        
+                    <div class="bento-card p-0 d-flex flex-column h-100">
                         <div class="position-relative">
-                            <img src="${imgSrc}" class="card-img-top" alt="${item.judul}" style="height: 200px; object-fit: cover;">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-white text-dark shadow-sm fw-bold">${item.kelas}</span>
+                            <img src="${imgSrc}" class="img-fluid w-100" style="height: 200px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                            <div class="position-absolute top-0 start-0 m-3">
+                                <span class="badge bg-white text-primary shadow-sm fw-bold px-2 py-1 rounded-pill">${item.kelas}</span>
                             </div>
                         </div>
-
-                        <div class="card-body d-flex flex-column">
-                            <small class="text-muted mb-1 fw-bold">
-                                <i class="fas fa-bookmark text-success me-1"></i> ${item.bab}
-                            </small>
-                            
-                            <h5 class="card-title fw-bold text-dark mb-2">
-                                <a href="${finalUrl}" class="text-decoration-none text-dark stretched-link">
-                                    ${item.judul}
-                                </a>
-                            </h5>
-                            
-                            <div class="mt-2 mb-3">
-                                <small class="text-muted bg-light px-2 py-1 rounded border">
-                                    <i class="fas fa-tag me-1 text-secondary"></i> 
-                                    ${item.keyword}
-                                </small>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <small class="text-success mb-1 fw-bold"><i class="fas fa-bookmark me-1"></i> ${item.bab}</small>
+                            <h5 class="font-heading mb-2"><a href="${finalUrl}" class="text-decoration-none text-dark stretched-link">${item.judul}</a></h5>
+                            <div class="mt-2 mb-4">
+                                <small class="text-muted bg-light px-2 py-1 rounded-pill border-0"><i class="fas fa-tag me-1"></i> ${item.keyword}</small>
                             </div>
-
-                            <div class="mt-auto">
-                                <a href="${finalUrl}" class="btn btn-outline-success btn-sm w-100 rounded-pill">
-                                    Buka Materi <i class="fas fa-arrow-right ms-1"></i>
-                                </a>
-                            </div>
+                            <a href="${finalUrl}" class="btn btn-outline-primary mt-auto rounded-pill w-100 fw-bold">Buka Materi <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>`;
             });
             container.innerHTML = html;
         } else {
-            // JIKA HASIL KOSONG
             container.innerHTML = `
                 <div class="col-12 text-center py-5">
-                    <div class="mb-3">
-                        <i class="fas fa-search fa-3x text-muted opacity-25"></i>
-                    </div>
-                    <h5 class="text-muted fw-bold">Materi tidak ditemukan.</h5>
-                    <p class="text-muted small">
-                        Kami tidak menemukan hasil untuk "<strong>${rawQuery}</strong>". <br>
-                        Coba kata kunci lain atau gunakan sinonim.
-                    </p>
-                    <a href="index.html" class="btn btn-success rounded-pill px-4 mt-2">Kembali ke Beranda</a>
+                    <i class="fas fa-search fa-3x text-muted opacity-25 mb-3"></i>
+                    <h5 class="text-muted font-heading">Materi tidak ditemukan.</h5>
+                    <p class="text-muted small">Kami tidak menemukan hasil untuk "<strong>${rawQuery}</strong>". <br>Coba kata kunci lain.</p>
+                    <a href="index.html" class="btn btn-primary rounded-pill px-4 mt-2 fw-bold">Kembali ke Beranda</a>
                 </div>`;
         }
-
     } catch (error) {
-        console.error("Error Search:", error);
-        container.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <div class="alert alert-danger d-inline-block">
-                    <i class="fas fa-exclamation-triangle me-2"></i> Gagal memuat data pencarian.
-                </div>
-            </div>`;
+        container.innerHTML = `<div class="col-12 text-center py-5"><div class="alert alert-danger rounded-4 border-0 shadow-sm d-inline-block"><i class="fas fa-exclamation-triangle me-2"></i> Gagal memuat data pencarian.</div></div>`;
     }
 }
+
+// =================================================================
+// 5. LOGIKA REKOMENDASI PENCARIAN (AUTOCOMPLETE)
+// =================================================================
+let searchDataCache = null; // Menyimpan data JSON agar tidak didownload berulang kali
+
+// Fungsi untuk mengambil JSON
+async function fetchSearchData() {
+    if (!searchDataCache) {
+        try {
+            const res = await fetch('assets/pencarian.json');
+            searchDataCache = await res.json();
+        } catch (e) {
+            console.error("Gagal memuat data pencarian", e);
+            searchDataCache = [];
+        }
+    }
+    return searchDataCache;
+}
+
+// Fungsi memunculkan rekomendasi saat mengetik
+async function showRecommendations(query) {
+    const list = document.getElementById('searchRecommendations');
+    if (!list) return;
+
+    // Jika inputan kosong, sembunyikan kotak
+    if (query.trim().length === 0) {
+        list.classList.add('d-none');
+        return;
+    }
+
+    const data = await fetchSearchData();
+    const cleanQuery = standardizeText(query);
+    
+    // Filter data yang cocok (Judul, Keyword, atau Bab), ambil 5 teratas
+    const filtered = data.filter(item => {
+        return standardizeText(item.judul).includes(cleanQuery) || 
+               standardizeText(item.keyword).includes(cleanQuery) || 
+               standardizeText(item.bab).includes(cleanQuery);
+    }).slice(0, 5); 
+
+    // Render HTML ke dalam kotak dropdown
+    if (filtered.length > 0) {
+        list.innerHTML = filtered.map(item => {
+            let finalUrl = item.url;
+            if (item.id_element) finalUrl += `?highlight=${item.id_element}`;
+            
+            return `
+            <a href="${finalUrl}" class="list-group-item list-group-item-action border-0 border-bottom px-4 py-3 d-flex align-items-center">
+                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                    <i class="fas fa-book-open text-primary"></i>
+                </div>
+                <div>
+                    <div class="fw-bold text-dark" style="font-size: 0.95rem;">${item.judul}</div>
+                    <small class="text-success fw-bold" style="font-size: 0.75rem;">${item.kelas} &bull; ${item.bab}</small>
+                </div>
+            </a>`;
+        }).join('');
+        
+        // Tambah tombol "Lihat semua hasil..." di paling bawah
+        list.innerHTML += `
+            <button onclick="doSearch()" class="list-group-item list-group-item-action text-center text-primary fw-bold py-2 border-0 bg-light" style="font-size: 0.85rem;">
+                Lihat semua hasil untuk "${query}" <i class="fas fa-arrow-right ms-1"></i>
+            </button>
+        `;
+        list.classList.remove('d-none');
+    } else {
+        list.innerHTML = `<li class="list-group-item text-muted text-center py-3 border-0"><i class="fas fa-search me-2 opacity-50"></i>Materi tidak ditemukan...</li>`;
+        list.classList.remove('d-none');
+    }
+}
+
+// Menutup kotak rekomendasi jika user mengklik di luar area pencarian
+document.addEventListener('click', (e) => {
+    const input = document.getElementById('mainSearchInput');
+    const list = document.getElementById('searchRecommendations');
+    if (input && list && !input.contains(e.target) && !list.contains(e.target)) {
+        list.classList.add('d-none');
+    }
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     // Cek apakah user pernah menutup widget ini sebelumnya?
@@ -444,81 +604,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// =================================================================
-// FUNGSI TRACK DOWNLOAD BUKU
-// =================================================================
-async function trackDownload(bookName) {
-    console.log(`Mencatat download: ${bookName}`);
-    
-    try {
-        await _supabase.from('analytics_logs').insert([
-            { 
-                event_type: 'download_buku', 
-                event_name: bookName 
-            }
-        ]);
-        console.log("Tracking sukses dikirim ke Supabase");
-    } catch (err) {
-        console.error("Gagal tracking download:", err);
-    }
-}
-
-// =================================================================
-// FUNGSI LOAD DATA DINAMIS (GURU & VIEW COUNT)
-// =================================================================
-async function loadDynamicData() {
-    // Cek apakah ada elemen kartu materi di halaman ini
-    if (!document.querySelector('.custom-card')) return; 
-
-    console.log("Mengambil data guru & statistik dari Supabase...");
-
-    try {
-        // 1. Ambil data dari tabel 'material_analytics'
-        // Kolom yang diambil: material_name (kunci), guru (nama), click_count (jumlah view)
-        const { data, error } = await _supabase
-            .from('material_analytics')
-            .select('material_name, guru, click_count');
-
-        if (error) throw error;
-
-        // 2. Loop setiap baris data yang didapat
-        if (data) {
-            data.forEach(item => {
-                // A. TEMPELKAN NAMA GURU
-                // Mencari elemen dengan ID: guru-k1_materi_10, guru-k1_materi_1, dst.
-                const elGuru = document.getElementById(`guru-${item.material_name}`);
-                if (elGuru) {
-                    // Jika nama guru kosong di database, tulis Admin
-                    elGuru.innerText = item.guru || "Tim PAI"; 
-                }
-
-                // B. TEMPELKAN JUMLAH VIEW (Update view counter juga)
-                // Mencari elemen dengan atribut: data-id="k1_materi_10"
-                const elView = document.querySelector(`.view-counter[data-id="${item.material_name}"]`);
-                if (elView) {
-                    // Update isi html view counter (tetap pertahankan ikon mata)
-                    elView.innerHTML = `<i class="fas fa-eye me-1"></i> ${item.click_count}`;
-                }
-            });
-        }
-    } catch (err) {
-        console.error("Gagal load data dinamis:", err);
-    }
-}
-
-// =================================================================
-// 5. INISIALISASI (MAIN)
-// =================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    
     // A. Load Data Awal
     logPageView();
     loadViews();
     loadTrending();
-    loadDynamicData();
-    
+
     // B. Cek apakah ini halaman Search?
-    renderSearchResults();    
+    renderSearchResults();   
 
     // C. Animasi Menu Hamburger (X to Bars)
     const myOffcanvas = document.getElementById('offcanvasNavbar');

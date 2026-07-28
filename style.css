@@ -1,334 +1,101 @@
-/* Import Font */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700;800&display=swap');
 
 :root {
-    --primary-green: #4ECDC4; /* Hijau Muda Segar */
-    --secondary-yellow: #FFE66D; /* Kuning Cerah */
-    --dark-text: #292f36;
-    --light-bg: #f7fff7;
+    --primary-blue: #007AFF;
+    --light-blue: #E5F0FF;
+    --primary-green: #34C759;
+    --light-green: #E8F8EB;
+    --dark-text: #1C1C1E;
+    --bg-color: #F2F2F7;
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--light-bg);
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
     color: var(--dark-text);
-    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .font-heading {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+/* Navbar & Glassmorphism */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-link { font-weight: 600; color: var(--dark-text) !important; transition: 0.3s; }
+.nav-link:hover { color: var(--primary-blue) !important; }
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-green) 100%);
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+}
+
+.search-bar-hero {
+    border-radius: 50px;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+.search-bar-hero input { border: none; box-shadow: none !important; font-size: 1.1rem; }
+.search-bar-hero .btn { border-radius: 50px; padding: 10px 30px; }
+
+/* Bento Grid System */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+.bento-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(0,0,0,0.02);
 }
 
-/* Judul Header */
-.main-header {
-    background-color: var(--primary-green);
-    color: white;
-    padding: 20px 0;
-    margin-bottom: 20px;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
-}
-
-/* Custom Card */
-.custom-card {
-    border: none;
-    border-radius: 20px;
-    background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-    overflow: hidden;
-    height: 100%;
-}
-
-.custom-card:hover {
+.bento-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 122, 255, 0.1);
 }
 
-.card-header-custom {
-    background-color: var(--secondary-yellow);
-    color: var(--dark-text);
-    font-weight: 700;
-    padding: 15px;
-    border-radius: 20px 20px 0 0;
+/* Spesifik Bento Item */
+.bento-trending { grid-column: span 12; }
+@media (min-width: 992px) {
+    .bento-kelas { grid-column: span 4; } /* 3 Kotak sejajar */
+    .bento-trending { grid-column: span 4; grid-row: span 2; } /* Memanjang ke bawah di kanan */
+    .bento-perpus { grid-column: span 8; } /* Memanjang ke samping */
 }
 
-/* Tombol */
-.btn-custom {
-    background-color: var(--primary-green);
-    color: white;
-    border-radius: 50px; /* Fully rounded */
-    padding: 10px 25px;
-    font-weight: 600;
-    border: none;
-    width: 100%;
-}
-
-.btn-custom:hover {
-    background-color: #3dbbb3;
-    color: white;
-}
-
-/* Default Setting (Penting agar gambar tidak gepeng) */
-.carousel-item img {
-    border-radius: 20px;
-    width: 100%;
-    object-fit: cover; /* Gambar akan dicrop rapi, tidak penyok */
-    object-position: center; /* Fokus gambar di tengah */
-    transition: height 0.3s ease; /* Efek halus saat resize layar */
-}
-
-/* IFP Specific List styling */
-.ifp-list .list-group-item {
-    border-radius: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    font-weight: 600;
-    transition: 0.2s;
-}
-.ifp-list .list-group-item:hover {
-    background-color: var(--secondary-yellow);
-    cursor: pointer;
-}
-
-.counter-badge {
-    background-color: #eee;
-    color: #555;
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    border-radius: 10px;
-}
-
-.main-footer {
-    background-color: #ffffff;
-    border-top: 5px solid var(--secondary-yellow); /* Garis kuning di atas footer */
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
-    font-size: 0.9rem;
-}
-
-/* =========================================
-   NAVBAR & SIDE MENU STYLING
-   ========================================= */
-
-/* Style Link Menu */
-.navbar-nav .nav-link {
-    transition: all 0.3s;
-    border: 2px solid transparent;
-}
-
-.navbar-nav .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-}
-
-/* Judul Halaman di Navbar */
-.page-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: white;
-    margin-left: 10px;
-    line-height: 1.2;
-}
-
-/* Tombol Back di Navbar */
-.nav-back-btn {
-    color: white;
-    font-size: 1.2rem;
-    padding: 8px;
-    border-radius: 50%;
-    transition: 0.2s;
-}
-.nav-back-btn:hover {
-    background-color: rgba(255,255,255,0.2);
-    color: white;
-}
-
-/* Memastikan figure tidak memiliki margin default yang berantakan */
-figure {
-    margin: 2rem 0;
+/* Card Kelas */
+.kelas-img-wrapper {
+    background: var(--light-blue);
+    border-radius: 1rem;
+    padding: 1rem;
     text-align: center;
-    width: 100%;
+    margin-bottom: 1rem;
+}
+.kelas-img-wrapper img { max-height: 100px; object-fit: contain; }
+
+/* Promo & Gradient */
+.bg-gradient-blue-green {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+    color: white;
 }
 
-#floatingIFP {
-    position: fixed;
-    top: 25%; /* Posisi vertikal (agak ke atas sedikit) */
-    right: 0;
-    z-index: 9999; /* Paling atas */
-    
-    background: #FFC107; /* Warna Kuning Warning Bootstrap */
-    padding: 10px 20px 10px 15px;
-    border-radius: 30px 0 0 30px; /* Membulat hanya di kiri */
-    border-left: 4px solid #fff;
-    
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
-
-#floatingIFP:hover {
-    transform: translateX(-5px); /* Efek geser dikit saat hover */
-}
-
-/* Class untuk menyembunyikan widget saat diclose */
-.hide-widget {
-    transform: translateX(120%) !important; /* Geser ke kanan luar layar */
-}
-
-/* 1. Tampilan HP (Mobile) - Layar di bawah 768px */
-@media (max-width: 767.98px) {
-    .carousel-item img {
-        height: 220px; /* Cukup pendek agar proporsional di HP */
-    }
-    
-    /* Opsional: Kecilkan font caption di HP */
-    .carousel-caption h5 {
-        font-size: 1rem;
-    }
-    .carousel-caption p {
-        font-size: 0.8rem;
-    }
-    
-    .offcanvas-body {
-        background-color: var(--primary-green);
-    }
-    
-    /* Menu Rata Kiri dengan Flexbox */
-    .navbar-nav .nav-link {
-        color: white !important;
-        border: 1px solid rgba(255,255,255,0.2);
-        margin-bottom: 8px;
-        display: flex;              /* Aktifkan Flexbox */
-        align-items: center;        /* Ikon & Teks sejajar vertikal */
-        justify-content: flex-start;/* Rata Kiri (PENTING) */
-        padding-left: 20px !important; /* Jarak dari pinggir kiri */
-        text-align: left;
-    }
-    
-    .navbar-nav .nav-link i {
-        width: 25px; /* Lebar tetap untuk ikon agar teks lurus */
-        text-align: center;
-        margin-right: 10px;
-    }
-
-    .offcanvas-header {
-        border-bottom: 5px solid var(--secondary-yellow);
-    }
-}
-
-/* 2. Tampilan Laptop/Tablet - Layar 768px s/d 1399px */
-@media (min-width: 768px) and (max-width: 1399.98px) {
-    .carousel-item img {
-        height: 400px; /* Tinggi standar laptop */
-    }
-}
-
-/* 3. Tampilan IFP / Layar Besar - Layar di atas 1400px */
-@media (min-width: 1400px) {
-    .carousel-item img {
-        height: 550px; /* Lebih tinggi agar imbang dengan list kelas di sampingnya */
-    }
-    
-    /* Perbesar font caption di IFP agar terbaca dari jauh */
-    .carousel-caption h5 {
-        font-size: 2.5rem;
-    }
-    .carousel-caption p {
-        font-size: 1.5rem;
-    }
-}
-
-/* =========================================
-   KHUSUS IFP RESOLUSI 4K (3840 x 2160)
-   ========================================= */
-@media (min-width: 2500px) {
-    
-    /* 1. Memperlebar Wadah Utama (Container) */
-    /* Agar tidak menumpuk kecil di tengah, kita lebarkan hampir full */
-    .container {
-        max-width: 3600px !important; 
-        padding-left: 50px;
-        padding-right: 50px;
-    }
-
-    /* 2. Slider Lebih Tinggi & Besar */
-    .carousel-item img {
-        height: 900px !important; /* Naik dari 550px jadi 900px agar proporsional */
-    }
-
-    /* 3. Perbesar Semua Teks Secara Otomatis */
-    body {
-        font-size: 1.8rem; /* Teks paragraf biasa diperbesar */
-    }
-
-    /* 4. Perbesar Judul-Judul */
-    h1 { font-size: 4.5rem; }
-    h2 { font-size: 4rem; }
-    h3 { font-size: 3.5rem; }
-    h4 { font-size: 3rem; }
-    h5 { font-size: 2.5rem; }
-    h6 { font-size: 2rem; }
-    
-    /* 5. Perbesar Caption Slider */
-    .carousel-caption h5 {
-        font-size: 5rem !important;
-    }
-    .carousel-caption p {
-        font-size: 3rem !important;
-    }
-
-    /* 6. Perbesar Tombol & Icon */
-    .btn {
-        font-size: 1.5rem !important;
-        padding: 15px 40px !important;
-    }
-    
-    /* 7. Perbaiki Grid Card agar tidak terlalu gepeng melebar */
-    /* Kita biarkan tetap 3 kolom (col-xxl-4), tapi karena container melebar, 
-       card akan otomatis membesar mengikuti container. */
-       
-    /* Perbesar Icon di dalam card */
-    .custom-card i {
-        transform: scale(1.5); /* Perbesar icon 1.5x lipat */
-        margin-right: 10px;
-    }
-
-    /* Perbesar Navbar */
-    .navbar {
-        padding: 40px 0 !important;
-    }
-    
-    /* Perbesar Logo */
-    .navbar-brand img {
-        width: 80px !important;
-        height: 80px !important;
-    }
-    .navbar-brand span {
-        font-size: 3rem !important;
-        margin-left: 20px;
-    }
-
-    /* Perbesar Menu Links */
-    .navbar-nav {
-        gap: 30px !important;
-    }
-    .nav-link {
-        font-size: 2.5rem !important; /* Tulisan menu besar */
-        padding: 20px 50px !important;
-        border-radius: 100px !important;
-    }
-    
-    /* Spacer navbar juga harus diperbesar */
-    div[style*="height: 80px"] {
-        height: 180px !important;
-    }
-
-    .page-title {
-        font-size: 3rem !important;
-        margin-left: 30px;
-    }
-    .nav-back-btn {
-        font-size: 3rem !important;
-        padding: 20px;
-    }
-    .navbar-toggler i {
-        font-size: 3rem !important; /* Icon hamburger besar */
-    }
-}
+.user-profile-img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-green); }

@@ -6,12 +6,13 @@
     <title>Buku Elektronik - PAIBP SD</title>
     <meta name="description" content="Portal Media Pembelajaran dan Buku Elektronik PAI SD KKG Kota Banjar.">
 
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Media Pembelajaran PAIBP SD">
     <meta property="og:description" content="Akses materi pembelajaran interaktif dan buku elektronik PAI SD Kurikulum Merdeka.">
     <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/header.png"> 
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" href="assets/logo.png">
     <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/buku.html">
+    <link rel="icon" type="image/png" href="assets/logo.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,192 +20,166 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+    
+    <!-- Navbar Glassmorphism -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
         <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
             
-            <div class="d-flex align-items-center">
-                <a href="index.html" class="nav-back-btn text-decoration-none">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <span class="page-title">Buku Elektronik</span>
-            </div>
-
-            <div class="d-flex align-items-center ms-auto gap-2">            
-                <button class="btn text-white d-lg-none" onclick="toggleSearchBar()" title="Cari Materi">
-                    <i class="fas fa-search fa-lg"></i>
-                </button>
-
-                <button class="navbar-toggler border-0 text-white p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
-                    <i class="fas fa-bars fa-lg" id="menuIcon" style="font-size: 1.5rem;"></i>
-                </button>
-            </div>
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header bg-light">
-                    <h5 class="offcanvas-title fw-bold text-success">Menu Utama</h5>
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="index.html">
-                                <i class="fas fa-home"></i> Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="buku.html">
-                                <i class="fas fa-book"></i> Buku Paket
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="blog.html">
-                                <i class="fas fa-newspaper"></i> Ruang Baca
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="banksoal.html">
-                                <i class="fas fa-clipboard-list"></i> Bank Soal
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <button class="btn text-white" onclick="toggleSearchBar()" title="Cari Materi">
-                                <i class="fas fa-search fa-lg"></i>
-                            </button>
-                        </li>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary fw-bold" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
                     </ul>
+
+                    <div id="authContainer" class="mt-3 mt-lg-0">
+                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                            <i class="fab fa-google me-2"></i> Masuk
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div id="searchBarContainer" class="bg-white border-bottom shadow-sm fixed-top p-3 d-none" style="top: 70px; z-index: 1020;">
-        <div class="container">
-            <div class="input-group">
-                <input type="text" id="navSearchInput" class="form-control border-success" placeholder="Cari lagi..." onkeypress="handleEnter(event)">
-                <button class="btn btn-success" onclick="doSearch()">
-                    <i class="fas fa-search"></i> Cari
-                </button>
-            </div>
+    <div style="height: 90px;"></div>
+
+    <div class="container pb-5">
+        
+        <!-- Header Halaman -->
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
+            <h1 class="display-5 fw-bolder mb-3 text-white font-heading"><i class="fas fa-book-open me-2"></i> Perpustakaan Digital</h1>
+            <p class="fs-5 mb-0 text-white opacity-75">Download Buku Sekolah Elektronik (BSE) PAI Kurikulum Merdeka format PDF.</p>
         </div>
-    </div>
-    
-    <div style="height: 80px;"></div>
 
-    <div class="container pb-5 pt-3">
-        <div class="row g-4 justify-content-center">
+        <!-- Validasi Akses Member (Sesuai Konsep index.html) -->
+        <div class="alert alert-success auth-only d-none shadow-sm rounded-4 border-0">
+            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i> Anda login sebagai Guru. Riwayat unduhan akan otomatis tersimpan di sistem.</h5>
+        </div>
 
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card custom-card h-100 border-0 shadow-sm">
-                    <div class="p-2 text-center bg-light rounded-top-4">
-                        <img src="assets/Islam_BS_KLS_I.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 1" style="max-height: 250px; object-fit: cover;">
+        <!-- Grid Buku -->
+        <div class="row g-4 justify-content-center mt-2">
+
+            <!-- Buku Kelas 1 -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="bento-card p-3 text-center d-flex flex-column h-100">
+                    <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2">
+                        <img src="assets/images/Islam_BS_KLS_I.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 1" style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="card-body text-center p-3 d-flex flex-column">
-                        <h6 class="fw-bold mb-1">Kelas 1</h6>
-                        <small class="text-muted mb-3 d-block">Kurikulum Merdeka</small>
-                        
-                        <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_I.pdf" 
-                           target="_blank" 
-                           onclick="trackDownload('Buku PAI Kelas 1')"
-                           class="btn btn-sm btn-outline-success rounded-pill mt-auto w-100">
-                            <i class="fas fa-download me-1"></i> PDF
-                        </a>
-                    </div>
+                    <h5 class="font-heading mb-1">Kelas 1</h5>
+                    <small class="text-muted mb-3">Kurikulum Merdeka</small>
+                    
+                    <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_I.pdf" 
+                       target="_blank" 
+                       onclick="trackDownload('Buku PAI Kelas 1')"
+                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                        <i class="fas fa-download me-1"></i> Unduh PDF
+                    </a>
                 </div>
             </div>
 
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card custom-card h-100 border-0 shadow-sm">
-                    <div class="p-2 text-center bg-light rounded-top-4">
-                        <img src="assets/Islam_BS_KLS_II.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 2" style="max-height: 250px; object-fit: cover;">
+            <!-- Buku Kelas 2 -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="bento-card p-3 text-center d-flex flex-column h-100">
+                    <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2">
+                        <img src="assets/images/Islam_BS_KLS_II.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 2" style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="card-body text-center p-3 d-flex flex-column">
-                        <h6 class="fw-bold mb-1">Kelas 2</h6>
-                        <small class="text-muted mb-3 d-block">Kurikulum Merdeka</small>
-                        
-                        <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_II.pdf" 
-                           target="_blank" 
-                           onclick="trackDownload('Buku PAI Kelas 2')"
-                           class="btn btn-sm btn-outline-success rounded-pill mt-auto w-100">
-                            <i class="fas fa-download me-1"></i> PDF
-                        </a>
-                    </div>
+                    <h5 class="font-heading mb-1">Kelas 2</h5>
+                    <small class="text-muted mb-3">Kurikulum Merdeka</small>
+                    
+                    <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_II.pdf" 
+                       target="_blank" 
+                       onclick="trackDownload('Buku PAI Kelas 2')"
+                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                        <i class="fas fa-download me-1"></i> Unduh PDF
+                    </a>
                 </div>
             </div>
 
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card custom-card h-100 border-0 shadow-sm">
-                    <div class="p-2 text-center bg-light rounded-top-4">
-                        <img src="assets/Islam_BS_KLS_III.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 3" style="max-height: 250px; object-fit: cover;">
+            <!-- Buku Kelas 3 -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="bento-card p-3 text-center d-flex flex-column h-100">
+                    <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2">
+                        <img src="assets/images/Islam_BS_KLS_III.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 3" style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="card-body text-center p-3 d-flex flex-column">
-                        <h6 class="fw-bold mb-1">Kelas 3</h6>
-                        <small class="text-muted mb-3 d-block">Kurikulum Merdeka</small>
-                        
-                        <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_III.pdf" 
-                           target="_blank" 
-                           onclick="trackDownload('Buku PAI Kelas 3')"
-                           class="btn btn-sm btn-outline-success rounded-pill mt-auto w-100">
-                            <i class="fas fa-download me-1"></i> PDF
-                        </a>
-                    </div>
+                    <h5 class="font-heading mb-1">Kelas 3</h5>
+                    <small class="text-muted mb-3">Kurikulum Merdeka</small>
+                    
+                    <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_III.pdf" 
+                       target="_blank" 
+                       onclick="trackDownload('Buku PAI Kelas 3')"
+                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                        <i class="fas fa-download me-1"></i> Unduh PDF
+                    </a>
                 </div>
             </div>
 
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card custom-card h-100 border-0 shadow-sm">
-                    <div class="p-2 text-center bg-light rounded-top-4">
-                        <img src="assets/Islam_BS_KLS_IV.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 4" style="max-height: 250px; object-fit: cover;">
+            <!-- Buku Kelas 4 -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="bento-card p-3 text-center d-flex flex-column h-100">
+                    <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2">
+                        <img src="assets/images/Islam_BS_KLS_IV.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 4" style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="card-body text-center p-3 d-flex flex-column">
-                        <h6 class="fw-bold mb-1">Kelas 4</h6>
-                        <small class="text-muted mb-3 d-block">Kurikulum Merdeka</small>
-                        
-                        <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_IV.pdf" 
-                           target="_blank" 
-                           onclick="trackDownload('Buku PAI Kelas 4')"
-                           class="btn btn-sm btn-outline-success rounded-pill mt-auto w-100">
-                            <i class="fas fa-download me-1"></i> PDF
-                        </a>
-                    </div>
+                    <h5 class="font-heading mb-1">Kelas 4</h5>
+                    <small class="text-muted mb-3">Kurikulum Merdeka</small>
+                    
+                    <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_IV.pdf" 
+                       target="_blank" 
+                       onclick="trackDownload('Buku PAI Kelas 4')"
+                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                        <i class="fas fa-download me-1"></i> Unduh PDF
+                    </a>
                 </div>
             </div>
 
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card custom-card h-100 border-0 shadow-sm">
-                    <div class="p-2 text-center bg-light rounded-top-4">
-                        <img src="assets/Islam_BS_KLS_V.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 5" style="max-height: 250px; object-fit: cover;">
+            <!-- Buku Kelas 5 -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="bento-card p-3 text-center d-flex flex-column h-100">
+                    <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2">
+                        <img src="assets/images/Islam_BS_KLS_V.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 5" style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="card-body text-center p-3 d-flex flex-column">
-                        <h6 class="fw-bold mb-1">Kelas 5</h6>
-                        <small class="text-muted mb-3 d-block">Kurikulum Merdeka</small>
-                        
-                        <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_V.pdf" 
-                           target="_blank" 
-                           onclick="trackDownload('Buku PAI Kelas 5')"
-                           class="btn btn-sm btn-outline-success rounded-pill mt-auto w-100">
-                            <i class="fas fa-download me-1"></i> PDF
-                        </a>
-                    </div>
+                    <h5 class="font-heading mb-1">Kelas 5</h5>
+                    <small class="text-muted mb-3">Kurikulum Merdeka</small>
+                    
+                    <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_V.pdf" 
+                       target="_blank" 
+                       onclick="trackDownload('Buku PAI Kelas 5')"
+                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                        <i class="fas fa-download me-1"></i> Unduh PDF
+                    </a>
                 </div>
             </div>
 
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card custom-card h-100 border-0 shadow-sm">
-                    <div class="p-2 text-center bg-light rounded-top-4">
-                        <img src="assets/Islam_BS_KLS_VI.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 6" style="max-height: 250px; object-fit: cover;">
+            <!-- Buku Kelas 6 -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="bento-card p-3 text-center d-flex flex-column h-100">
+                    <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2">
+                        <img src="assets/images/Islam_BS_KLS_VI.png" class="img-fluid rounded shadow-sm" alt="Buku Kelas 6" style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="card-body text-center p-3 d-flex flex-column">
-                        <h6 class="fw-bold mb-1">Kelas 6</h6>
-                        <small class="text-muted mb-3 d-block">Kurikulum Merdeka</small>
-                        
-                        <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_VI.pdf" 
-                           target="_blank" 
-                           onclick="trackDownload('Buku PAI Kelas 6')"
-                           class="btn btn-sm btn-outline-success rounded-pill mt-auto w-100">
-                            <i class="fas fa-download me-1"></i> PDF
-                        </a>
-                    </div>
+                    <h5 class="font-heading mb-1">Kelas 6</h5>
+                    <small class="text-muted mb-3">Kurikulum Merdeka</small>
+                    
+                    <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_VI.pdf" 
+                       target="_blank" 
+                       onclick="trackDownload('Buku PAI Kelas 6')"
+                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                        <i class="fas fa-download me-1"></i> Unduh PDF
+                    </a>
                 </div>
             </div>
 
