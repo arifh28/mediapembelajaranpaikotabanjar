@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Baca - PAIBP SD</title>
+    <meta name="description" content="Kumpulan artikel dan inspirasi pembelajaran PAIBP SD.">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    
+    <meta property="og:title" content="Ruang Baca - PAIBP SD">
+    <meta property="og:description" content="Kumpulan artikel, tips, dan inspirasi pembelajaran PAI SD Kurikulum Merdeka.">
+    <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/assets/canvaaicode.jpeg"> 
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/posts.html">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Navbar Glassmorphism -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
+            
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary fw-bold" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
+                    </ul>
+
+                    <div id="authContainer" class="mt-3 mt-lg-0">
+                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                            <i class="fab fa-google me-2"></i> Masuk
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 90px;"></div>
+
+    <div class="container pb-5 pt-3 flex-grow-1">
+        
+        <!-- Hero Section -->
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center position-relative" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
+            <a href="index.html" class="btn btn-light rounded-circle position-absolute top-50 start-0 translate-middle-y ms-3 ms-md-4 shadow-sm" style="z-index: 10;">
+                <i class="fas fa-arrow-left text-primary"></i>
+            </a>
+            <h1 class="display-5 fw-bolder mb-2 text-white font-heading"><i class="fas fa-newspaper me-2"></i> Ruang Baca</h1>
+            <p class="fs-5 mb-0 text-white opacity-75">Kumpulan informasi, artikel, dan inspirasi pembelajaran pendidikan.</p>
+        </div>
+
+        <!-- Kolom Pencarian Artikel -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 col-lg-6">
+                <div class="search-bar-hero d-flex shadow-sm rounded-pill overflow-hidden bg-white border">
+                    <span class="input-group-text bg-transparent border-0 text-muted ps-4"><i class="fas fa-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control border-0 shadow-none py-3" placeholder="Cari judul artikel atau topik..." autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontainer Render Artikel -->
+        <div id="blogContainer" class="row g-4 align-items-stretch">
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-spinner fa-spin fa-2x text-primary mb-3"></i>
+                <p class="text-muted fw-bold">Sedang memuat artikel...</p>
+            </div>
+        </div>
+
+        <!-- Notifikasi Jika Tidak Ditemukan -->
+        <div id="notFound" class="text-center d-none mt-5 py-5 bento-card border-0 bg-light">
+            <i class="fas fa-box-open fa-3x text-muted mb-3 opacity-50"></i>
+            <h5 class="font-heading text-muted">Artikel tidak ditemukan.</h5>
+            <p class="text-muted small">Coba gunakan kata kunci pencarian yang lain.</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Logika Render Artikel dari posts.json -->
+    <script>
+        let allPosts = []; // Tempat menyimpan data asli
+
+        // 1. Ambil Data dari JSON saat halaman dibuka
+        fetch('posts.json')
+            .then(response => response.json())
+            .then(data => {
+                allPosts = data;
+                displayPosts(allPosts); // Tampilkan semua di awal
+            })
+            .catch(error => {
+                console.error('Gagal memuat postingan:', error);
+                document.getElementById('blogContainer').innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <div class="alert alert-danger rounded-4 border-0 shadow-sm d-inline-block">
+                            <i class="fas fa-exclamation-triangle me-2"></i> Gagal memuat data artikel.
+                        </div>
+                    </div>`;
+            });
+
+        // 2. Fungsi Menampilkan Artikel ke HTML dengan UI Bento Card
+        function displayPosts(posts) {
+            const container = document.getElementById('blogContainer');
+            const notFound = document.getElementById('notFound');
+            
+            container.innerHTML = ''; // Bersihkan isi lama
+
+            if (posts.length === 0) {
+                notFound.classList.remove('d-none');
+            } else {
+                notFound.classList.add('d-none');
+                
+                posts.forEach(post => {
+                    // Template Bento Card Artikel Baru
+                    const html = `
+                        <div class="col-md-6 col-lg-4 d-flex">
+                            <div class="bento-card p-0 d-flex flex-column w-100 h-100 border-0 shadow-sm">
+                                <div class="position-relative">
+                                    <img src="${post.gambar}" class="img-fluid w-100" alt="${post.judul}" style="height: 220px; object-fit: cover; border-radius: 1.5rem 1.5rem 0 0;">
+                                </div>
+                                <div class="p-4 d-flex flex-column flex-grow-1">
+                                    <span class="badge bg-light text-primary mb-3 align-self-start border fw-bold px-3 py-2 rounded-pill"><i class="fas fa-tag me-1"></i> ${post.kategori}</span>
+                                    <h5 class="font-heading mb-2 text-dark lh-base">${post.judul}</h5>
+                                    <p class="text-muted small mb-4 flex-grow-1 lh-lg">${post.ringkasan}</p>
+                                    <a href="${post.link}" class="btn btn-outline-primary mt-auto rounded-pill w-100 fw-bold">
+                                        Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                });
+            }
+        }
+
+        // 3. Logika Pencarian (Realtime)
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            
+            // Filter data berdasarkan Judul ATAU Ringkasan ATAU Kategori
+            const filteredPosts = allPosts.filter(post => {
+                return post.judul.toLowerCase().includes(keyword) || 
+                       post.ringkasan.toLowerCase().includes(keyword) ||
+                       post.kategori.toLowerCase().includes(keyword);
+            });
+
+            displayPosts(filteredPosts);
+        });
+    </script>
+</body>
+</html>

@@ -16,61 +16,94 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS Khusus untuk Bento Grid yang Responsive */
-        .bento-grid {
-            display: grid;
-            gap: 1.5rem;
-            /* Default untuk mobile: 2 kolom (kelas) */
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        /* Styling Card Kelas */
-        .bento-kelas {
+        /* CSS Khusus untuk Desain Card Kelas Modern */
+        .bento-kelas-modern {
+            position: relative;
             background: #ffffff;
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-decoration: none;
-            color: inherit;
+            color: white; /* Default text color changed to white for overlay */
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.03);
+            /* Set a minimum height to ensure cards don't shrink too much */
+            min-height: 180px; 
         }
 
-        .bento-kelas:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+        .bento-kelas-modern:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.15);
         }
 
-        .kelas-img-wrapper img {
-            width: 80px;
-            height: auto;
-            margin-bottom: 1rem;
+        /* Styling The Full Background Image */
+        .bento-kelas-modern img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.5s ease;
         }
 
-        /* Styling Card Trending agar mengambil lebar penuh di mobile */
-        .bento-trending {
-            grid-column: span 2; /* Di mobile, ambil 2 kolom (lebar penuh) */
-            background: #ffffff;
-            border-radius: 1.25rem;
+        /* Subtle zoom effect on the image when hovering */
+        .bento-kelas-modern:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Gradient Overlay to make text readable */
+        .kelas-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Linear gradient from transparent at top to dark at bottom */
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+        }
+
+        /* Content placed on top of the overlay */
+        .kelas-content {
+            position: relative;
+            z-index: 3;
+            margin-top: auto; /* Pushes content to the bottom */
             padding: 1.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
         }
 
-        /* Aturan Responsive untuk Tablet dan Desktop */
-        @media (min-width: 768px) {
-            .bento-grid {
-                /* Di tablet/desktop, gunakan 4 kolom */
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .bento-trending {
-                grid-column: span 2; /* Trending ambil 2 kolom dari 4 kolom */
-                grid-row: span 2;    /* Trending ambil tinggi 2 baris */
-            }
+        /* Badge Styling */
+        .kelas-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Styling Card Trending */
+        .bento-trending {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.03);
+            height: 100%;
         }
     </style>
 </head>
@@ -146,7 +179,7 @@
                     <h1 class="display-5 fw-bolder mb-3" style="color: var(--primary-blue);">Eksplorasi Materi PAI <br><span class="text-success">Lebih Menyenangkan!</span></h1>
                     <p class="fs-5 mb-4 opacity-75">Temukan rangkuman materi, buku elektronik, dan latihan soal interaktif untuk Sekolah Dasar.</p>
                     
-                    <!-- Search Bar dengan Fitur Rekomendasi (Live Search) dikembalikan sesuai dengan yang diminta -->
+                    <!-- Search Bar dengan Fitur Rekomendasi (Live Search) -->
                     <div class="position-relative mx-auto ms-lg-0" style="max-width: 600px;">
                         <div class="search-bar-hero d-flex shadow-sm rounded-pill overflow-hidden bg-white border">
                             <span class="input-group-text bg-transparent border-0 text-muted ps-4"><i class="fas fa-search"></i></span>
@@ -179,20 +212,20 @@
                 
                 <!-- Bento Card Game Interaktif -->
                 <div class="col-12 col-lg-4">
-                    <a href="game.html" class="bento-card text-white text-center text-decoration-none d-flex flex-column justify-content-center align-items-center p-4 border-0 h-100" style="background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%); min-height: 220px;">
+                    <a href="game.html" class="bento-card text-white text-center text-decoration-none d-flex flex-column justify-content-center align-items-center p-4 border-0 h-100" style="background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%); min-height: 220px; border-radius: 1.5rem;">
                         <i class="fas fa-gamepad mb-3" style="font-size: 4.5rem; opacity: 0.9; text-shadow: 2px 2px 10px rgba(0,0,0,0.1);"></i>
                         <h4 class="font-heading fw-bold mb-1">Game Interaktif</h4>
                         <p class="small opacity-75 mb-0 fw-bold">Uji wawasan PAI dengan seru!</p>
                     </a>
                 </div>
                 
-                <!-- Bento Card Perpustakaan Digital (Dipindah ke Sini) -->
+                <!-- Bento Card Perpustakaan Digital -->
                 <div class="col-12 col-lg-8">
-                    <div class="bento-card bg-gradient-blue-green d-flex flex-row align-items-center justify-content-between h-100 border-0 p-4" style="min-height: 220px;">
+                    <div class="bento-card bg-gradient-blue-green d-flex flex-row align-items-center justify-content-between h-100 border-0 p-4" style="min-height: 220px; border-radius: 1.5rem;">
                         <div class="text-white">
                             <h3 class="font-heading mb-2">Perpustakaan Digital</h3>
                             <p class="mb-4 opacity-75">Buku Sekolah Elektronik (BSE) PAI Kurikulum Merdeka format PDF.</p>
-                            <a href="buku.html" class="btn btn-light text-primary fw-bold rounded-pill px-4">Buka Perpustakaan</a>
+                            <a href="buku.html" class="btn btn-light text-primary fw-bold rounded-pill px-4 shadow-sm">Buka Perpustakaan</a>
                         </div>
                         <i class="fas fa-book-reader text-white opacity-25 d-none d-sm-block" style="font-size: 8rem; margin-right: 10px;"></i>
                     </div>
@@ -207,31 +240,9 @@
         <!-- BENTO GRID UTAMA MENGGUNAKAN BOOTSTRAP ROW/COL -->
         <div class="row g-3 g-md-4 align-items-stretch">
             
-            <div class="col-6 col-md-3 d-flex">
-                <a href="kelas1.html" class="bento-kelas text-center w-100">
-                    <div class="kelas-img-wrapper"><img src="assets/kelas1.png" alt="Kelas 1"></div>
-                    <h4 class="font-heading m-0 text-dark">Kelas 1</h4>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-3 d-flex">
-                <a href="kelas2.html" class="bento-kelas text-center w-100">
-                    <div class="kelas-img-wrapper"><img src="assets/kelas2.png" alt="Kelas 2"></div>
-                    <h4 class="font-heading m-0 text-dark">Kelas 2</h4>
-                </a>
-            </div>
-            
-            <div class="col-6 col-md-3 d-flex">
-                <a href="kelas3.html" class="bento-kelas text-center w-100">
-                    <div class="kelas-img-wrapper"><img src="assets/kelas3.png" alt="Kelas 3"></div>
-                    <h4 class="font-heading m-0 text-dark">Kelas 3</h4>
-                </a>
-            </div>
-
-            <!-- Card Trending: Memakai grid 12 kolom di mobile, dan 6 kolom (setengah baris) di desktop.
-                 Dengan order-last di mobile, card ini akan turun ke bawah. Di desktop (order-md-0), dia menempati posisi tengah. -->
+			<!-- Card Trending: Memakai grid 12 kolom di mobile, dan 6 kolom (setengah baris) di desktop. -->
             <div class="col-12 col-md-6 d-flex align-items-stretch order-last order-md-0">
-                <div class="bento-trending w-100 d-flex flex-column" style="min-height: 250px;">
+                <div class="bento-trending w-100 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="font-heading m-0"><i class="fas fa-fire text-danger me-2"></i> Sedang Populer</h5>
                     </div>
@@ -240,25 +251,70 @@
                     </ul>
                 </div>
             </div>
+			
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas1.html" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas1.png" alt="Ilustrasi Kelas 1">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase A</span>
+                        <h4 class="font-heading m-0">Kelas 1</h4>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas2.html" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas2.png" alt="Ilustrasi Kelas 2">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase A</span>
+                        <h4 class="font-heading m-0">Kelas 2</h4>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3 d-flex">
+                <a href="kelas3.html" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas3.png" alt="Ilustrasi Kelas 3">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase B</span>
+                        <h4 class="font-heading m-0">Kelas 3</h4>
+                    </div>
+                </a>
+            </div>
 
             <div class="col-6 col-md-3 d-flex">
-                <a href="kelas4.html" class="bento-kelas text-center w-100">
-                    <div class="kelas-img-wrapper"><img src="assets/kelas4.png" alt="Kelas 4"></div>
-                    <h4 class="font-heading m-0 text-dark">Kelas 4</h4>
+                <a href="kelas4.html" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas4.png" alt="Ilustrasi Kelas 4">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase B</span>
+                        <h4 class="font-heading m-0">Kelas 4</h4>
+                    </div>
                 </a>
             </div>
             
             <div class="col-6 col-md-3 d-flex">
-                <a href="kelas5.html" class="bento-kelas text-center w-100">
-                    <div class="kelas-img-wrapper"><img src="assets/kelas5.png" alt="Kelas 5"></div>
-                    <h4 class="font-heading m-0 text-dark">Kelas 5</h4>
+                <a href="kelas5.html" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas5.png" alt="Ilustrasi Kelas 5">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase C</span>
+                        <h4 class="font-heading m-0">Kelas 5</h4>
+                    </div>
                 </a>
             </div>
             
             <div class="col-6 col-md-3 d-flex">
-                <a href="kelas6.html" class="bento-kelas text-center w-100">
-                    <div class="kelas-img-wrapper"><img src="assets/kelas6.png" alt="Kelas 6"></div>
-                    <h4 class="font-heading m-0 text-dark">Kelas 6</h4>
+                <a href="kelas6.html" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas6.png" alt="Ilustrasi Kelas 6">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase C</span>
+                        <h4 class="font-heading m-0">Kelas 6</h4>
+                    </div>
                 </a>
             </div>
 
@@ -290,7 +346,7 @@
 
                 setTimeout(() => {
                     closeCpAlert();
-                }, 15000);
+                }, 30000); // 30 Detik
             }
         });
     </script>

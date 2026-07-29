@@ -18,78 +18,70 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+    <!-- Navbar Glassmorphism -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
         <div class="container">
-            <div class="d-flex align-items-center">
-                <a href="index.html" class="nav-back-btn text-decoration-none text-white me-3">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <span class="page-title text-white fw-bold fs-5">Bank Soal & Kisi-Kisi</span>
-            </div>
-
-            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
+            
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
                 <i class="fas fa-bars fa-lg"></i>
             </button>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header bg-light">
-                    <h5 class="offcanvas-title fw-bold text-success">Menu Utama</h5>
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="index.html">
-                                <i class="fas fa-home"></i> Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="buku.html">
-                                <i class="fas fa-book"></i> Buku Paket
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="blog.html">
-                                <i class="fas fa-newspaper"></i> Ruang Baca
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="banksoal.html">
-                                <i class="fas fa-clipboard-list"></i> Bank Soal
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <button class="btn text-white" onclick="toggleSearchBar()" title="Cari Materi">
-                                <i class="fas fa-search fa-lg"></i>
-                            </button>
-                        </li>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary fw-bold" href="banksoal.html">Bank Soal</a></li>
                     </ul>
+
+                    <div id="authContainer" class="mt-3 mt-lg-0">
+                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
+                            <i class="fab fa-google me-2"></i> Masuk
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div id="searchBarContainer" class="bg-white border-bottom shadow-sm fixed-top p-3 d-none" style="top: 70px; z-index: 1020;">
-        <div class="container">
-            <div class="input-group">
-                <input type="text" id="navSearchInput" class="form-control border-success" placeholder="Cari lagi..." onkeypress="handleEnter(event)">
-                <button class="btn btn-success" onclick="doSearch()">
-                    <i class="fas fa-search"></i> Cari
-                </button>
-            </div>
-        </div>
-    </div>
+    <div style="height: 90px;"></div>
 
-    <div style="height: 80px;"></div>
-
-    <div class="container py-4">
-        <div class="row g-4" id="cardContainer">
+    <div class="container pb-5 pt-3 flex-grow-1">
+        
+        <!-- Hero Section -->
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center position-relative" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
+            <a href="index.html" class="btn btn-light rounded-circle position-absolute top-50 start-0 translate-middle-y ms-3 ms-md-4 shadow-sm" style="z-index: 10;">
+                <i class="fas fa-arrow-left text-primary"></i>
+            </a>
+            <h1 class="display-5 fw-bolder mb-2 text-white font-heading"><i class="fas fa-clipboard-list me-2"></i> Bank Soal</h1>
+            <p class="fs-5 mb-0 text-white opacity-75">Kumpulan soal lengkap dengan kisi-kisi dan penilaian otomatis.</p>
         </div>
+
+        <div class="row g-4 justify-content-center" id="cardContainer">
+            <!-- Konten di-generate oleh JavaScript -->
+        </div>
+
     </div>    
+
+    <!-- Footer -->
+    <footer class="main-footer text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
@@ -102,34 +94,46 @@
                 // Loop Semester 1 sampai 2
                 for (let smt = 1; smt <= 2; smt++) {
                     
-                    // Nama File JSON target (sesuai format Anda)
-                    const fileName = `kelas_${kelas}_semester_${smt}.json`; // misal: kelas_1_semester_1.json
-                    const title = `Kelas ${kelas} Semester ${smt}`;
-                    const imgColor = smt === 1 ? '4ECDC4' : 'FFE66D'; // Hijau (Ganjil), Kuning (Genap)
+                    // Nama File JSON target
+                    const fileName = `kelas_${kelas}_semester_${smt}.json`; 
+                    const title = `Kelas ${kelas}`;
+                    const subtitle = `Semester ${smt === 1 ? 'Ganjil' : 'Genap'}`;
+                    
+                    // Skema warna gradasi modern (Semester 1 biru, Semester 2 hijau/kuning)
+                    const gradientBg = smt === 1 
+                        ? 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)' 
+                        : 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)';
+                    const iconColor = smt === 1 ? 'text-primary' : 'text-warning';
                     
                     const html = `
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm custom-card border-0">
-                            <div class="card-header border-0 text-white py-3 d-flex justify-content-between align-items-center" 
-                                 style="background-color: #${imgColor}; border-radius: 20px 20px 0 0;">
-                                <h5 class="fw-bold m-0 text-dark opacity-75">${title}</h5>
-                                <i class="fas fa-book fa-2x text-dark opacity-25"></i>
+                        <div class="bento-card p-0 d-flex flex-column h-100 border-0 shadow-sm overflow-hidden">
+                            <!-- Header Kartu Berwarna -->
+                            <div class="p-4 d-flex justify-content-between align-items-center" style="background: ${gradientBg}; border-radius: 1.5rem 1.5rem 0 0;">
+                                <div>
+                                    <h4 class="font-heading fw-bold m-0 text-dark opacity-75">${title}</h4>
+                                    <span class="badge bg-white text-dark mt-1 shadow-sm px-2 py-1 rounded-pill">${subtitle}</span>
+                                </div>
+                                <i class="fas fa-file-signature fa-3x text-white opacity-50"></i>
                             </div>
-                            <div class="card-body">
-                                <p class="text-muted small">Bank soal lengkap dengan kisi-kisi, kunci jawaban, dan penilaian otomatis.</p>
+                            
+                            <!-- Bodi Kartu -->
+                            <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
+                                <p class="text-muted small mb-4 flex-grow-1 lh-lg">Bank soal interaktif lengkap dengan kisi-kisi, kunci jawaban, dan lembar penilaian guru.</p>
                                 
-                                <div class="d-grid gap-2">
-                                    <a href="banksoal/soalguru.html?file=${fileName}" class="btn btn-outline-primary rounded-pill">
-                                        <i class="fas fa-chalkboard-teacher me-2"></i> Kartu Soal (Guru)
+                                <div class="d-flex flex-column gap-2 mt-auto">
+                                    <a href="banksoal/soalsiswa.html?file=${fileName}" class="btn btn-success rounded-pill fw-bold w-100">
+                                        <i class="fas fa-play-circle me-1"></i> Mulai Ujian (Siswa)
                                     </a>
                                     
-                                    <a href="banksoal/soalsiswa.html?file=${fileName}" class="btn btn-success text-white rounded-pill">
-                                        <i class="fas fa-user-graduate me-2"></i> Kerjakan (Siswa)
-                                    </a>
-
-                                    <button onclick="copyLink('${fileName}')" class="btn btn-light border text-muted rounded-pill">
-                                        <i class="fas fa-copy me-2"></i> Salin Link Siswa
-                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <a href="banksoal/soalguru.html?file=${fileName}" class="btn btn-outline-primary rounded-pill flex-fill fw-bold" style="font-size: 0.85rem;">
+                                            <i class="fas fa-print me-1"></i> Kisi-kisi (Guru)
+                                        </a>
+                                        <button onclick="copyLink('${fileName}')" class="btn btn-light border text-secondary rounded-pill fw-bold" style="font-size: 0.85rem;" title="Salin Link untuk Siswa">
+                                            <i class="fas fa-link"></i> Salin
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,48 +146,49 @@
 
         function copyLink(fileName) {
             // Membuat URL absolut untuk halaman siswa
-            // Mendeteksi apakah kita ada di folder root atau subfolder
             let basePath = window.location.pathname.replace('banksoal.html', '');
             if (!basePath.endsWith('/')) basePath += '/';
             
-            // Perbaiki path agar tidak dobel 'banksoal/banksoal/' jika file ada di subfolder
-            // Asumsi: soalsiswa.html ada di folder yang sama dengan banksoal.html
             const url = `${window.location.origin}${basePath}banksoal/soalsiswa.html?file=${fileName}`;
             
             navigator.clipboard.writeText(url).then(() => {
-                // Tampilkan SweetAlert dengan Link
                 Swal.fire({
                     icon: 'success',
                     title: 'Link Berhasil Disalin!',
                     html: `
-                        <p class="mb-2">Link ujian untuk siswa:</p>
-                        <div class="p-2 bg-light border rounded text-break small text-muted">
+                        <p class="mb-2">Link ujian siap dibagikan ke grup siswa:</p>
+                        <div class="p-3 bg-light border rounded-3 text-break small text-muted font-monospace shadow-sm">
                             ${url}
                         </div>
                     `,
-                    timer: 2000, // 2 Detik
+                    timer: 3000, 
                     timerProgressBar: true,
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    customClass: {
+                        popup: 'rounded-4 border-0 shadow-lg'
+                    }
                 });
             }).catch(err => {
-                Swal.fire('Gagal', 'Tidak bisa menyalin link otomatis.', 'error');
+                Swal.fire('Gagal', 'Tidak bisa menyalin link otomatis. Silakan salin manual.', 'error');
             });
         }
 
+        // Peringatan Sedang Masa Pengembangan (Ditunda sedikit agar tak langsung menimpa loading halaman)
         document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: 'error', // Ikon X Merah
-                title: 'Mohon Maaf 🙏',
-                text: 'Fitur Bank Soal belum bisa digunakan sepenuhnya karena saat ini masih dalam tahap pengembangan & pengisian konten.',
-                confirmButtonText: 'Baik, Saya Mengerti',
-                confirmButtonColor: '#198754', // Warna Hijau sesuai tema
-                allowOutsideClick: false, // User harus klik tombol untuk menutup
-                backdrop: `
-                    rgba(0,0,123,0.4)
-                    left top
-                    no-repeat
-                `
-            });
+            setTimeout(() => {
+                Swal.fire({
+                    icon: 'info', // Mengganti ikon error jadi info agar tidak terkesan rusak
+                    title: 'Dalam Tahap Pengembangan',
+                    text: 'Fitur Bank Soal interaktif ini belum bisa digunakan sepenuhnya karena sedang dalam proses pengisian konten materi.',
+                    confirmButtonText: 'Baik, Saya Mengerti',
+                    confirmButtonColor: '#007AFF', 
+                    allowOutsideClick: false,
+                    customClass: {
+                        popup: 'rounded-4 border-0 shadow-lg',
+                        confirmButton: 'rounded-pill px-4 fw-bold'
+                    }
+                });
+            }, 500);
         });
     </script>
 </body>

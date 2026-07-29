@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code - Blog PAI</title>
-    <meta name="description" content="Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code">
+    <meta name="description" content="Tutorial Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code">
     <link rel="icon" type="image/png" href="../assets/logo.png">
+    
     <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/">
     <meta property="og:title" content="Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code">
     <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/assets/canvaaicode.jpeg"> 
@@ -16,15 +16,16 @@
     <link rel="stylesheet" href="../style.css"> 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS KHUSUS ARTIKEL (Bisa dipindah ke style.css nanti) */
+        /* CSS KHUSUS ARTIKEL */
         .article-body {
-            font-size: 1.1rem; /* Tulisan agak besar biar enak dibaca */
-            line-height: 1.8;  /* Jarak antar baris renggang */
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: #444;
         }
-        .article-body h2 {
+        .article-body h2, .article-body h3 {
             margin-top: 2rem;
-            color: var(--primary-green);
+            color: var(--primary-blue);
+            font-family: 'Quicksand', sans-serif;
             font-weight: 700;
         }
         .article-meta {
@@ -35,135 +36,150 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
 
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+    <!-- Navbar Glassmorphism -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
         <div class="container">
+            <a href="../index.html" class="navbar-brand d-flex align-items-center">
+                <img src="../assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
             
-            <div class="d-flex align-items-center">
-                <a href="../blog.html" class="nav-back-btn text-decoration-none">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <span class="page-title">Ruang Baca</span>
-            </div>
-
-            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
-                <i class="fas fa-bars fa-lg" id="menuIcon"></i>
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
             </button>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header bg-light">
-                    <h5 class="offcanvas-title fw-bold text-success">Menu Utama</h5>
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../index.html">
-                                <i class="fas fa-home"></i> Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../buku.html">
-                                <i class="fas fa-book"></i> Buku Paket
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill active-link" href="../blog.html">
-                                <i class="fas fa-newspaper"></i> Ruang Baca
-                            </a>
-                        </li>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary fw-bold" href="../posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../banksoal.html">Bank Soal</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-    <div style="height: 80px;"></div>
 
-    <div class="container py-5 flex-grow-1">
+    <div style="height: 90px;"></div>
+
+    <div class="container py-4 flex-grow-1">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10 col-xl-9">
 
-                <article class="card custom-card p-4 p-md-5">
+                <!-- Hero Section Mini untuk Navigasi Kembali -->
+                <div class="mb-4">
+                    <a href="../posts.html" class="text-decoration-none text-muted fw-bold d-inline-flex align-items-center hover-scale">
+                        <i class="fas fa-arrow-left me-2 p-2 bg-white rounded-circle shadow-sm"></i> Kembali ke Daftar Artikel
+                    </a>
+                </div>
+
+                <article class="bento-card p-4 p-md-5 border-0 shadow-sm">
     
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="badge bg-info text-dark">Canva</span>
-                        <span class="article-meta"><i class="far fa-calendar-alt me-1"></i> 3 Jan 2026</span>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-bold"><i class="fas fa-tag me-1"></i> Tutorial Canva</span>
+                        <span class="article-meta fw-bold"><i class="far fa-calendar-alt me-1 text-success"></i> 3 Jan 2026</span>
                     </div>
 
-                    <h1 class="fw-bold mb-4" style="color: var(--dark-text);">Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code</h1>
+                    <h1 class="font-heading fw-bold mb-4 lh-base" style="color: var(--dark-text); font-size: 2.5rem;">Membuat Media Pembelajaran dan Asesmen Sendiri menggunakan Canva AI Code</h1>
 
-                    <img src="../assets/canvaaicode.jpeg" 
-                        class="img-fluid rounded-4 shadow-sm mb-5 w-100" alt="Canva AI Code">
+                    <div class="position-relative mb-5">
+                        <img src="../assets/canvaaicode.jpeg" class="img-fluid rounded-4 shadow-sm w-100" alt="Banner Canva AI Code" style="max-height: 400px; object-fit: cover;">
+                    </div>
 
                     <div class="article-body">
-                        <p class="lead">Sebagai guru kreatif kita harus berinovasi untuk membuat kelas kita lebih menyenangkan, ditambah lagi kini setipa sekolah sudah dibekali layar digital interaktif untuk mendukungnya. Ada beberapa jenis tools atau perangkat yang bisa kita manfaatkan untuk mendukungnya salah satunya adalah Canva AI Code. Dengan Canva AI Code merupakan tools untuk membuat media pembelajaran lebih interaktif dengan sentuhan jari di Interactive Flat Panel (IFP). Namun, kita terbatas pada menuliskan perintah atau prompt yang akan kita tuliskan ke Canva AI Code tersebut. Kita akan dibantu oleh AI Chatbot lainnya untuk membuat prompt yang cocok untuk di Canva AI Code tersebut. Kali ini kita akan menggunakan AI Chatbot ChatGPT dari OpenAI. Sebagai contoh, kita akan membuat media pembelajaran tentang materi Iman Kepada Allah Swt. yaitu materi kelas 3 SD.</p>
+                        <p class="lead fw-normal text-dark opacity-75">Sebagai guru kreatif kita harus berinovasi untuk membuat kelas kita lebih menyenangkan, ditambah lagi kini setipa sekolah sudah dibekali layar digital interaktif untuk mendukungnya. Ada beberapa jenis tools atau perangkat yang bisa kita manfaatkan untuk mendukungnya salah satunya adalah Canva AI Code. Dengan Canva AI Code merupakan tools untuk membuat media pembelajaran lebih interaktif dengan sentuhan jari di Interactive Flat Panel (IFP).</p>
+                        
+                        <p>Namun, kita terbatas pada menuliskan perintah atau prompt yang akan kita tuliskan ke Canva AI Code tersebut. Kita akan dibantu oleh AI Chatbot lainnya untuk membuat prompt yang cocok untuk di Canva AI Code tersebut. Kali ini kita akan menggunakan AI Chatbot ChatGPT dari OpenAI. Sebagai contoh, kita akan membuat media pembelajaran tentang materi Iman Kepada Allah Swt. yaitu materi kelas 3 SD.</p>
 
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode1.png" class="figure-img img-fluid rounded" alt="Prompt Canva AI">
-                            <figcaption class="figure-caption">Gambar 1: membuat prompt Canva AI Code dari ChatGPT</figcaption>
+                        <figure class="figure w-100 text-center my-5 bg-light p-3 rounded-4 border">
+                            <img src="../assets/canvaaicode1.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Prompt Canva AI">
+                            <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 1: membuat prompt Canva AI Code dari ChatGPT</figcaption>
                         </figure>
 
-                        <p>Sebagai contoh Saya membuat prompt di ChatGPT sebagai berikut :</p>
+                        <p>Sebagai contoh Saya membuat prompt di ChatGPT sebagai berikut:</p>
 
-                        <blockquote class="blockquote bg-light p-3 rounded border-start border-5 border-primary my-4 fst-italic">
-                            <p class="mb-0">Saya ingin membuat media pembelajaran interaktif yang terdiri dari materi, game interaktif tarik tambang, dan asesmen. Materi yang Saya ingin ajarkan adalah tentang iman kepada kitab Allah untuk siswa kelas 3. Pada bagian materi dibagi lagi menjadi 6 menu, pada game tarik tambang materi iman kepada kitab Allah sebelum dimulai menuliskan nama pemain atau kelompok terlebih dahulu. Dan pada menu asesmen berikan 20 soal yang terkait materi tersebut lalu setelah selesai dan mendapatkan nilai munculkan form nomor wa guru yang bisa diketik lalu tombol kirim akan mengirimkan nilai akhir ke nomor WA guru. Tampilannya menarik untuk siswa kelas 3. Saya ingin membuat prompt tersebut di Canva AI Code, buatlah.</p>
-                        </blockquote>
+                        <div class="bg-light p-4 rounded-4 border-start border-5 border-primary my-4 position-relative">
+                            <i class="fas fa-quote-left fa-2x text-primary opacity-25 position-absolute top-0 start-0 m-3"></i>
+                            <p class="mb-0 fst-italic position-relative z-1" style="text-indent: 1.5rem;">Saya ingin membuat media pembelajaran interaktif yang terdiri dari materi, game interaktif tarik tambang, dan asesmen. Materi yang Saya ingin ajarkan adalah tentang iman kepada kitab Allah untuk siswa kelas 3. Pada bagian materi dibagi lagi menjadi 6 menu, pada game tarik tambang materi iman kepada kitab Allah sebelum dimulai menuliskan nama pemain atau kelompok terlebih dahulu. Dan pada menu asesmen berikan 20 soal yang terkait materi tersebut lalu setelah selesai dan mendapatkan nilai munculkan form nomor wa guru yang bisa diketik lalu tombol kirim akan mengirimkan nilai akhir ke nomor WA guru. Tampilannya menarik untuk siswa kelas 3. Saya ingin membuat prompt tersebut di Canva AI Code, buatlah.</p>
+                        </div>
 
                         <p>Pada prompt ini, Saya meminta ChatGPT membuat prompt untuk Canva AI Code materi tentang Iman Kepada Allah Swt. dimana yang menjadi poin penekanan adalah pada menu asesmen. Biasanya menu asesmen pada media interaktif tidak bisa dikirim ke guru berapa hasilnya. Namun pada prompt ini Saya menambahkan "setelah selesai dan mendapatkan nilai munculkan form nomor wa guru yang bisa diketik lalu tombol kirim akan mengirimkan nilai akhir ke nomor WA guru" sehingga guru mendapatkan rekap nilainya. Tentu prompt ini adalah khusus untuk dikirimkan ke siswa berbeda dengan media pembelajaran yang ditampilkan di IFP dengan tanpa ada form kirim ke WA Guru, walaupun sebenarnya di skip juga bisa.</p>
 
                         <p>Setelah kita mendapatkan prompt Canva AI Code dari AI Chatbot ChatGPT, kini kita membuka aplikasi Canva. Untuk menggunakannya kita harus memilih bagian Canva AI dan dibawah pilih Code. Sehingga Canva mengerti harus membuat apa.</p>
 
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode2.png" class="figure-img img-fluid rounded" alt="Halaman Canva">
-                            <figcaption class="figure-caption">Gambar 2: Halaman Awal Canva</figcaption>
-                        </figure>
-
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode3.png" class="figure-img img-fluid rounded" alt="Pilih Canva AI Code">
-                            <figcaption class="figure-caption">Gambar 3: Memilih Canva AI dengan Code</figcaption>
-                        </figure>
+                        <div class="row g-4 my-4">
+                            <div class="col-md-6">
+                                <figure class="figure w-100 text-center bg-light p-3 rounded-4 border h-100 mb-0">
+                                    <img src="../assets/canvaaicode2.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Halaman Canva">
+                                    <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 2: Halaman Awal Canva</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <figure class="figure w-100 text-center bg-light p-3 rounded-4 border h-100 mb-0">
+                                    <img src="../assets/canvaaicode3.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Pilih Canva AI Code">
+                                    <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 3: Memilih Canva AI dengan Code</figcaption>
+                                </figure>
+                            </div>
+                        </div>
 
                         <p>Setelah itu kita meng copy paste hasil prompt yang telah dibuat ChatGPT ke kotak prompt Canva AI Code lalu biarkan Canva AI Code bekerja sendiri sampai selesai.</p>
 
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode4.png" class="figure-img img-fluid rounded" alt="Proses Generasi">
-                            <figcaption class="figure-caption">Gambar 4: Canva AI Code sedang membuat Media Pembelajaran Interaktif</figcaption>
+                        <figure class="figure w-100 text-center my-5 bg-light p-3 rounded-4 border">
+                            <img src="../assets/canvaaicode4.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Proses Generasi">
+                            <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 4: Canva AI Code sedang membuat Media Pembelajaran Interaktif</figcaption>
                         </figure>
 
-                        <p>Setelah selesai, kita coba dulu pada bilah pratinjau. Pada hasil kerja Saya, pada game tarik tambang hanya satu pemain. Saya merevisi kerja Canva AI Code dengan menambahkan perintah "Buatlah tarik tambang menjadi dua pemain dengan soal kanan untuk pemain satu dan soal kiri untuk pemain 2."</p>
+                        <p>Setelah selesai, kita coba dulu pada bilah pratinjau. Pada hasil kerja Saya, pada game tarik tambang hanya satu pemain. Saya merevisi kerja Canva AI Code dengan menambahkan perintah <strong>"Buatlah tarik tambang menjadi dua pemain dengan soal kanan untuk pemain satu dan soal kiri untuk pemain 2."</strong></p>
 
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode5.png" class="figure-img img-fluid rounded" alt="Game Tarik Tambang V1">
-                            <figcaption class="figure-caption">Gambar 5: Hasil Canva AI Code pada menu Game Tarik Tambang Version 1</figcaption>
-                        </figure>
-
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode6.png" class="figure-img img-fluid rounded" alt="Revisi Canva AI">
-                            <figcaption class="figure-caption">Gambar 6: Canva AI Code merevisi kerjanya dengan tanda Version 2 pada bilah pratinjau bagian atas.</figcaption>
-                        </figure>
+                        <div class="row g-4 my-4">
+                            <div class="col-md-6">
+                                <figure class="figure w-100 text-center bg-light p-3 rounded-4 border h-100 mb-0">
+                                    <img src="../assets/canvaaicode5.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Game Tarik Tambang V1">
+                                    <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 5: Hasil Canva AI Code (Versi 1)</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <figure class="figure w-100 text-center bg-light p-3 rounded-4 border h-100 mb-0">
+                                    <img src="../assets/canvaaicode6.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Revisi Canva AI">
+                                    <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 6: Canva merevisi kerja (Versi 2)</figcaption>
+                                </figure>
+                            </div>
+                        </div>
 
                         <p>Setelah kita coba dan sesuai dengan apa yang kita inginkan, selanjutnya kita Publish dengan link Canva yang kita punya. Sebelum di Publish kita bsia mengganti linknya sesuai yang inginkan.</p>
 
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode7.png" class="figure-img img-fluid rounded" alt="Siap Digunakan">
-                            <figcaption class="figure-caption">Gambar 7: Media Pembelajaran Interaktif kita sudah siap digunakan.</figcaption>
+                        <figure class="figure w-100 text-center my-5 bg-light p-3 rounded-4 border">
+                            <img src="../assets/canvaaicode7.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Siap Digunakan">
+                            <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 7: Media Pembelajaran Interaktif siap digunakan.</figcaption>
                         </figure>
 
-                        <p>Langkah terakhir adalah kita tunggu sampai jadi dan siap dibagikan ke siswa atau ditampilkan pada IFP dengan menggunakan Google atau Chrome.</p>
+                        <p>Langkah terakhir adalah kita tunggu sampai jadi dan siap dibagikan ke siswa atau ditampilkan pada IFP dengan menggunakan Google Chrome.</p>
 
-                        <figure class="figure w-100 text-center my-4">
-                            <img src="../assets/canvaaicode8.png" class="figure-img img-fluid rounded" alt="Link Aktif">
-                            <figcaption class="figure-caption">Gambar 8: Link Media kita sudah aktif dan Copy lalu bagikan ke WA.</figcaption>
+                        <figure class="figure w-100 text-center my-5 bg-light p-3 rounded-4 border">
+                            <img src="../assets/canvaaicode8.png" class="figure-img img-fluid rounded-3 shadow-sm border" alt="Link Aktif">
+                            <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 8: Link Media sudah aktif dan siap dibagikan.</figcaption>
                         </figure>
 
-                        <p>Sekian sedikit tutorial tentang penggunaan Canva AI Code ini untuk pembuatan Media Pembelajaran Interaktif ini. Silahkan amati tiru dan modifikasi untuk media pembelajaran interaktif lainnya.</p>
+                        <div class="alert alert-info rounded-4 border-0 shadow-sm mt-5">
+                            <h5 class="fw-bold"><i class="fas fa-lightbulb text-warning me-2"></i> Kesimpulan</h5>
+                            <p class="mb-0 text-dark">Sekian sedikit tutorial tentang penggunaan Canva AI Code ini untuk pembuatan Media Pembelajaran Interaktif ini. Silahkan amati tiru dan modifikasi untuk media pembelajaran interaktif lainnya di kelas Anda.</p>
+                        </div>
                     </div>
                     
-                    <hr class="my-5 opacity-25">
+                    <hr class="my-5 opacity-10">
 
-                    <div class="text-center">
-                        <p class="text-muted small mb-3">Bagikan artikel ini:</p>
-                        <a href="#" class="btn btn-success btn-sm rounded-pill px-3 me-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        <a href="#" class="btn btn-primary btn-sm rounded-pill px-3"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center bg-light p-3 rounded-pill border">
+                        <p class="text-muted fw-bold mb-3 mb-sm-0 ms-sm-3">Bagikan artikel ini:</p>
+                        <div>
+                            <a href="#" id="share-wa" target="_blank" class="btn btn-success rounded-pill px-4 shadow-sm me-2"><i class="fab fa-whatsapp me-1"></i> WhatsApp</a>
+                            <a href="#" id="share-fb" target="_blank" class="btn btn-primary rounded-pill px-4 shadow-sm"><i class="fab fa-facebook-f me-1"></i> Facebook</a>
+                        </div>
                     </div>
 
                 </article>
@@ -173,9 +189,7 @@
 
     <footer class="main-footer text-center py-4 mt-auto">
         <div class="container">
-            <p class="mb-0 fw-bold" style="color: #292f36;">
-                &copy; KKG PAI SD Kota Banjar Jawa Barat 2026
-            </p>
+            <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
         </div>
     </footer>
 
@@ -183,17 +197,12 @@
     <script src="../script.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Ambil URL halaman saat ini dan Judul halaman
             var currentUrl = encodeURIComponent(window.location.href);
             var pageTitle = encodeURIComponent(document.title);
 
-            // 1. Link WhatsApp
-            // Format: https://api.whatsapp.com/send?text=[Judul] [Link]
             var waLink = "https://api.whatsapp.com/send?text=" + pageTitle + "%0A" + currentUrl;
             document.getElementById("share-wa").href = waLink;
 
-            // 2. Link Facebook
-            // Format: https://www.facebook.com/sharer/sharer.php?u=[Link]
             var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
             document.getElementById("share-fb").href = fbLink;
         });

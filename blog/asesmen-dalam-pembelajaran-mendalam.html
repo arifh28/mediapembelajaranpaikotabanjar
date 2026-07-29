@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar - Blog PAI</title>
     <meta name="description" content="Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar">
     <link rel="icon" type="image/png" href="../assets/logo.png">
+    
     <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/">
     <meta property="og:title" content="Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar">
     <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/assets/asesmen.jpeg">
-    <meta property="og:description"  content="Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar"> 
+    <meta property="og:description" content="Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar"> 
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css"> 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS KHUSUS ARTIKEL (Bisa dipindah ke style.css nanti) */
+        /* CSS KHUSUS ARTIKEL */
         .article-body {
-            font-size: 1.1rem; /* Tulisan agak besar biar enak dibaca */
-            line-height: 1.8;  /* Jarak antar baris renggang */
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: #444;
         }
-        .article-body h2 {
+        .article-body h2, .article-body h3 {
             margin-top: 2rem;
-            color: var(--primary-green);
+            color: var(--primary-blue);
+            font-family: 'Quicksand', sans-serif;
             font-weight: 700;
         }
         .article-meta {
@@ -36,67 +37,64 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
 
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style="background-color: var(--primary-green);">
+    <!-- Navbar Glassmorphism -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
         <div class="container">
+            <a href="../index.html" class="navbar-brand d-flex align-items-center">
+                <img src="../assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
             
-            <div class="d-flex align-items-center">
-                <a href="../blog.html" class="nav-back-btn text-decoration-none">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <span class="page-title">Ruang Baca</span>
-            </div>
-
-            <button class="navbar-toggler border-0 text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
-                <i class="fas fa-bars fa-lg" id="menuIcon"></i>
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
             </button>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header bg-light">
-                    <h5 class="offcanvas-title fw-bold text-success">Menu Utama</h5>
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../index.html">
-                                <i class="fas fa-home"></i> Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill" href="../buku.html">
-                                <i class="fas fa-book"></i> Buku Paket
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-bold px-3 rounded-pill active-link" href="../blog.html">
-                                <i class="fas fa-newspaper"></i> Ruang Baca
-                            </a>
-                        </li>
+                
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary fw-bold" href="../posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../banksoal.html">Bank Soal</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-    <div style="height: 80px;"></div>
 
-    <div class="container py-5 flex-grow-1">
+    <div style="height: 90px;"></div>
+
+    <div class="container py-4 flex-grow-1">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10 col-xl-9">
                 
-                <article class="card custom-card p-4 p-md-5">
+                <!-- Hero Section Mini untuk Navigasi Kembali -->
+                <div class="mb-4">
+                    <a href="../posts.html" class="text-decoration-none text-muted fw-bold d-inline-flex align-items-center hover-scale">
+                        <i class="fas fa-arrow-left me-2 p-2 bg-white rounded-circle shadow-sm"></i> Kembali ke Daftar Artikel
+                    </a>
+                </div>
+
+                <article class="bento-card p-4 p-md-5 border-0 shadow-sm">
                     
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="badge bg-warning text-dark">Kurikulum</span>
-                        <span class="article-meta"><i class="far fa-calendar-alt me-1"></i> 3 Jan 2026</span>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-bold"><i class="fas fa-tag me-1"></i> Kurikulum</span>
+                        <span class="article-meta fw-bold"><i class="far fa-calendar-alt me-1 text-success"></i> 3 Jan 2026</span>
                     </div>
 
-                    <h1 class="fw-bold mb-4" style="color: var(--dark-text);">Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar</h1>
+                    <h1 class="font-heading fw-bold mb-4 lh-base" style="color: var(--dark-text); font-size: 2.5rem;">Transformasi Asesmen dalam Membangun Karakter Siswa Sekolah Dasar</h1>
 
-                    <img src="../assets/asesmen.jpeg" 
-                         class="img-fluid rounded-4 shadow-sm mb-5 w-100" alt="Wudhu">
+                    <div class="position-relative mb-5">
+                        <img src="../assets/asesmen.jpeg" class="img-fluid rounded-4 shadow-sm w-100" alt="Ilustrasi Asesmen" style="max-height: 400px; object-fit: cover;">
+                    </div>
 
                     <div class="article-body">
-                        <p class="lead">Pendidikan di Indonesia saat ini sedang bergerak menuju peningkatan mutu yang menyeluruh, di mana kurikulum dan pendekatan pembelajaran beradaptasi untuk menciptakan pengalaman belajar yang bermakna. Salah satu perubahan fundamental terletak pada cara pandang terhadap evaluasi hasil belajar, yang tidak lagi sekadar mengejar angka, melainkan memastikan siswa mengalami proses <em>deep learning</em> atau pembelajaran mendalam. Dalam paradigma ini, asesmen terbagi menjadi tiga fungsi vital: <em>assessment as learning</em>, <em>assessment for learning</em>, dan <em>assessment of learning</em>, yang memadukan pendekatan formatif dan sumatif secara proporsional.</p>
+                        <p class="lead fw-normal text-dark opacity-75">Pendidikan di Indonesia saat ini sedang bergerak menuju peningkatan mutu yang menyeluruh, di mana kurikulum dan pendekatan pembelajaran beradaptasi untuk menciptakan pengalaman belajar yang bermakna. Salah satu perubahan fundamental terletak pada cara pandang terhadap evaluasi hasil belajar, yang tidak lagi sekadar mengejar angka, melainkan memastikan siswa mengalami proses <em>deep learning</em> atau pembelajaran mendalam. Dalam paradigma ini, asesmen terbagi menjadi tiga fungsi vital: <em>assessment as learning</em>, <em>assessment for learning</em>, dan <em>assessment of learning</em>, yang memadukan pendekatan formatif dan sumatif secara proporsional.</p>
 
                         <p>Ketiga jenis asesmen ini memiliki peran strategis dalam mendukung siklus pembelajaran mendalam yang terdiri dari tahap memahami, mengaplikasi, dan merefleksi. Penerapan ketiga asesmen ini sangat relevan jika diterapkan pada materi konkret seperti tata cara Salat bagi siswa kelas 3 SD. Pada usia ini, secara psikologis anak berada pada tahap operasional konkret, di mana mereka membutuhkan contoh nyata dan keterlibatan fisik langsung. Selain itu, aspek sosial mereka mulai berkembang melalui interaksi dengan teman sebaya, sehingga validasi dan umpan balik menjadi elemen krusial dalam pembentukan kepercayaan diri mereka.</p>
 
@@ -104,18 +102,18 @@
 
                         <p>Studi kasus penerapan <em>assessment as learning</em> pada materi Salat kelas 3 SD dapat dilakukan melalui penggunaan "Jurnal Aku Anak Sholeh". Guru menyediakan lembar ceklis sederhana yang berisi urutan bacaan dan gerakan Salat yang menarik secara visual. Setelah berlatih, siswa diminta untuk menilai diri sendiri (<em>self-assessment</em>): "Apakah aku sudah membaca Iftitah?", "Apakah punggungku lurus saat rukuk?". Aktivitas ini mempertimbangkan psikologis anak yang menyukai pencapaian bertahap, sekaligus melatih kejujuran dan tanggung jawab spiritual tanpa rasa takut dinilai salah oleh orang lain.</p>
 
-                        <figure>
-                            <img src="../assets/asesmen1.jpeg" class="img-fluid rounded-4 shadow-sm mb-5 w-100" alt="Ilustrasi siswa kelas 3 SD sedang melakukan gerakan rukuk sambil melakukan penilaian diri (self-assessment) dalam format kartun 3D.">
-                            <figcaption>Gambar 1: Siswa melakukan refleksi diri saat mempraktikkan gerakan Salat.</figcaption>
+                        <figure class="figure w-100 text-center my-5 bg-light p-3 rounded-4 border">
+                            <img src="../assets/asesmen1.jpeg" class="figure-img img-fluid rounded-3 shadow-sm" alt="Ilustrasi self-assessment" style="max-height: 350px;">
+                            <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 1: Siswa melakukan refleksi diri saat mempraktikkan gerakan Salat.</figcaption>
                         </figure>
 
                         <p>Selanjutnya adalah <em>assessment for learning</em>, yang juga termasuk dalam kategori asesmen formatif namun berfokus pada perbaikan proses pembelajaran saat kegiatan berlangsung. Asesmen ini memberikan umpan balik (<em>feedback</em>) seketika yang konstruktif untuk membantu siswa mencapai kompetensi yang diharapkan. Dalam konteks sosial kelas 3 SD, asesmen ini bisa melibatkan interaksi antar-teman atau bimbingan langsung guru yang bersifat mengayomi, bukan menghakimi.</p>
 
                         <p>Dalam praktik materi Salat, <em>assessment for learning</em> dapat diwujudkan melalui metode observasi dan tutor sebaya. Guru dapat berkeliling saat siswa mempraktikkan gerakan Salat, memberikan koreksi lembut pada posisi sujud yang kurang tepat, atau membenarkan pelafalan bacaan. Secara sosial, siswa dapat dipasangkan untuk saling mengamati gerakan teman (<em>peer assessment</em>), yang membangun kolaborasi dan empati. Pendekatan ini selaras dengan prinsip pembelajaran mendalam pada tahap "mengaplikasi", di mana siswa mempraktikkan pemahaman mereka dalam konteks nyata dan mendapatkan masukan untuk penyempurnaan.</p>
 
-                        <figure>
-                            <img src="../assets/asesmen2.jpeg" class="img-fluid rounded-4 shadow-sm mb-5 w-100" alt="Ilustrasi suasana belajar di kelas di mana seorang siswa mendapatkan umpan balik positif dari teman atau guru saat berlatih Salat, dalam gaya kartun 3D.">
-                            <figcaption>Gambar 2: Proses umpan balik dan kolaborasi antar siswa dalam mempelajari gerakan Salat.</figcaption>
+                        <figure class="figure w-100 text-center my-5 bg-light p-3 rounded-4 border">
+                            <img src="../assets/asesmen2.jpeg" class="figure-img img-fluid rounded-3 shadow-sm" alt="Ilustrasi peer-assessment" style="max-height: 350px;">
+                            <figcaption class="figure-caption mt-2 text-muted fw-bold">Gambar 2: Proses umpan balik dan kolaborasi antar siswa dalam mempelajari gerakan Salat.</figcaption>
                         </figure>
 
                         <p>Berbeda dengan dua jenis sebelumnya, <em>assessment of learning</em> adalah asesmen sumatif yang dilakukan di akhir proses pembelajaran untuk mengukur capaian kompetensi siswa. Meskipun bersifat penilaian akhir, dalam kurikulum yang berpusat pada siswa, asesmen ini harus tetap bersifat autentik dan holistik. Autentik berarti penilaian merepresentasikan konteks kehidupan nyata, sedangkan holistik berarti melihat kemampuan siswa secara utuh meliputi pengetahuan, keterampilan, dan sikap.</p>
@@ -128,16 +126,19 @@
 
                         <p>Penerapan strategi ini pada akhirnya mendukung tujuan besar pendidikan nasional untuk membangun manusia yang beriman, bertakwa kepada Tuhan Yang Maha Esa, dan berakhlak mulia. Asesmen bukan lagi sekadar alat administrasi pengisian rapor, melainkan instrumen pedagogis yang ampuh untuk menanamkan nilai-nilai karakter. Melalui kombinasi asesmen formatif dan sumatif yang tepat, guru dapat memfasilitasi pertumbuhan spiritual dan intelektual siswa secara seimbang.</p>
 
-                        <p>Sebagai penutup, transformasi menuju pembelajaran mendalam menuntut guru untuk mengubah pola pikir bahwa mengajar bukan sekadar menyampaikan materi hingga tuntas, melainkan memastikan kompetensi tercapai. Sinergi antara <em>assessment as learning, for learning,</em> dan <em>of learning</em> pada materi Salat kelas 3 SD adalah bukti nyata bagaimana kebijakan kurikulum dapat diterjemahkan menjadi praktik kelas yang humanis, bermakna, dan sesuai dengan perkembangan psikologis serta sosial peserta didik.</p>
-
-                        <p><em>Tulisan ini adalah AI Generated dengan sedikit perubahan.</em></p>
+                        <div class="bg-light p-4 rounded-4 mt-5 border-start border-5 border-primary">
+                            <p class="mb-0 text-muted fst-italic">Tulisan ini adalah AI Generated dengan sedikit perubahan editorial untuk penyesuaian konteks.</p>
+                        </div>
                     </div>
-                    <hr class="my-5 opacity-25">
+                    
+                    <hr class="my-5 opacity-10">
 
-                    <div class="text-center">
-                        <p class="text-muted small mb-3">Bagikan artikel ini:</p>
-                        <a href="#" class="btn btn-success btn-sm rounded-pill px-3 me-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        <a href="#" class="btn btn-primary btn-sm rounded-pill px-3"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center bg-light p-3 rounded-pill border">
+                        <p class="text-muted fw-bold mb-3 mb-sm-0 ms-sm-3">Bagikan artikel ini:</p>
+                        <div>
+                            <a href="#" id="share-wa" target="_blank" class="btn btn-success rounded-pill px-4 shadow-sm me-2"><i class="fab fa-whatsapp me-1"></i> WhatsApp</a>
+                            <a href="#" id="share-fb" target="_blank" class="btn btn-primary rounded-pill px-4 shadow-sm"><i class="fab fa-facebook-f me-1"></i> Facebook</a>
+                        </div>
                     </div>
 
                 </article>
@@ -148,27 +149,20 @@
 
     <footer class="main-footer text-center py-4 mt-auto">
         <div class="container">
-            <p class="mb-0 fw-bold" style="color: #292f36;">
-                &copy; KKG PAI SD Kota Banjar Jawa Barat 2026
-            </p>
+            <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script.js"></script>
-        <script>
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Ambil URL halaman saat ini dan Judul halaman
             var currentUrl = encodeURIComponent(window.location.href);
             var pageTitle = encodeURIComponent(document.title);
 
-            // 1. Link WhatsApp
-            // Format: https://api.whatsapp.com/send?text=[Judul] [Link]
             var waLink = "https://api.whatsapp.com/send?text=" + pageTitle + "%0A" + currentUrl;
             document.getElementById("share-wa").href = waLink;
 
-            // 2. Link Facebook
-            // Format: https://www.facebook.com/sharer/sharer.php?u=[Link]
             var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
             document.getElementById("share-fb").href = fbLink;
         });
