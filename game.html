@@ -4,33 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Interaktif - PAIBP SD</title>
-    <meta name="description" content="Portal Media Pembelajaran dan Buku Elektronik PAI SD KKG Kota Banjar.">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Game Interaktif PAIBP SD">
-    <meta property="og:description" content="Akses materi pembelajaran interaktif dan buku elektronik PAI SD Kurikulum Merdeka.">
-    <meta property="og:image" content="https://mediapembelajaranpaikotabanjar.vercel.app/header.png"> 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mediapembelajaranpaikotabanjar.vercel.app/game.html">
+    <meta name="description" content="Kumpulan Game Interaktif PAI SD Kurikulum Merdeka.">
     <link rel="icon" type="image/png" href="assets/logo.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        .coming-soon-container {
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
     
-    <!-- Navbar Glassmorphism -->
     <nav class="navbar navbar-expand-lg fixed-top glass-nav">
         <div class="container">
             <a href="index.html" class="navbar-brand d-flex align-items-center">
@@ -47,7 +30,6 @@
                     <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </div>
-                
                 <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
                         <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
@@ -55,12 +37,6 @@
                         <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
                         <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
                     </ul>
-
-                    <div id="authContainer" class="mt-3 mt-lg-0">
-                        <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
-                            <i class="fab fa-google me-2"></i> Masuk
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -68,23 +44,36 @@
 
     <div style="height: 90px;"></div>
 
-    <div class="container pb-5">
+    <div class="container pb-5 flex-grow-1">
         
-        <!-- Header Halaman -->
         <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
             <h1 class="display-5 fw-bolder mb-3 text-white font-heading"><i class="fas fa-gamepad me-2"></i> Game Interaktif</h1>
             <p class="fs-5 mb-0 text-white opacity-75">Uji wawasan PAI dengan seru dan menyenangkan.</p>
         </div>
 
-        <div class="row justify-content-center mt-2">
-            <div class="col-md-8 col-lg-6">
-                <div class="bento-card coming-soon-container text-center border-0 shadow-sm rounded-4 p-5">
-                     <i class="fas fa-tools fa-5x text-muted mb-4 opacity-50"></i>
-                     <h2 class="font-heading fw-bold text-dark">Segera Hadir</h2>
-                     <p class="text-muted">Fitur Game Interaktif sedang dalam tahap pengembangan. Kami sedang menyiapkan sesuatu yang seru untuk Anda!</p>
-                     <a href="index.html" class="btn btn-primary rounded-pill px-4 mt-3 fw-bold">Kembali ke Beranda</a>
+        <!-- Daftar Game -->
+        <div class="row g-4 justify-content-center mt-2">
+            
+            <!-- Game 1: Fathu Makkah -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100 border-0 shadow-sm overflow-hidden" style="border-radius: 1.5rem;">
+                    <div class="p-4 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                        <div>
+                            <h4 class="font-heading fw-bold m-0 text-dark opacity-75">Kuis Video</h4>
+                            <span class="badge bg-white text-dark mt-2 shadow-sm px-3 py-2 rounded-pill"><i class="fas fa-history me-1"></i> Sejarah Islam</span>
+                        </div>
+                        <i class="fas fa-kaaba fa-3x text-white opacity-50"></i>
+                    </div>
+                    <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
+                        <h5 class="font-heading fw-bold mb-2">Peristiwa Fathu Makkah</h5>
+                        <p class="text-muted small mb-4 flex-grow-1 lh-lg">Simak video animasi sejarah penaklukan Kota Makkah, lalu uji pemahamanmu dengan menjawab 10 pertanyaan seru!</p>
+                        <a href="game/fathu_mekkah.html" class="btn btn-success rounded-pill fw-bold w-100 shadow-sm py-2">
+                            <i class="fas fa-play-circle me-1"></i> Mulai Bermain
+                        </a>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
+<body class="bg-light d-flex flex-column min-vh-100">
     
     <!-- Navbar Glassmorphism -->
     <nav class="navbar navbar-expand-lg fixed-top glass-nav">
@@ -59,18 +59,139 @@
 
     <div style="height: 90px;"></div>
 
-    <div class="container pb-5">
+    <div class="container pb-5 flex-grow-1">
         
         <!-- Header Halaman -->
-        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center position-relative" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
             <h1 class="display-5 fw-bolder mb-3 text-white font-heading"><i class="fas fa-book-open me-2"></i> Perpustakaan Digital</h1>
-            <p class="fs-5 mb-0 text-white opacity-75">Download Buku Sekolah Elektronik (BSE) PAI Kurikulum Merdeka format PDF.</p>
+            <p class="fs-5 mb-0 text-white opacity-75">Download Buku Pegangan PAI dan Buku Sekolah Elektronik (BSE) Kurikulum Merdeka.</p>
         </div>
 
-        <!-- Validasi Akses Member (Sesuai Konsep index.html) -->
-        <div class="alert alert-success auth-only d-none shadow-sm rounded-4 border-0">
-            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i> Anda login sebagai Guru. Riwayat unduhan akan otomatis tersimpan di sistem.</h5>
+        <!-- ========================================== -->
+        <!-- AREA KHUSUS MEMBER (BUKU CP 020 TAHUN 2026) -->
+        <!-- ========================================== -->
+        <div class="auth-only d-none mb-5">
+            
+            <div class="alert alert-success shadow-sm rounded-4 border-0 mb-5">
+                <h5 class="mb-0 fw-bold"><i class="fas fa-check-circle me-2"></i> Anda login sebagai Guru. Akses modul eksklusif terbuka.</h5>
+            </div>
+
+            <div class="mb-4 text-center">
+                <h3 class="font-heading fw-bold text-primary mb-2">
+                    <i class="fas fa-book-medical me-2 text-warning"></i> Buku Pegangan PAI Sesuai CP No. 020 Tahun 2026
+                </h3>
+                <p class="text-danger fw-bold bg-danger-subtle d-inline-block px-3 py-1 rounded-pill small">
+                    (Unofficial / Tidak Resmi Kemendikdasmen)
+                </p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                
+                <!-- Buku Baru Kelas 1 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="bento-card p-3 text-center d-flex flex-column h-100 border-primary border shadow-sm">
+                        <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2 position-relative">
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="z-index: 10;">NEW CP 020</span>
+                            <img src="assets/images/Islam_BS_KLS_I.png" class="img-fluid rounded shadow-sm opacity-75" alt="Buku Kelas 1 Baru" style="max-height: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="font-heading mb-1">Kelas 1</h5>
+                        <small class="text-primary fw-bold mb-3">Semester 1 (Ganjil)</small>
+                        
+                        <a href="assets/buku_new/Buku Siswa PAI SD - Kelas I.pdf" target="_blank" onclick="trackDownload('Buku PAI CP020 Kelas 1')" class="btn btn-primary rounded-pill mt-auto w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-download-alt me-1"></i> Buka PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Buku Baru Kelas 2 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="bento-card p-3 text-center d-flex flex-column h-100 border-primary border shadow-sm">
+                        <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2 position-relative">
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="z-index: 10;">NEW CP 020</span>
+                            <img src="assets/images/Islam_BS_KLS_II.png" class="img-fluid rounded shadow-sm opacity-75" alt="Buku Kelas 2 Baru" style="max-height: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="font-heading mb-1">Kelas 2</h5>
+                        <small class="text-primary fw-bold mb-3">Semester 1 (Ganjil)</small>
+                        
+                        <a href="assets/buku_new/BUKU SISWA PAI KELAS 2 CP 020 S1 (SMTR).pdf" target="_blank" onclick="trackDownload('Buku PAI CP020 Kelas 2')" class="btn btn-primary rounded-pill mt-auto w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-download-alt me-1"></i> Buka PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Buku Baru Kelas 3 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="bento-card p-3 text-center d-flex flex-column h-100 border-primary border shadow-sm">
+                        <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2 position-relative">
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="z-index: 10;">NEW CP 020</span>
+                            <img src="assets/images/Islam_BS_KLS_III.png" class="img-fluid rounded shadow-sm opacity-75" alt="Buku Kelas 3 Baru" style="max-height: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="font-heading mb-1">Kelas 3</h5>
+                        <small class="text-primary fw-bold mb-3">Semester 1 (Ganjil)</small>
+                        
+                        <a href="assets/buku_new/BUKU SISWA PAI KELAS 3 CP 020 S1 (SMTR).pdf" target="_blank" onclick="trackDownload('Buku PAI CP020 Kelas 3')" class="btn btn-primary rounded-pill mt-auto w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-download-alt me-1"></i> Buka PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Buku Baru Kelas 4 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="bento-card p-3 text-center d-flex flex-column h-100 border-primary border shadow-sm">
+                        <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2 position-relative">
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="z-index: 10;">NEW CP 020</span>
+                            <img src="assets/images/Islam_BS_KLS_IV.png" class="img-fluid rounded shadow-sm opacity-75" alt="Buku Kelas 4 Baru" style="max-height: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="font-heading mb-1">Kelas 4</h5>
+                        <small class="text-primary fw-bold mb-3">Semester 1 (Ganjil)</small>
+                        
+                        <a href="assets/buku_new/BUKU SISWA PAI KELAS IV SESUAI CP 020 SEMESTER 1.pdf" target="_blank" onclick="trackDownload('Buku PAI CP020 Kelas 4')" class="btn btn-primary rounded-pill mt-auto w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-download-alt me-1"></i> Buka PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Buku Baru Kelas 5 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="bento-card p-3 text-center d-flex flex-column h-100 border-primary border shadow-sm">
+                        <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2 position-relative">
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="z-index: 10;">NEW CP 020</span>
+                            <img src="assets/images/Islam_BS_KLS_V.png" class="img-fluid rounded shadow-sm opacity-75" alt="Buku Kelas 5 Baru" style="max-height: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="font-heading mb-1">Kelas 5</h5>
+                        <small class="text-primary fw-bold mb-3">Semester 1 (Ganjil)</small>
+                        
+                        <a href="assets/buku_new/BUKU SISWA PAI KELAS V SESUAI CP 020 SEMESTER 1.pdf" target="_blank" onclick="trackDownload('Buku PAI CP020 Kelas 5')" class="btn btn-primary rounded-pill mt-auto w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-download-alt me-1"></i> Buka PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Buku Baru Kelas 6 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="bento-card p-3 text-center d-flex flex-column h-100 border-primary border shadow-sm">
+                        <div class="kelas-img-wrapper mb-3 bg-light rounded-4 p-2 position-relative">
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger" style="z-index: 10;">NEW CP 020</span>
+                            <img src="assets/images/Islam_BS_KLS_VI.png" class="img-fluid rounded shadow-sm opacity-75" alt="Buku Kelas 6 Baru" style="max-height: 200px; object-fit: cover;">
+                        </div>
+                        <h5 class="font-heading mb-1">Kelas 6</h5>
+                        <small class="text-primary fw-bold mb-3">Semester 1 (Ganjil)</small>
+                        
+                        <a href="assets/buku_new/BUKU SISWA PAI KELAS VI SESUAI CP 020 SEMESTER 1.pdf" target="_blank" onclick="trackDownload('Buku PAI CP020 Kelas 6')" class="btn btn-primary rounded-pill mt-auto w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-download-alt me-1"></i> Buka PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-5 opacity-25">
         </div>
+
+        <!-- ========================================== -->
+        <!-- AREA UMUM (BSE LAMA) -->
+        <!-- ========================================== -->
+        
+        <h3 class="font-heading mb-4 text-dark border-start border-5 border-success ps-3">Buku Teks Utama (BSE Lama)</h3>
 
         <!-- Grid Buku -->
         <div class="row g-4 justify-content-center mt-2">
@@ -87,7 +208,7 @@
                     <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_I.pdf" 
                        target="_blank" 
                        onclick="trackDownload('Buku PAI Kelas 1')"
-                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                       class="btn btn-outline-success rounded-pill mt-auto w-100 fw-bold">
                         <i class="fas fa-download me-1"></i> Unduh PDF
                     </a>
                 </div>
@@ -105,7 +226,7 @@
                     <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_II.pdf" 
                        target="_blank" 
                        onclick="trackDownload('Buku PAI Kelas 2')"
-                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                       class="btn btn-outline-success rounded-pill mt-auto w-100 fw-bold">
                         <i class="fas fa-download me-1"></i> Unduh PDF
                     </a>
                 </div>
@@ -123,7 +244,7 @@
                     <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_III.pdf" 
                        target="_blank" 
                        onclick="trackDownload('Buku PAI Kelas 3')"
-                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                       class="btn btn-outline-success rounded-pill mt-auto w-100 fw-bold">
                         <i class="fas fa-download me-1"></i> Unduh PDF
                     </a>
                 </div>
@@ -141,7 +262,7 @@
                     <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_IV.pdf" 
                        target="_blank" 
                        onclick="trackDownload('Buku PAI Kelas 4')"
-                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                       class="btn btn-outline-success rounded-pill mt-auto w-100 fw-bold">
                         <i class="fas fa-download me-1"></i> Unduh PDF
                     </a>
                 </div>
@@ -159,7 +280,7 @@
                     <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_V.pdf" 
                        target="_blank" 
                        onclick="trackDownload('Buku PAI Kelas 5')"
-                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                       class="btn btn-outline-success rounded-pill mt-auto w-100 fw-bold">
                         <i class="fas fa-download me-1"></i> Unduh PDF
                     </a>
                 </div>
@@ -177,7 +298,7 @@
                     <a href="https://archive.org/download/buku-pai/Islam_BS_KLS_VI.pdf" 
                        target="_blank" 
                        onclick="trackDownload('Buku PAI Kelas 6')"
-                       class="btn btn-outline-primary rounded-pill mt-auto w-100 fw-bold">
+                       class="btn btn-outline-success rounded-pill mt-auto w-100 fw-bold">
                         <i class="fas fa-download me-1"></i> Unduh PDF
                     </a>
                 </div>
@@ -185,6 +306,13 @@
 
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="main-footer text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>    

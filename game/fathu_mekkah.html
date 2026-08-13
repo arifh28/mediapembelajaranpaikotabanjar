@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Fathu Makkah - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Fonts: Plus Jakarta Sans & Ubuntu -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-green: #198754;
+            --primary-blue: #0d6efd;
+            --gradient-bg: linear-gradient(135deg, #e0f2f1 0%, #bbdefb 100%);
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background: var(--gradient-bg);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .font-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.5);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn {
+            text-align: left;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-blue);
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.correct {
+            background-color: #d1e7dd;
+            border-color: var(--primary-green);
+            color: #0f5132;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #842029;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .option-badge {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 50%;
+            background: #e9ecef;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .progress-bar-custom {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-green);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .discussion-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Minimal Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="../game.html" class="text-decoration-none text-muted fw-bold d-flex align-items-center hover-scale">
+                <i class="fas fa-arrow-left me-2 bg-light p-2 rounded-circle"></i> Kembali
+            </a>
+            <span class="font-heading fw-bold text-primary fs-5 d-none d-md-block">Kuis Fathu Makkah</span>
+        </div>
+    </nav>
+
+    <div class="container flex-grow-1 d-flex justify-content-center align-items-center py-4 py-md-5">
+        <div class="col-12 col-md-10 col-lg-8">
+            
+            <!-- Layar 1: Video Intro -->
+            <div id="intro-screen" class="game-container p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <span class="badge bg-primary text-white rounded-pill px-3 py-2 mb-2">Materi Kelas 6</span>
+                    <h2 class="font-heading fw-bolder text-dark">Peristiwa Fathu Makkah</h2>
+                    <p class="text-muted">Tonton video di bawah ini dengan saksama sebelum memulai kuis!</p>
+                </div>
+                
+                <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm mb-4 border">
+                    <iframe src="https://www.youtube.com/embed/D8JL4NOGDdk?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+                <button onclick="startQuiz()" class="btn btn-success w-100 py-3 rounded-pill fw-bold fs-5 shadow-sm">
+                    <i class="fas fa-play me-2"></i> Mulai Kuis Sekarang
+                </button>
+            </div>
+
+            <!-- Layar 2: Kuis -->
+            <div id="quiz-screen" class="game-container p-4 p-md-5 d-none">
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="font-heading fw-bold text-primary" id="question-counter">Soal 1 dari 10</span>
+                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill"><i class="fas fa-star text-warning me-1"></i> <span id="score-display">0</span> Poin</span>
+                </div>
+
+                <div class="progress-bar-custom mb-4">
+                    <div class="progress-fill" id="progress-bar"></div>
+                </div>
+
+                <h4 class="font-heading fw-bold mb-4 lh-base" id="question-text" style="color: #2b3035;">Memuat pertanyaan...</h4>
+
+                <div id="options-container" class="d-flex flex-column gap-3 mb-4">
+                    <!-- Tombol pilihan digenerate di sini -->
+                </div>
+
+                <!-- Box Pembahasan (Muncul setelah memilih) -->
+                <div id="feedback-container" class="discussion-box p-3 p-md-4 mb-4 d-none shadow-sm">
+                    <div class="d-flex align-items-center mb-2" id="feedback-status">
+                        <!-- Ikon Benar/Salah -->
+                    </div>
+                    <p class="mb-0 small lh-lg text-dark" id="feedback-text"></p>
+                </div>
+
+                <div class="text-end">
+                    <button id="next-btn" onclick="nextQuestion()" class="btn btn-primary px-4 py-2 rounded-pill fw-bold d-none shadow-sm">
+                        Soal Berikutnya <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Layar 3: Hasil Akhir -->
+            <div id="result-screen" class="game-container p-4 p-md-5 text-center d-none">
+                <i class="fas fa-trophy fa-5x text-warning mb-4" style="text-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);"></i>
+                <h2 class="font-heading fw-bolder mb-2 text-dark">Kuis Selesai!</h2>
+                <p class="text-muted mb-4">Luar biasa! Berikut adalah skor akhir kamu:</p>
+                
+                <div class="bg-light p-4 rounded-4 mb-4 border d-inline-block shadow-sm">
+                    <h1 class="display-1 fw-bolder text-primary m-0" id="final-score">100</h1>
+                    <span class="text-muted fw-bold">Poin</span>
+                </div>
+                
+                <p class="mb-5" id="final-message">Semoga ilmu yang didapat berkah dan bermanfaat.</p>
+
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                    <button onclick="location.reload()" class="btn btn-outline-primary px-4 py-3 rounded-pill fw-bold">
+                        <i class="fas fa-redo me-2"></i> Main Ulang
+                    </button>
+                    <a href="../game.html" class="btn btn-success px-4 py-3 rounded-pill fw-bold">
+                        <i class="fas fa-home me-2"></i> Kembali ke Menu Game
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Data dan Logika Kuis -->
+    <script>
+        const quizData = [
+            {
+                question: "Di kota manakah Rasulullah Sallallahu Alaihi Wasallam dan umat Islam membangun kehidupan baru setelah hijrah dari Makkah?",
+                options: ["Thaif", "Madinah", "Khaibar", "Tabuk"],
+                correct: 1,
+                pembahasan: "Setelah hijrah dari Makkah, Rasulullah dan umat Islam mulai membangun kehidupan baru di Madinah, di mana kaum Muhajirin dipersaudarakan dengan kaum Ansar (00:00:28)."
+            },
+            {
+                question: "Apa nama perjanjian yang disepakati oleh seluruh penduduk Madinah, baik Muslim maupun non-Muslim, untuk saling membantu dan mengakui kepemimpinan Nabi Muhammad?",
+                options: ["Perjanjian Hudaibiyah", "Perjanjian Aqabah", "Piagam Madinah", "Deklarasi Makkah"],
+                correct: 2,
+                pembahasan: "Perjanjian ini menyepakati agar semua penduduk saling membantu, menasihati, dan mengakui kepemimpinan Nabi Muhammad di Madinah (00:02:14)."
+            },
+            {
+                question: "Siapakah pemimpin kaum Quraisy yang memimpin pasukan sebanyak hampir 1000 orang dalam Perang Badar?",
+                options: ["Abu Jahal", "Abu Sufyan", "Abu Lahab", "Khalid bin Walid"],
+                correct: 0,
+                pembahasan: "Abu Jahal memimpin pasukan Quraisy yang berjumlah hampir 1000 orang untuk menghadapi umat Islam dalam Perang Badar (00:03:36)."
+            },
+            {
+                question: "Siapakah tokoh Quraisy yang menyimpan dendam mendalam setelah Perang Badar hingga ia jatuh sakit dan akhirnya meninggal dunia?",
+                options: ["Abu Jahal", "Abu Sufyan", "Khalid bin Walid", "Abu Lahab"],
+                correct: 3,
+                pembahasan: "Abu Lahab sangat terpukul dan menyimpan dendam atas kekalahan Quraisy dan kematian saudaranya (Abu Jahal), hingga ia jatuh sakit dan meninggal (00:04:28)."
+            },
+            {
+                question: "Perang apakah yang terjadi pada tahun ketiga Hijriah, di mana umat Islam mengalami kekalahan akibat kelalaian pasukan pemanah yang meninggalkan posnya?",
+                options: ["Perang Badar", "Perang Khandaq", "Perang Uhud", "Perang Tabuk"],
+                correct: 2,
+                pembahasan: "Pada tahun ketiga Hijriah, terjadi Perang Uhud di mana pasukan pemanah muslim turun dari bukit karena mengira perang sudah selesai, kelalaian ini dimanfaatkan musuh (00:05:24)."
+            },
+            {
+                question: "Sahabat Nabi yang mengusulkan strategi membuat parit besar (khandaq) untuk menghalau pasukan musuh pada Perang Ahzab adalah...",
+                options: ["Umar bin Khattab", "Salman Al-Farisi", "Ali bin Abi Thalib", "Utsman bin Affan"],
+                correct: 1,
+                pembahasan: "Saat kota Madinah dikepung oleh 10.000 pasukan gabungan dalam Perang Khandaq, Salman Al-Farisi memberikan ide cerdas untuk membangun parit besar di sekitar Madinah (00:07:22)."
+            },
+            {
+                question: "Apa nama desa tempat Rasulullah dan 1400 kaum muslimin mendirikan kemah saat hendak melaksanakan ibadah haji, namun dihadang oleh kaum Quraisy?",
+                options: ["Arafah", "Mina", "Hudaibiyah", "Muzdalifah"],
+                correct: 2,
+                pembahasan: "Untuk menghindari penghadangan kaum Quraisy saat hendak melaksanakan ibadah haji, Rasulullah memilih jalur lain dan mendirikan kemah di Hudaibiyah (00:09:13)."
+            },
+            {
+                question: "Siapakah sahabat yang diutus oleh Rasulullah untuk menyampaikan pesan damai kepada kaum Quraisy saat berada di Hudaibiyah?",
+                options: ["Umar bin Khattab", "Utsman bin Affan", "Ali bin Abi Thalib", "Zaid bin Haritsah"],
+                correct: 1,
+                pembahasan: "Rasulullah mengutus Utsman bin Affan untuk menyampaikan pesan kepada kaum Quraisy bahwa umat Islam datang hanya untuk beribadah haji, bukan untuk berperang (00:09:23)."
+            },
+            {
+                question: "Kaum Quraisy melanggar Perjanjian Hudaibiyah dengan membantu sekutu mereka untuk menyerang suku lain yang telah memeluk Islam. Suku manakah yang diserang tersebut?",
+                options: ["Bani Bakar", "Bani Khuza'ah", "Bani Hasyim", "Bani Nadir"],
+                correct: 1,
+                pembahasan: "Kaum Quraisy membantu sekutu mereka, Bani Bakar, menyerang Bani Khuza'ah yang telah beragama Islam. Hal ini merupakan pelanggaran terhadap Perjanjian (00:10:28)."
+            },
+            {
+                question: "Peristiwa bersejarah penaklukan kota Makkah oleh umat Islam tanpa pertumpahan darah dikenal dengan sebutan...",
+                options: ["Hijrah", "Haji Wada'", "Fathul Makkah", "Perang Fijar"],
+                correct: 2,
+                pembahasan: "Peristiwa penaklukan Makkah secara damai dan pemberian ampunan kepada seluruh penduduknya disebut sebagai Fathul Makkah (00:14:14)."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        const labels = ['A', 'B', 'C', 'D'];
+
+        function startQuiz() {
+            document.getElementById('intro-screen').classList.add('d-none');
+            document.getElementById('quiz-screen').classList.remove('d-none');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const data = quizData[currentQuestion];
+            document.getElementById('question-counter').innerText = `Soal ${currentQuestion + 1} dari ${quizData.length}`;
+            document.getElementById('progress-bar').style.width = `${((currentQuestion) / quizData.length) * 100}%`;
+            document.getElementById('question-text').innerText = data.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            data.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn d-flex align-items-center w-100 shadow-sm';
+                btn.innerHTML = `<span class="option-badge">${labels[index]}</span> <span>${opt}</span>`;
+                btn.onclick = () => selectAnswer(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            // Sembunyikan elemen sisa
+            document.getElementById('feedback-container').classList.add('d-none');
+            document.getElementById('next-btn').classList.add('d-none');
+        }
+
+        function selectAnswer(selectedIndex, btnElement) {
+            // Matikan semua tombol
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            const data = quizData[currentQuestion];
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackStatus = document.getElementById('feedback-status');
+            const feedbackText = document.getElementById('feedback-text');
+
+            if (selectedIndex === data.correct) {
+                // Jawaban Benar
+                btnElement.classList.add('correct');
+                score += 10;
+                document.getElementById('score-display').innerText = score;
+                feedbackStatus.innerHTML = `<i class="fas fa-check-circle fa-lg text-success me-2"></i><strong class="text-success">Jawaban Kamu Benar!</strong>`;
+            } else {
+                // Jawaban Salah
+                btnElement.classList.add('wrong');
+                buttons[data.correct].classList.add('correct'); // Tunjukkan jawaban yang benar
+                feedbackStatus.innerHTML = `<i class="fas fa-times-circle fa-lg text-danger me-2"></i><strong class="text-danger">Jawaban Kamu Kurang Tepat.</strong>`;
+            }
+
+            // Tampilkan Pembahasan
+            feedbackText.innerHTML = `<strong>Pembahasan:</strong> ${data.pembahasan}`;
+            feedbackContainer.classList.remove('d-none');
+            
+            // Ubah text tombol terakhir
+            const nextBtn = document.getElementById('next-btn');
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.innerHTML = 'Lihat Hasil Akhir <i class="fas fa-flag-checkered ms-2"></i>';
+                nextBtn.classList.replace('btn-primary', 'btn-success');
+            }
+            nextBtn.classList.remove('d-none');
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-screen').classList.add('d-none');
+            document.getElementById('result-screen').classList.remove('d-none');
+            
+            document.getElementById('final-score').innerText = score;
+            
+            let message = "";
+            if (score === 100) message = "Luar Biasa! Pemahaman sejarah kamu sangat sempurna.";
+            else if (score >= 70) message = "Hebat! Kamu menguasai sebagian besar materinya.";
+            else message = "Tetap semangat! Coba tonton videonya lagi dan mainkan ulang kuisnya ya.";
+            
+            document.getElementById('final-message').innerText = message;
+        }
+    </script>
+</body>
+</html>
