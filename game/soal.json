@@ -1,0 +1,37 @@
+{
+  "1": [
+    { "q": "Segala perkataan, perbuatan, dan ketetapan Nabi Muhammad saw. yang dijadikan sebagai pedoman hidup umat Islam disebut...?", "a": ["Al-Qur'an", "Hadis", "Ijtihad", "Qiyas"], "c": 1 },
+    { "q": "Potongan hadis \"Salatul jama'ati tafdhulu...\" menjelaskan tentang keutamaan...?", "a": ["Sedekah", "Salat berjamaah", "Puasa", "Haji"], "c": 1 },
+    { "q": "Ketentuan yang sah dalam melaksanakan salat berjamaah adalah...?", "a": ["Sendirian", "Beda tempat", "Ada imam dan makmum", "Tanpa wudu"], "c": 2 },
+    { "q": "Salah satu ajaran pokok dari kitab Taurat yang diturunkan kepada Nabi Musa a.s. adalah...?", "a": ["Perintah haji", "Menyucikan hari Sabtu/Sabat", "Puasa Ramadan", "Zakat fitrah"], "c": 1 },
+    { "q": "Ciri orang yang beriman kepada kitab-kitab Allah adalah...?", "a": ["Meyakini semua kitab suci dari Allah", "Hanya percaya Taurat", "Meragukan Al-Qur'an", "Tidak mau membaca Al-Qur'an"], "c": 0 }
+  ],
+  "2": [
+    { "q": "Kitab suci dari Allah yang wajib kita imani ada empat, yaitu...?", "a": ["Taurat, Zabur, Injil, Al-Qur'an", "Weda, Tripitaka, Injil, Al-Qur'an", "Taurat, Suhuf, Zabur, Injil", "Al-Qur'an saja"], "c": 0 },
+    { "q": "Secara umum, kitab Zabur yang diturunkan kepada Nabi Daud a.s. berisi tentang...?", "a": ["Hukum perang", "Tata cara haji", "Nyanyian pujian (mazmur) dan zikir", "Kisah kiamat"], "c": 2 },
+    { "q": "Percaya kepada kitab-kitab Allah merupakan rukun iman yang ke-...?", "a": ["Pertama", "Kedua", "Ketiga", "Keempat"], "c": 2 },
+    { "q": "Arti dari kalimah tayyibah Subhanallah adalah...?", "a": ["Allah Maha Besar", "Maha Suci Allah", "Segala Puji bagi Allah", "Tiada Tuhan selain Allah"], "c": 1 },
+    { "q": "Kalimah tayyibah yang diucapkan ketika melihat pemandangan yang sangat indah adalah...?", "a": ["Masyaallah", "Innalillahi", "Astaghfirullah", "Allahu Akbar"], "c": 0 }
+  ],
+  "3": [
+    { "q": "Dalil naqli \"Wa rabbaka fakabbir\" adalah perintah mengucapkan kalimah tayyibah...?", "a": ["Subhanallah", "Alhamdulillah", "Allahu Akbar", "Lailahaillallah"], "c": 2 },
+    { "q": "Salat sunnah yang pelaksanaannya mengiringi salat fardu disebut salat sunnah...?", "a": ["Tahajud", "Rawatib", "Dhuha", "Tarawih"], "c": 1 },
+    { "q": "Berikut yang termasuk salat sunnah rawatib adalah...?", "a": ["2 rakaat sebelum Subuh", "2 rakaat setelah Dhuha", "2 rakaat setelah Tahajud", "2 rakaat sebelum Idul Fitri"], "c": 0 },
+    { "q": "Salat sunnah rawatib yang dilaksanakan sebelum mengerjakan salat fardu disebut...?", "a": ["Ba'diyah", "Qabliyah", "Muakkad", "Ghairu muakkad"], "c": 1 },
+    { "q": "Niat \"Ushalli sunnatadh dzhuhri rak'ataini qabliyyatan...\" adalah untuk salat...?", "a": ["2 rakaat sebelum Dzuhur", "2 rakaat sesudah Dzuhur", "2 rakaat sebelum Asar", "2 rakaat sesudah Isya"], "c": 0 }
+  ],
+  "4": [
+    { "q": "Yang termasuk salat sunnah rawatib muakkad adalah...?", "a": ["4 rakaat sebelum Asar", "2 rakaat sebelum Maghrib", "2 rakaat sesudah Dzuhur", "2 rakaat sebelum Isya"], "c": 2 },
+    { "q": "Malaikat yang bertugas menyampaikan wahyu kepada Nabi Muhammad saw. adalah...?", "a": ["Mikail", "Israfil", "Jibril", "Izrail"], "c": 2 },
+    { "q": "Wahyu kedua yang diturunkan kepada Nabi Muhammad saw. setelah masa jeda adalah surah...?", "a": ["Al-Fatihah 1-7", "Al-'Alaq 1-5", "Al-Muddassir 1-7", "Al-Kautsar 1-3"], "c": 2 },
+    { "q": "Sikap Nabi Muhammad saw. ketika mendapat penolakan berdakwah di Makkah adalah...?", "a": ["Sabar dan memaafkan", "Marah dan dendam", "Putus asa", "Membalas dengan kekerasan"], "c": 0 },
+    { "q": "Mukjizat terbesar Nabi Muhammad saw. yang dijaga keasliannya hingga akhir zaman adalah...?", "a": ["Membelah bulan", "Air dari jari", "Al-Qur'an", "Tongkat menjadi ular"], "c": 2 }
+  ],
+  "5": [
+    { "q": "Apa hukum melaksanakan salat fardu secara berjamaah?", "a": ["Fardu Ain", "Fardu Kifayah", "Sunnah Muakkad", "Sunnah Ghairu Muakkad"], "c": 2 },
+    { "q": "Orang yang memimpin pelaksanaan salat berjamaah di depan disebut?", "a": ["Khatib", "Makmum", "Imam", "Muazin"], "c": 2 },
+    { "q": "Kalimat tayyibah yang diucapkan saat merencanakan atau berjanji adalah?", "a": ["Subhanallah", "Insyaallah", "Alhamdulillah", "Allahu Akbar"], "c": 1 },
+    { "q": "Sebutan untuk salat sunnah rawatib yang sangat dianjurkan nabi adalah?", "a": ["Rawatib Muakkad", "Rawatib Ghairu Muakkad", "Tahiyatul Masjid", "Salat Hajat"], "c": 0 },
+    { "q": "Apa nama surah yang menjadi wahyu kedua bagi Nabi Muhammad?", "a": ["Al-Baqarah", "Al-Fatihah", "Al-Muddassir", "Al-Kafirun"], "c": 2 }
+  ]
+}
