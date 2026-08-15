@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petualangan Pintar</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+    <!-- Kita tetap butuh SweetAlert untuk popup error/info -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        @font-face { font-family: 'GameFont'; src: url('assets/showcard.ttf'); }
+        
+        body { 
+            margin: 0; background: #222; overflow: hidden; 
+            font-family: 'GameFont', 'Arial', sans-serif; 
+            user-select: none; -webkit-user-select: none; touch-action: none; 
+        }
+        
+        #rotate-msg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: white; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        @media only screen and (orientation: portrait) { #rotate-msg { display: flex; } }
+        
+        #loginOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 999999; }
+        
+        .box { background: white; padding: 30px; border-radius: 15px; text-align: center; width: 320px; box-shadow: 0 0 20px #87CEEB; }
+        h2, h3, button, input { font-family: 'GameFont', sans-serif; }
+        
+        .input-group { width: 100%; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+        
+        button.start-btn { background: #28a745; color: white; border: none; padding: 15px 20px; border-radius: 5px; cursor: pointer; font-size: 20px; margin-top: 10px; width: 100%; transition: 0.2s; }
+        button.start-btn:hover { background: #218838; transform: scale(1.05); }
+
+        .switch-account { color: #dc3545; font-size: 12px; text-decoration: underline; cursor: pointer; margin-top: 15px; display: block; border:none; background:none; width:100%; }
+        
+        .hidden { display: none !important; }
+        #welcomeMsg { color: #0d47a1; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="rotate-msg"><h2>Mohon Putar Layar<br>ke Landscape</h2></div>
+
+<div id="loginOverlay">
+    <div class="box">
+        <h2 id="titleMsg">Mulai Petualangan</h2>
+        <div id="welcomeMsg" class="hidden">
+            <h3>Halo, <span id="displayName">Siswa</span>!</h3>
+            <p>Siap lanjut ke <b>Level <span id="displayLevel">1</span></b>?</p>
+        </div>
+        <div id="inputGroup" class="input-group">
+            <input type="text" id="inputName" placeholder="Nama Lengkap" required maxlength="50">
+            <input type="text" id="inputClass" placeholder="Kelas" required maxlength="10">
+        </div>
+        <button class="start-btn" onclick="checkFontAndStart()" id="btnAction">MASUK GAME</button>
+        <button class="switch-account hidden" id="btnSwitch" onclick="resetData()">Bukan Kamu? Ganti Pemain</button>
+        <p id="loadingText" style="display:none; color:blue; margin-top:10px;">Memuat Soal dari Server...</p>
+    </div>
+</div>
+
+<script>
+    let studentData = { name: '', class: '', score: 0, time: 0, level: 1 };
+    let game;
+    let isTouchLeft = false, isTouchRight = false, isTouchJump = false;
+    let bgMusic = null;
+    let questionsDB = {}; // Akan diisi dari URL GAS / JSON Lokal
+
+    window.onload = function() {
+        const savedName = localStorage.getItem('game_siswa_nama');
+        const savedClass = localStorage.getItem('game_siswa_kelas');
+        const savedLevel = localStorage.getItem('game_siswa_level') || 1;
+
+        if(savedName && savedClass) {
+            document.getElementById('inputGroup').classList.add('hidden');
+            document.getElementById('welcomeMsg').classList.remove('hidden');
+            document.getElementById('btnSwitch').classList.remove('hidden');
+            document.getElementById('displayName').innerText = savedName;
+            document.getElementById('displayLevel').innerText = savedLevel;
+            document.getElementById('btnAction').innerText = "▶ LANJUTKAN";
+            document.getElementById('titleMsg').style.display = 'none';
+        }
+    };
+
+    async function fetchQuestions() {
+        // Cek apakah ada parameter 'id' di URL (Misal: game.html?id=1AbCdEfG...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const sheetId = urlParams.get('id');
+
+        let fetchUrl = 'soal.json'; // Default fallback ke soal bawaan sistem
+
+        if (sheetId) {
+            // MASUKKAN URL MASTER APPS SCRIPT ANDA DI SINI
+            const MASTER_GAS_URL = 'https://script.google.com/macros/s/AKfycbxwbdAMTCvbYqITBqb8MoepYcwNUOx0zHBkDZR1qFkyPse9KADxRAHHaTv-Ns6h0QWU/exec'; 
+            
+            // Gabungkan URL Master dengan ID Sheet milik Guru
+            fetchUrl = `${MASTER_GAS_URL}?id=${sheetId}`;
+        }
+
+        try {
+            const response = await fetch(fetchUrl);
+            const data = await response.json();
+            
+            // Cek jika Apps Script mengembalikan error (misal sheet di-private)
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            
+            return data;
+        } catch (error) {
+            console.error("Fetch error:", error);
+            throw error;
+        }
+    }
+
+    async function checkFontAndStart() {
+        let name = document.getElementById('inputName').value;
+        let cls = document.getElementById('inputClass').value;
+        
+        if(!name && localStorage.getItem('game_siswa_nama')) {
+            name = localStorage.getItem('game_siswa_nama');
+            cls = localStorage.getItem('game_siswa_kelas');
+        }
+
+        if(!name || !cls) { 
+            Swal.fire('Oops!', 'Isi nama dan kelas dulu ya!', 'warning'); 
+            return; 
+        }
+
+        document.getElementById('btnAction').style.display = 'none';
+        document.getElementById('btnSwitch').style.display = 'none';
+        document.getElementById('loadingText').style.display = 'block';
+
+        try {
+            // 1. Fetch soal
+            questionsDB = await fetchQuestions();
+
+            // 2. Set LocalStorage (Pengganti Supabase)
+            if(!localStorage.getItem('game_siswa_nama')) {
+                // Pemain Baru
+                localStorage.setItem('game_siswa_nama', name);
+                localStorage.setItem('game_siswa_kelas', cls);
+                localStorage.setItem('game_siswa_level', 1);
+                localStorage.setItem('game_siswa_skor', 0);
+                localStorage.setItem('game_siswa_waktu', 0);
+            }
+
+            studentData.name = localStorage.getItem('game_siswa_nama');
+            studentData.class = localStorage.getItem('game_siswa_kelas');
+            studentData.level = parseInt(localStorage.getItem('game_siswa_level'));
+            studentData.score = parseInt(localStorage.getItem('game_siswa_skor'));
+            studentData.time = parseInt(localStorage.getItem('game_siswa_waktu'));
+
+            // Memuat aset font dan inisialisasi game
+            WebFont.load({
+                custom: { families: ['Font Awesome 6 Free', 'GameFont'], urls: ['https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'] },
+                active: function() { document.getElementById('loginOverlay').classList.add('hidden'); initGame(); },
+                inactive: function() { document.getElementById('loginOverlay').classList.add('hidden'); initGame(); }
+            });
+
+        } catch (error) {
+            console.error("Error:", error);
+            Swal.fire('Error', 'Gagal memuat soal. Pastikan koneksi internet stabil atau ID Sheet benar.', 'error');
+            document.getElementById('btnAction').style.display = 'block';
+            document.getElementById('btnSwitch').style.display = 'block';
+            document.getElementById('loadingText').style.display = 'none';
+        }
+    }
+
+    // Fungsi update progress MURNI LocalStorage
+    function updateProgress(level, skor, tambahanWaktu = 0) {
+        studentData.time += parseInt(tambahanWaktu) || 0; 
+        studentData.score = skor;
+        studentData.level = level;
+            
+        localStorage.setItem('game_siswa_waktu', studentData.time);
+        localStorage.setItem('game_siswa_skor', studentData.score);
+        localStorage.setItem('game_siswa_level', studentData.level);
+    }
+
+    function resetData() {
+        Swal.fire({
+            title: 'Ganti Pemain?',
+            text: "Data permainan kamu saat ini akan diulang dari awal.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Ganti',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Hanya hapus item lokal untuk game, hindari menghapus auth supabase utama
+                localStorage.removeItem('game_siswa_nama');
+                localStorage.removeItem('game_siswa_kelas');
+                localStorage.removeItem('game_siswa_level');
+                localStorage.removeItem('game_siswa_skor');
+                localStorage.removeItem('game_siswa_waktu');
+                location.reload();
+            }
+        });
+    }
+
+    class BaseLevel extends Phaser.Scene {
+        constructor(key) { super(key); }
+
+        init(data) {
+            this.levelNum = data.level || studentData.level || 1;
+            this.booksCollected = 0;
+            this.currentScore = studentData.score || 0;
+            this.questions = [...(questionsDB[this.levelNum] || questionsDB[1])];
+            this.levelTime = 0; 
+        }
+
+        preload() {
+            this.load.audio('bgm', 'assets/bg_music.wav');
+            this.load.audio('sfx_jump', 'assets/jump.wav');
+
+            const loadSeq = (key, path) => {
+                for (let i = 1; i <= 15; i++) {
+                    this.load.image(`${key}${i}`, `${path} (${i}).png`);
+                }
+            };
+            loadSeq('idle', 'assets/idle/Idle');
+            loadSeq('walk', 'assets/walk/Walk');
+            loadSeq('jump', 'assets/jump/Jump');
+            loadSeq('dead', 'assets/dead/Dead');
+            loadSeq('npc1_idle', 'assets/npc1/idle/Idle');
+            loadSeq('npc1_walk', 'assets/npc1/walk/Walk');
+            loadSeq('npc2_idle', 'assets/npc2/idle/Idle');
+            loadSeq('npc2_walk', 'assets/npc2/walk/Walk');
+
+            this.load.image('tree1', 'assets/tree1.png');
+            this.load.image('tree2', 'assets/tree2.png');
+            this.load.image('tree3', 'assets/tree3.png');
+            this.load.image('cloud', 'assets/cloud.png');
+            this.load.image('book', 'assets/book.png');
+            this.load.image('doorclosed', 'assets/doorclosed.png');
+            this.load.image('dooropen', 'assets/dooropen.png');
+            this.load.image('platform', 'assets/platform.png');
+            this.load.image('plat_left', 'assets/plat_left.png');
+            this.load.image('plat_mid', 'assets/plat_mid.png');
+            this.load.image('plat_right', 'assets/plat_right.png');
+            this.load.image('ground', 'assets/ground.png'); 
+            this.load.image('grass', 'assets/grass2.png'); 
+        }
+
+        create() {
+            this.mapWidth = 5000 + (this.levelNum * 500); 
+            this.physics.world.setBounds(0, 0, this.mapWidth, 600);
+            this.physics.world.setBoundsCollision(true, true, false, true); 
+            this.input.addPointer(3); 
+
+            this.createHUD();
+            this.createTouchControls();
+            this.cursors = this.input.keyboard.createCursorKeys();
+
+            try {
+                if (!this.sound.get('bgm')) {
+                    bgMusic = this.sound.add('bgm', { loop: true, volume: 0.5 });
+                    bgMusic.play();
+                } else { bgMusic = this.sound.get('bgm'); }
+                this.jumpSound = this.sound.add('sfx_jump', { volume: 0.6 });
+            } catch(e) { console.log("Audio Error:", e); }
+
+            this.add.rectangle(0, 0, this.mapWidth, 600, 0xA1D6E2).setOrigin(0).setScrollFactor(0); 
+            
+            this.clouds = this.physics.add.group({ allowGravity: false });
+            for(let i=0; i < 10; i++) {
+                let cloud = this.clouds.create(Phaser.Math.Between(0, this.mapWidth), Phaser.Math.Between(50, 200), 'cloud');
+                cloud.setScrollFactor(0.2).setScale(Phaser.Math.FloatBetween(0.5, 0.9)).setAlpha(0.8);
+                cloud.setVelocityX(Phaser.Math.Between(5, 15)); 
+            }
+
+            this.platforms = this.physics.add.staticGroup();
+            this.grassGroup = this.add.group();
+            
+            let groundKey = this.textures.exists('ground') ? 'ground' : 'plat_mid';
+            let ground = this.add.tileSprite(this.mapWidth/2, 600, this.mapWidth, 64, groundKey);
+            ground.setOrigin(0.5, 1);
+            this.physics.add.existing(ground, true);
+            this.platforms.add(ground);
+
+            this.createLevelLayout(); 
+            try { this.decorateGround(ground); } catch(e) {}
+
+            this.createAnimations();
+
+            this.player = this.physics.add.sprite(100, 450, 'idle1');
+            this.player.setScale(0.25); 
+            this.player.body.setSize(200, 400); 
+            this.player.body.setOffset(110, 50);
+            this.player.setCollideWorldBounds(true);
+            this.player.setDepth(10);
+            this.physics.add.collider(this.player, this.platforms);
+            this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+            this.cameras.main.setBounds(0, 0, this.mapWidth, 600);
+            this.player.play('idle');
+
+            this.npcs = this.physics.add.group();
+            try { this.spawnNPCs(); } catch(e) {}
+            this.physics.add.collider(this.npcs, this.platforms);
+
+            this.books = this.physics.add.group({ allowGravity: false, immovable: true });
+            this.placeBooks();
+            this.physics.add.overlap(this.player, this.books, this.collectBook, null, this);
+
+            this.door = this.physics.add.sprite(this.mapWidth - 150, 536, 'doorclosed'); 
+            this.door.setOrigin(0.5, 1);
+            this.door.body.setAllowGravity(false);
+            this.door.body.setImmovable(true);
+            this.door.isLocked = true; 
+            this.physics.add.overlap(this.player, this.door, this.enterDoor, null, this);
+            
+            this.levelTimer = this.time.addEvent({
+                delay: 1000, // 1000 ms = 1 detik
+                callback: () => {
+                    this.levelTime++;
+                    this.txtTime.setText(`Waktu: ${this.levelTime}s`);
+                },
+                callbackScope: this,
+                loop: true
+            });
+        }
+
+        createAnimations() {
+            const create = (key, prefix, fps=25) => {
+                if(!this.anims.exists(key)) {
+                    if(this.textures.exists(prefix + '1')) {
+                        let frames = []; for (let i = 1; i <= 15; i++) frames.push({ key: prefix + i });
+                        this.anims.create({ key: key, frames: frames, frameRate: fps, repeat: -1 });
+                    }
+                }
+            };
+            create('idle', 'idle'); create('walk', 'walk'); create('jump', 'jump'); 
+            create('npc1_idle', 'npc1_idle'); create('npc1_walk', 'npc1_walk');
+            create('npc2_idle', 'npc2_idle'); create('npc2_walk', 'npc2_walk');
+        }
+
+        createNPC(x, y, type) {
+            let startKey = type + '_idle1';
+            if (!this.textures.exists(startKey)) startKey = 'idle1'; 
+            let npc = this.npcs.create(x, y, startKey); 
+            npc.setScale(0.25);
+            npc.body.setSize(200, 400); 
+            npc.body.setOffset(110, 50);
+            npc.setCollideWorldBounds(true);
+            npc.setPushable(false);
+            npc.type = type; npc.moveDir = 1; npc.walkDist = 300; npc.startX = x;
+        }
+		
+        spawnTrees(count) {
+            if (count === undefined) count = Math.floor(this.mapWidth / 400);
+            for(let i=0; i < count; i++) {
+                let x = Phaser.Math.Between(50, this.mapWidth - 50);
+                this.add.image(x, 565, 'tree'+Phaser.Math.Between(1,3))
+                    .setOrigin(0.5, 1).setScrollFactor(0.6).setDepth(0)
+                    .setScale(Phaser.Math.FloatBetween(0.8, 1.2));
+            }
+        }
+
+        createPlat(x, y, midCount, density = 1) {
+            const leftTex = this.textures.get('plat_left').getSourceImage();
+            const midTex = this.textures.get('plat_mid').getSourceImage();
+            const leftW = leftTex.width;
+            const midW = midTex.width;
+            const midH = midTex.height;
+
+            let left = this.platforms.create(x, y, 'plat_left');
+            left.setOrigin(0, 0.5); left.refreshBody();
+
+            let totalMidWidth = midW * midCount;
+            let midX = x + leftW; 
+
+            let mid = this.add.tileSprite(midX, y, totalMidWidth, midH, 'plat_mid');
+            mid.setOrigin(0, 0.5); 
+            this.physics.add.existing(mid, true); 
+            this.platforms.add(mid);
+
+            let rightX = midX + totalMidWidth;
+            let right = this.platforms.create(rightX, y, 'plat_right');
+            right.setOrigin(0, 0.5); right.refreshBody();
+
+            if(density > 0) this.addGrassToTileSprite(mid, totalMidWidth, density);
+        }
+
+        addGrassToTileSprite(platformObj, width, density) {
+            let topY = platformObj.y - (platformObj.displayHeight / 2);
+            let maxGrass = Math.floor(width / 50) * density; 
+            let grassCount = Phaser.Math.Between(1, maxGrass);
+            for(let i=0; i<grassCount; i++) {
+                let gx = platformObj.x + Phaser.Math.Between(10, width - 10);
+                let grass = this.add.image(gx, topY + 10, 'grass');
+                grass.setOrigin(0.5, 1); grass.setScale(Phaser.Math.FloatBetween(0.5, 0.7)); grass.setDepth(5);
+            }
+        }
+		
+        decorateGround(ground) {
+            let totalWidth = ground.width;
+            let yPos = ground.y - ground.displayHeight; 
+            for(let cx = 0; cx < totalWidth; cx += 150) {
+                if(Phaser.Math.Between(0, 10) > 3) { 
+                    let grass = this.add.image(cx, yPos + 10, 'grass');
+                    grass.setOrigin(0.5, 1); grass.setScale(Phaser.Math.FloatBetween(0.6, 0.9)); grass.setDepth(5);
+                }
+            }
+        }
+
+        createBook(x, y, indexSoal) {
+            let book = this.physics.add.sprite(x, y, 'book');
+            book.setScale(0.8); book.body.setSize(50, 50); book.body.setAllowGravity(false); book.body.setImmovable(true); book.questionIndex = indexSoal;
+            this.tweens.add({ targets: book, y: y - 15, duration: 1500, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+            this.books.add(book);
+        }
+
+        update() {
+            if (this.clouds) {
+                this.clouds.children.iterate((cloud) => {
+                    if (cloud.x > this.mapWidth + 100) { cloud.x = -100; cloud.y = Phaser.Math.Between(50, 200); }
+                });
+            }
+
+            this.npcs.children.iterate((npc) => {
+                if(npc && npc.body) {
+                    if (npc.body.blocked.right) { npc.moveDir = -1; }
+                    else if (npc.body.blocked.left) { npc.moveDir = 1; }
+                    if(npc.x > npc.startX + npc.walkDist) { npc.moveDir = -1; }
+                    else if(npc.x < npc.startX - npc.walkDist) { npc.moveDir = 1; }
+                    npc.setVelocityX(100 * npc.moveDir);
+                    npc.setFlipX(npc.moveDir === -1); 
+                    if(this.anims.exists(npc.type + '_walk')) npc.anims.play(npc.type + '_walk', true);
+                    else npc.anims.play('walk', true); 
+                }
+            });
+
+            this.player.setVelocityX(0);
+
+            if (this.cursors.left.isDown || isTouchLeft) { 
+                this.player.setVelocityX(-250); this.player.setFlipX(true); 
+                if(this.player.body.touching.down) this.player.anims.play('walk', true); 
+            } 
+            else if (this.cursors.right.isDown || isTouchRight) { 
+                this.player.setVelocityX(250); this.player.setFlipX(false); 
+                if(this.player.body.touching.down) this.player.anims.play('walk', true); 
+            } 
+            else { if(this.player.body.touching.down) this.player.anims.play('idle', true); }
+
+            if ((this.cursors.up.isDown || isTouchJump) && this.player.body.touching.down) { 
+                this.player.setVelocityY(-600); 
+                if(this.jumpSound) this.jumpSound.play(); 
+            }
+            if (!this.player.body.touching.down) { this.player.anims.play('jump', true); }
+        }
+
+        collectBook(player, bookZone) {
+            this.physics.pause();
+            this.input.keyboard.resetKeys();
+            isTouchLeft = false; isTouchRight = false; isTouchJump = false;
+
+            let qIdx = bookZone.questionIndex;
+            let qData = this.questions[qIdx];
+
+            if(!qData) { bookZone.destroy(); this.physics.resume(); return; }
+
+            this.showQuizNative(qData, bookZone);
+        }
+
+        showQuizNative(qData, bookZone) {
+            this.quizElements = [];
+
+            let bgDim = this.add.rectangle(683, 300, 1366, 600, 0x000000, 0.8).setScrollFactor(0).setDepth(20000).setInteractive();
+            this.quizElements.push(bgDim);
+
+            let box = this.add.rectangle(683, 300, 800, 520, 0xffffff).setStrokeStyle(4, 0xffc107).setScrollFactor(0).setDepth(20001);
+            this.quizElements.push(box);
+
+            let textSoal = this.add.text(683, 120, qData.q, {
+                fontFamily: 'GameFont', fontSize: '32px', color: '#000000', align: 'center', wordWrap: { width: 750 }
+            }).setOrigin(0.5).setScrollFactor(0).setDepth(20002);
+            this.quizElements.push(textSoal);
+
+            let startY = 210; 
+            qData.a.forEach((ans, idx) => {
+                let btnY = startY + (idx * 75); 
+                let btnRect = this.add.rectangle(683, btnY, 600, 60, 0xe3f2fd).setStrokeStyle(2, 0x2196f3).setScrollFactor(0).setDepth(20003).setInteractive({ useHandCursor: true });
+                let btnText = this.add.text(683, btnY, ans, { fontFamily: 'GameFont', fontSize: '22px', color: '#0d47a1' }).setOrigin(0.5).setScrollFactor(0).setDepth(20004);
+
+                btnRect.on('pointerover', () => { btnRect.setFillStyle(0x2196f3); btnText.setColor('#ffffff'); });
+                btnRect.on('pointerout', () => { btnRect.setFillStyle(0xe3f2fd); btnText.setColor('#0d47a1'); });
+                
+                btnRect.on('pointerdown', () => {
+                    this.quizElements.forEach(el => el.destroy()); 
+                    this.quizElements = [];
+
+                    if(idx === qData.c) {
+                        bookZone.destroy(); 
+                        this.currentScore += 20; 
+                        this.booksCollected++;
+                        
+                        updateProgress(this.levelNum, this.currentScore);
+                        
+                        this.txtScore.setText(`Skor: ${this.currentScore} | Buku: ${this.booksCollected}/5`);
+                        this.showFeedback("HEBAT!", '#28a745', true); 
+                    } else {
+                        bookZone.body.enable = false; 
+                        this.showFeedback("SALAH!", '#dc3545', false);
+                        this.time.delayedCall(2000, () => { 
+                            if(bookZone.body) bookZone.body.enable = true; 
+                        });
+                    }
+                });
+                this.quizElements.push(btnRect); this.quizElements.push(btnText);
+            });
+        }
+
+        showFeedback(text, colorHex, isCorrect) {
+            let txt = this.add.text(683, 300, text, { fontFamily: 'GameFont', fontSize: '80px', color: colorHex, stroke: '#ffffff', strokeThickness: 6 }).setOrigin(0.5).setScrollFactor(0).setDepth(20005);
+            
+            this.tweens.add({
+                targets: txt, scale: { from: 0.5, to: 1.2 }, alpha: { from: 1, to: 0 }, duration: 1500, ease: 'Back.out',
+                onComplete: () => { 
+                    txt.destroy(); 
+                    this.physics.resume(); 
+                    if(isCorrect) this.checkFinish(); 
+                }
+            });
+        }
+
+        createHUD() {
+            this.add.rectangle(0, 0, 1366, 80, 0x000000, 0.6).setOrigin(0).setScrollFactor(0).setDepth(100);
+            
+            // Baris 1: Nama & Level
+            this.txtInfo = this.add.text(20, 15, `Siswa: ${studentData.name} | Level: ${this.levelNum}`, { 
+                fontFamily: 'GameFont', fontSize: '20px', color: '#fff' 
+            }).setScrollFactor(0).setDepth(101);
+            
+            // Baris 2: Skor & Buku
+            this.txtScore = this.add.text(20, 45, `Skor: ${this.currentScore} | Buku: 0/5`, { 
+                fontFamily: 'GameFont', fontSize: '20px', color: '#ffff00' 
+            }).setScrollFactor(0).setDepth(101);
+
+            this.txtTime = this.add.text(320, 45, `Waktu: 0s`, { 
+                fontFamily: 'GameFont', fontSize: '20px', color: '#00ff00' 
+            }).setScrollFactor(0).setDepth(101);
+
+            let btnPause = this.add.text(880, 22, '⏸ PAUSE', { 
+                fontFamily: 'GameFont', fontSize: '22px', backgroundColor: '#333', padding: {x:10, y:5}
+            }).setScrollFactor(0).setDepth(101).setInteractive();
+            
+            let isMute = (bgMusic && bgMusic.volume === 0);
+            let btnSound = this.add.text(1040, 22, isMute ? '🔇' : '🔊', { 
+                fontSize: '28px', backgroundColor: '#333', padding: {x:10, y:2}
+            }).setScrollFactor(0).setDepth(101).setInteractive();
+
+            let btnFull = this.add.text(1130, 22, '⛶ FULLSCREEN', { 
+                fontFamily: 'GameFont', fontSize: '22px', backgroundColor: '#333', padding: {x:10, y:5}
+            }).setScrollFactor(0).setDepth(101).setInteractive();
+
+            btnFull.on('pointerdown', () => {
+                if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(err => {}); btnFull.setText('☒ EXIT FULL'); } 
+                else { if (document.exitFullscreen) document.exitFullscreen(); btnFull.setText('⛶ FULLSCREEN'); }
+            });
+
+            btnSound.on('pointerdown', () => {
+                if(!bgMusic) return;
+                if (bgMusic.volume > 0) { bgMusic.setVolume(0); btnSound.setText('🔇'); } 
+                else { bgMusic.setVolume(0.5); btnSound.setText('🔊'); }
+            });
+
+            btnPause.on('pointerdown', () => {
+                this.scene.pause(); 
+                this.scene.launch('PauseScene', { currentLevel: this.scene.key }); 
+            });
+        }
+
+        checkFinish() { 
+            if(this.booksCollected >= 5) { 
+                this.door.setTexture('dooropen'); 
+                this.door.isLocked = false; 
+                let msg = this.add.text(this.cameras.main.scrollX + 683, 200, "PINTU TERBUKA!", { fontFamily: 'GameFont', fontSize: '50px', color: '#fff', stroke: '#000', strokeThickness: 6 }).setOrigin(0.5); 
+                this.tweens.add({ targets: msg, alpha: 0, duration: 2000, delay: 1000 }); 
+            } 
+        }
+        
+        async enterDoor(player, door) { 
+            if(!door.isLocked) { 
+                let next = this.levelNum + 1; 
+                
+                updateProgress(next, this.currentScore, this.levelTime);
+
+                if(questionsDB[next]) { 
+                    this.scene.start('Level' + next, { level: next }); 
+                } else { 
+                    this.scene.start('WinScene', { score: this.currentScore }); 
+                } 
+            } 
+        }
+
+        createTouchControls() {
+            const createBtn = (x, y, label, type) => {
+                let bg = this.add.graphics(); bg.fillStyle(0xffffff, 0.3); bg.fillRoundedRect(0, 0, 80, 80, 20); bg.generateTexture('btn'+label, 80, 80); bg.destroy();
+                let btn = this.add.sprite(x, y, 'btn'+label).setInteractive().setScrollFactor(0).setDepth(100);
+                let txt = this.add.text(x, y, label, { fontFamily: 'GameFont', fontSize: '40px', color:'#fff' }).setOrigin(0.5).setScrollFactor(0).setDepth(101);
+                btn.on('pointerdown', () => { if(type==='L') isTouchLeft=true; if(type==='R') isTouchRight=true; if(type==='J') isTouchJump=true; btn.setTint(0xaaaaaa); });
+                const release = () => { if(type==='L') isTouchLeft=false; if(type==='R') isTouchRight=false; if(type==='J') isTouchJump=false; btn.clearTint(); };
+                btn.on('pointerup', release); btn.on('pointerupoutside', release);
+            };
+            createBtn(80, 500, '<', 'L'); createBtn(200, 500, '>', 'R'); createBtn(1250, 500, '^', 'J');
+        }
+        
+        createLevelLayout() { } 
+        placeBooks() { }
+        spawnNPCs() { }
+    }
+
+    class Level1 extends BaseLevel { 
+        constructor() { super('Level1'); } 
+        init() { 
+            let saved = parseInt(localStorage.getItem('game_siswa_level')) || 1;
+            if(saved > 1) { this.scene.start('Level' + saved, { level: saved }); return; }
+            super.init({ level: 1 }); 
+        }
+		
+        createLevelLayout() {
+			this.spawnTrees(50);
+            this.createPlat(1000, 350, 4, 5);
+            this.createPlat(1500, 200, 3, 2);
+            this.createPlat(1700, 400, 2, 2);
+			this.createPlat(2500, 400, 1, 1);
+			this.createPlat(2800, 300, 3, 4);
+			this.createPlat(3200, 375, 3, 4);
+			this.createPlat(3800, 300, 5, 6);
+			this.createPlat(4300, 375, 1, 2);
+			this.createPlat(4800, 400, 3, 6);
+        }
+		
+        placeBooks() { 
+            this.createBook(1200, 275, 0); 
+			this.createBook(1800, 325, 1); 
+			this.createBook(3100, 250, 2); 
+			this.createBook(4250, 375, 3); 
+			this.createBook(5000, 350, 4); 
+        }
+		
+        spawnNPCs() { 
+			this.createNPC(800, 485, 'npc1'); 
+			this.createNPC(1800, 486, 'npc2'); 
+			this.createNPC(2000, 350, 'npc1');
+			this.createNPC(2800, 486, 'npc2');
+			this.createNPC(3800, 350, 'npc1');
+			this.createNPC(4500, 486, 'npc2');	
+		}
+    }
+
+    class Level2 extends BaseLevel { 
+        constructor() { super('Level2'); } 
+        init() { super.init({ level: 2 }); } 
+        createLevelLayout() {
+			this.spawnTrees(20);
+            this.createPlat(600, 400, 2, 5); 
+			this.createPlat(1000, 250, 3, 2); 
+            this.createPlat(1400, 400, 2, 3); 
+			this.createPlat(1800, 200, 3, 3);
+            this.createPlat(2200, 400, 2, 3);
+            this.createPlat(2500, 150, 5, 7); 
+			this.createPlat(3200, 400, 3, 2);
+            this.createPlat(3700, 250, 4, 2);
+            this.createPlat(4200, 350, 2, 2);
+            this.createPlat(4800, 250, 3, 3);
+            this.createPlat(5100, 400, 3, 3); 
+        }
+        placeBooks() { 
+            this.createBook(730, 350, 0); 
+            this.createBook(2700, 100, 1); 
+            this.createBook(3900, 200, 2); 
+            this.createBook(4350, 300, 3); 
+            this.createBook(5300, 350, 4); 
+        }
+        spawnNPCs() { 
+            this.createNPC(1200, 300, 'npc1');
+            this.createNPC(2500, 350, 'npc2');  
+            this.createNPC(3700, 320, 'npc2');
+            this.createNPC(4000, 370, 'npc1');
+            this.createNPC(4300, 320, 'npc2');
+        }
+    }
+
+    class Level3 extends BaseLevel { 
+        constructor() { super('Level3'); } 
+        init() { super.init({ level: 3 }); } 
+        
+        createLevelLayout() {
+            this.spawnTrees(30);
+            
+            this.createPlat(500, 450, 3, 2); 
+            this.createPlat(900, 350, 3, 2);  
+            this.createPlat(1150, 180, 2, 1); 
+            this.createPlat(1500, 350, 3, 2); 
+            this.createPlat(2000, 250, 4, 3); 
+            this.createPlat(2450, 150, 2, 2); 
+            this.createPlat(2300, 450, 1, 0); 
+            this.createPlat(2900, 300, 3, 3); 
+            this.createPlat(3400, 300, 2, 2); 
+            this.createPlat(3150, 500, 2, 1); 
+            this.createPlat(3900, 250, 4, 3); 
+            this.createPlat(4400, 120, 2, 1); 
+            this.createPlat(4800, 350, 3, 2); 
+            this.createPlat(5300, 450, 3, 2); 
+            this.createPlat(5600, 250, 2, 1); 
+            this.createPlat(6000, 400, 4, 2); 
+        }
+        
+        placeBooks() { 
+            this.createBook(1200, 130, 0); 
+            this.createBook(2350, 400, 1); 
+            this.createBook(3200, 450, 2); 
+            this.createBook(4450, 70, 3);  
+            this.createBook(5650, 200, 4); 
+        }
+        
+        spawnNPCs() { 
+            this.createNPC(1000, 300, 'npc1'); 
+            this.createNPC(1600, 300, 'npc2');
+            this.createNPC(2100, 200, 'npc1');
+            this.createNPC(3000, 250, 'npc2');
+            this.createNPC(4000, 200, 'npc1');
+            this.createNPC(4900, 300, 'npc2');
+            this.createNPC(6100, 350, 'npc1'); 
+        }
+    }
+
+    class Level4 extends BaseLevel { 
+        constructor() { super('Level4'); } 
+        init() { super.init({ level: 4 }); } 
+        
+        createLevelLayout() {
+            this.spawnTrees(40);
+            
+            this.createPlat(600, 350, 2, 2);
+            this.createPlat(1050, 350, 2, 1); 
+            this.createPlat(1000, 150, 1, 1); 
+            this.createPlat(1500, 350, 4, 3);
+            this.createPlat(2050, 200, 2, 2); 
+            this.createPlat(2450, 400, 3, 2); 
+            this.createPlat(2300, 150, 1, 0); 
+            this.createPlat(2900, 300, 3, 2);
+            this.createPlat(3400, 200, 3, 2);
+            this.createPlat(3700, 500, 1, 1); 
+            this.createPlat(4200, 300, 4, 3);
+            this.createPlat(4800, 450, 2, 1); 
+            this.createPlat(4900, 250, 1, 1); 
+            this.createPlat(5000, 100, 1, 1); 
+            this.createPlat(5500, 350, 3, 2);
+            this.createPlat(5900, 200, 1, 1); 
+            this.createPlat(6200, 400, 4, 3);
+            this.createPlat(6700, 250, 2, 2);
+        }
+        
+        placeBooks() { 
+            this.createBook(1050, 100, 0); 
+            this.createBook(2350, 100, 1); 
+            this.createBook(3750, 450, 2); 
+            this.createBook(5050, 50, 3);  
+            this.createBook(5950, 150, 4); 
+        }
+        
+        spawnNPCs() { 
+            this.createNPC(1600, 300, 'npc1');
+            this.createNPC(2500, 350, 'npc2'); 
+            this.createNPC(3000, 250, 'npc1');
+            this.createNPC(4300, 250, 'npc2');
+            this.createNPC(4850, 400, 'npc1');
+            this.createNPC(5600, 300, 'npc2');
+            this.createNPC(6300, 350, 'npc1');
+        }
+    }
+
+    class Level5 extends BaseLevel { 
+        constructor() { super('Level5'); } 
+        init() { super.init({ level: 5 }); } 
+        
+        createLevelLayout() {
+            this.spawnTrees(50);
+            
+            this.createPlat(400, 400, 3, 3);
+            this.createPlat(900, 450, 4, 2);  
+            this.createPlat(850, 200, 2, 1);  
+            this.createPlat(1400, 300, 2, 2);
+            this.createPlat(1800, 150, 2, 1);
+            this.createPlat(1900, 500, 2, 1); 
+            this.createPlat(2300, 350, 3, 2);
+            this.createPlat(2800, 200, 4, 3); 
+            this.createPlat(2650, 100, 1, 0); 
+            this.createPlat(3400, 400, 2, 2);
+            this.createPlat(3800, 250, 3, 2);
+            this.createPlat(4200, 500, 1, 1); 
+            this.createPlat(4700, 300, 3, 2);
+            this.createPlat(5200, 450, 3, 2); 
+            this.createPlat(5300, 250, 2, 1); 
+            this.createPlat(5400, 100, 1, 1); 
+            this.createPlat(5900, 350, 2, 2);
+            this.createPlat(6400, 250, 2, 2);
+            this.createPlat(7000, 400, 4, 3); 
+        }
+        
+        placeBooks() { 
+            this.createBook(950, 150, 0);  
+            this.createBook(1950, 450, 1); 
+            this.createBook(2700, 50, 2);  
+            this.createBook(4250, 450, 3); 
+            this.createBook(5450, 50, 4);  
+        }
+        
+        spawnNPCs() { 
+            this.createNPC(950, 400, 'npc1');  
+            this.createNPC(1450, 250, 'npc2');
+            this.createNPC(2400, 300, 'npc1');
+            this.createNPC(2900, 150, 'npc2'); 
+            this.createNPC(3900, 200, 'npc1');
+            this.createNPC(4800, 250, 'npc2');
+            this.createNPC(5250, 400, 'npc1');
+            this.createNPC(6000, 300, 'npc2');
+            this.createNPC(7100, 350, 'npc1');
+        }
+    }
+
+    class WinScene extends Phaser.Scene {
+        constructor() { super('WinScene'); }
+
+        init(data) { this.finalScore = data.score || 0; }
+
+        create() {
+            this.add.rectangle(0, 0, 1366, 600, 0xA1D6E2).setOrigin(0);
+
+            this.add.text(683, 150, "LUAR BIASA!", { fontFamily: 'GameFont', fontSize: '80px', color: '#FFD700', stroke: '#000', strokeThickness: 8 }).setOrigin(0.5);
+            this.add.text(683, 250, `Skor Akhir: ${this.finalScore}`, { fontFamily: 'GameFont', fontSize: '40px', color: '#fff', stroke: '#000', strokeThickness: 5 }).setOrigin(0.5);
+            this.add.text(683, 300, `Total Waktu: ${studentData.time} detik`, { fontFamily: 'GameFont', fontSize: '30px', color: '#fff', stroke: '#000', strokeThickness: 4 }).setOrigin(0.5);
+
+            // Tombol Main Lagi
+            let btnBg = this.add.rectangle(683, 450, 250, 60, 0x007bff, 1).setStrokeStyle(4, 0xffffff).setInteractive({ useHandCursor: true });
+            this.add.text(683, 450, "MAIN LAGI", { fontFamily: 'GameFont', fontSize: '30px', color: '#fff' }).setOrigin(0.5);
+
+            btnBg.on('pointerdown', () => {
+                localStorage.setItem('game_siswa_level', 1);
+                localStorage.setItem('game_siswa_skor', 0);
+                localStorage.setItem('game_siswa_waktu', 0);
+                studentData.time = 0;
+                location.reload();
+            });
+        }
+    }
+
+    class PauseScene extends Phaser.Scene {
+        constructor() { super('PauseScene'); }
+
+        init(data) { this.activeLevel = data.currentLevel; }
+
+        create() {
+            // Layar transparan gelap
+            this.add.rectangle(683, 300, 1366, 600, 0x000000, 0.8).setOrigin(0.5);
+            
+            this.add.text(683, 200, 'PAUSE', { 
+                fontFamily: 'GameFont', fontSize: '80px', color: '#ffc107', stroke: '#000', strokeThickness: 8 
+            }).setOrigin(0.5);
+
+            let btnResume = this.add.rectangle(683, 350, 250, 70, 0x28a745).setStrokeStyle(4, 0xffffff).setInteractive({ useHandCursor: true });
+            let txtResume = this.add.text(683, 350, 'LANJUTKAN', { fontFamily: 'GameFont', fontSize: '30px', color: '#fff' }).setOrigin(0.5);
+
+            btnResume.on('pointerdown', () => {
+                this.scene.resume(this.activeLevel); // Lanjutkan level yang sedang aktif
+                this.scene.stop(); // Tutup scene pause
+            });
+        }
+    }
+
+    function initGame() {
+        const config = {
+            type: Phaser.AUTO,
+            scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH, width: 1366, height: 600 },
+            physics: { default: 'arcade', arcade: { gravity: { y: 800 }, debug: false } }, 
+            scene: [ Level1, Level2, Level3, Level4, Level5, WinScene, PauseScene ]
+        };
+        game = new Phaser.Game(config);
+    }
+</script>
+</body>
+</html>
