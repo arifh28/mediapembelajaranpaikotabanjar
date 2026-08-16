@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gerakan Salat 3D - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            font-family: 'Ubuntu', sans-serif; 
+            background: linear-gradient(to bottom, #d6eaf8 0%, #f0f8ff 100%);
+            touch-action: none; 
+        }
+        .font-heading { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        #canvas-container { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh; 
+            z-index: 1;
+        }
+        
+        #loading-screen { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: #f0f8ff; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; color: #0d6efd; z-index: 50; 
+        }
+
+        /* Layar Tutorial (Overlay) */
+        #tutorial-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; z-index: 40; backdrop-filter: blur(5px);
+        }
+
+        #hud-layer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 10;
+            pointer-events: none; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hud-element { pointer-events: auto; }
+
+        /* Glassmorphism Panel Transparan */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65); /* Dibuat lebih transparan */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+
+        /* Top Bar Transparan */
+        .top-glass-panel {
+            background: rgba(255, 255, 255, 0.5); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-gerakan { 
+            font-weight: 600; padding: 10px 20px; border-radius: 2rem; 
+            transition: all 0.2s ease; border-width: 2px;
+            background: rgba(255, 255, 255, 0.7); /* Background tombol semi transparan */
+        }
+        .btn-gerakan.active { 
+            background-color: #0d6efd; color: white; border-color: #0d6efd; 
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4); transform: translateY(-2px);
+        }
+
+        #btnPlayPause {
+            width: 65px; height: 65px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(25, 135, 84, 0.4);
+            transition: all 0.2s;
+        }
+        #btnPlayPause:active { transform: scale(0.9); }
+
+        /* Kustomisasi Slider (Seekbar) agar lebih tebal & jelas */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px; width: 20px;
+            border-radius: 50%;
+            background: #0d6efd;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 6px;
+            cursor: pointer;
+            background: rgba(13, 110, 253, 0.3);
+            border-radius: 3px;
+        }
+    </style>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.module.js",
+                "gltfloader": "https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/GLTFLoader.js",
+                "orbitcontrols": "https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/controls/OrbitControls.js"
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Proteksi Login (Dijalankan paling awal sebelum merender 3D) -->
+    <script>
+        const sessionData = localStorage.getItem('user_session');
+        let namaGuru = "Bapak/Ibu Guru";
+        if (!sessionData) {
+            alert("Akses Ditolak: Anda harus login terlebih dahulu untuk mengakses media 3D ini.");
+            window.location.href = "../index.html"; // Arahkan kembali ke beranda
+        } else {
+            const user = JSON.parse(sessionData);
+            namaGuru = user.Nama_Lengkap || user.nama_lengkap || user.Username || "Guru";
+        }
+    </script>
+
+    <!-- Canvas 3D Viewer Fullscreen -->
+    <div id="canvas-container"></div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <i class="fas fa-circle-notch fa-spin fa-4x mb-3"></i>
+        <h3 class="font-heading fw-bold">Memuat Model 3D...</h3>
+        <p class="text-muted">Mempersiapkan pengalaman interaktif</p>
+    </div>
+
+    <!-- Layar Tutorial (Disembunyikan via JS jika sudah pernah) -->
+    <div id="tutorial-overlay" class="d-none text-center px-4">
+        <div class="mb-4">
+            <i class="fas fa-hand-pointer fa-4x mb-3 text-warning"></i>
+            <h2 class="font-heading fw-bold">Cara Menggunakan</h2>
+        </div>
+        <div class="row text-start w-100 mb-4" style="max-width: 400px;">
+            <div class="col-12 mb-3 d-flex align-items-center">
+                <i class="fas fa-arrows-alt fa-2x me-3 text-info"></i>
+                <p class="mb-0 fs-5"><strong>Geser Layar</strong> untuk memutar sudut pandang.</p>
+            </div>
+            <div class="col-12 mb-3 d-flex align-items-center">
+                <i class="fas fa-search-plus fa-2x me-3 text-info"></i>
+                <p class="mb-0 fs-5"><strong>Cubit / Scroll</strong> untuk memperbesar & memperkecil.</p>
+            </div>
+            <div class="col-12 d-flex align-items-center">
+                <i class="fas fa-hand-rock fa-2x me-3 text-info"></i>
+                <p class="mb-0 fs-5"><strong>Gunakan 2 Jari</strong> untuk menggeser posisi kamera.</p>
+            </div>
+        </div>
+        <button id="btnPahamTutorial" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow">Saya Mengerti</button>
+    </div>
+
+    <!-- HUD Overlay Layer -->
+    <div id="hud-layer">
+        
+        <!-- Top Bar HUD -->
+        <div class="d-flex justify-content-between align-items-center p-2 p-md-3 hud-element top-glass-panel w-100">
+            <a href="../game.html" class="btn btn-light text-primary shadow-sm rounded-pill fw-bold px-3 py-2 d-flex align-items-center gap-2">
+                <i class="fas fa-arrow-left"></i> <span class="d-none d-md-inline">Kembali</span>
+            </a>
+            
+            <div class="text-center flex-grow-1">
+                <h5 class="font-heading fw-bold text-dark m-0"><i class="fas fa-cube text-warning me-2"></i>Eksplorasi Salat 3D</h5>
+                <small class="text-primary fw-bold d-none d-sm-block">Halo, <span id="displayNamaGuru"></span></small>
+            </div>
+
+            <!-- Tombol Fullscreen -->
+            <button id="btnFullscreen" class="btn btn-outline-dark bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                <i class="fas fa-expand"></i>
+            </button>
+        </div>
+
+        <!-- Bottom Controls HUD -->
+        <div class="hud-element glass-panel p-3 p-md-4">
+            <div class="container-fluid max-w-100">
+                
+                <!-- Player Controller (Slider & Play/Pause) -->
+                <div class="row align-items-center mb-3">
+                    <div class="col-auto">
+                        <button id="btnPlayPause" class="btn btn-success text-white border-0">
+                            <i class="fas fa-pause" id="iconPlayPause"></i>
+                        </button>
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center">
+                        <div class="d-flex justify-content-between mb-1 px-1">
+                            <span class="fw-bold text-primary small"><i class="fas fa-clock me-1"></i> Waktu</span>
+                            <span class="fw-bold text-danger small" id="timeLabel">0.00s</span>
+                        </div>
+                        <input type="range" class="form-range" id="timeSlider" min="0" max="100" step="0.01" value="0">
+                    </div>
+                </div>
+
+                <!-- Tombol Gerakan (Poses) -->
+                <div class="d-flex flex-nowrap overflow-auto pb-1 gap-2 justify-content-lg-center" style="-webkit-overflow-scrolling: touch;" id="button-container">
+                    <button class="btn btn-outline-primary btn-gerakan text-nowrap" data-time="2.86">Takbiratul Ihram</button>
+                    <button class="btn btn-outline-primary btn-gerakan text-nowrap" data-time="6.01">Rukuk</button>
+                    <button class="btn btn-outline-primary btn-gerakan text-nowrap" data-time="7.95">I'tidal</button>
+                    <button class="btn btn-outline-primary btn-gerakan text-nowrap" data-time="10.24">Sujud</button>
+                    <button class="btn btn-outline-primary btn-gerakan text-nowrap" data-time="12.36">Duduk Antara 2 Sujud</button>
+                    <button class="btn btn-outline-primary btn-gerakan text-nowrap" data-time="33.60">Tahiyat Akhir</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logika HTML DOM (Tutorial & Fullscreen) -->
+    <script>
+        // Masukkan nama guru ke UI
+        document.getElementById('displayNamaGuru').innerText = namaGuru;
+
+        // Logika Tutorial Overlay
+        document.addEventListener("DOMContentLoaded", () => {
+            const tutorialOverlay = document.getElementById('tutorial-overlay');
+            const btnPaham = document.getElementById('btnPahamTutorial');
+
+            // Cek apakah tutorial sudah pernah ditonton?
+            if (localStorage.getItem('tutorial_salat3d') !== 'done') {
+                tutorialOverlay.classList.remove('d-none');
+            }
+
+            btnPaham.addEventListener('click', () => {
+                localStorage.setItem('tutorial_salat3d', 'done');
+                tutorialOverlay.style.opacity = '0';
+                tutorialOverlay.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => tutorialOverlay.classList.add('d-none'), 500);
+            });
+        });
+
+        // Logika Fullscreen API
+        const btnFullscreen = document.getElementById('btnFullscreen');
+        const iconFullscreen = btnFullscreen.querySelector('i');
+        
+        btnFullscreen.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Gagal memasuki mode fullscreen: ${err.message}`);
+                });
+                iconFullscreen.classList.replace('fa-expand', 'fa-compress');
+            } else {
+                document.exitFullscreen();
+                iconFullscreen.classList.replace('fa-compress', 'fa-expand');
+            }
+        });
+
+        // Menangkap event keluar fullscreen dengan tombol Esc/Back Android
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                iconFullscreen.classList.replace('fa-compress', 'fa-expand');
+            }
+        });
+    </script>
+
+    <!-- Script Logika Three.js -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'gltfloader';
+        import { OrbitControls } from 'orbitcontrols';
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0xf0f8ff, 15, 60); // Jarak kabut dijauhkan
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 1.2, 4.5); 
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.target.set(0, 0.8, 0); 
+        controls.minDistance = 1.5;
+        controls.maxDistance = 8; // Memperbolehkan zoom out sedikit lebih jauh
+        controls.maxPolarAngle = Math.PI / 2 + 0.1; 
+
+        // Pencahayaan
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); 
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.5); 
+        dirLight.position.set(5, 10, 7);
+        scene.add(dirLight);
+
+        let mixer;
+        let action;
+        let totalDuration = 0;
+        const clock = new THREE.Clock();
+        
+        let isPlaying = true; 
+        let isDraggingSlider = false; 
+
+        const timeSlider = document.getElementById('timeSlider');
+        const timeLabel = document.getElementById('timeLabel');
+        const btnPlayPause = document.getElementById('btnPlayPause');
+        const iconPlayPause = document.getElementById('iconPlayPause');
+        const poseButtons = document.querySelectorAll('.btn-gerakan');
+
+        const loader = new GLTFLoader();
+        loader.load('../assets/file/scene.gltf', function (gltf) {
+            
+            const model = gltf.scene;
+
+            model.traverse((child) => {
+                if (child.isMesh) {
+                    child.frustumCulled = false;
+                    if (child.material) {
+                        child.material.side = THREE.DoubleSide;
+                        child.material.transparent = false;
+                        child.material.alphaTest = 0; 
+                        child.material.depthWrite = true;
+                        child.material.needsUpdate = true;
+                    }
+                }
+            });
+
+            scene.add(model);
+
+            if (gltf.animations && gltf.animations.length > 0) {
+                mixer = new THREE.AnimationMixer(model);
+                
+                let clipUtama = gltf.animations[0];
+                for (let i = 0; i < gltf.animations.length; i++) {
+                    if (gltf.animations[i].duration > clipUtama.duration) {
+                        clipUtama = gltf.animations[i];
+                    }
+                }
+                
+                totalDuration = clipUtama.duration;
+                timeSlider.max = totalDuration;
+
+                action = mixer.clipAction(clipUtama);
+                action.play();
+            }
+
+            document.getElementById('loading-screen').style.display = 'none';
+
+        });
+
+        function updatePlayState(playing) {
+            isPlaying = playing;
+            if (isPlaying) {
+                iconPlayPause.classList.replace('fa-play', 'fa-pause');
+                btnPlayPause.classList.replace('btn-primary', 'btn-success');
+                poseButtons.forEach(b => b.classList.remove('active'));
+            } else {
+                iconPlayPause.classList.replace('fa-pause', 'fa-play');
+                btnPlayPause.classList.replace('btn-success', 'btn-primary');
+            }
+        }
+
+        btnPlayPause.addEventListener('click', () => {
+            updatePlayState(!isPlaying);
+        });
+
+        timeSlider.addEventListener('input', function(e) {
+            isDraggingSlider = true;
+            updatePlayState(false); 
+            
+            if (action) {
+                const targetTime = parseFloat(e.target.value);
+                action.time = targetTime;
+                timeLabel.innerText = targetTime.toFixed(2) + "s";
+                mixer.update(0); 
+            }
+        });
+
+        timeSlider.addEventListener('change', function() {
+            isDraggingSlider = false;
+        });
+
+        poseButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                updatePlayState(false);
+                
+                poseButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const targetTime = parseFloat(this.getAttribute('data-time'));
+                if (action) {
+                    action.time = targetTime;
+                    timeSlider.value = targetTime;
+                    timeLabel.innerText = targetTime.toFixed(2) + "s";
+                    mixer.update(0); 
+                }
+            });
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (mixer) {
+                if (!isDraggingSlider && isPlaying) {
+                    const delta = clock.getDelta();
+                    mixer.update(delta);
+
+                    if (action) {
+                        if (action.time >= totalDuration) {
+                            action.time = 0;
+                        }
+                        timeSlider.value = action.time;
+                        timeLabel.innerText = action.time.toFixed(2) + "s";
+                    }
+                }
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+    </script>
+</body>
+</html>
