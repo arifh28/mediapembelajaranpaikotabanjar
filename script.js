@@ -1,90 +1,170 @@
 // =================================================================
-// 1. KONFIGURASI SUPABASE & AUTH
+// 1. KONFIGURASI SUPABASE (Hanya untuk Analytics & Form Saran)
 // =================================================================
 const SUPABASE_URL = 'https://oisrtlcxdwgvzrxrlzpb.supabase.co'; 
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pc3J0bGN4ZHdndnpyeHJsenBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzM3OTEsImV4cCI6MjA3ODYwOTc5MX0.aI162olkIydnJrRxLnC0NsBU9umySmd2nWSTt8Hc1ec'; 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Fungsi Login Google
-async function loginGoogle() {
-    const { data, error } = await _supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-            // Ini akan memastikan user dikembalikan persis ke halaman saat ini
-            redirectTo: window.location.href 
+// =================================================================
+// 2. LOGIKA LOGIN GOOGLE APPS SCRIPT (GAS)
+// =================================================================
+
+// GANTI DENGAN URL DEPLOYMENT APPS SCRIPT ANDA SENDIRI
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyq3ZQuaBMK4HNycPWu86pt2fSu7z7eZzi6N5s6V7KrCAC0fB33pyfNfJbExEjv61Xj/exec'; 
+
+// Tangani Form Submit Login
+const loginForm = document.getElementById('gasLoginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('usernameInput').value.trim();
+        const password = document.getElementById('passwordInput').value.trim();
+        const btnSubmit = document.getElementById('btnLoginSubmit');
+        const alertBox = document.getElementById('loginAlert');
+        
+        // Ubah UI Tombol menjadi Loading
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memverifikasi...';
+        alertBox.classList.add('d-none');
+
+        // Susun payload sesuai dengan doPost di Code.gs
+        const payload = {
+            action: "login",
+            username: username,
+            password: password
+        };
+
+        try {
+            // Karena GAS menggunakan CORS, gunakan fetch POST
+            const response = await fetch(GAS_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            });
+            
+            const result = await response.json();
+            
+            if (result.status === "success" || result.status === "sukses") {
+                // 1. SIMPAN SESI KE LOCAL STORAGE
+                localStorage.setItem('user_session', JSON.stringify(result.user));
+                
+                // 2. Tutup Modal & Refresh Tampilan
+                const modalElement = document.getElementById('loginModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                if(modalInstance) modalInstance.hide();
+                
+                // Cek ulang sesi untuk mengubah UI
+                checkUserSessionGAS();
+                
+            } else {
+                // Tampilkan pesan error dari server
+                alertBox.innerText = result.message || "Gagal login. Periksa username dan password.";
+                alertBox.classList.remove('d-none');
+            }
+        } catch (error) {
+            console.error("Login Error:", error);
+            alertBox.innerText = "Terjadi kesalahan koneksi ke server.";
+            alertBox.classList.remove('d-none');
+        } finally {
+            // Kembalikan Tombol
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = 'Masuk Sekarang';
         }
     });
-    if (error) console.error("Login Error:", error.message);
 }
 
 // Fungsi Logout
-async function logout() {
-    const { error } = await _supabase.auth.signOut();
-    if (!error) window.location.reload();
+function logoutGAS() {
+    localStorage.removeItem('user_session');
+    window.location.reload();
 }
 
-// Cek Sesi User saat halaman dimuat
-async function checkUserSession() {
-    const { data: { session } } = await _supabase.auth.getSession();
+// Fungsi untuk menangkap sesi lemparan dari Netlify
+function tangkapSesiLintasDomain() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenSesi = urlParams.get('token_sesi');
+
+    if (tokenSesi) {
+        try {
+            // Decode (terjemahkan kembali) Base64 menjadi JSON string
+            const decodedSession = decodeURIComponent(atob(tokenSesi));
+            
+            // Simpan ke localStorage Vercel
+            localStorage.setItem('user_session', decodedSession);
+            
+            // Bersihkan URL agar token_sesi hilang dari address bar (lebih rapi & aman)
+            const urlBersih = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.replaceState({path: urlBersih}, '', urlBersih);
+            
+        } catch (error) {
+            console.error("Gagal membaca sesi lintas domain", error);
+        }
+    }
+}
+
+// Cek Sesi User (Berbasis LocalStorage)
+function checkUserSessionGAS() {
+    const sessionData = localStorage.getItem('user_session');
     const authContainer = document.getElementById('authContainer');
 
-    // Mengambil semua elemen yang mau disembunyikan/ditampilkan
     const authOnlyElements = document.querySelectorAll('.auth-only');
     const guestOnlyElements = document.querySelectorAll('.guest-only');
 
-    if (session && session.user) {
+    if (sessionData) {
         // --- USER SUDAH LOGIN ---
-        const userMeta = session.user.user_metadata;
-        const userEmail = session.user.email;
+        const user = JSON.parse(sessionData);
         
-        // Perbaikan Foto: Cek avatar_url, lalu picture, jika tidak ada pakai inisial nama
-        const avatarUrl = userMeta.avatar_url || userMeta.picture || `https://ui-avatars.com/api/?name=${encodeURIComponent(userMeta.full_name)}&background=random`;
+        // Ambil nama (Utamakan Nama Lengkap, jika tidak ada pakai username)
+        const displayName = user.Nama_Lengkap || user.nama_lengkap || user.Username || "Guru";
+        
+        // Buat Avatar Inisial
+        const avatarUrl = user.foto_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=0d6efd&color=fff`;
 
-        // Render Dropdown Profil
+        // Render Dropdown Profil di Navbar
         if(authContainer) {
             authContainer.innerHTML = `
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown">
-                    <img src="${avatarUrl}" alt="Profile" class="user-profile-img me-2" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-green);">
-                    <span class="d-none d-lg-inline">${userMeta.full_name}</span>
+                    <img src="${avatarUrl}" alt="Profile" class="user-profile-img me-2 shadow-sm" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-green);">
+                    <span class="d-none d-lg-inline">${displayName}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
-                    <li><a class="dropdown-item disabled" href="#"><i class="fas fa-envelope me-2"></i> ${userEmail}</a></li>
+                    <li><h6 class="dropdown-header text-primary"><i class="fas fa-id-badge me-1"></i> ${user.Role || 'Guru'}</h6></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a></li>
+                    <li><a class="dropdown-item text-danger fw-bold" href="#" onclick="logoutGAS()"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a></li>
                 </ul>
             </div>`;
         }
 
-        // Tampilkan div khusus yang login, sembunyikan div guest
+        // Tampilkan elemen khusus member
         authOnlyElements.forEach(el => el.classList.remove('d-none'));
         guestOnlyElements.forEach(el => el.classList.add('d-none'));
 
     } else {
         // --- USER BELUM LOGIN ---
-        
         if(authContainer) {
-            // Render ulang tombol login jika user logout
+            // Tampilkan tombol pemanggil Modal Login
             authContainer.innerHTML = `
-            <button onclick="loginGoogle()" class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100">
-                <i class="fab fa-google me-2"></i> Masuk
+            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold w-100" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <i class="fas fa-sign-in-alt me-2"></i> Masuk
             </button>`;
         }
 
-        // Tampilkan div guest, sembunyikan div khusus login
         authOnlyElements.forEach(el => el.classList.add('d-none'));
         guestOnlyElements.forEach(el => el.classList.remove('d-none'));
     }
 }
 
-// Panggil cek sesi
-checkUserSession();
+// Panggil fungsi penangkap DULU sebelum mengecek sesi
+tangkapSesiLintasDomain();
+
+// Panggil cek sesi saat script dimuat
+checkUserSessionGAS();
 
 // =================================================================
-// 2. FUNGSI PENCARIAN DARI HERO SECTION
+// 3. FUNGSI PENCARIAN DARI HERO SECTION
 // =================================================================
 function doSearch() {
-    // Ambil dari input baru di hero section
     const input = document.getElementById('mainSearchInput');
     if(!input) return;
     
@@ -101,7 +181,7 @@ function handleEnter(event) {
 }
 
 // =================================================================
-// 3. FUNGSI RENDER POSTS (BLOG)
+// 4. FUNGSI RENDER POSTS (BLOG)
 // =================================================================
 async function renderPosts() {
     const container = document.getElementById('postsContainer');
@@ -180,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.insertAdjacentHTML('beforeend', feedbackHTML);
     }
 
-    // 2. Tangani Form Submit
+    // 2. Tangani Form Submit Saran ke Supabase
     const formSaran = document.getElementById('formKritikSaran');
     if (formSaran) {
         formSaran.addEventListener('submit', async function(e) {
@@ -190,24 +270,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const saran = document.getElementById('fs-saran').value;
             const btnSubmit = document.getElementById('btnSubmitSaran');
             
-            // Ubah tombol jadi loading
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Mengirim...';
 
             try {
-                // Ambil IP Address publik user menggunakan API gratis (ipify)
                 const ipRes = await fetch('https://api.ipify.org?format=json');
                 const ipData = await ipRes.json();
                 const ip_address = ipData.ip;
 
-                // Insert data ke Supabase
                 const { error } = await _supabase.from('kritik_saran').insert([
                     { nama: nama, saran: saran, ip_address: ip_address }
                 ]);
 
                 if (error) throw error;
-
-                // Redirect ke halaman saran.html jika berhasil
                 window.location.href = 'saran.html';
 
             } catch (err) {
@@ -221,13 +296,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =================================================================
-// 2. FUNGSI TRACK CLICK (HYBRID: LINK & DATABASE)
+// 5. FUNGSI TRACK CLICK (HYBRID: LINK & DATABASE SUPABASE)
 // =================================================================
 
 async function logPageView() {
-    // Ambil nama file halaman saat ini (misal: index.html atau kelas1.html)
     let pageName = window.location.pathname.split("/").pop();
-    if (pageName === "") pageName = "index.html"; // Jika root
+    if (pageName === "") pageName = "index.html"; 
 
     try {
         await _supabase.from('analytics_logs').insert([
@@ -241,7 +315,7 @@ async function logPageView() {
 
 async function trackClick(materialId, targetUrl) {
     
-    // A. BUKA LINK DULUAN (Supaya user tidak menunggu)
+    // A. BUKA LINK DULUAN
     if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('#')) {
         const isFile = /\.(pdf|ppt|pptx|doc|docx|xls|xlsx|zip|rar)$/i.test(targetUrl);
         const link = document.createElement('a');
@@ -253,14 +327,12 @@ async function trackClick(materialId, targetUrl) {
         document.body.removeChild(link);
     }
 
-    // B. PEREKAMAN DATA (BACKGROUND PROCESS)
+    // B. PEREKAMAN DATA
     try {
-        // 1. Catat ke LOG (Untuk hitungan Hari/Minggu/Bulan)
         await _supabase.from('analytics_logs').insert([
             { event_type: 'click_material', event_name: materialId }
         ]);
 
-        // 2. Update Total Counter (Untuk tampilan kartu materi yang cepat)
         const { data: existingData } = await _supabase
             .from('material_analytics')
             .select('click_count')
@@ -273,7 +345,6 @@ async function trackClick(materialId, targetUrl) {
                 .update({ click_count: existingData.click_count + 1 })
                 .eq('material_name', materialId);
         } else {
-            // Jika materi baru belum ada di tabel analytics
             await _supabase
                 .from('material_analytics')
                 .insert([{ material_name: materialId, click_count: 1 }]);
@@ -285,7 +356,7 @@ async function trackClick(materialId, targetUrl) {
 }
 
 // =================================================================
-// 3. FUNGSI LOAD VIEW & TRENDING
+// 6. FUNGSI LOAD VIEW & TRENDING
 // =================================================================
 async function loadViews() {
     const counters = document.querySelectorAll('.view-counter');
@@ -338,10 +409,9 @@ async function loadTrending() {
 
 
 // =================================================================
-// 4. LOGIKA PENCARIAN (BARU)
+// 7. LOGIKA PENCARIAN & AUTOCOMPLETE
 // =================================================================
 
-// Toggle (Buka/Tutup) Search Bar
 function toggleSearchBar() {
     const container = document.getElementById('searchBarContainer');
     const input = document.getElementById('navSearchInput');
@@ -354,75 +424,11 @@ function toggleSearchBar() {
     }
 }
 
-// Redirect ke search.html
-function doSearch() {
-    const input = document.getElementById('navSearchInput');
-    const query = input.value.trim();
-    
-    if (query.length > 0) {
-        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
-    }
-}
-
-// Handle tombol Enter
-function handleEnter(event) {
-    if (event.key === 'Enter') {
-        doSearch();
-    }
-}
-
-// =================================================================
-// LOGIKA PENCARIAN (UPDATE: PINTAR & CARD BERGAMBAR)
-// =================================================================
-
-// 1. Fungsi Normalisasi Teks 1 (Menghapus tanda baca -)
 function normalizeText(text) {
     if (!text) return "";
-    return text
-        .toLowerCase()              // Ubah ke huruf kecil
-        .replace(/[^a-z0-9]/g, ''); // Hapus SEMUA karakter kecuali huruf & angka
-        // Contoh: "Al-Qur'an" -> "alquran"
+    return text.toLowerCase().replace(/[^a-z0-9]/g, ''); 
 }
 
-// 2. Fungsi Normalisasi Teks 2 (Agar "solat" == "salat")
-function standardizeText(text) {
-    if (!text) return "";
-    let clean = text.toLowerCase();
-
-    // 1. Kelompok SHALAT (Semua diubah jadi 'salat')
-    clean = clean.replace(/sholat/g, 'salat');
-    clean = clean.replace(/solat/g, 'salat');
-    clean = clean.replace(/shalat/g, 'salat');
-    
-    // 2. Kelompok AL-QURAN
-    clean = clean.replace(/alquran/g, "al-qur'an");
-    clean = clean.replace(/quran/g, "al-qur'an");
-    clean = clean.replace(/al quran/g, "al-qur'an");
-
-    // 3. Kelompok HADIS
-    clean = clean.replace(/hadist/g, 'hadis');
-    clean = clean.replace(/hadits/g, 'hadis');
-
-    // 4. Kelompok ALLAH
-    clean = clean.replace(/alloh/g, 'allah');
-
-    // 4. Kelompok RASUL
-    clean = clean.replace(/rosul/g, 'rasul');
-
-    // 5. Kelompok AKHLAK
-    clean = clean.replace(/akhlaq/g, 'akhlak');
-    clean = clean.replace(/ahlaq/g, 'akhlak');
-    clean = clean.replace(/ahlak/g, 'akhlak');
-
-    // 6. Kelompok ZIKIR
-    clean = clean.replace(/dzikir/g, 'zikir');
-
-    return clean;
-}
-
-// =================================================================
-// LOGIKA PENCARIAN (PINTAR & CARD BERGAMBAR)
-// =================================================================
 function standardizeText(text) {
     if (!text) return "";
     let clean = text.toLowerCase();
@@ -513,12 +519,8 @@ async function renderSearchResults() {
     }
 }
 
-// =================================================================
-// 5. LOGIKA REKOMENDASI PENCARIAN (AUTOCOMPLETE)
-// =================================================================
-let searchDataCache = null; // Menyimpan data JSON agar tidak didownload berulang kali
+let searchDataCache = null;
 
-// Fungsi untuk mengambil JSON
 async function fetchSearchData() {
     if (!searchDataCache) {
         try {
@@ -532,12 +534,10 @@ async function fetchSearchData() {
     return searchDataCache;
 }
 
-// Fungsi memunculkan rekomendasi saat mengetik
 async function showRecommendations(query) {
     const list = document.getElementById('searchRecommendations');
     if (!list) return;
 
-    // Jika inputan kosong, sembunyikan kotak
     if (query.trim().length === 0) {
         list.classList.add('d-none');
         return;
@@ -546,14 +546,12 @@ async function showRecommendations(query) {
     const data = await fetchSearchData();
     const cleanQuery = standardizeText(query);
     
-    // Filter data yang cocok (Judul, Keyword, atau Bab), ambil 5 teratas
     const filtered = data.filter(item => {
         return standardizeText(item.judul).includes(cleanQuery) || 
                standardizeText(item.keyword).includes(cleanQuery) || 
                standardizeText(item.bab).includes(cleanQuery);
     }).slice(0, 5); 
 
-    // Render HTML ke dalam kotak dropdown
     if (filtered.length > 0) {
         list.innerHTML = filtered.map(item => {
             let finalUrl = item.url;
@@ -571,7 +569,6 @@ async function showRecommendations(query) {
             </a>`;
         }).join('');
         
-        // Tambah tombol "Lihat semua hasil..." di paling bawah
         list.innerHTML += `
             <button onclick="doSearch()" class="list-group-item list-group-item-action text-center text-primary fw-bold py-2 border-0 bg-light" style="font-size: 0.85rem;">
                 Lihat semua hasil untuk "${query}" <i class="fas fa-arrow-right ms-1"></i>
@@ -584,7 +581,6 @@ async function showRecommendations(query) {
     }
 }
 
-// Menutup kotak rekomendasi jika user mengklik di luar area pencarian
 document.addEventListener('click', (e) => {
     const input = document.getElementById('mainSearchInput');
     const list = document.getElementById('searchRecommendations');
@@ -593,27 +589,26 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// =================================================================
+// 8. EVENT LISTENER AWAL DOM
+// =================================================================
+
 document.addEventListener("DOMContentLoaded", function() {
-    // Cek apakah user pernah menutup widget ini sebelumnya?
     if (sessionStorage.getItem('hideIFPWidget') === 'true') {
         const widget = document.getElementById('floatingIFP');
         if (widget) {
-            widget.classList.add('d-none'); // Sembunyikan permanen
+            widget.classList.add('d-none'); 
             widget.classList.remove('d-lg-flex');
         }
     }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // A. Load Data Awal
     logPageView();
     loadViews();
     loadTrending();
-
-    // B. Cek apakah ini halaman Search?
     renderSearchResults();   
 
-    // C. Animasi Menu Hamburger (X to Bars)
     const myOffcanvas = document.getElementById('offcanvasNavbar');
     const menuIcon = document.getElementById('menuIcon');
     if(myOffcanvas && menuIcon) {
@@ -629,7 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // D. Auto Scroll (Highlight) jika dari Pencarian
     const urlParams = new URLSearchParams(window.location.search);
     const targetId = urlParams.get('highlight');
 
@@ -638,14 +632,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (targetElement) {
             const cardElement = targetElement.closest('.card');
             if (cardElement) {
-                // Scroll & Highlight Effect
                 setTimeout(() => {
                     cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     cardElement.style.transition = "all 0.5s";
                     cardElement.classList.add('border', 'border-warning', 'border-5');
                 }, 500);
                 
-                // Hapus Highlight setelah 3 detik
                 setTimeout(() => {
                     cardElement.classList.remove('border', 'border-warning', 'border-5');
                 }, 3500);
@@ -653,13 +645,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // E. CEK SESSION STORAGE (WIDGET IFP)
-    // Logika: Jika user pernah close, kita pastikan class d-lg-flex dibuang dan d-none dipasang
     if (sessionStorage.getItem('hideIFPWidget') === 'true') {
         const widget = document.getElementById('floatingIFP');
         if (widget) {
-            widget.classList.remove('d-lg-flex'); // Hapus display flex (penting!)
-            widget.classList.add('d-none');        // Tambah display none
+            widget.classList.remove('d-lg-flex'); 
+            widget.classList.add('d-none');        
         }
     }
 });
@@ -668,19 +658,12 @@ function closeIFPWidget() {
     const widget = document.getElementById('floatingIFP');
     
     if (widget) {
-        // 1. Animasi Keluar (Geser ke kanan via CSS)
         widget.classList.add('hide-widget');
-
-        // 2. Simpan di memori browser
         sessionStorage.setItem('hideIFPWidget', 'true');
         
-        // 3. Hapus elemen secara permanen setelah animasi selesai (0.5 detik)
         setTimeout(() => {
-            // Kita gunakan cara yang sama dengan di atas (konsisten)
-            widget.classList.remove('d-lg-flex'); // Matikan Flexbox
-            widget.classList.add('d-none');        // Sembunyikan total
-            
-            // Opsional: hapus style inline jika ada
+            widget.classList.remove('d-lg-flex'); 
+            widget.classList.add('d-none');        
             widget.style.display = ''; 
         }, 500);
     } else {

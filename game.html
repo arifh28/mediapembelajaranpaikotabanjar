@@ -67,7 +67,7 @@
                     <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
                         <h5 class="font-heading fw-bold mb-2">Peristiwa Fathu Makkah</h5>
                         <p class="text-muted small mb-4 flex-grow-1 lh-lg">Simak video animasi sejarah penaklukan Kota Makkah, lalu uji pemahamanmu dengan menjawab 10 pertanyaan seru!</p>
-                        <a href="game/fathu_mekkah.html" class="btn btn-success rounded-pill fw-bold w-100 shadow-sm py-2">
+                        <a href="game/fathu_mekkah.html" class="btn btn-success rounded-pill fw-bold w-100 shadow-sm py-2 mt-auto">
                             <i class="fas fa-play-circle me-1"></i> Mulai Bermain
                         </a>
                     </div>
@@ -86,10 +86,20 @@
                     </div>
                     <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
                         <h5 class="font-heading fw-bold mb-2">Petualangan Pintar</h5>
-                        <p class="text-muted small mb-4 flex-grow-1 lh-lg">Bantu karakter melewati rintangan, kumpulkan buku, dan jawab soal-soal PAI untuk bisa membuka pintu ke level berikutnya!</p>
-                        <a href="game/platformer.html" class="btn btn-warning text-dark rounded-pill fw-bold w-100 shadow-sm py-2">
+                        <p class="text-muted small mb-3 flex-grow-1 lh-lg">Bantu karakter melewati rintangan, kumpulkan buku, dan jawab soal-soal PAI untuk membuka pintu ke level berikutnya!</p>
+                        
+                        <!-- Input Khusus Mode Custom Guru -->
+                        <div class="mb-3 w-100">
+                            <div class="input-group shadow-sm rounded-pill overflow-hidden border">
+                                <span class="input-group-text bg-white border-0 text-muted ps-3"><i class="fas fa-key"></i></span>
+                                <input type="text" id="sheetIdInput" class="form-control border-0 shadow-none py-2" style="font-size: 0.85rem;" placeholder="ID Google Sheet (Opsional)" autocomplete="off">
+                            </div>
+                            <div class="form-text text-center mt-1 text-muted" style="font-size: 0.7rem;">*Kosongkan untuk bermain dengan soal bawaan</div>
+                        </div>
+
+                        <button onclick="playPlatformer()" class="btn btn-warning text-dark rounded-pill fw-bold w-100 shadow-sm py-2 mt-auto">
                             <i class="fas fa-play-circle me-1"></i> Mulai Bermain
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -105,5 +115,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>    
+
+    <!-- Script Logika Navigasi Game Platformer -->
+    <script>
+        function playPlatformer() {
+            // Mengambil nilai ID dari input
+            const sheetId = document.getElementById('sheetIdInput').value.trim();
+            
+            // Mengarahkan URL sesuai kondisi (dengan atau tanpa ID)
+            if (sheetId !== "") {
+                window.location.href = `game/platformer.html?id=${encodeURIComponent(sheetId)}`;
+            } else {
+                window.location.href = `game/platformer.html`;
+            }
+        }
+    </script>
 </body>
 </html>
