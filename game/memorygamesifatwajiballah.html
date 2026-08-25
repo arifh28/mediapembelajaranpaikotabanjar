@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Memory Sifat Wajib Allah - PAIBP SD</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- PROTEKSI HALAMAN -->
+    <script>
+        const sessionData = localStorage.getItem('user_session');
+        if (!sessionData) {
+            alert("Akses Ditolak: Anda harus login terlebih dahulu untuk mengakses media ini.");
+            window.location.href = "../index.html"; 
+        }
+    </script>
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #108A81 0%, #06D7A3 100%);
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh; 
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        /* Top HUD Bar */
+        .hud-bar {
+            width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+            flex-shrink: 0; 
+        }
+
+        .title-area h2 {
+            color: white;
+            font-weight: 800;
+            margin: 0;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .title-area p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .stats-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 5px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            min-width: 90px;
+        }
+        
+        .stat-box .label { font-size: 0.65rem; font-weight: 800; color: #6c757d; text-transform: uppercase; }
+        .stat-box .val { font-size: 1.2rem; font-weight: 800; color: #108A81; margin: 0; line-height: 1.2; }
+
+        .btn-hud {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            color: #108A81;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-hud:active { transform: scale(0.9); }
+
+        /* Area Papan Permainan Memenuhi Sisa Layar */
+        .board-wrapper {
+            flex-grow: 1; 
+            min-height: 0; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .board-container {
+            display: grid;
+            grid-template-rows: repeat(2, auto);
+            justify-content: center;
+            align-content: center;
+            gap: 15px;
+        }
+
+        .memory-card {
+            --gap-space: 15px;
+            --total-gap-x: calc((var(--cols) - 1) * var(--gap-space));
+            --total-gap-y: var(--gap-space);
+            
+            --max-h: calc((var(--avail-h) - var(--total-gap-y)) / 2);
+            --max-w: calc((var(--avail-w) - var(--total-gap-x)) / var(--cols));
+            
+            width: min(calc(var(--max-h) * 2 / 3), var(--max-w));
+            height: min(var(--max-h), calc(var(--max-w) * 3 / 2));
+            
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-8px); }
+            80% { transform: translateX(8px); }
+        }
+        .is-wrong {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .memory-card.is-flipped .card-inner { transform: rotateY(180deg); }
+
+        .card-face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: clamp(8px, 1.5vw, 16px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8%; 
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            border: clamp(2px, 0.5vw, 6px) solid #108A81;
+            transform: rotateY(180deg);
+        }
+        
+        .card-text {
+            font-size: clamp(0.9rem, 3.5vmin, 2.5rem); 
+            font-weight: 800;
+            color: #173B3A;
+            word-wrap: break-word;
+            line-height: 1.2;
+        }
+
+        .card-type {
+            font-size: clamp(0.55rem, 1.5vmin, 1.5rem);
+            color: #108A81;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .card-back {
+            background-color: #075D58; 
+            background-image: url('assets/card_back.png'); 
+            background-size: cover;
+            background-position: center;
+            border: clamp(2px, 0.5vw, 5px) solid rgba(255, 255, 255, 0.9);
+        }
+
+        .is-matched .card-front {
+            background-color: #E8FFFA;
+            border-color: #FFB703;
+            box-shadow: 0 0 25px rgba(255, 183, 3, 0.6);
+        }
+
+        /* Responsif Layar Kecil (HP) */
+        @media (max-width: 768px) {
+            .hud-bar { padding: 15px; flex-direction: column; gap: 12px; }
+            .title-area { text-align: center; }
+            .title-area h2 { font-size: 1.2rem; }
+            .title-area p { display: none; }
+            .stats-area { flex-wrap: wrap; justify-content: center; }
+            .board-wrapper { padding: 10px; }
+            .btn-hud { width: 40px; height: 40px; font-size: 1rem;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hud-bar">
+        <div class="d-flex align-items-center gap-3">
+            <a href="../game.html" class="btn-hud text-decoration-none" title="Kembali">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="title-area">
+                <h2>Memory Game Sifat Wajib Bagi Allah</h2>
+                <p>Temukan Pasangan Sifat Wajib dan Artinya</p>
+            </div>
+        </div>
+
+        <div class="stats-area">
+            <div class="stat-box bg-warning text-dark">
+                <div class="label text-dark">Level <span id="levelDisplay">1</span></div>
+                <div class="val" style="font-size: 1rem;">Putaran <span id="roundDisplay">1</span>/3</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">Percobaan</div>
+                <div class="val" id="moveCount">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">Urutan Cocok</div>
+                <div class="val"><span id="matchCount">0</span> / <span id="totalMatchCount">3</span></div>
+            </div>
+            
+            <button class="btn-hud text-warning" onclick="resetRound()" title="Ulangi Putaran Ini">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+            <button class="btn-hud text-danger" onclick="confirmResetGame()" title="Reset Total (Ke Level 1)">
+                <i class="fas fa-power-off"></i>
+            </button>
+            <button class="btn-hud text-dark" id="btnFullscreen" title="Layar Penuh">
+                <i class="fas fa-expand"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="board-wrapper">
+        <div class="board-container" id="gameBoard">
+            <!-- Kartu Disuntikkan JS -->
+        </div>
+    </div>
+
+    <script>
+        const databaseSifat = [
+            { sifat: "Wujud", arti: "Ada" },
+            { sifat: "Qidam", arti: "Terdahulu" },
+            { sifat: "Baqa'", arti: "Kekal" },
+            { sifat: "Mukhalafatu lil-hawaditsi", arti: "Berbeda dengan makhluk" },
+            { sifat: "Qiyamuhu binafsihi", arti: "Berdiri sendiri" },
+            { sifat: "Wahdaniyah", arti: "Maha Esa" },
+            { sifat: "Qudrat", arti: "Berkuasa" },
+            { sifat: "Iradat", arti: "Berkehendak" },
+            { sifat: "Ilmu", arti: "Mengetahui" },
+            { sifat: "Hayat", arti: "Hidup" },
+            { sifat: "Sama'", arti: "Mendengar" },
+            { sifat: "Basar", arti: "Melihat" },
+            { sifat: "Kalam", arti: "Berfirman" },
+            { sifat: "Qadiran", arti: "Maha Kuasa" },
+            { sifat: "Muridan", arti: "Maha Berkehendak" },
+            { sifat: "'Aliman", arti: "Maha Mengetahui" },
+            { sifat: "Hayyan", arti: "Maha Hidup" },
+            { sifat: "Sami'an", arti: "Maha Mendengar" },
+            { sifat: "Basiran", arti: "Maha Melihat" },
+            { sifat: "Mutakalliman", arti: "Maha Berfirman" }
+        ];
+
+        let currentLevel = 1;
+        let currentRound = 1;
+        const maxRounds = 3; 
+
+        const savedProgress = localStorage.getItem('memoryGameProgress');
+        if (savedProgress) {
+            const parsed = JSON.parse(savedProgress);
+            currentLevel = parsed.level || 1;
+            currentRound = parsed.round || 1;
+        }
+        
+        let pairsCount = 3; 
+        let cards = [];
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let moves = 0;
+        let matches = 0;
+
+        const boardEl = document.getElementById('gameBoard');
+        
+        function updateLayout() {
+            const wrapper = document.querySelector('.board-wrapper');
+            if(!wrapper) return;
+            const w = wrapper.clientWidth - 40; 
+            const h = wrapper.clientHeight - 40; 
+            boardEl.style.setProperty('--avail-w', w + 'px');
+            boardEl.style.setProperty('--avail-h', h + 'px');
+        }
+        window.addEventListener('resize', updateLayout);
+
+        function getPairsCount(level) {
+            if (level === 1) return 3; 
+            if (level === 2) return 4; 
+            if (level === 3) return 5; 
+            return 3;
+        }
+
+        function saveProgress() {
+            localStorage.setItem('memoryGameProgress', JSON.stringify({ level: currentLevel, round: currentRound }));
+        }
+
+        // FUNGSI BARU: Konfirmasi Reset Keseluruhan Game
+        function confirmResetGame() {
+            Swal.fire({
+                title: 'Reset Permainan?',
+                text: "Seluruh progres level dan putaran kamu akan dihapus dan diulang dari awal.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="fas fa-trash-alt me-1"></i> Ya, Reset!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    currentLevel = 1;
+                    currentRound = 1;
+                    localStorage.removeItem('memoryGameProgress');
+                    initGame();
+                }
+            });
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initGame() {
+            pairsCount = getPairsCount(currentLevel);
+            
+            boardEl.style.setProperty('--cols', pairsCount);
+            boardEl.style.gridTemplateColumns = `repeat(${pairsCount}, auto)`;
+
+            boardEl.innerHTML = '';
+            cards = [];
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+            moves = 0;
+            matches = 0;
+            updateUI();
+
+            const shuffledDB = shuffleArray([...databaseSifat]);
+            const selectedPairs = shuffledDB.slice(0, pairsCount);
+
+            selectedPairs.forEach((item, index) => {
+                cards.push({ id: index, text: item.sifat, type: 'Sifat' });
+                cards.push({ id: index, text: item.arti, type: 'Arti' });
+            });
+
+            cards = shuffleArray(cards);
+
+            cards.forEach((card) => {
+                const cardHtml = `
+                    <div class="memory-card" data-id="${card.id}" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-face card-back"></div>
+                            <div class="card-face card-front">
+                                <span class="card-type">${card.type}</span>
+                                <span class="card-text">${card.text}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                boardEl.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            setTimeout(updateLayout, 50);
+        }
+
+        function resetRound() {
+            initGame();
+        }
+
+        function flipCard(cardElement) {
+            if (lockBoard) return;
+            if (cardElement.classList.contains('is-flipped')) return;
+
+            cardElement.classList.add('is-flipped');
+
+            if (!firstCard) {
+                firstCard = cardElement;
+                return;
+            }
+
+            secondCard = cardElement;
+            moves++;
+            updateUI();
+
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            const isMatch = firstCard.dataset.id === secondCard.dataset.id;
+
+            if (isMatch) {
+                disableCards();
+            } else {
+                unflipCards();
+            }
+        }
+
+        function disableCards() {
+            firstCard.classList.add('is-matched');
+            secondCard.classList.add('is-matched');
+            
+            matches++;
+            updateUI();
+            resetBoard();
+
+            if (matches === pairsCount) {
+                setTimeout(() => {
+                    let titleText = 'Alhamdulillah!';
+                    let msgText = `Putaran ${currentRound} selesai dalam ${moves} percobaan.`;
+                    let btnText = 'Lanjut Putaran Berikutnya';
+                    let isGameFinished = false; // Flag untuk menentukan apakah game tamat
+
+                    if (currentRound === maxRounds) {
+                        if (currentLevel === 3) {
+                            titleText = 'Masya Allah! Sempurna!';
+                            msgText = 'Kamu telah menyelesaikan SEMUA LEVEL! Kamu hebat!';
+                            btnText = '<i class="fas fa-play me-1"></i> Main Lagi dari Awal';
+                            isGameFinished = true;
+                        } else {
+                            titleText = 'Hebat Sekali!';
+                            msgText = `Kamu berhasil menamatkan Level ${currentLevel}! Bersiap untuk level selanjutnya.`;
+                            btnText = `Lanjut Level ${currentLevel + 1} <i class="fas fa-arrow-right ms-1"></i>`;
+                        }
+                    }
+
+                    if (isGameFinished) {
+                        // SWAL KHUSUS SAAT TAMAT SEMUA LEVEL
+                        Swal.fire({
+                            title: titleText,
+                            text: msgText,
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: btnText,
+                            cancelButtonText: 'Kembali ke Menu',
+                            confirmButtonColor: '#108A81',
+                            cancelButtonColor: '#6c757d',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                currentRound = 1;
+                                currentLevel = 1;
+                                localStorage.removeItem('memoryGameProgress');
+                                initGame();
+                            } else {
+                                window.location.href = '../game.html';
+                            }
+                        });
+                    } else {
+                        // SWAL UNTUK PERPINDAHAN RONDE/LEVEL BIASA
+                        Swal.fire({
+                            title: titleText,
+                            text: msgText,
+                            icon: 'success',
+                            confirmButtonText: btnText,
+                            confirmButtonColor: '#108A81',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                currentRound++;
+                                
+                                if (currentRound > maxRounds) {
+                                    currentRound = 1;
+                                    currentLevel++;
+                                }
+                                
+                                saveProgress();
+                                initGame();
+                            }
+                        });
+                    }
+                }, 600);
+            }
+        }
+
+        function unflipCards() {
+            lockBoard = true; 
+            
+            setTimeout(() => {
+                firstCard.classList.remove('is-flipped');
+                secondCard.classList.remove('is-flipped');
+
+                setTimeout(() => {
+                    firstCard.querySelector('.card-inner').classList.add('is-wrong');
+                    secondCard.querySelector('.card-inner').classList.add('is-wrong');
+
+                    setTimeout(() => {
+                        firstCard.querySelector('.card-inner').classList.remove('is-wrong');
+                        secondCard.querySelector('.card-inner').classList.remove('is-wrong');
+                        resetBoard();
+                    }, 500);
+
+                }, 600); 
+
+            }, 1500); 
+        }
+
+        function resetBoard() {
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }
+
+        function updateUI() {
+            document.getElementById('levelDisplay').innerText = currentLevel;
+            document.getElementById('roundDisplay').innerText = currentRound;
+            document.getElementById('moveCount').innerText = moves;
+            document.getElementById('matchCount').innerText = matches;
+            document.getElementById('totalMatchCount').innerText = pairsCount;
+        }
+
+        const btnFullscreen = document.getElementById('btnFullscreen');
+        const iconFullscreen = btnFullscreen.querySelector('i');
+        
+        btnFullscreen.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Gagal memasuki mode fullscreen: ${err.message}`);
+                });
+                iconFullscreen.classList.replace('fa-expand', 'fa-compress');
+            } else {
+                document.exitFullscreen();
+                iconFullscreen.classList.replace('fa-compress', 'fa-expand');
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                iconFullscreen.classList.replace('fa-compress', 'fa-expand');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>

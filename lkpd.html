@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unduh LKPD - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tambahkan SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <!-- PROTEKSI HALAMAN: Hanya untuk yang sudah login -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkSession = localStorage.getItem('user_session');
+            if (!checkSession) {
+                document.body.style.display = 'none'; 
+                Swal.fire({
+                    title: 'Akses Dibatasi!',
+                    text: 'Halaman ini khusus untuk area member (Guru). Silakan masuk terlebih dahulu di Beranda.',
+                    icon: 'warning',
+                    showCancelButton: false,
+                    confirmButtonColor: '#0d6efd',
+                    confirmButtonText: '<i class="fas fa-home me-1"></i> Ke Beranda',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    window.location.href = "index.html";
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* CSS Khusus untuk Desain Card Kelas Modern */
+        .bento-kelas-modern {
+            position: relative;
+            background: #ffffff;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: white; 
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.03);
+            min-height: 220px; 
+            cursor: pointer;
+        }
+
+        .bento-kelas-modern:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.15);
+        }
+
+        .bento-kelas-modern img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .bento-kelas-modern:hover img {
+            transform: scale(1.05);
+        }
+
+        .kelas-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.9) 100%);
+            z-index: 2;
+        }
+
+        .kelas-content {
+            position: relative;
+            z-index: 3;
+            margin-top: auto; 
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .kelas-badge {
+            background-color: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="text-primary fs-4">PAIBP <span class="text-success">SD</span></span>
+            </a>
+            
+            <button class="navbar-toggler border-0 p-1 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header bg-light">
+                    <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="buku.html">Buku Paket</a></li>
+                        <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 90px;"></div>
+
+    <div class="container pb-5 flex-grow-1">
+        
+        <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); border-radius: 1.5rem;">
+            <h1 class="display-5 fw-bolder mb-3 text-white font-heading"><i class="fas fa-edit me-2"></i> Pusat Unduhan LKPD</h1>
+            <p class="fs-5 mb-0 text-white opacity-75">Lembar Kerja Peserta Didik (LKPD) PAI Kurikulum Merdeka Fase A hingga C.</p>
+        </div>
+
+        <h4 class="font-heading fw-bold text-dark mb-4 text-center text-md-start"><i class="fas fa-folder-open text-warning me-2"></i> Pilih Kelas</h4>
+
+        <!-- Grid Card LKPD Kelas 1 - 6 -->
+        <div class="row g-3 g-md-4 justify-content-center">
+            
+            <div class="col-6 col-lg-4 d-flex">
+                <div onclick="showDevAlert('Kelas 1')" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas1.png" alt="Ilustrasi LKPD Kelas 1">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase A</span>
+                        <h3 class="font-heading m-0 fw-bold">LKPD Kelas 1</h3>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-lg-4 d-flex">
+                <div onclick="showDevAlert('Kelas 2')" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas2.png" alt="Ilustrasi LKPD Kelas 2">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase A</span>
+                        <h3 class="font-heading m-0 fw-bold">LKPD Kelas 2</h3>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-lg-4 d-flex">
+                <div onclick="showDevAlert('Kelas 3')" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas3.png" alt="Ilustrasi LKPD Kelas 3">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase B</span>
+                        <h3 class="font-heading m-0 fw-bold">LKPD Kelas 3</h3>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4 d-flex">
+                <div onclick="showDevAlert('Kelas 4')" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas4.png" alt="Ilustrasi LKPD Kelas 4">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase B</span>
+                        <h3 class="font-heading m-0 fw-bold">LKPD Kelas 4</h3>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-lg-4 d-flex">
+                <div onclick="showDevAlert('Kelas 5')" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas5.png" alt="Ilustrasi LKPD Kelas 5">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase C</span>
+                        <h3 class="font-heading m-0 fw-bold">LKPD Kelas 5</h3>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-lg-4 d-flex">
+                <div onclick="showDevAlert('Kelas 6')" class="bento-kelas-modern w-100">
+                    <img src="assets/kelas6.png" alt="Ilustrasi LKPD Kelas 6">
+                    <div class="kelas-overlay"></div>
+                    <div class="kelas-content">
+                        <span class="kelas-badge">Fase C</span>
+                        <h3 class="font-heading m-0 fw-bold">LKPD Kelas 6</h3>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="main-footer text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>    
+
+    <!-- Logika Animasi SweetAlert2 -->
+    <script>
+        function showDevAlert(kelas) {
+            Swal.fire({
+                title: 'Segera Hadir!',
+                html: `Mohon bersabar, berkas <strong>${kelas}</strong> saat ini masih dalam tahap penyusunan dan pengembangan oleh tim KKG.`,
+                icon: 'info',
+                confirmButtonText: '<i class="fas fa-thumbs-up me-1"></i> Baik, Saya Tunggu',
+                confirmButtonColor: '#fda085',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        }
+    </script>
+</body>
+</html>

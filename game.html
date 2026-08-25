@@ -22,7 +22,6 @@
             const checkSession = localStorage.getItem('user_session');
             
             if (!checkSession) {
-                // Munculkan SweetAlert jika belum login
                 Swal.fire({
                     title: 'Akses Dibatasi!',
                     text: 'Halaman ini khusus untuk area member (Guru). Silakan masuk terlebih dahulu.',
@@ -32,27 +31,22 @@
                     cancelButtonColor: '#6c757d',
                     confirmButtonText: '<i class="fas fa-sign-in-alt me-1"></i> Login Sekarang',
                     cancelButtonText: '<i class="fas fa-home me-1"></i> Ke Beranda',
-                    allowOutsideClick: false, // Wajib pilih salah satu tombol
+                    allowOutsideClick: false, 
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Jika pilih Login, panggil Modal Login Bootstrap
                         const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
                         loginModal.show();
                     } else {
-                        // Jika pilih Cancel/Ke Beranda
                         window.location.href = "index.html";
                     }
                 });
             }
 
-            // Mencegah bypass saat modal diclose via tombol X atau klik luar modal
             const loginModalEl = document.getElementById('loginModal');
             if (loginModalEl) {
                 loginModalEl.addEventListener('hidden.bs.modal', function () {
-                    // Setelah modal tertutup, cek lagi apakah dia benar-benar sudah login?
                     if (!localStorage.getItem('user_session')) {
-                        // Jika masih belum ada sesi (berarti batal login), tendang ke beranda!
                         window.location.href = "index.html";
                     }
                 });
@@ -93,7 +87,6 @@
 
     <div style="height: 90px;"></div>
 
-    <!-- WRAPPER PROTEKSI: class="auth-only d-none" akan menyembunyikan isinya dari tamu -->
     <div class="container pb-5 flex-grow-1 auth-only d-none">
         
         <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);">
@@ -123,7 +116,47 @@
                 </div>
             </div>
 
-            <!-- Game 1: Fathu Makkah -->
+            <!-- Game Baru 1: Memory Sifat Wajib -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100 border-0 shadow-sm overflow-hidden" style="border-radius: 1.5rem;">
+                    <div class="p-4 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #108A81 0%, #06D7A3 100%);">
+                        <div>
+                            <h4 class="font-heading fw-bold m-0 text-white">Memory Card</h4>
+                            <span class="badge bg-white text-dark mt-2 shadow-sm px-3 py-2 rounded-pill"><i class="fas fa-brain me-1"></i> Ketangkasan</span>
+                        </div>
+                        <i class="fas fa-layer-group fa-3x text-white opacity-50"></i>
+                    </div>
+                    <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
+                        <h5 class="font-heading fw-bold mb-2">Memory Sifat Allah</h5>
+                        <p class="text-muted small mb-4 flex-grow-1 lh-lg">Latih daya ingatmu dengan mencocokkan kartu 20 sifat wajib Allah beserta artinya. Cocok untuk melatih fokus dan hafalan!</p>
+                        <a href="game/memorygamesifatwajiballah.html" class="btn text-white rounded-pill fw-bold w-100 shadow-sm py-2 mt-auto" style="background-color: #108A81;">
+                            <i class="fas fa-play-circle me-1"></i> Mulai Bermain
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Baru 2: Memory Asmaul Husna (BARU) -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bento-card p-0 d-flex flex-column h-100 border-0 shadow-sm overflow-hidden" style="border-radius: 1.5rem;">
+                    <div class="p-4 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 100%);">
+                        <div>
+                            <h4 class="font-heading fw-bold m-0 text-white">Memory Card</h4>
+                            <span class="badge bg-white text-dark mt-2 shadow-sm px-3 py-2 rounded-pill"><i class="fas fa-star me-1"></i> Hafalan</span>
+                        </div>
+                        <i class="fas fa-moon fa-3x text-warning opacity-75"></i>
+                    </div>
+                    <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
+                        <h5 class="font-heading fw-bold mb-2">99 Asmaul Husna</h5>
+                        <p class="text-muted small mb-4 flex-grow-1 lh-lg">Eksplorasi 99 Nama-Nama Allah yang Indah. Cocokkan lafal dan maknanya melalui 3 Level tantangan yang seru!</p>
+                        <a href="game/memorygameasmaulhusna.html" class="btn text-white rounded-pill fw-bold w-100 shadow-sm py-2 mt-auto" style="background-color: #5B21B6;">
+                            <i class="fas fa-play-circle me-1"></i> Mulai Bermain
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 3: Fathu Makkah -->
             <div class="col-md-6 col-lg-4">
                 <div class="bento-card p-0 d-flex flex-column h-100 border-0 shadow-sm overflow-hidden" style="border-radius: 1.5rem;">
                     <div class="p-4 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
@@ -143,7 +176,7 @@
                 </div>
             </div>
 
-            <!-- Game 2: Platformer -->
+            <!-- Game 4: Platformer -->
             <div class="col-md-6 col-lg-4">
                 <div class="bento-card p-0 d-flex flex-column h-100 border-0 shadow-sm overflow-hidden" style="border-radius: 1.5rem;">
                     <div class="p-4 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
@@ -157,7 +190,6 @@
                         <h5 class="font-heading fw-bold mb-2">Petualangan Pintar</h5>
                         <p class="text-muted small mb-3 flex-grow-1 lh-lg">Bantu karakter melewati rintangan, kumpulkan buku, dan jawab soal-soal PAI untuk membuka pintu ke level berikutnya!</p>
                         
-                        <!-- Input Khusus Mode Custom Guru -->
                         <div class="mb-3 w-100">
                             <div class="input-group shadow-sm rounded-pill overflow-hidden border">
                                 <span class="input-group-text bg-white border-0 text-muted ps-3"><i class="fas fa-key"></i></span>
@@ -176,7 +208,7 @@
         </div>
     </div>
 
-    <!-- Modal Login (Diperlukan di halaman ini agar pop-up login bisa dipanggil) -->
+    <!-- Modal Login -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">

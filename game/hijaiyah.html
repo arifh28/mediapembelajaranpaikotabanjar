@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Game Sambung Hijaiyah - PAIBP SD</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Polyfill Wajib: Agar fitur Drag & Drop HTML5 berfungsi di layar sentuh (IFP/HP) -->
+    <script src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Ubuntu', sans-serif; 
+            background: linear-gradient(135deg, #e0f2f1 0%, #bbdefb 100%); 
+            min-height: 100vh;
+            touch-action: none; /* Mencegah layar ikut tergeser saat main di IFP */
+        }
+        .font-heading { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* Papan Permainan */
+        .game-board {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            border: 3px solid #fff;
+        }
+
+        /* Zona Taruh (Tempat Kosong) */
+        .drop-zone {
+            width: 80px;
+            height: 100px;
+            border: 3px dashed #adb5bd;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.hover {
+            background-color: #e2e3e5;
+            border-color: #0d6efd;
+            transform: scale(1.05);
+        }
+        .drop-zone.correct {
+            border: 3px solid #198754;
+            background-color: #d1e7dd;
+        }
+
+        /* Potongan Huruf (Bisa Diseret) */
+        .draggable-piece {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
+            border: 2px solid #ff758c;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem; /* Ukuran font Arab besar */
+            color: #000;
+            font-weight: bold;
+            cursor: grab;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            user-select: none;
+        }
+        .draggable-piece:active { cursor: grabbing; transform: scale(0.95); }
+        .draggable-piece.hide { opacity: 0; }
+
+        /* Font khusus untuk huruf Arab agar jelas */
+        .arabic-text {
+            font-family: 'Traditional Arabic', 'Amiri', 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column">
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3 mb-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="../game.html" class="text-decoration-none text-muted fw-bold d-flex align-items-center hover-scale">
+                <i class="fas fa-arrow-left me-2 bg-light p-2 rounded-circle"></i> Kembali
+            </a>
+            <span class="font-heading fw-bold text-success fs-5 d-none d-md-block">Seret & Taruh Hijaiyah</span>
+            <div style="width: 80px;" class="d-none d-md-block"></div> <!-- Spacer -->
+        </div>
+    </nav>
+
+    <div class="container flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+        
+        <div class="text-center mb-4">
+            <h2 class="font-heading fw-bold text-dark">Rangkai Kata: <span class="text-primary arabic-text fs-1 ms-2" id="targetWord">بِسْمِ</span></h2>
+            <p class="text-muted">Seret potongan huruf di bawah ini ke dalam kotak kosong yang tepat secara berurutan (dari kanan ke kiri).</p>
+        </div>
+
+        <div class="game-board text-center w-100" style="max-width: 700px;">
+            
+            <!-- Tempat Menaruh Huruf (Drop Zones) -->
+            <!-- Karena Arab dibaca dari kanan ke kiri, urutan visual kotak dimulai dari kanan -->
+            <h5 class="fw-bold mb-3 text-secondary">Area Rangkaian</h5>
+            <div class="d-flex justify-content-center gap-3 mb-5 flex-row-reverse" id="dropZonesContainer">
+                <div class="drop-zone" data-target="1"></div>
+                <div class="drop-zone" data-target="2"></div>
+                <div class="drop-zone" data-target="3"></div>
+            </div>
+
+            <hr class="opacity-25 mb-4">
+
+            <!-- Pilihan Huruf Acak -->
+            <h5 class="fw-bold mb-3 text-secondary">Pilihan Huruf</h5>
+            <div class="d-flex flex-wrap justify-content-center gap-3" id="piecesContainer">
+                <!-- Potongan akan di-generate otomatis oleh JavaScript -->
+            </div>
+
+            <!-- Pesan Sukses -->
+            <div id="successMessage" class="alert alert-success mt-4 d-none">
+                <h4 class="fw-bold mb-0"><i class="fas fa-star text-warning me-2"></i> Masya Allah, Hebat Sekali!</h4>
+                <button onclick="nextLevel()" class="btn btn-success rounded-pill fw-bold mt-3 px-4">Lanjut Level Berikutnya <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logika Game -->
+    <script>
+        // --- DATABASE LEVEL GAME ---
+        // target: id kotak tempat menaruh (1 = paling kanan)
+        // decoy: true berarti ini adalah huruf pengecoh (tidak dipakai)
+        const levels = [
+            {
+                word: "بِسْمِ", // Target kata
+                zones: 3,     // Jumlah kotak kosong
+                pieces: [
+                    { id: '1', text: 'بِـ', decoy: false },
+                    { id: '2', text: 'ـسْـ', decoy: false },
+                    { id: '3', text: 'ـمِ', decoy: false },
+                    { id: '4', text: 'س', decoy: true } // Pengecoh
+                ]
+            },
+            {
+                word: "مَسْجِدٌ",
+                zones: 4,
+                pieces: [
+                    { id: '1', text: 'مَـ', decoy: false },
+                    { id: '2', text: 'ـسْـ', decoy: false },
+                    { id: '3', text: 'ـجِـ', decoy: false },
+                    { id: '4', text: 'ـدٌ', decoy: false },
+                    { id: '5', text: 'ج', decoy: true }
+                ]
+            }
+        ];
+
+        let currentLevel = 0;
+        let correctCount = 0;
+
+        function loadLevel() {
+            const levelData = levels[currentLevel];
+            correctCount = 0;
+
+            // 1. Set Target Kata
+            document.getElementById('targetWord').innerText = levelData.word;
+            
+            // Sembunyikan pesan sukses
+            document.getElementById('successMessage').classList.add('d-none');
+
+            // 2. Render Drop Zones (Dari Kanan ke Kiri)
+            const dropContainer = document.getElementById('dropZonesContainer');
+            dropContainer.innerHTML = '';
+            for(let i = 1; i <= levelData.zones; i++) {
+                dropContainer.innerHTML += `<div class="drop-zone" data-target="${i}"></div>`;
+            }
+
+            // 3. Render Draggable Pieces (Acak urutannya)
+            const piecesContainer = document.getElementById('piecesContainer');
+            piecesContainer.innerHTML = '';
+            
+            // Acak array (Shuffle)
+            const shuffledPieces = levelData.pieces.sort(() => Math.random() - 0.5);
+            
+            shuffledPieces.forEach(piece => {
+                piecesContainer.innerHTML += `
+                    <div class="draggable-piece arabic-text" draggable="true" data-id="${piece.id}">
+                        ${piece.text}
+                    </div>
+                `;
+            });
+
+            // 4. Pasang Event Listener (Fitur Drag & Drop)
+            setupDragAndDrop();
+        }
+
+        function setupDragAndDrop() {
+            const draggables = document.querySelectorAll('.draggable-piece');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            // Event saat item mulai ditarik
+            draggables.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', item.dataset.id);
+                    setTimeout(() => item.classList.add('hide'), 0); // Efek menghilang dari posisi awal
+                });
+
+                item.addEventListener('dragend', () => {
+                    item.classList.remove('hide');
+                });
+            });
+
+            // Event saat item berada di atas kotak kosong
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault(); // Wajib agar bisa di-drop
+                    zone.classList.add('hover');
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('hover');
+                });
+
+                // Logika ketika item dilepas (di-drop) di kotak
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('hover');
+
+                    // Ambil ID huruf yang ditarik
+                    const draggedId = e.dataTransfer.getData('text/plain');
+                    const expectedId = zone.dataset.target;
+
+                    // Cek apakah hurufnya benar sesuai urutan kotaknya
+                    if (draggedId === expectedId) {
+                        const draggedElement = document.querySelector(`[data-id='${draggedId}']`);
+                        
+                        // Masukkan huruf ke dalam kotak
+                        zone.appendChild(draggedElement);
+                        zone.classList.add('correct');
+                        
+                        // Matikan fungsi drag agar tidak bisa ditarik lagi
+                        draggedElement.setAttribute('draggable', false);
+                        draggedElement.style.cursor = 'default';
+                        draggedElement.style.boxShadow = 'none';
+                        draggedElement.style.border = 'none';
+
+                        correctCount++;
+                        checkWin(levels[currentLevel].zones);
+                    } else {
+                        // Jika salah, kotak bergetar (opsional visual)
+                        zone.style.borderColor = 'red';
+                        setTimeout(() => zone.style.borderColor = '#adb5bd', 500);
+                    }
+                });
+            });
+        }
+
+        function checkWin(totalNeeded) {
+            if (correctCount === totalNeeded) {
+                document.getElementById('successMessage').classList.remove('d-none');
+            }
+        }
+
+        function nextLevel() {
+            currentLevel++;
+            if (currentLevel >= levels.length) {
+                alert("Alhamdulillah! Semua level telah selesai!");
+                currentLevel = 0; // Ulangi dari awal
+            }
+            loadLevel();
+        }
+
+        // Muat level pertama saat halaman dibuka
+        document.addEventListener('DOMContentLoaded', loadLevel);
+    </script>
+</body>
+</html>
