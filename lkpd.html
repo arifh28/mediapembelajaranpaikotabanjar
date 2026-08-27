@@ -10,27 +10,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Supabase untuk kebutuhan script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- PROTEKSI HALAMAN: Hanya untuk yang sudah login -->
+    <!-- PROTEKSI HALAMAN (Sederhana, menyelaraskan dengan script.js) -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const checkSession = localStorage.getItem('user_session');
-            if (!checkSession) {
-                document.body.style.display = 'none'; 
-                Swal.fire({
-                    title: 'Akses Dibatasi!',
-                    text: 'Halaman ini khusus untuk area member (Guru). Silakan masuk terlebih dahulu di Beranda.',
-                    icon: 'warning',
-                    showCancelButton: false,
-                    confirmButtonColor: '#0d6efd',
-                    confirmButtonText: '<i class="fas fa-home me-1"></i> Ke Beranda',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                }).then((result) => {
-                    window.location.href = "index.html";
-                });
-            }
-        });
+        // Cek secara kasar di awal. Jika tidak ada sesi, tendang ke luar.
+        if (!localStorage.getItem('user_session')) {
+            alert("Akses Ditolak: Anda harus login terlebih dahulu.");
+            window.location.href = "index.html"; 
+        }
     </script>
 
     <style>
@@ -105,7 +95,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Styling tambahan untuk list modal LKPD */
         .lkpd-item {
             transition: all 0.2s ease;
             border: 2px solid transparent;
@@ -119,6 +108,7 @@
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
     
+    <!-- Navbar Glassmorphism -->
     <nav class="navbar navbar-expand-lg fixed-top glass-nav">
         <div class="container">
             <a href="index.html" class="navbar-brand d-flex align-items-center">
@@ -135,6 +125,7 @@
                     <h5 class="offcanvas-title font-heading text-primary">Menu Utama</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </div>
+                
                 <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
                         <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
@@ -142,6 +133,9 @@
                         <li class="nav-item"><a class="nav-link" href="posts.html">Ruang Baca</a></li>
                         <li class="nav-item"><a class="nav-link" href="banksoal.html">Bank Soal</a></li>
                     </ul>
+
+                    <!-- KONTINER PROFIL USER (Otomatis dirender oleh checkUserSessionGAS di script.js) -->
+                    <div id="authContainer" class="mt-3 mt-lg-0"></div>
                 </div>
             </div>
         </div>
@@ -151,6 +145,7 @@
 
     <div class="container pb-5 flex-grow-1">
         
+        <!-- Header Halaman -->
         <div class="hero-section p-4 p-md-5 mb-5 shadow-sm text-center" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); border-radius: 1.5rem;">
             <h1 class="display-5 fw-bolder mb-3 text-white font-heading"><i class="fas fa-edit me-2"></i> Pusat Unduhan LKPD</h1>
             <p class="fs-5 mb-0 text-white opacity-75">Lembar Kerja Peserta Didik (LKPD) PAI Kurikulum Merdeka Fase A hingga C.</p>
@@ -158,7 +153,7 @@
 
         <h4 class="font-heading fw-bold text-dark mb-4 text-center text-md-start"><i class="fas fa-folder-open text-warning me-2"></i> Pilih Kelas</h4>
 
-        <!-- Grid Card LKPD Kelas 1 - 6 (Fungsi onclick diperbarui) -->
+        <!-- Grid Card LKPD Kelas 1 - 6 -->
         <div class="row g-3 g-md-4 justify-content-center">
             
             <div class="col-6 col-lg-4 d-flex">
@@ -247,7 +242,6 @@
                 <div class="modal-body p-4 bg-light rounded-bottom-4">
                     <p class="text-muted small mb-3">Silakan pilih dan ketuk bab yang ingin Anda lihat atau unduh (berkas dalam format PDF):</p>
                     
-                    <!-- Container Daftar Bab yang akan diisi oleh JS -->
                     <div class="d-grid gap-2" id="lkpdListContainer">
                         <!-- Tombol Bab dirender di sini -->
                     </div>
@@ -256,28 +250,26 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="main-footer text-center py-4 mt-auto">
         <div class="container">
             <p class="mb-0 fw-bold text-dark">&copy; KKG PAI SD Kota Banjar Jawa Barat 2026</p>
         </div>
     </footer>
 
+    <!-- SKRIP INTI -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>    
 
     <!-- Logika Dinamis Modal LKPD -->
     <script>
         function showLkpdOptions(kelas) {
-            // 1. Ubah Judul Modal
             document.getElementById('lkpdModalLabel').innerHTML = `<i class="fas fa-file-pdf me-2 text-danger"></i> LKPD Kelas ${kelas}`;
             
-            // 2. Siapkan Wadah Tombol
             const container = document.getElementById('lkpdListContainer');
-            container.innerHTML = ''; // Bersihkan isi sebelumnya
+            container.innerHTML = ''; 
             
-            // 3. Bangun 5 Tombol Bab secara otomatis (Looping)
             for (let bab = 1; bab <= 5; bab++) {
-                // Konfigurasi Path File: assets/lkpd/bab[X]kelas[Y].pdf
                 const filePath = `assets/lkpd/bab${bab}kelas${kelas}.pdf`;
                 
                 const btnHTML = `
@@ -297,7 +289,6 @@
                 container.innerHTML += btnHTML;
             }
             
-            // 4. Panggil dan Tampilkan Modal Bootstrap
             const modalInstance = bootstrap.Modal.getOrCreateInstance(document.getElementById('lkpdModal'));
             modalInstance.show();
         }
