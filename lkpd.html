@@ -8,10 +8,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tambahkan SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <link rel="stylesheet" href="style.css">
 
     <!-- PROTEKSI HALAMAN: Hanya untuk yang sudah login -->
@@ -37,7 +34,6 @@
     </script>
 
     <style>
-        /* CSS Khusus untuk Desain Card Kelas Modern */
         .bento-kelas-modern {
             position: relative;
             background: #ffffff;
@@ -108,6 +104,17 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
+        /* Styling tambahan untuk list modal LKPD */
+        .lkpd-item {
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .lkpd-item:hover {
+            background-color: #f8f9fa;
+            border-color: #0d6efd;
+            transform: translateX(5px);
+        }
     </style>
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
@@ -151,81 +158,101 @@
 
         <h4 class="font-heading fw-bold text-dark mb-4 text-center text-md-start"><i class="fas fa-folder-open text-warning me-2"></i> Pilih Kelas</h4>
 
-        <!-- Grid Card LKPD Kelas 1 - 6 -->
+        <!-- Grid Card LKPD Kelas 1 - 6 (Fungsi onclick diperbarui) -->
         <div class="row g-3 g-md-4 justify-content-center">
             
             <div class="col-6 col-lg-4 d-flex">
-                <div onclick="showDevAlert('Kelas 1')" class="bento-kelas-modern w-100">
+                <div onclick="showLkpdOptions(1)" class="bento-kelas-modern w-100">
                     <img src="assets/kelas1.png" alt="Ilustrasi LKPD Kelas 1">
                     <div class="kelas-overlay"></div>
                     <div class="kelas-content">
                         <span class="kelas-badge">Fase A</span>
                         <h3 class="font-heading m-0 fw-bold">LKPD Kelas 1</h3>
-                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-hand-pointer me-1"></i> Ketuk untuk memilih bab</small>
                     </div>
                 </div>
             </div>
             
             <div class="col-6 col-lg-4 d-flex">
-                <div onclick="showDevAlert('Kelas 2')" class="bento-kelas-modern w-100">
+                <div onclick="showLkpdOptions(2)" class="bento-kelas-modern w-100">
                     <img src="assets/kelas2.png" alt="Ilustrasi LKPD Kelas 2">
                     <div class="kelas-overlay"></div>
                     <div class="kelas-content">
                         <span class="kelas-badge">Fase A</span>
                         <h3 class="font-heading m-0 fw-bold">LKPD Kelas 2</h3>
-                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-hand-pointer me-1"></i> Ketuk untuk memilih bab</small>
                     </div>
                 </div>
             </div>
             
             <div class="col-6 col-lg-4 d-flex">
-                <div onclick="showDevAlert('Kelas 3')" class="bento-kelas-modern w-100">
+                <div onclick="showLkpdOptions(3)" class="bento-kelas-modern w-100">
                     <img src="assets/kelas3.png" alt="Ilustrasi LKPD Kelas 3">
                     <div class="kelas-overlay"></div>
                     <div class="kelas-content">
                         <span class="kelas-badge">Fase B</span>
                         <h3 class="font-heading m-0 fw-bold">LKPD Kelas 3</h3>
-                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-hand-pointer me-1"></i> Ketuk untuk memilih bab</small>
                     </div>
                 </div>
             </div>
 
             <div class="col-6 col-lg-4 d-flex">
-                <div onclick="showDevAlert('Kelas 4')" class="bento-kelas-modern w-100">
+                <div onclick="showLkpdOptions(4)" class="bento-kelas-modern w-100">
                     <img src="assets/kelas4.png" alt="Ilustrasi LKPD Kelas 4">
                     <div class="kelas-overlay"></div>
                     <div class="kelas-content">
                         <span class="kelas-badge">Fase B</span>
                         <h3 class="font-heading m-0 fw-bold">LKPD Kelas 4</h3>
-                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-hand-pointer me-1"></i> Ketuk untuk memilih bab</small>
                     </div>
                 </div>
             </div>
             
             <div class="col-6 col-lg-4 d-flex">
-                <div onclick="showDevAlert('Kelas 5')" class="bento-kelas-modern w-100">
+                <div onclick="showLkpdOptions(5)" class="bento-kelas-modern w-100">
                     <img src="assets/kelas5.png" alt="Ilustrasi LKPD Kelas 5">
                     <div class="kelas-overlay"></div>
                     <div class="kelas-content">
                         <span class="kelas-badge">Fase C</span>
                         <h3 class="font-heading m-0 fw-bold">LKPD Kelas 5</h3>
-                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-hand-pointer me-1"></i> Ketuk untuk memilih bab</small>
                     </div>
                 </div>
             </div>
             
             <div class="col-6 col-lg-4 d-flex">
-                <div onclick="showDevAlert('Kelas 6')" class="bento-kelas-modern w-100">
+                <div onclick="showLkpdOptions(6)" class="bento-kelas-modern w-100">
                     <img src="assets/kelas6.png" alt="Ilustrasi LKPD Kelas 6">
                     <div class="kelas-overlay"></div>
                     <div class="kelas-content">
                         <span class="kelas-badge">Fase C</span>
                         <h3 class="font-heading m-0 fw-bold">LKPD Kelas 6</h3>
-                        <small class="text-white opacity-75 mt-1"><i class="fas fa-download me-1"></i> Klik untuk unduh</small>
+                        <small class="text-white opacity-75 mt-1"><i class="fas fa-hand-pointer me-1"></i> Ketuk untuk memilih bab</small>
                     </div>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- MODAL PILIHAN LKPD -->
+    <div class="modal fade" id="lkpdModal" tabindex="-1" aria-labelledby="lkpdModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-warning text-dark rounded-top-4 border-0">
+                    <h5 class="modal-title font-heading fw-bold" id="lkpdModalLabel"><i class="fas fa-file-pdf me-2"></i> LKPD Kelas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 bg-light rounded-bottom-4">
+                    <p class="text-muted small mb-3">Silakan pilih dan ketuk bab yang ingin Anda lihat atau unduh (berkas dalam format PDF):</p>
+                    
+                    <!-- Container Daftar Bab yang akan diisi oleh JS -->
+                    <div class="d-grid gap-2" id="lkpdListContainer">
+                        <!-- Tombol Bab dirender di sini -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -238,22 +265,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>    
 
-    <!-- Logika Animasi SweetAlert2 -->
+    <!-- Logika Dinamis Modal LKPD -->
     <script>
-        function showDevAlert(kelas) {
-            Swal.fire({
-                title: 'Segera Hadir!',
-                html: `Mohon bersabar, berkas <strong>${kelas}</strong> saat ini masih dalam tahap penyusunan dan pengembangan oleh tim KKG.`,
-                icon: 'info',
-                confirmButtonText: '<i class="fas fa-thumbs-up me-1"></i> Baik, Saya Tunggu',
-                confirmButtonColor: '#fda085',
-                showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                }
-            });
+        function showLkpdOptions(kelas) {
+            // 1. Ubah Judul Modal
+            document.getElementById('lkpdModalLabel').innerHTML = `<i class="fas fa-file-pdf me-2 text-danger"></i> LKPD Kelas ${kelas}`;
+            
+            // 2. Siapkan Wadah Tombol
+            const container = document.getElementById('lkpdListContainer');
+            container.innerHTML = ''; // Bersihkan isi sebelumnya
+            
+            // 3. Bangun 5 Tombol Bab secara otomatis (Looping)
+            for (let bab = 1; bab <= 5; bab++) {
+                // Konfigurasi Path File: assets/lkpd/bab[X]kelas[Y].pdf
+                const filePath = `assets/lkpd/bab${bab}kelas${kelas}.pdf`;
+                
+                const btnHTML = `
+                    <a href="${filePath}" target="_blank" class="lkpd-item text-decoration-none bg-white p-3 rounded-4 shadow-sm d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-dark font-heading">Materi Bab ${bab}</h6>
+                                <small class="text-muted">Format PDF</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-download text-primary fs-5"></i>
+                    </a>
+                `;
+                container.innerHTML += btnHTML;
+            }
+            
+            // 4. Panggil dan Tampilkan Modal Bootstrap
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(document.getElementById('lkpdModal'));
+            modalInstance.show();
         }
     </script>
 </body>
